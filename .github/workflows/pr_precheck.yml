@@ -1,0 +1,106 @@
+name: Lab PR Pre-check
+
+on:
+  pull_request:
+    branches: [ master ]
+    types: [ opened, synchronize, reopened, edited ]
+
+jobs:
+  validate-metadata-and-files:
+    runs-on: ubuntu-latest
+    outputs:
+      group: ${{ steps.parse.outputs.group }}
+      student: ${{ steps.parse.outputs.student }}
+      lab_num: ${{ steps.parse.outputs.lab_num }}
+      student_dir: ${{ steps.parse.outputs.student_dir }}
+    steps:
+      - name: Checkout repository with full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate Branch Name and PR Title
+        id: parse
+        run: |
+          HEAD_REF="${{ github.head_ref }}"
+          PR_TITLE="${{ github.event.pull_request.title }}"
+
+          echo "Evaluating Branch: $HEAD_REF"
+          echo "Evaluating PR Title: $PR_TITLE"
+
+          # 1. Validate branch name format: <group>-<surname-name>-lab<lab_number>
+          # Example: ai-123-baranov-oleksii-lab4
+          BRANCH_REGEX='^([a-z0-9]+-[0-9]+)-([a-z-]+)-lab([0-9]+)$'
+          if [[ ! "$HEAD_REF" =~ $BRANCH_REGEX ]]; then
+            echo "::error::Invalid branch name: '$HEAD_REF'. Expected format: '<group>-<surname-name>-lab<number>' (e.g. ai-123-baranov-oleksii-lab4)."
+            exit 1
+          fi
+
+          GROUP="${BASH_REMATCH[1]}"
+          STUDENT="${BASH_REMATCH[2]}"
+          LAB_NUM="${BASH_REMATCH[3]}"
+          STUDENT_DIR="students/$GROUP/$STUDENT/lab$LAB_NUM"
+
+          echo "group=$GROUP" >> $GITHUB_OUTPUT
+          echo "student=$STUDENT" >> $GITHUB_OUTPUT
+          echo "lab_num=$LAB_NUM" >> $GITHUB_OUTPUT
+          echo "student_dir=$STUDENT_DIR" >> $GITHUB_OUTPUT
+
+          # 2. Validate PR title format: <GROUP> <Surname Name> - Lab <lab_number>
+          # Example: AI-123 Baranov Oleksii - Lab 1
+          TITLE_REGEX='^[A-Z0-9]+-[0-9]+ [A-Za-z -]+ - Lab [0-9]+$'
+          if [[ ! "$PR_TITLE" =~ $TITLE_REGEX ]]; then
+            echo "::error::Invalid PR title: '$PR_TITLE'. Expected format: '<GROUP> <Surname Name> - Lab <number>' (e.g. AI-123 Baranov Oleksii - Lab 4)."
+            exit 1
+          fi
+
+      - name: Validate Changed Files Isolation
+        run: |
+          TARGET_DIR="${{ steps.parse.outputs.student_dir }}"
+          echo "Allowed directory for changes: $TARGET_DIR"
+
+          # Get the list of all changed/added files relative to master
+          CHANGED_FILES=$(git diff --name-only origin/master...HEAD)
+          
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "::error::No changed files detected in this PR."
+            exit 1
+          fi
+
+          VIOLATIONS=0
+          while IFS= read -r file; do
+            # Skip empty lines
+            [ -z "$file" ] && continue
+
+            # Ensure file path starts with the allowed directory
+            if [[ "$file" != "$TARGET_DIR"* ]]; then
+              echo "::error file=$file::Modifying files outside your assigned directory is prohibited: $file"
+              VIOLATIONS=$((VIOLATIONS + 1))
+            fi
+          done <<< "$CHANGED_FILES"
+
+          if [ $VIOLATIONS -gt 0 ]; then
+            echo "::error::Found $VIOLATIONS file(s) outside '$TARGET_DIR'. PR checks failed."
+            exit 1
+          fi
+
+          echo "All changed files are strictly inside '$TARGET_DIR'."
+
+      - name: Validate Required Files Existence
+        run: |
+          TARGET_DIR="${{ steps.parse.outputs.student_dir }}"
+
+          # Check for mandatory Python scripts (*.py) and log files (*.log)
+          PY_FILES=$(find "$TARGET_DIR" -maxdepth 2 -type f -name "*.py" 2>/dev/null | wc -l)
+          LOG_FILES=$(find "$TARGET_DIR" -maxdepth 2 -type f -name "*.log" 2>/dev/null | wc -l)
+
+          if [ "$PY_FILES" -eq 0 ]; then
+            echo "::error::No Python script (*.py) found inside '$TARGET_DIR'."
+            exit 1
+          fi
+
+          if [ "$LOG_FILES" -eq 0 ]; then
+            echo "::warning::No log file (*.log) found inside '$TARGET_DIR'."
+          fi
+
+          echo "Required file structure validated successfully."
