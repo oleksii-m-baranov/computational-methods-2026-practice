@@ -1,0 +1,32 @@
+﻿2026-09-24 19:30:31 - INFO - {'provider': 'local', 'model': 'llama3.2:3b', 'prompt': 'short', 'ttft_s': 2.167, 'total_s': 7.923, 'chars': 242, 'chars_per_s': 30.5}
+2026-09-24 19:30:31 - INFO - {'provider': 'local', 'model': 'llama3.2:3b', 'prompt': 'medium', 'ttft_s': 2.13, 'total_s': 6.836, 'chars': 194, 'chars_per_s': 30.3}
+2026-09-24 19:30:31 - INFO - {'provider': 'local', 'model': 'llama3.2:3b', 'prompt': 'long', 'ttft_s': 2.175, 'total_s': 72.035, 'chars': 2657, 'chars_per_s': 42.2}
+2026-09-24 19:30:31 - INFO - {'provider': 'cloud', 'model': 'openai/gpt-oss-20b', 'prompt': 'short', 'ttft_s': 0.498, 'total_s': 0.51, 'chars': 6, 'chars_per_s': 12.1}
+2026-09-24 19:30:31 - INFO - {'provider': 'cloud', 'model': 'openai/gpt-oss-20b', 'prompt': 'medium', 'ttft_s': 0.598, 'total_s': 0.814, 'chars': 394, 'chars_per_s': 750.6}
+2026-09-24 19:30:31 - INFO - {'provider': 'cloud', 'model': 'openai/gpt-oss-20b', 'prompt': 'long', 'ttft_s': 1.01, 'total_s': 1.901, 'chars': 3132, 'chars_per_s': 1660.9}
+2026-09-24 21:03:43 - INFO - llama3.2:3b / 1_fact — готово
+2026-09-24 21:03:47 - INFO - llama3.2:3b / 2_format — готово
+2026-09-24 21:03:57 - INFO - llama3.2:3b / 3_summary — готово
+2026-09-24 21:04:00 - INFO - llama3.2:3b / 4_code — готово
+2026-09-24 21:04:45 - INFO - llama3.2:3b / 5_logic — готово
+2026-09-24 21:04:59 - INFO - llama3.2:3b / 6_ukrainian — готово
+2026-09-24 21:06:45 - INFO - qwen3:4b / 1_fact — готово
+2026-09-24 21:08:23 - INFO - qwen3:4b / 2_format — готово
+2026-09-24 21:10:10 - INFO - qwen3:4b / 3_summary — готово
+2026-09-24 21:11:20 - INFO - qwen3:4b / 4_code — готово
+2026-09-24 21:12:59 - INFO - qwen3:4b / 5_logic — готово
+2026-09-24 21:14:53 - INFO - qwen3:4b / 6_ukrainian — готово
+2026-09-24 21:14:54 - INFO - openai/gpt-oss-20b / 1_fact — готово
+2026-09-24 21:14:56 - INFO - openai/gpt-oss-20b / 2_format — готово
+2026-09-24 21:14:59 - INFO - openai/gpt-oss-20b / 3_summary — готово
+2026-09-24 21:15:00 - INFO - openai/gpt-oss-20b / 4_code — готово
+2026-09-24 21:15:02 - INFO - openai/gpt-oss-20b / 5_logic — готово
+2026-09-24 21:15:03 - INFO - openai/gpt-oss-20b / 6_ukrainian — готово
+2026-09-24 21:19:45 - INFO - Sampling experiment: temperature_0.0 — готово
+2026-09-24 21:20:30 - INFO - Sampling experiment: temperature_0.7 — готово
+2026-09-24 21:23:23 - INFO - Sampling experiment: temperature_1.5 — готово
+2026-09-24 21:23:40 - INFO - Sampling experiment: top_p_0.1 — готово
+2026-09-24 21:24:11 - INFO - Sampling experiment: top_p_0.5 — готово
+2026-09-24 21:24:29 - INFO - Sampling experiment: top_p_1.0 — готово
+2026-09-24 21:24:29 - INFO - Sampling reproducibility: temperature=0
+2026-09-24 21:24:49 - INFO - Sampling completed
