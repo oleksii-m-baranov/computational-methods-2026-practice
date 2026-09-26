@@ -34,6 +34,7 @@ computational-methods-2026-practice/
                 └── ...
 ```
 and place all related files there.
+
 3. Commit your changes. The commit message should match the following template `<GROUP> <Surname Name> - Lab <lab_number>`. 
 Example: `AI-123 Baranov Oleksii - Lab 1`.
 4. Create a PR to the `master` branch in the upstream repo. The PR name must match the commit message. 

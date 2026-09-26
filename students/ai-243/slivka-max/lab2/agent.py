@@ -1,16 +1,17 @@
-"""Цикл агента."""
+"""Цикл агента. Варіант 9 — Вибір ноутбука."""
 from openai import OpenAI
+
 import config
 from schemas import SCHEMAS
 from dispatcher import call_tool
-from utils.lab_logger import custom_logger
+from lab_logger import custom_logger
 
 client = OpenAI(base_url=config.BASE_URL, api_key=config.API_KEY)
 logger = custom_logger('lab2')
 
 
 def run_agent(task):
-    """task – питання користувача
+    """task – питання користувача.
     Повертає текст відповіді або None, якщо вичерпано ліміт."""
 
     # історія розмови: системне повідомлення і питання
@@ -23,6 +24,7 @@ def run_agent(task):
     logger.info(f"ЗАДАЧА: {task}")
 
     for step in range(1, config.MAX_STEPS + 1):
+
         # 1. запит до моделі: передаємо ВСЮ історію заново
         response = client.chat.completions.create(
             model=config.MODEL,
@@ -44,21 +46,24 @@ def run_agent(task):
 
         # 4. виконуємо кожен запитаний виклик
         for call in msg.tool_calls:
-            logger.info(f" виклик : {call.function.name}({call.function.arguments})")
+            logger.info(f"  виклик   : {call.function.name}({call.function.arguments})")
+
             result = call_tool(call.function.name, call.function.arguments)
-            logger.info(f" результат: {result}")
 
+            logger.info(f"  результат: {result}")
 
-        # 5. результат повертаємо моделі з роллю tool
-        messages.append({
-            "role": "tool",
-            "tool_call_id": call.id,
-            "content": result,
-        })
+            # 5. результат повертаємо моделі з роллю tool
+            messages.append({
+                "role": "tool",
+                "tool_call_id": call.id,
+                "content": result,
+            })
 
     # сюди потрапляємо, якщо цикл дійшов до кінця без відповіді
     logger.info("СТОП: вичерпано ліміт кроків")
     return None
 
+
 if __name__ == "__main__":
-    run_agent("Знайди щось легке з фантастики")
+    run_agent("Потрібен ноутбук для навчання")
+
