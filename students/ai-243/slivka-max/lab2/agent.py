@@ -4,7 +4,7 @@ from openai import OpenAI
 import config
 from schemas import SCHEMAS
 from dispatcher import call_tool
-from utils.lab_logger import custom_logger
+from lab_logger import custom_logger
 
 client = OpenAI(base_url=config.BASE_URL, api_key=config.API_KEY)
 logger = custom_logger('lab2')
@@ -66,3 +66,4 @@ def run_agent(task):
 
 if __name__ == "__main__":
     run_agent("Потрібен ноутбук для навчання")
+
