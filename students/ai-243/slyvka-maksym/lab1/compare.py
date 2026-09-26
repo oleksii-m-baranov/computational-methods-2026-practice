@@ -1,8 +1,6 @@
 import time
 from providers import make_client
-from utils.lab_logger import custom_logger
 
-logger = custom_logger('lab1', overwrite=True)
 
 QUESTION = "Поясни різницю між функцією і методом. Коротко."
 
@@ -18,8 +16,9 @@ for name in ["local", "cloud"]:
 
     elapsed = time.perf_counter() - t0
 
-    logger.info(f"===== {name.upper()} ({model}) =====")
-    logger.info(response.choices[0].message.content)
-    logger.info(f"Час: {elapsed:.2f} с")
-    logger.info(response.usage)
-    logger.info("")
+    print(f"===== {name.upper()} ({model}) =====")
+    print(response.choices[0].message.content)
+    print(f"Час: {elapsed:.2f} с")
+    print(response.usage)
+    print("")
+

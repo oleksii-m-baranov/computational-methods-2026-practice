@@ -1,7 +1,5 @@
 from openai import OpenAI
-from utils.lab_logger import custom_logger
 
-logger = custom_logger('lab1', overwrite=True)
 
 client = OpenAI(
     base_url="http://localhost:11434/v1",
@@ -21,5 +19,6 @@ response = client.chat.completions.create(
 )
 
 content = response.choices[0].message.content
-logger.info(content)
-logger.info(response.usage)
+print(content)
+print(response.usage)
+

@@ -2,9 +2,7 @@ import time
 import statistics
 import csv
 from providers import make_client
-from utils.lab_logger import custom_logger
 
-logger = custom_logger('lab1')
 
 def measure(client, model, prompt):
     """Один вимір: повертає TTFT, загальний час і довжину відповіді."""
@@ -44,7 +42,7 @@ PROMPTS = {
 rows = []
 for provider in ["local", "local2", "cloud"]:
     client, model = make_client(provider)
-    logger.info(f"Provider: {provider} | Model: {model}")
+    print(f"Provider: {provider} | Model: {model}")
     measure(client, model, "розігрів")  # прогрів, не рахуємо
 
     for name, prompt in PROMPTS.items():
@@ -58,11 +56,12 @@ for provider in ["local", "local2", "cloud"]:
             "chars_per_s": statistics.median(r["chars_per_s"] for r in runs),
         }
         rows.append(row)
-        logger.info(row)
+        print(row)
 
 with open("results.csv", "w", newline="", encoding="utf-8") as f:
     writer = csv.DictWriter(f, fieldnames=rows[0].keys())
     writer.writeheader()
     writer.writerows(rows)
 
-logger.info("results.csv saved.")
+print("results.csv saved.")
+
