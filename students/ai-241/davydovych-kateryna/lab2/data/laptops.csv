@@ -1,0 +1,12 @@
+model,price,in_stock,warranty_months
+StudyBook 14,24000,3,12
+CodeMaster Pro,52000,1,24
+CodeMaster Pro X,68000,0,24
+BlazeRunner 17,74000,2,24
+NovaStrike G5,36000,5,12
+TitanForge X9,89000,1,36
+PixelCanvas 16,61000,4,24
+DevStation 16,57000,2,36
+OfficeMate 15,18000,8,12
+PaperLite Air,45000,6,24
+FlexWork 13,49000,3,36
