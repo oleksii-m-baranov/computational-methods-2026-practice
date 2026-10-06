@@ -949,7 +949,6 @@ lab2/
 
 ```
 lab2/
-├── venv/
 ├── data/
 │   ├── corpus/
 │   │   ├── b01.txt
