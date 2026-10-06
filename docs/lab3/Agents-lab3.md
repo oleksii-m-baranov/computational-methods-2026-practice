@@ -427,6 +427,7 @@ from schemas import SCHEMAS
 from dispatcher import call_tool, check_response, MODEL_ERRORS        # НОВЕ
 
 client = OpenAI(base_url=config.BASE_URL, api_key=config.API_KEY)
+logger = custom_logger('lab3')
 
 
 @observe()
@@ -437,8 +438,8 @@ def run_agent(task, log):
     ]
     retries = 0                                                       # НОВЕ: помилок моделі поспіль
 
-    log(f"\n{'=' * 60}")
-    log(f"ЗАДАЧА: {task}")
+    logger.info(f"\n{'=' * 60}")
+    logger.info(f"ЗАДАЧА: {task}")
 
     for step in range(1, config.MAX_STEPS + 1):
         response = client.chat.completions.create(
@@ -450,18 +451,18 @@ def run_agent(task, log):
         choice = response.choices[0]
         msg = choice.message
 
-        log(f"\n--- крок {step} | помилок поспіль={retries} "           # НОВЕ
-            f"| prompt_tokens={response.usage.prompt_tokens}")
+        logger.info(f"\n--- крок {step} | помилок поспіль={retries} "           # НОВЕ
+                    f"| prompt_tokens={response.usage.prompt_tokens}")
 
         # НОВЕ: обрив або зламаний виклик у тексті відповіді
         problem = check_response(choice)
         if problem is not None:
             level, text = problem
-            log(f"  рівень   : {level}")
-            log(f"  текст    : {msg.content}")
+            logger.info(f"  рівень   : {level}")
+            logger.info(f"  текст    : {msg.content}")
             retries = retries + 1
             if retries > config.MAX_RETRIES:
-                log("СТОП: модель не змогла сформувати правильний виклик")
+                logger.info("СТОП: модель не змогла сформувати правильний виклик")
                 return None
             if text is not None:
                 messages.append({"role": "assistant", "content": msg.content})
@@ -476,12 +477,12 @@ def run_agent(task, log):
 
         model_failed = False                                          # НОВЕ
         for call in msg.tool_calls:
-            log(f"  виклик   : {call.function.name}({call.function.arguments})")
+            logger.info(f"  виклик   : {call.function.name}({call.function.arguments})")
 
             level, result = call_tool(call.function.name, call.function.arguments)   # НОВЕ
 
-            log(f"  рівень   : {level}")                              # НОВЕ
-            log(f"  результат: {result}")
+            logger.info(f"  рівень   : {level}")                              # НОВЕ
+            logger.info(f"  результат: {result}")
 
             messages.append({
                 "role": "tool",
@@ -495,12 +496,12 @@ def run_agent(task, log):
         if model_failed:
             retries = retries + 1
             if retries > config.MAX_RETRIES:
-                log("СТОП: модель не змогла сформувати правильний виклик")
+                logger.info("СТОП: модель не змогла сформувати правильний виклик")
                 return None
         else:
             retries = 0
 
-    log("СТОП: вичерпано ліміт кроків")
+    logger.info("СТОП: вичерпано ліміт кроків")
     return None
 
 
@@ -530,13 +531,13 @@ if __name__ == "__main__":
    python agent_runner.py
    ```
 
-Лог прогону запишеться в `logs/run.txt`, траси — у Langfuse з міткою `checks`.
+Лог прогону запишеться в `lab3.log`, траси — у Langfuse з міткою `checks`.
 
 П'ять задач — мала вибірка: різниця в одну задачу може бути випадковою. Тому висновки підкріплюйте не лише числами, а й конкретними фрагментами логу, трасами та результатами кроку 5.
 
 ### Крок 8. Таблиці результатів
 
-1. Для кожної задачі звірте відповідь з полем `expected` і заповніть табл. 3. Колонки «До» беріть з `logs/run_baseline.txt`, колонки «Після» - з `logs/run.txt`.
+1. Для кожної задачі звірте відповідь з полем `expected` і заповніть табл. 3. Колонки «До» беріть з `lab3_baseline.log`, колонки «Після» - з `lab3.log`.
 
    Таблиця 3 — Результати по задачах
 
@@ -560,7 +561,7 @@ if __name__ == "__main__":
    | Вичерпав ліміт кроків               |    |       |
    | Відмова після ліміту помилок (нове) | -  |       |
 
-3. Порахуйте в `logs/run.txt` рядки «рівень» з кожним значенням і для кожної помилки подивіться, чи виправилася модель на наступному кроці. Заповніть табл. 5.
+3. Порахуйте в `lab3.log` рядки «рівень» з кожним значенням і для кожної помилки подивіться, чи виправилася модель на наступному кроці. Заповніть табл. 5.
 
    Таблиця 5 — Спрацювання перевірок у прогоні
 
@@ -574,7 +575,7 @@ if __name__ == "__main__":
    | `tool`       |               | -                                      |
    | `length`     |               | -                                      |
 
-Якщо в базовому прогоні були випадки «не викликав інструмент», перегляньте їх у `logs/run_baseline.txt`. Якщо у відповіді моделі видно текст, схожий на виклик інструмента, — це насправді був зламаний виклик. Напишіть про такі випадки у звіті.
+Якщо в базовому прогоні були випадки «не викликав інструмент», перегляньте їх у `lab3_baseline.log`. Якщо у відповіді моделі видно текст, схожий на виклик інструмента, — це насправді був зламаний виклик. Напишіть про такі випадки у звіті.
 
 ### Крок 9. Аналіз трас у Langfuse
 

@@ -41,7 +41,7 @@ def calculate(operation: str, a: float, b: float) -> str:
     return str(ops[operation](a, b))
 
 
-def issue_book():
+def issue_book(title: str) -> str:
     return "Книгу видано"
 
 
@@ -49,5 +49,5 @@ TOOLS = {
     "search_books": search_books,
     "book_info": book_info,
     "calculate": calculate,
-    "issue_book": issue_book
+    "issue_book": issue_book,
 }

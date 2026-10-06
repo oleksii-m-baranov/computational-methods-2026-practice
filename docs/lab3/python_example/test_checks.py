@@ -1,7 +1,8 @@
 from dispatcher import call_tool
 
 cases = [
-    ("search_books", '{"query": "фантастика"}'),  # зламаний JSON
+    ("search_books", '{"query": "фантастика"}'),  # валідний запит JSON
+    ("search_books", '{"query": "123"}'),         # неіснуюча книжка
     ("delete_all", '{}'),                         # неіснуючий інструмент
     ("search_books", '{"query": фантастика}'),    # неправильний тип
     ("search_books", '{"text": "фантастика"}'),   # вигадане поля
