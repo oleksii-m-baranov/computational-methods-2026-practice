@@ -42,7 +42,7 @@ def calculate(operation: str, a: float, b: float) -> str:
 
 
 def issue_book(title: str) -> str:
-    return "Книгу видано"
+    return f"Книгу '{title}' видано"
 
 
 TOOLS = {
