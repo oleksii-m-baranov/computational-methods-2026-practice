@@ -1,0 +1,12 @@
+model,price,in_stock,warranty_months
+StudyBook 14,23500,4,12
+DevForge 15,58000,3,24
+CodeCrafter 16,64500,2,24
+PixelArtisan 16,53000,5,24
+ColorCanvas 15,47000,1,12
+VortexBlade 17,86000,2,36
+CyberPulse 15,61000,7,24
+ShadowRider 15,54000,4,24
+DeskMaster 15,27500,8,12
+CompactOffice 13,31000,0,12
+WorkStation Lite 14,19500,6,12
