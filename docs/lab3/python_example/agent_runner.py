@@ -8,7 +8,7 @@ import config
 from langfuse import get_client, propagate_attributes
 
 
-logger = custom_logger('lab3')
+logger = custom_logger(config.LAB_LOGFILE_NAME)
 
 with open("tasks.json", encoding="utf-8") as f:
     tasks = json.load(f)
@@ -20,4 +20,4 @@ with open("tasks.json", encoding="utf-8") as f:
             run_agent(task["question"])
 
 get_client().flush()
-logger.info(f"\nОброблено задач: {len(tasks)}. Лог: lab3.log")
+logger.info(f"\nОброблено задач: {len(tasks)}. Лог: {config.LAB_LOGFILE_NAME}.log")

@@ -101,7 +101,7 @@
    import config                                                  # НОВЕ
    from agent import run_agent
    
-   logger = custom_logger('lab3')
+   logger = custom_logger(config.LAB_LOGFILE_NAME)
 
    with open("tasks.json", encoding="utf-8") as f:
        tasks = json.load(f)
@@ -114,7 +114,7 @@
                run_agent(task["question"])
 
    get_client().flush()                                           # НОВЕ: дочекатися відправки подій
-   logger.info(f"\nОброблено задач: {len(tasks)}. Лог: lab3.txt")
+   logger.info(f"\nОброблено задач: {len(tasks)}. Лог: {config.LAB_LOGFILE_NAME}.log")
    ```
 
    Назва траси має складатися лише з латинських літер, цифр і знаків, тому в ній номер задачі, а не її текст. Програма надсилає події в Langfuse у фоні, і без `flush()` останні з них можуть загубитися.
@@ -424,85 +424,90 @@ from langfuse.openai import OpenAI
 
 import config
 from schemas import SCHEMAS
-from dispatcher import call_tool, check_response, MODEL_ERRORS        # НОВЕ
+from dispatcher import call_tool, check_response, MODEL_ERRORS  # НОВЕ
+from utils.lab_logger import custom_logger
 
 client = OpenAI(base_url=config.BASE_URL, api_key=config.API_KEY)
-logger = custom_logger('lab3')
+logger = custom_logger(config.LAB_LOGFILE_NAME)
 
 
 @observe()
-def run_agent(task, log):
-    messages = [
-        {"role": "system", "content": config.SYSTEM},
-        {"role": "user", "content": task},
-    ]
-    retries = 0                                                       # НОВЕ: помилок моделі поспіль
+def run_agent(task):
+   """task – питання користувача
+   Повертає текст відповіді або None, якщо вичерпано ліміт."""
 
-    logger.info(f"\n{'=' * 60}")
-    logger.info(f"ЗАДАЧА: {task}")
+   # історія розмови: системне повідомлення і питання
+   messages = [
+      {"role": "system", "content": config.SYSTEM},
+      {"role": "user", "content": task},
+   ]
+   retries = 0  # НОВЕ: помилок моделі поспіль
 
-    for step in range(1, config.MAX_STEPS + 1):
-        response = client.chat.completions.create(
-            model=config.MODEL,
-            messages=messages,
-            tools=SCHEMAS,
-            temperature=config.TEMPERATURE,
-        )
-        choice = response.choices[0]
-        msg = choice.message
+   logger.info(f"\n{'=' * 60}")
+   logger.info(f"ЗАДАЧА: {task}")
 
-        logger.info(f"\n--- крок {step} | помилок поспіль={retries} "           # НОВЕ
-                    f"| prompt_tokens={response.usage.prompt_tokens}")
+   for step in range(1, config.MAX_STEPS + 1):
+      response = client.chat.completions.create(
+         model=config.MODEL,
+         messages=messages,
+         tools=SCHEMAS,
+         temperature=config.TEMPERATURE,
+      )
+      choice = response.choices[0]
+      msg = choice.message
 
-        # НОВЕ: обрив або зламаний виклик у тексті відповіді
-        problem = check_response(choice)
-        if problem is not None:
-            level, text = problem
-            logger.info(f"  рівень   : {level}")
-            logger.info(f"  текст    : {msg.content}")
-            retries = retries + 1
-            if retries > config.MAX_RETRIES:
-                logger.info("СТОП: модель не змогла сформувати правильний виклик")
-                return None
-            if text is not None:
-                messages.append({"role": "assistant", "content": msg.content})
-                messages.append({"role": "user", "content": text})
-            continue
+      logger.info(f"\n--- крок {step} | помилок поспіль={retries} "  # НОВЕ
+                  f"| prompt_tokens={response.usage.prompt_tokens}")
 
-        if not msg.tool_calls:
-            logger.info(f"ВІДПОВІДЬ: {msg.content}")
-            return msg.content
+      # НОВЕ: обрив або зламаний виклик у тексті відповіді
+      problem = check_response(choice)
+      if problem is not None:
+         level, text = problem
+         logger.info(f"  рівень   : {level}")
+         logger.info(f"  текст    : {msg.content}")
+         retries = retries + 1
+         if retries > config.MAX_RETRIES:
+            logger.info("СТОП: модель не змогла сформувати правильний виклик")
+            return None
+         if text is not None:
+            messages.append({"role": "assistant", "content": msg.content})
+            messages.append({"role": "user", "content": text})
+         continue
 
-        messages.append(msg)
+      if not msg.tool_calls:
+         logger.info(f"ВІДПОВІДЬ: {msg.content}")
+         return msg.content
 
-        model_failed = False                                          # НОВЕ
-        for call in msg.tool_calls:
-            logger.info(f"  виклик   : {call.function.name}({call.function.arguments})")
+      messages.append(msg)
 
-            level, result = call_tool(call.function.name, call.function.arguments)   # НОВЕ
+      model_failed = False  # НОВЕ
+      for call in msg.tool_calls:
+         logger.info(f"  виклик   : {call.function.name}({call.function.arguments})")
 
-            logger.info(f"  рівень   : {level}")                              # НОВЕ
-            logger.info(f"  результат: {result}")
+         level, result = call_tool(call.function.name, call.function.arguments)  # НОВЕ
 
-            messages.append({
-                "role": "tool",
-                "tool_call_id": call.id,
-                "content": result,
-            })
-            if level in MODEL_ERRORS:                                 # НОВЕ
-                model_failed = True
+         logger.info(f"  рівень   : {level}")  # НОВЕ
+         logger.info(f"  результат: {result}")
 
-        # НОВЕ: рахуємо помилки моделі поспіль
-        if model_failed:
-            retries = retries + 1
-            if retries > config.MAX_RETRIES:
-                logger.info("СТОП: модель не змогла сформувати правильний виклик")
-                return None
-        else:
-            retries = 0
+         messages.append({
+            "role": "tool",
+            "tool_call_id": call.id,
+            "content": result,
+         })
+         if level in MODEL_ERRORS:  # НОВЕ
+            model_failed = True
 
-    logger.info("СТОП: вичерпано ліміт кроків")
-    return None
+      # НОВЕ: рахуємо помилки моделі поспіль
+      if model_failed:
+         retries = retries + 1
+         if retries > config.MAX_RETRIES:
+            logger.info("СТОП: модель не змогла сформувати правильний виклик")
+            return None
+      else:
+         retries = 0
+
+   logger.info("СТОП: вичерпано ліміт кроків")
+   return None
 
 
 if __name__ == "__main__":
@@ -678,7 +683,7 @@ if __name__ == "__main__":
 
 ## Звіт
 
-Оформлюється у форматі Markdows. Структура:
+Оформлюється у форматі Markdown. Структура:
 
 1. Титульна сторінка.
 2. Мета роботи, номер варіанта, предметна область.

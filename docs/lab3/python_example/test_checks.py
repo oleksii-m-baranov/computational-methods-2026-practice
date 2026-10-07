@@ -8,7 +8,6 @@ cases = [
     ("search_books", '{"text": "фантастика"}'),   # вигадане поля
 ]
 
-if __name__ == '__main__':
-    for name, raw in cases:
-        level, text = call_tool(name, raw)
-        print(f"{level:10} | {text}\n")
+for name, raw in cases:
+    level, text = call_tool(name, raw)
+    print(f"{level:10} | {text}\n")

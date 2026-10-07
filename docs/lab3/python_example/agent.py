@@ -4,11 +4,11 @@ from langfuse.openai import OpenAI
 
 import config
 from schemas import SCHEMAS
-from dispatcher import call_tool, check_response, MODEL_ERRORS
+from dispatcher import call_tool, check_response, MODEL_ERRORS        # НОВЕ
 from utils.lab_logger import custom_logger
 
 client = OpenAI(base_url=config.BASE_URL, api_key=config.API_KEY)
-logger = custom_logger('lab3')
+logger = custom_logger(config.LAB_LOGFILE_NAME)
 
 
 @observe()
@@ -21,7 +21,7 @@ def run_agent(task):
         {"role": "system", "content": config.SYSTEM},
         {"role": "user", "content": task},
     ]
-    retries = 0  # помилок моделі поспіль
+    retries = 0                                                       # НОВЕ: помилок моделі поспіль
 
     logger.info(f"\n{'=' * 60}")
     logger.info(f"ЗАДАЧА: {task}")
@@ -37,7 +37,7 @@ def run_agent(task):
         choice = response.choices[0]
         msg = choice.message
 
-        logger.info(f"\n--- крок {step} | помилок поспіль={retries} "
+        logger.info(f"\n--- крок {step} | помилок поспіль={retries} "           # НОВЕ
                     f"| prompt_tokens={response.usage.prompt_tokens}")
 
         # НОВЕ: обрив або зламаний виклик у тексті відповіді
@@ -64,14 +64,14 @@ def run_agent(task):
         messages.append(msg)
 
         # 4. виконуємо кожен запитаний виклик
-        model_failed = False
+        model_failed = False                                          # НОВЕ
         for call in msg.tool_calls:
-            logger.info(f" виклик   : {call.function.name}({call.function.arguments})")
+            logger.info(f"  виклик   : {call.function.name}({call.function.arguments})")
 
-            level, result = call_tool(call.function.name, call.function.arguments)
+            level, result = call_tool(call.function.name, call.function.arguments)   # НОВЕ
 
-            logger.info(f" рівень   : {level}")
-            logger.info(f" результат: {result}")
+            logger.info(f"  рівень   : {level}")                              # НОВЕ
+            logger.info(f"  результат: {result}")
 
             # 5. результат повертаємо моделі з роллю tool
             messages.append({
@@ -79,11 +79,10 @@ def run_agent(task):
                 "tool_call_id": call.id,
                 "content": result,
             })
-
-            if level in MODEL_ERRORS:
+            if level in MODEL_ERRORS:                                 # НОВЕ
                 model_failed = True
 
-        # рахуємо помилки моделі поспіль
+        # НОВЕ: рахуємо помилки моделі поспіль
         if model_failed:
             retries += 1
 

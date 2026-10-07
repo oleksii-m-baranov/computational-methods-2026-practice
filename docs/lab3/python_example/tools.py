@@ -1,15 +1,11 @@
 import csv
 import os
-from pathlib import Path
-
-
-BASE_DIR = Path(__file__).resolve().parent
 
 
 def search_books(query: str) -> str:
     q = query.lower()
     found = []
-    folder = os.path.join(BASE_DIR, 'data', 'corpus')
+    folder = "data/corpus"
     for filename in sorted(os.listdir(folder)):
         with open(os.path.join(folder, filename), encoding="utf-8") as f:
             text = f.read()
@@ -21,7 +17,7 @@ def search_books(query: str) -> str:
 
 
 def book_info(title: str) -> str:
-    with open(os.path.join(BASE_DIR, 'data', 'books.csv'), encoding="utf-8") as f:
+    with open("data/books.csv", encoding="utf-8") as f:
         for row in csv.DictReader(f):
             if row["title"].lower() == title.lower():
                 return (f"Примірників: {row['copies']}, "
