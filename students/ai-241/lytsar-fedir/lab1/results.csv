@@ -1,0 +1,7 @@
+provider,model,prompt,ttft_s,total_s,chars_per_s
+local,llama3.2:3b,short,2.156,2.771,11.5
+local,llama3.2:3b,medium,2.167,4.909,56.3
+local,llama3.2:3b,long,2.2,21.59,97.3
+cloud,openai/gpt-oss-20b,short,0.44,0.47,123.5
+cloud,openai/gpt-oss-20b,medium,0.428,0.576,820.9
+cloud,openai/gpt-oss-20b,long,0.782,1.871,1336.4
