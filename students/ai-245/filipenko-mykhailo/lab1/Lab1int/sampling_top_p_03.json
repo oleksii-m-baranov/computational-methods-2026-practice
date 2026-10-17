@@ -1,0 +1,23 @@
+[
+    {
+        "model": "llama3.2:3b",
+        "temperature": 0.7,
+        "top_p": 0.3,
+        "run": 1,
+        "answer": "Перший iPhone випущений у 2007 році."
+    },
+    {
+        "model": "llama3.2:3b",
+        "temperature": 0.7,
+        "top_p": 0.3,
+        "run": 2,
+        "answer": "Перший iPhone випущений у 2007 році."
+    },
+    {
+        "model": "llama3.2:3b",
+        "temperature": 0.7,
+        "top_p": 0.3,
+        "run": 3,
+        "answer": "Перший iPhone випущений у 2007 році."
+    }
+]
