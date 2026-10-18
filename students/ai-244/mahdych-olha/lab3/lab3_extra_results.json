@@ -1,0 +1,173 @@
+{
+  "id": "E1",
+  "question": "Перерахуй 300 г рису з 0 порцій на 10 порцій. Спочатку виклич scale_amount з amount=300, base_servings=0, target_servings=10. Якщо інструмент поверне помилку, виправ base_servings на 4 і повтори виклик.",
+  "steps": [
+    {
+      "step": 1,
+      "response": {
+        "id": "chatcmpl-929",
+        "choices": [
+          {
+            "finish_reason": "tool_calls",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": null,
+              "audio": null,
+              "function_call": null,
+              "tool_calls": [
+                {
+                  "id": "call_h6ve0a7b",
+                  "function": {
+                    "arguments": "{\"target_servings\":10,\"amount\":300,\"base_servings\":0}",
+                    "name": "scale_amount"
+                  },
+                  "type": "function",
+                  "index": 0
+                }
+              ]
+            }
+          }
+        ],
+        "created": 1791999862,
+        "model": "qwen2.5:3b",
+        "object": "chat.completion",
+        "metadata": null,
+        "moderation": null,
+        "service_tier": null,
+        "system_fingerprint": "fp_ollama",
+        "usage": {
+          "completion_tokens": 39,
+          "prompt_tokens": 839,
+          "total_tokens": 878,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0,
+            "image_tokens": null,
+            "text_tokens": null
+          }
+        }
+      },
+      "calls": [
+        {
+          "name": "scale_amount",
+          "arguments": "{\"target_servings\":10,\"amount\":300,\"base_servings\":0}",
+          "level": "schema",
+          "result": "Помилка: аргументи не пройшли перевірку.\nПоле base_servings: Input should be greater than 0\nВиправ аргументи і виклич інструмент ще раз."
+        }
+      ],
+      "response_check": null
+    },
+    {
+      "step": 2,
+      "response": {
+        "id": "chatcmpl-651",
+        "choices": [
+          {
+            "finish_reason": "tool_calls",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": null,
+              "audio": null,
+              "function_call": null,
+              "tool_calls": [
+                {
+                  "id": "call_zcsu1lzq",
+                  "function": {
+                    "arguments": "{\"amount\":300,\"base_servings\":4,\"target_servings\":10}",
+                    "name": "scale_amount"
+                  },
+                  "type": "function",
+                  "index": 0
+                }
+              ]
+            }
+          }
+        ],
+        "created": 1791999865,
+        "model": "qwen2.5:3b",
+        "object": "chat.completion",
+        "metadata": null,
+        "moderation": null,
+        "service_tier": null,
+        "system_fingerprint": "fp_ollama",
+        "usage": {
+          "completion_tokens": 34,
+          "prompt_tokens": 942,
+          "total_tokens": 976,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 854,
+            "image_tokens": null,
+            "text_tokens": null
+          }
+        }
+      },
+      "calls": [
+        {
+          "name": "scale_amount",
+          "arguments": "{\"amount\":300,\"base_servings\":4,\"target_servings\":10}",
+          "level": "ok",
+          "result": "750.0"
+        }
+      ],
+      "response_check": null
+    },
+    {
+      "step": 3,
+      "response": {
+        "id": "chatcmpl-917",
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "Кількість рису для 10 порцій становить 750.0 г.",
+              "refusal": null,
+              "role": "assistant",
+              "annotations": null,
+              "audio": null,
+              "function_call": null,
+              "tool_calls": null
+            }
+          }
+        ],
+        "created": 1791999868,
+        "model": "qwen2.5:3b",
+        "object": "chat.completion",
+        "metadata": null,
+        "moderation": null,
+        "service_tier": null,
+        "system_fingerprint": "fp_ollama",
+        "usage": {
+          "completion_tokens": 28,
+          "prompt_tokens": 999,
+          "total_tokens": 1027,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 975,
+            "image_tokens": null,
+            "text_tokens": null
+          }
+        }
+      },
+      "calls": [],
+      "response_check": null
+    }
+  ],
+  "answer": "Кількість рису для 10 порцій становить 750.0 г."
+}
