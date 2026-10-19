@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# macOS
+.DS_Store
+
+# Temporary logs
+*.log
+
+# Required laboratory logs
+!lab2.log
+!lab3_baseline.log
+!lab3_checks.log
