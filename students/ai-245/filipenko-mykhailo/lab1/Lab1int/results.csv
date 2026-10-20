@@ -1,0 +1,7 @@
+﻿model,run,time_seconds
+llama3.2:3b,1,11.76
+llama3.2:3b,2,5.68
+llama3.2:3b,3,3.49
+qwen3:4b,1,102.43
+qwen3:4b,2,40.55
+qwen3:4b,3,171.47
