@@ -1,0 +1,13 @@
+{
+    "model": "llama3.2:3b",
+    "task": "Перший політ людини в космос",
+    "response": {
+        "event": "Первый політ людини в космос",
+        "year": 1961,
+        "person": "Юрій Гагарін"
+    },
+    "correct_year": true,
+    "correct_person": true,
+    "correct_format": true,
+    "passed": true
+}
