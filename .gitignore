@@ -216,3 +216,12 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Misc
+docs/**/cache/
+docs/**/state/
+students/**/cache/
+students/**/state/
+
+!students/**/*.log
+!docs/**/*.log
