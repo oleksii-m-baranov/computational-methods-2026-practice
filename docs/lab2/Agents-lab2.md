@@ -646,8 +646,8 @@ lab2/
 буде неможливо.
 
 Тому кожен крок записується: який інструмент викликано, з якими
-аргументами, що повернулося. Функція друку передається в `run_agent`
-параметром `log` – так її зручно замінити на запис у файл.
+аргументами, що повернулося. Для цього використовується `custom_logger` - він
+одночасно записує повідомлення у файл і виводить на консоль.
 
 #### Код
 
@@ -949,7 +949,6 @@ lab2/
 
 ```
 lab2/
-├── venv/
 ├── data/
 │   ├── corpus/
 │   │   ├── b01.txt
@@ -960,12 +959,13 @@ lab2/
 ├── config.py
 ├── dispatcher.py
 ├── lab2.log
+├── report.md
 ├── schemas.py
 └── tasks.json
 └── tools.py
 ```
 
-здається у вигляді PR в репозиторій https://github.com/oleksii-m-baranov/computational-methods-2026-practice . 
+Здається у вигляді PR в репозиторій https://github.com/oleksii-m-baranov/computational-methods-2026-practice . 
 Дивиться README.md щодо правил оформлення PR.
 
 Каталог `venv/` до архіву не включається.

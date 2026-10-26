@@ -1,0 +1,15 @@
+2026-09-15 13:50:15 - INFO - ===== LOCAL (llama3.2:3b) =====
+2026-09-15 13:50:15 - INFO - Функція — це relation між двома змінними, яка виділяє конкретний результат для кожного значення однієї з них.
+
+Метodem — це чергування методів, які використовуються для досягнення певного мети чи цели.
+2026-09-15 13:50:15 - INFO - Час: 10.43 с
+2026-09-15 13:50:15 - INFO - CompletionUsage(completion_tokens=56, prompt_tokens=43, total_tokens=99, completion_tokens_details=None, prompt_tokens_details=PromptTokensDetails(audio_tokens=None, cache_write_tokens=None, cached_tokens=0, image_tokens=None, text_tokens=None))
+2026-09-15 13:50:15 - INFO - 
+2026-09-15 13:50:15 - INFO - ===== CLOUD (openai/gpt-oss-20b) =====
+2026-09-15 13:50:15 - INFO - **Функція** – це окремий блок коду, який можна викликати за іменем і який не прив’язаний до жодного об’єкта.  
+**Метод** – це функція, що «приєднана» до класу або об’єкта; він викликається як `obj.method()` і має доступ до стану (полів) цього об’єкта.  
+
+Тобто: функція – незалежна, метод – функція, що працює в контексті об’єкта.
+2026-09-15 13:50:15 - INFO - Час: 0.64 с
+2026-09-15 13:50:15 - INFO - CompletionUsage(completion_tokens=259, prompt_tokens=89, total_tokens=348, completion_tokens_details=CompletionTokensDetails(accepted_prediction_tokens=None, audio_tokens=None, reasoning_tokens=136, rejected_prediction_tokens=None, text_tokens=None), prompt_tokens_details=None, queue_time=0.203766566, prompt_time=0.004243827, completion_time=0.269148529, total_time=0.273392356)
+2026-09-15 13:50:15 - INFO - 

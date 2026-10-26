@@ -1,0 +1,13 @@
+provider,model,prompt,ttft_s,total_s,chars_per_s
+local,llama3.2:3b,short,2.126,2.926,8.7
+local,llama3.2:3b,medium,2.136,7.2,48.6
+local,llama3.2:3b,long,2.178,36.98,51.9
+cloud,models/gemini-3-flash-preview,short,1.316,1.317,23.0
+cloud,models/gemini-3-flash-preview,medium,2.446,3.158,156.6
+cloud,models/gemini-3-flash-preview,long,4.688,9.4,316.2
+local,qwen3:4b,1_fact,"['1895', '1895']"
+local,qwen3:4b,2_format,"['', '']"
+local,qwen3:4b,3_summary,"['', '']"
+local,qwen3:4b,4_code,"['', '']"
+local,qwen3:4b,5_logic,"['', '']"
+local,qwen3:4b,6_language,"['', '']"
