@@ -222,3 +222,6 @@ docs/**/cache/
 docs/**/state/
 students/**/cache/
 students/**/state/
+
+!students/**/*.log
+!docs/**/*.log
