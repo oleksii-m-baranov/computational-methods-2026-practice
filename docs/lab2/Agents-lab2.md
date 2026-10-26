@@ -959,12 +959,13 @@ lab2/
 ├── config.py
 ├── dispatcher.py
 ├── lab2.log
+├── report.md
 ├── schemas.py
 └── tasks.json
 └── tools.py
 ```
 
-здається у вигляді PR в репозиторій https://github.com/oleksii-m-baranov/computational-methods-2026-practice . 
+Здається у вигляді PR в репозиторій https://github.com/oleksii-m-baranov/computational-methods-2026-practice . 
 Дивиться README.md щодо правил оформлення PR.
 
 Каталог `venv/` до архіву не включається.
