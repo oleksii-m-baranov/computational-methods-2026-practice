@@ -1,0 +1,12 @@
+model,price,in_stock,warranty_months
+StudyBook 14,24000,3,12
+StudyBook 15,27000,5,12
+CodeMaster Pro,52000,1,24
+GameForce X17,78000,2,36
+GameForce X15,63000,4,24
+PixelCraft Studio,45000,2,24
+OfficePro 360,19000,6,12
+DevStation Ultra,89000,0,36
+SlimAir 13,32000,3,12
+RenderMax 4K,71000,1,24
+BudgetBook 11,15000,7,12
