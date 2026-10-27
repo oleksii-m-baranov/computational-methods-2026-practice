@@ -1,0 +1,29 @@
+import logging
+import sys
+
+if hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
+def custom_logger(name, overwrite=False):
+    logger = logging.getLogger(name)
+    if overwrite and logger.handlers:
+        for handler in logger.handlers[:]:
+            handler.close()
+            logger.removeHandler(handler)
+            
+    if not logger.handlers:
+        logger.setLevel(logging.INFO)
+        formatter = logging.Formatter('%(message)s')
+        
+        mode = 'w' if overwrite else 'a'
+        fh = logging.FileHandler(f"{name}.log", mode=mode, encoding='utf-8')
+        fh.setFormatter(formatter)
+        logger.addHandler(fh)
+        
+        ch = logging.StreamHandler(sys.stdout)
+        ch.setFormatter(formatter)
+        logger.addHandler(ch)
+    return logger
