@@ -7,9 +7,9 @@ client = OpenAI(base_url=config.BASE_URL, api_key=config.API_KEY)
 schema = ARGS["calc_price"].model_json_schema()
 
 questions = [
-    "Порахуй 12 + 30. Сформуй аргументи для інструмента calc_price.",
-    "Скільки буде 100 / 4? Сформуй аргументи для calc_price.",
-    "Переведи 100 доларів у єни. Сформуй аргументи для calc_price.",
+    "Порахуй вартість доставки 5 кг до Львова. Сформуй аргументи для інструмента calc_price.",
+    "Скільки буде 20 * 15? Сформуй аргументи для calc_price.",
+    "Порахуй доставку 100 кг до Києва. Сформуй аргументи для calc_price.",
 ]
 
 for question in questions:
