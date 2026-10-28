@@ -1,0 +1,4 @@
+openai==3.31.0
+pydantic==2.14.1
+python-dotenv==1.2.4
+langfuse==4.18.0
