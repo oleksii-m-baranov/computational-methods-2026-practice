@@ -12,7 +12,7 @@ response = client.chat.completions.create(
         {
             "role": "user",
             "content": (
-                "Розкажи про маршрут до Нарнії."
+                "Підбери маршрути для подорожі до Нарнії. "
             ),
         }
     ],
