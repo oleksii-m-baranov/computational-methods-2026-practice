@@ -1,0 +1,140 @@
+[
+  {
+    "tool": "search_rules",
+    "args": {
+      "query": "Київ"
+    },
+    "result": "За запитом 'Київ' нічого не знайдено."
+  },
+  {
+    "tool": "tariff_info",
+    "args": {
+      "city": "Київ"
+    },
+    "result": "Ціна: 15 грн/кг, термін: 1 днів, мінімальна вартість: 60 грн"
+  },
+  {
+    "tool": "calc_price",
+    "args": {
+      "weight": 2,
+      "price_per_kg": 10,
+      "min_price": 10
+    },
+    "result": "20.0 грн"
+  },
+  {
+    "tool": "search_rules",
+    "args": {
+      "query": "Львів"
+    },
+    "result": "За запитом 'Львів' нічого не знайдено."
+  },
+  {
+    "tool": "tariff_info",
+    "args": {
+      "city": "Львів"
+    },
+    "result": "Ціна: 18 грн/кг, термін: 2 днів, мінімальна вартість: 70 грн"
+  },
+  {
+    "tool": "calc_price",
+    "args": {
+      "min_price": 10,
+      "weight": 1.5,
+      "price_per_kg": 12
+    },
+    "result": "18.0 грн"
+  },
+  {
+    "tool": "search_rules",
+    "args": {
+      "query": "Харків"
+    },
+    "result": "За запитом 'Харків' нічого не знайдено."
+  },
+  {
+    "tool": "tariff_info",
+    "args": {
+      "city": "Харків"
+    },
+    "result": "Ціна: 20 грн/кг, термін: 3 днів, мінімальна вартість: 75 грн"
+  },
+  {
+    "tool": "calc_price",
+    "args": {
+      "min_price": 10,
+      "weight": 3,
+      "price_per_kg": 15
+    },
+    "result": "45.0 грн"
+  },
+  {
+    "tool": "search_rules",
+    "args": {
+      "query": "Одеса"
+    },
+    "result": "За запитом 'Одеса' нічого не знайдено."
+  },
+  {
+    "tool": "tariff_info",
+    "args": {
+      "city": "Одеса"
+    },
+    "result": "Ціна: 19 грн/кг, термін: 2 днів, мінімальна вартість: 80 грн"
+  },
+  {
+    "tool": "calc_price",
+    "args": {
+      "weight": 1,
+      "price_per_kg": 10,
+      "min_price": 10
+    },
+    "result": "10.0 грн"
+  },
+  {
+    "tool": "search_rules",
+    "args": {
+      "query": "Дніпро"
+    },
+    "result": "За запитом 'Дніпро' нічого не знайдено."
+  },
+  {
+    "tool": "tariff_info",
+    "args": {
+      "city": "Дніпро"
+    },
+    "result": "Ціна: 17 грн/кг, термін: 2 днів, мінімальна вартість: 65 грн"
+  },
+  {
+    "tool": "calc_price",
+    "args": {
+      "min_price": 10,
+      "weight": 2.5,
+      "price_per_kg": 15
+    },
+    "result": "37.5 грн"
+  },
+  {
+    "tool": "search_rules",
+    "args": {
+      "query": "Запоріжжя"
+    },
+    "result": "За запитом 'Запоріжжя' нічого не знайдено."
+  },
+  {
+    "tool": "tariff_info",
+    "args": {
+      "city": "Запоріжжя"
+    },
+    "result": "Ціна: 21 грн/кг, термін: 3 днів, мінімальна вартість: 85 грн"
+  },
+  {
+    "tool": "calc_price",
+    "args": {
+      "weight": 4,
+      "price_per_kg": 20,
+      "min_price": 10
+    },
+    "result": "80.0 грн"
+  }
+]
