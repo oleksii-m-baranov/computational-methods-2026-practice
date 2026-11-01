@@ -57,7 +57,7 @@
       "1895"
     ],
     "2_format": [
-      "[\n  {\n    \"event\": \"First public screening of a motion picture by the Lumière brothers\",\n    \"year\": 1903,\n    \"city\": \"Paris\"\n  },\n  {\n    \"event\": \"Release of the first feature-length talkie, \\\"The Jazz Singer\\\"\",\n    \"year\": 1927,\n    \"city\": \"New York\"\n  },\n  {\n    \"event\": \"Premiere of the first full-length color feature film, \\\"The Wizard of Oz\\\"\",\n    \"year\": 1939,\n    \"city\": \"Los Angeles\"\n  }\n]",
+      "[\n  {\n    \"event\": \"First public screening of a motion picture by the Lumière brothers\",\n    \"year\": 1895,\n    \"city\": \"Paris\"\n  },\n  {\n    \"event\": \"Release of the first feature-length talkie, \\\"The Jazz Singer\\\"\",\n    \"year\": 1927,\n    \"city\": \"New York\"\n  },\n  {\n    \"event\": \"Premiere of the first full-length color feature film, \\\"The Wizard of Oz\\\"\",\n    \"year\": 1939,\n    \"city\": \"Los Angeles\"\n  }\n]",
       "[\n  {\n    \"event\": \"First public film screening by the Lumière brothers\",\n    \"year\": 1903,\n    \"city\": \"Paris\"\n  },\n  {\n    \"event\": \"First feature-length talkie, \\\"The Jazz Singer\\\"\",\n    \"year\": 1927,\n    \"city\": \"New York\"\n  },\n  {\n    \"event\": \"Premiere of \\\"The Godfather\\\"\",\n    \"year\": 1972,\n    \"city\": \"New York\"\n  }\n]"
     ],
     "3_summary": [
