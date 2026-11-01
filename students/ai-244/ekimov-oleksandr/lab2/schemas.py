@@ -9,7 +9,7 @@ SCHEMAS = [
                 "properties": {
                     "query": {
                         "type": "string",
-                        "description": "Ключове слово, тип відпочинку або назва місця українською"
+                        "description": "Тип або місто"
                     }
                 },
                 "required": ["query"]
@@ -26,7 +26,7 @@ SCHEMAS = [
                 "properties": {
                     "route": {
                         "type": "string",
-                        "description": "Назва маршруту або міста українською"
+                        "description": "Назва міста"
                     }
                 },
                 "required": ["route"]
@@ -43,15 +43,15 @@ SCHEMAS = [
                 "properties": {
                     "price_per_person": {
                         "type": "number",
-                        "description": "Вартість поїздки на одну особу"
+                        "description": "Ціна особи"
                     },
                     "people": {
                         "type": "number",
-                        "description": "Кількість людей у групі"
+                        "description": "Кількість людей"
                     },
                     "extra": {
                         "type": "number",
-                        "description": "Додаткові витрати"
+                        "description": "Додатково"
                     }
                 },
                 "required": ["price_per_person", "people", "extra"]
