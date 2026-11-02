@@ -225,3 +225,5 @@ students/**/state/
 
 !students/**/*.log
 !docs/**/*.log
+
+*.tmp
