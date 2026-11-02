@@ -10,7 +10,7 @@ class search_exercises(BaseModel):
 
 class schedule_info(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    title: str = Field(description="Назва заняття українською в нижньому регістрі")
+    activity: str = Field(description="Назва заняття українською в нижньому регістрі")
 
 
 class calc_calories(BaseModel):

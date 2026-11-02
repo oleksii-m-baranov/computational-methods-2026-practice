@@ -1,4 +1,4 @@
-﻿from dispatcher import call_tool
+from dispatcher import call_tool
 
 cases = [
     ("calc_calories",    '{"minutes": 30, "weight_kg": 70',                    # зламаний JSON
@@ -13,7 +13,7 @@ cases = [
     ),
     ("book_session",     '{"booking_id": "123"}',                              # заборонена дія
     ),
-    ("schedule_info",    '{"title": "підводне поло"}',                         # значення немає в довіднику
+    ("schedule_info",    '{"activity": "підводне поло"}',                         # значення немає в довіднику
     ),
     ("calc_calories",    '{"minutes": 30, "weight_kg": 0, "met": 5}',          # значення поза межами
     ),

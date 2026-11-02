@@ -17,9 +17,10 @@ def search_exercises(query: str) -> str:
 
 
 def schedule_info(activity: str) -> str:
+    act = activity.strip().lower()
     with open("data/schedule.csv", encoding="utf-8") as f:
         for row in csv.DictReader(f):
-            if row["activity"].lower() == activity.lower():
+            if row["activity"].strip().lower() == act:
                 return (f"День: {row['weekday']}, час: {row['time']}, "
                         f"тренер: {row['trainer']}")
     return f"Заняття '{activity}' немає в розкладі."
@@ -28,8 +29,10 @@ def schedule_info(activity: str) -> str:
 def calc_calories(minutes: float, weight_kg: float, met: float) -> str:
     return f"{round(met * 3.5 * weight_kg / 200 * minutes)} ккал"
 
+
 def book_session(booking_id: str) -> str:
     return "записати на заняття"      # заглушка: агентові ця дія заборонена
+
 
 TOOLS = {
     "search_exercises": search_exercises,
