@@ -1,7 +1,7 @@
-import time
+﻿import time
 from providers import make_client
 
-QUESTION = "Поясни різницю між синхронним і асинхронним виконанням коду. Коротко."
+QUESTION = "Поясни різницю між масивом і зв'язним списком. Коротко."
 
 for name in ["local", "cloud"]:
     client, model = make_client(name)

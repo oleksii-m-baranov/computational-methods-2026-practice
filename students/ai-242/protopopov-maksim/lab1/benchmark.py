@@ -1,7 +1,11 @@
-import time, statistics, csv
+﻿import time
+import statistics
+import csv
 from providers import make_client
 
+
 def measure(client, model, prompt):
+    """Один вимір: повертає TTFT, загальний час і довжину відповіді."""
     t_start = time.perf_counter()
     first_token_at = None
     parts = []
@@ -25,16 +29,17 @@ def measure(client, model, prompt):
         "chars_per_s": round(len(text) / (t_end - t_start), 1),
     }
 
+
 PROMPTS = {
-    "short": "Столиця Австралії?",
+    "short": "Столиця Єгипту?",
     "medium": "Поясни в одному абзаці, що таке рекурсія.",
-    "long": "Напиши інструкцію з 10 пунктів, як розгорнути вебзастосунок на сервері.",
+    "long": "Напиши інструкцію з 10 пунктів, як почати працювати з Git.",
 }
 
 rows = []
 for provider in ["local", "cloud"]:
     client, model = make_client(provider)
-    measure(client, model, "розігрів")
+    measure(client, model, "розігрів")  # прогрів, не рахуємо
     for name, prompt in PROMPTS.items():
         runs = [measure(client, model, prompt) for _ in range(3)]
         rows.append({
@@ -51,3 +56,5 @@ with open("results.csv", "w", newline="", encoding="utf-8") as f:
     writer = csv.DictWriter(f, fieldnames=rows[0].keys())
     writer.writeheader()
     writer.writerows(rows)
+
+print("Готово: results.csv")
