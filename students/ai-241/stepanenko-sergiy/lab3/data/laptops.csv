@@ -1,0 +1,12 @@
+model,price,in_stock,warranty_months
+StudyBook 14,24000,4,12
+StudyBook 14 Plus,32000,3,24
+CodeNova 15,42000,5,24
+CodeNova Pro 16,68000,2,36
+GameStorm X15,59000,3,24
+GamePulse 17,75000,1,36
+ArtVision 15,46000,4,24
+PixelCraft Pro,82000,0,36
+OfficeFlow 13,19500,7,12
+OfficeMate 15,27000,6,12
+TravelLite 14,35000,2,24
