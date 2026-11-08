@@ -10,6 +10,12 @@ All practice docs are stored in the directory `./docs` and organized by practice
 1. Install Python 3.12
 2. Create a `venv` using Python 3.12
 3. Activate the venv
+4. From the repository root, install the shared `utils` package in editable mode (once per venv):
+```bash
+pip install -e .
+```
+(or `uv pip install -e .` if the venv was created with `uv`). After that `from utils.lab_logger import custom_logger`
+works from any directory, so lab scripts can be run directly, e.g. `cd docs/lab5/python_example && python ask.py D1`.
 
 ## How To Contribute
 (One time)
