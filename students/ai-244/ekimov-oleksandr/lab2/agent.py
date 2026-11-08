@@ -56,17 +56,7 @@ def run_agent(task):
             except Exception:
                 args_dict = {}
 
-            # Якщо модель викликала search_routes, але передала 'category' замість 'query'
-            if func_name == "search_routes" and "category" in args_dict and "query" not in args_dict:
-                args_dict["query"] = args_dict.pop("category")
-
-            # Якщо модель викликала transport_info, але передала 'destination' або 'city' замість 'route'
-            if func_name == "transport_info":
-                if "destination" in args_dict and "route" not in args_dict:
-                    args_dict["route"] = args_dict.pop("destination")
-                elif "city" in args_dict and "route" not in args_dict:
-                    args_dict["route"] = args_dict.pop("city")
-
+    
             # Якщо модель викликала calc_budget, але передала інші ключі або забула 'extra'
             if func_name == "calc_budget":
                 if "price_per_person" not in args_dict and "transport_cost" in args_dict:
