@@ -1,0 +1,4 @@
+provider,model,prompt,ttft_s,total_s,chars_per_s
+local_qwen,qwen3:4b,short,17.774,17.972,0.3
+local_qwen,qwen3:4b,medium,123.692,129.309,1.9
+local_qwen,qwen3:4b,long,142.814,157.994,7.5
