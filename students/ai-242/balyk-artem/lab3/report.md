@@ -182,9 +182,11 @@ ARGS = {
 5. **Результат** — вихід `call_tool`, що містить рівень перевірки та текст результату.
 
 <img width="923" height="906" alt="Image" src="https://github.com/user-attachments/assets/74412eb5-53c3-45b7-a67f-e62eae4b2809" />
+
 Рис.1 Траса в Langfuse (крок 1)
 
 <img width="931" height="896" alt="Image" src="https://github.com/user-attachments/assets/d373075f-9120-497d-8912-968e0ff63006" />
+
 Рис.2 Траса в Langfuse (крок 2 на якому видна відповідь)
 
 ## 7.2. Таблиця 6 — порівняння прогонів у Langfuse
@@ -205,7 +207,11 @@ ARGS = {
 
 <img width="952" height="686" alt="Image" src="https://github.com/user-attachments/assets/a55f6af0-04ac-490e-9538-d0bb4019d2fb" />
 
+Рис.3 Виклик інструменту для неіснуючого продукту і повідомлення помилки для моделі
+
 <img width="918" height="887" alt="Image" src="https://github.com/user-attachments/assets/d513064d-5e09-45fe-93b9-89717d354b23" />
+
+Рис.4 Відповідь моделі з урахуванням помилки
 
 Опис:
 - Початкова помилка: вказаного продукту немає у довіднику.
@@ -222,6 +228,8 @@ ARGS = {
 У цій задачі агент викликав `search_recipes`, хоча користувач просив виконати дію зі списком покупок.
 
 <img width="940" height="555" alt="Image" src="https://github.com/user-attachments/assets/6f112601-0bee-4825-a4cc-4f0870c8a93e" />
+
+Рис.5 Траса неправильно розв'язаної задачі
 
 Причина помилки:
 
@@ -304,6 +312,8 @@ amount=10.0 base_servings=4.0 target_servings=10.0
 ```
 
 <img width="1416" height="516" alt="Image" src="https://github.com/user-attachments/assets/fb02f5de-a201-42fc-92fb-f29c1b267599" />
+
+Рис.6 Помилка Structured Output
 
 Тут значення у 0 порцій є невалідним і structured output видав помилку, не надавши можливість сформувати не логічний JSON.
 
