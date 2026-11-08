@@ -1,0 +1,7 @@
+provider,model,prompt,ttft_s,total_s,chars_per_s
+local,llama3.2:3b,short,2.105,2.484,14.7
+local,llama3.2:3b,medium,2.089,5.067,80.6
+local,llama3.2:3b,long,2.123,17.363,107.8
+cloud,gemini-3.6-flash,short,1.696,1.697,15.9
+cloud,gemini-3.6-flash,medium,9.031,9.452,46.4
+cloud,gemini-3.6-flash,long,7.902,13.609,231.6

@@ -1,0 +1,15 @@
+{
+  "model": "llama3.2:3b",
+  "cold": {
+    "ttft_s": 3.73,
+    "total_s": 3.815,
+    "chars": 25,
+    "chars_per_s": 6.6
+  },
+  "warm": {
+    "ttft_s": 2.043,
+    "total_s": 2.134,
+    "chars": 28,
+    "chars_per_s": 13.1
+  }
+}
