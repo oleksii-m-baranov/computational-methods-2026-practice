@@ -1,7 +1,0 @@
-﻿model,run,start_type,wall_seconds,total_seconds,load_seconds,eval_seconds,tokens,characters,chars_per_second,status
-llama3.2:3b,1,cold,15.93,13.8,7.97,5.62,297,1053,187.53,ok
-llama3.2:3b,2,warm,7.8,5.74,0.02,5.64,296,946,167.71,ok
-llama3.2:3b,3,warm,7.96,5.92,0.02,5.81,296,946,162.73,ok
-qwen3:4b,1,cold,31.39,29.33,7.61,21.16,512,2257,106.64,ok
-qwen3:4b,2,warm,23.21,21.14,0.04,20.97,512,2282,108.82,ok
-qwen3:4b,3,warm,23.73,21.66,0.08,21.44,512,2282,106.44,ok
