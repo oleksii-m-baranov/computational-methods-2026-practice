@@ -23,6 +23,7 @@ from utils.lab_logger import custom_logger
 
 
 logger = custom_logger(config.LAB_LOGFILE_NAME)
+client = get_client()
 
 
 with open("tasks.json", encoding="utf-8") as f:
@@ -36,15 +37,17 @@ for task in tasks:
         f"очікується: {task['expected']}"
     )
 
-    with propagate_attributes(
-        trace_name=f"{config.RUN_TAG}-{task['id']}",
-        tags=[config.RUN_TAG],
+    trace_name = f"{config.RUN_TAG}-{task['id']}"
+    with (
+        client.start_as_current_observation(name=trace_name, as_type="span") as root,
+        propagate_attributes(trace_name=trace_name, tags=[config.RUN_TAG]),
     ):
-        run_agent(task["question"])
+        answer = run_agent(task["question"])
+        root.update(input=task["question"], output=answer)
 
 
 # Обов'язково відправляємо всі події
-get_client().flush()
+client.flush()
 
 logger.info(
     f"\nОброблено задач: {len(tasks)}. "
