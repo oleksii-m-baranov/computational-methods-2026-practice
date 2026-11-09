@@ -1,0 +1,13 @@
+mode=cache
+run=1
+task_id=long_books_01
+expected=268
+compress=none
+use_state=False
+use_cache=True
+cache_hits=0
+cache_misses=3
+cache_size=3
+answer=For the book "Місто вічної ночі", the fine for overdue is 25 грн (5 грн/day * 5 days).
+
+
