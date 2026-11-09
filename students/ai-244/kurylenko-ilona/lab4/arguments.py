@@ -16,9 +16,20 @@ class SearchArticlesArgs(BaseModel):
 class VaccineInfoArgs(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
-    vaccine: str = Field(
+    vaccine: str | None = Field(
+        default=None,
         description="Точна назва щеплення в нижньому регістрі, "
-                    "як вона записана в довіднику vaccines.csv"
+                    "як вона записана в довіднику vaccines.csv. "
+                    "Передавай, якщо відома конкретна назва щеплення"
+    )
+
+    age_months: int | None = Field(
+        default=None,
+        gt=0,
+        le=240,
+        description="Вік кота в місяцях для пошуку щеплень за віком "
+                    "у довіднику vaccines.csv. Передавай, коли потрібно "
+                    "підібрати щеплення за віком кота"
     )
 
 

@@ -1,21 +1,18 @@
 """Створення довгої задачі для варіанта 10: догляд за котом."""
 
-import csv
 import json
-from pathlib import Path
 
 from tools import search_articles, vaccine_info, calc_food
 
 
-# Шість котів різного віку та ваги.
-# Назви щеплень відповідають довіднику vaccines.csv.
+# Шість котів різного віку та ваги з природно сформульованими потребами.
 ITEMS = [
-    (2, 2.0, "комплексне"),
-    (3, 3.0, "від сказу"),
-    (3, 4.0, "каліцивіроз"),
-    (4, 5.0, "хламідіоз"),
-    (5, 6.0, "дерматофітія"),
-    (6, 7.0, "інфекційний перитоніт"),
+    (2, 2.0, "дряпає меблі"),
+    (3, 3.0, "дряпає диван"),
+    (4, 4.0, "не їсть"),
+    (5, 5.0, "сильно линяє"),
+    (6, 6.0, "правильне годування кота"),
+    (7, 7.0, "як годувати кота"),
 ]
 
 DAYS = 30
@@ -23,53 +20,23 @@ GRAMS_PER_KG = 25
 MIN_CALLS = 18
 
 
-def get_articles():
-    """Беремо шість реальних назв статей з наявного корпусу."""
-    folder = Path("data/corpus")
-    files = sorted(folder.glob("*.txt"))
+def check_items():
+    """Перевіряємо, що для кожного кота є стаття в корпусі та щеплення за віком."""
+    for age, weight, need in ITEMS:
+        article = search_articles(need)
+        if "нічого не знайдено" in article:
+            raise ValueError(f"Статтю не знайдено для потреби: {need}")
 
-    if len(files) < 6:
-        raise ValueError("У корпусі повинно бути щонайменше 6 статей.")
-
-    titles = []
-    for path in files[:6]:
-        lines = path.read_text(encoding="utf-8").splitlines()
-        title = lines[0].strip()
-        if not title:
-            raise ValueError(f"Порожня назва статті: {path.name}")
-        titles.append(title)
-
-    return titles
-
-
-def check_vaccines():
-    """Перевіряємо назви та вік першого щеплення."""
-    with open("data/vaccines.csv", encoding="utf-8") as f:
-        vaccines = {
-            row["vaccine"]: row
-            for row in csv.DictReader(f)
-        }
-
-    for age, weight, vaccine in ITEMS:
-        if vaccine not in vaccines:
-            raise ValueError(f"Немає щеплення: {vaccine}")
-
-        first_age = int(vaccines[vaccine]["first_age_months"])
-        if age < first_age:
-            raise ValueError(
-                f"Щеплення {vaccine} не підходить для віку {age} міс."
-            )
+        info = vaccine_info(age_months=age)
+        if "немає" in info or "Помилка" in info:
+            raise ValueError(f"Не знайдено щеплення для віку {age} міс.: {info}")
 
 
 def compute():
-    """Обчислюємо правильний результат через інструменти."""
+    """Обчислюємо правильний результат через інструменти, без моделі."""
     total = 0
 
-    for age, weight, vaccine in ITEMS:
-        info = vaccine_info(vaccine)
-        if "немає в довіднику" in info:
-            raise ValueError(info)
-
+    for age, weight, need in ITEMS:
         result = calc_food(weight, GRAMS_PER_KG, DAYS)
         grams = int(result.removesuffix(" г"))
         total += grams
@@ -77,52 +44,35 @@ def compute():
     return total
 
 
-def make_question(titles):
-    """Формуємо довге питання з шістьма позиціями."""
-    descriptions = []
-
-    for index, ((age, weight, vaccine), title) in enumerate(
-        zip(ITEMS, titles), start=1
-    ):
-        descriptions.append(
-            f"{index}) кіт віком {age} міс., вагою {weight} кг; "
-            f"тема статті: «{title}»; щеплення: «{vaccine}»"
-        )
+def make_question():
+    """Формуємо довге питання з шістьма позиціями за шаблоном методички."""
+    descriptions = [
+        f"{index}) кіт віком {age} міс., вагою {weight:g} кг ({need})"
+        for index, (age, weight, need) in enumerate(ITEMS, start=1)
+    ]
 
     question = (
-        "Для кожного із шести котів виконай три дії за допомогою "
-        "окремих інструментів. Не пропускай жодного кота. "
-        "Дані котів:\n"
-        + "\n".join(descriptions)
-        + "\nДля КОЖНОГО кота: "
-        "(а) виклич search_articles за вказаною темою та назви "
-        "знайдену статтю; "
-        "(б) виклич vaccine_info для вказаного щеплення "
-        "та повідом вік першого щеплення і ціну; "
-        "(в) виклич calc_food для розрахунку корму на 30 днів "
-        "за нормою 25 грамів на кілограм ваги на день. "
-        "Після обробки всіх шести котів назви загальну "
-        "кількість корму за місяць у грамах одним числом. "
-        "Не вигадуй дані та не обчислюй корм самостійно."
+        "Є шість котів різного віку й ваги:\n"
+        + ";\n".join(descriptions)
+        + ".\n"
+        "Для кожного з шести котів: "
+        "(а) знайди пораду з догляду щодо описаної потреби і наведи її одним реченням; "
+        "(б) знайди в довіднику інформацію про щеплення за віком кота "
+        "(назву, вік першого щеплення та ціну); "
+        "(в) порахуй місячну кількість корму на 30 днів за нормою 25 г на 1 кг ваги на день. "
+        "У кінці назви загальну кількість корму за місяць для всіх шести котів у грамах одним числом."
     )
 
     return question
 
 
 def main():
-    titles = get_articles()
-    check_vaccines()
-
-    for title in titles:
-        result = search_articles(title)
-        if "нічого не знайдено" in result:
-            raise ValueError(f"Статтю не знайдено: {title}")
-
+    check_items()
     total = compute()
 
     task = {
         "id": "L1",
-        "question": make_question(titles),
+        "question": make_question(),
         "expected": str(total),
         "min_calls": MIN_CALLS,
     }
