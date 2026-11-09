@@ -1,0 +1,7 @@
+﻿model,run,start_type,ttft_seconds,wall_seconds,total_seconds,load_seconds,eval_seconds,tokens,characters,status
+llama3.2:3b,1,cold,9.542,85.388,83.352,6.918,75.845,297,1053,ok
+llama3.2:3b,2,warm,2.395,87.49,85.432,0.009,85.091,296,946,ok
+llama3.2:3b,3,warm,2.384,87.619,85.547,0.008,85.21,296,946,ok
+qwen3:4b,1,cold,17.734,183.834,181.76,14.013,166.097,512,2257,ok
+qwen3:4b,2,warm,2.448,168.959,166.924,0.008,166.509,512,2282,ok
+qwen3:4b,3,warm,2.462,167.367,165.313,0.011,164.901,512,2282,ok

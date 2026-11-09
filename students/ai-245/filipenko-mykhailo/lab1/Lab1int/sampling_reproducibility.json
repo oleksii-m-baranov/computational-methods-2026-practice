@@ -1,0 +1,102 @@
+[
+  {
+    "run": 1,
+    "model": "llama3.2:3b",
+    "temperature": 0,
+    "top_p": 1.0,
+    "seed": 42,
+    "answer": "\"Robo-Трух\"",
+    "seconds": 4.81,
+    "status": "ok"
+  },
+  {
+    "run": 2,
+    "model": "llama3.2:3b",
+    "temperature": 0,
+    "top_p": 1.0,
+    "seed": 42,
+    "answer": "\"Robo-Трух\"",
+    "seconds": 4.85,
+    "status": "ok"
+  },
+  {
+    "run": 3,
+    "model": "llama3.2:3b",
+    "temperature": 0,
+    "top_p": 1.0,
+    "seed": 42,
+    "answer": "\"Robo-Трух\"",
+    "seconds": 4.75,
+    "status": "ok"
+  },
+  {
+    "run": 4,
+    "model": "llama3.2:3b",
+    "temperature": 0,
+    "top_p": 1.0,
+    "seed": 42,
+    "answer": "\"Robo-Трух\"",
+    "seconds": 4.14,
+    "status": "ok"
+  },
+  {
+    "run": 5,
+    "model": "llama3.2:3b",
+    "temperature": 0,
+    "top_p": 1.0,
+    "seed": 42,
+    "answer": "\"Robo-Трух\"",
+    "seconds": 4.11,
+    "status": "ok"
+  },
+  {
+    "run": 6,
+    "model": "llama3.2:3b",
+    "temperature": 0,
+    "top_p": 1.0,
+    "seed": 42,
+    "answer": "\"Robo-Трух\"",
+    "seconds": 4.09,
+    "status": "ok"
+  },
+  {
+    "run": 7,
+    "model": "llama3.2:3b",
+    "temperature": 0,
+    "top_p": 1.0,
+    "seed": 42,
+    "answer": "\"Robo-Трух\"",
+    "seconds": 4.16,
+    "status": "ok"
+  },
+  {
+    "run": 8,
+    "model": "llama3.2:3b",
+    "temperature": 0,
+    "top_p": 1.0,
+    "seed": 42,
+    "answer": "\"Robo-Трух\"",
+    "seconds": 4.13,
+    "status": "ok"
+  },
+  {
+    "run": 9,
+    "model": "llama3.2:3b",
+    "temperature": 0,
+    "top_p": 1.0,
+    "seed": 42,
+    "answer": "\"Robo-Трух\"",
+    "seconds": 4.09,
+    "status": "ok"
+  },
+  {
+    "run": 10,
+    "model": "llama3.2:3b",
+    "temperature": 0,
+    "top_p": 1.0,
+    "seed": 42,
+    "answer": "\"Robo-Трух\"",
+    "seconds": 4.08,
+    "status": "ok"
+  }
+]

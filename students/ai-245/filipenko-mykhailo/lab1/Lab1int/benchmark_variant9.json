@@ -1,0 +1,200 @@
+[
+  {
+    "provider": "llama",
+    "model": "llama3.2:3b",
+    "prompt_type": "short",
+    "run": 1,
+    "ttft_seconds": 2.162,
+    "total_seconds": 2.552,
+    "characters": 29,
+    "chars_per_second": 11.36,
+    "status": "ok"
+  },
+  {
+    "provider": "llama",
+    "model": "llama3.2:3b",
+    "prompt_type": "short",
+    "run": 2,
+    "ttft_seconds": 2.151,
+    "total_seconds": 2.475,
+    "characters": 29,
+    "chars_per_second": 11.72,
+    "status": "ok"
+  },
+  {
+    "provider": "llama",
+    "model": "llama3.2:3b",
+    "prompt_type": "short",
+    "run": 3,
+    "ttft_seconds": 2.161,
+    "total_seconds": 2.548,
+    "characters": 29,
+    "chars_per_second": 11.38,
+    "status": "ok"
+  },
+  {
+    "provider": "llama",
+    "model": "llama3.2:3b",
+    "prompt_type": "medium",
+    "run": 1,
+    "ttft_seconds": 2.182,
+    "total_seconds": 3.816,
+    "characters": 301,
+    "chars_per_second": 78.88,
+    "status": "ok"
+  },
+  {
+    "provider": "llama",
+    "model": "llama3.2:3b",
+    "prompt_type": "medium",
+    "run": 2,
+    "ttft_seconds": 2.139,
+    "total_seconds": 3.78,
+    "characters": 301,
+    "chars_per_second": 79.63,
+    "status": "ok"
+  },
+  {
+    "provider": "llama",
+    "model": "llama3.2:3b",
+    "prompt_type": "medium",
+    "run": 3,
+    "ttft_seconds": 2.16,
+    "total_seconds": 3.801,
+    "characters": 301,
+    "chars_per_second": 79.19,
+    "status": "ok"
+  },
+  {
+    "provider": "llama",
+    "model": "llama3.2:3b",
+    "prompt_type": "long",
+    "run": 1,
+    "ttft_seconds": 2.213,
+    "total_seconds": 11.915,
+    "characters": 1631,
+    "chars_per_second": 136.89,
+    "status": "ok"
+  },
+  {
+    "provider": "llama",
+    "model": "llama3.2:3b",
+    "prompt_type": "long",
+    "run": 2,
+    "ttft_seconds": 2.199,
+    "total_seconds": 11.887,
+    "characters": 1631,
+    "chars_per_second": 137.21,
+    "status": "ok"
+  },
+  {
+    "provider": "llama",
+    "model": "llama3.2:3b",
+    "prompt_type": "long",
+    "run": 3,
+    "ttft_seconds": 2.172,
+    "total_seconds": 12.023,
+    "characters": 1631,
+    "chars_per_second": 135.65,
+    "status": "ok"
+  },
+  {
+    "provider": "cloud",
+    "model": "gemini-3.5-flash-lite",
+    "prompt_type": "short",
+    "run": 1,
+    "ttft_seconds": 0.827,
+    "total_seconds": 0.916,
+    "characters": 75,
+    "chars_per_second": 81.87,
+    "status": "ok"
+  },
+  {
+    "provider": "cloud",
+    "model": "gemini-3.5-flash-lite",
+    "prompt_type": "short",
+    "run": 2,
+    "ttft_seconds": 0.635,
+    "total_seconds": 0.898,
+    "characters": 148,
+    "chars_per_second": 164.81,
+    "status": "ok"
+  },
+  {
+    "provider": "cloud",
+    "model": "gemini-3.5-flash-lite",
+    "prompt_type": "short",
+    "run": 3,
+    "ttft_seconds": 0.636,
+    "total_seconds": 0.774,
+    "characters": 75,
+    "chars_per_second": 96.84,
+    "status": "ok"
+  },
+  {
+    "provider": "cloud",
+    "model": "gemini-3.5-flash-lite",
+    "prompt_type": "medium",
+    "run": 1,
+    "ttft_seconds": 0.84,
+    "total_seconds": 1.366,
+    "characters": 414,
+    "chars_per_second": 303.05,
+    "status": "ok"
+  },
+  {
+    "provider": "cloud",
+    "model": "gemini-3.5-flash-lite",
+    "prompt_type": "medium",
+    "run": 2,
+    "ttft_seconds": 0.604,
+    "total_seconds": 1.073,
+    "characters": 403,
+    "chars_per_second": 375.66,
+    "status": "ok"
+  },
+  {
+    "provider": "cloud",
+    "model": "gemini-3.5-flash-lite",
+    "prompt_type": "medium",
+    "run": 3,
+    "ttft_seconds": 0.577,
+    "total_seconds": 1.043,
+    "characters": 481,
+    "chars_per_second": 461.19,
+    "status": "ok"
+  },
+  {
+    "provider": "cloud",
+    "model": "gemini-3.5-flash-lite",
+    "prompt_type": "long",
+    "run": 1,
+    "ttft_seconds": 0.582,
+    "total_seconds": 2.12,
+    "characters": 1551,
+    "chars_per_second": 731.54,
+    "status": "ok"
+  },
+  {
+    "provider": "cloud",
+    "model": "gemini-3.5-flash-lite",
+    "prompt_type": "long",
+    "run": 2,
+    "ttft_seconds": 0.711,
+    "total_seconds": 2.358,
+    "characters": 1584,
+    "chars_per_second": 671.8,
+    "status": "ok"
+  },
+  {
+    "provider": "cloud",
+    "model": "gemini-3.5-flash-lite",
+    "prompt_type": "long",
+    "run": 3,
+    "ttft_seconds": 0.709,
+    "total_seconds": 2.28,
+    "characters": 1551,
+    "chars_per_second": 680.25,
+    "status": "ok"
+  }
+]

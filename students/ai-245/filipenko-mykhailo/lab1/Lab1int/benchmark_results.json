@@ -1,0 +1,80 @@
+[
+  {
+    "model": "llama3.2:3b",
+    "run": 1,
+    "start_type": "cold",
+    "wall_seconds": 15.93,
+    "total_seconds": 13.8,
+    "load_seconds": 7.97,
+    "eval_seconds": 5.62,
+    "tokens": 297,
+    "characters": 1053,
+    "chars_per_second": 187.53,
+    "status": "ok"
+  },
+  {
+    "model": "llama3.2:3b",
+    "run": 2,
+    "start_type": "warm",
+    "wall_seconds": 7.8,
+    "total_seconds": 5.74,
+    "load_seconds": 0.02,
+    "eval_seconds": 5.64,
+    "tokens": 296,
+    "characters": 946,
+    "chars_per_second": 167.71,
+    "status": "ok"
+  },
+  {
+    "model": "llama3.2:3b",
+    "run": 3,
+    "start_type": "warm",
+    "wall_seconds": 7.96,
+    "total_seconds": 5.92,
+    "load_seconds": 0.02,
+    "eval_seconds": 5.81,
+    "tokens": 296,
+    "characters": 946,
+    "chars_per_second": 162.73,
+    "status": "ok"
+  },
+  {
+    "model": "qwen3:4b",
+    "run": 1,
+    "start_type": "cold",
+    "wall_seconds": 31.39,
+    "total_seconds": 29.33,
+    "load_seconds": 7.61,
+    "eval_seconds": 21.16,
+    "tokens": 512,
+    "characters": 2257,
+    "chars_per_second": 106.64,
+    "status": "ok"
+  },
+  {
+    "model": "qwen3:4b",
+    "run": 2,
+    "start_type": "warm",
+    "wall_seconds": 23.21,
+    "total_seconds": 21.14,
+    "load_seconds": 0.04,
+    "eval_seconds": 20.97,
+    "tokens": 512,
+    "characters": 2282,
+    "chars_per_second": 108.82,
+    "status": "ok"
+  },
+  {
+    "model": "qwen3:4b",
+    "run": 3,
+    "start_type": "warm",
+    "wall_seconds": 23.73,
+    "total_seconds": 21.66,
+    "load_seconds": 0.08,
+    "eval_seconds": 21.44,
+    "tokens": 512,
+    "characters": 2282,
+    "chars_per_second": 106.44,
+    "status": "ok"
+  }
+]

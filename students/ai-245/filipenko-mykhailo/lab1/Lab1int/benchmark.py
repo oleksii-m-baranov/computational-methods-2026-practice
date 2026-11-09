@@ -1,38 +1,112 @@
-import time
 import csv
-from providers import ask_model
+import json
+import time
+from urllib.request import Request, urlopen
 
-# Варіант 9
-prompt = "Поясни різницю між функцією і методом. Коротко."
+MODELS = ["llama3.2:3b", "qwen3:4b"]
 
-models = ["llama3.2:3b", "qwen3:4b"]
+PROMPT = (
+    "Поясни різницю між функцією і методом "
+    "у Python. Наведи короткий приклад."
+)
+
+URL = "http://localhost:11434/api/generate"
+
 results = []
 
-for model in models:
-    print(f"\nТестування моделі: {model}")
 
-    times = []
+def ollama_request(model, prompt, keep_alive):
+    data = {
+        "model": model,
+        "prompt": prompt,
+       "stream": False,
+"keep_alive": keep_alive,
+"think": False,
+"options": {
+    "temperature": 0,
+    "num_predict": 512
+}
+    }
 
-    for i in range(3):
-        print(f"\nЗапуск {i + 1}")
+    request = Request(
+        URL,
+        data=json.dumps(data).encode("utf-8"),
+        headers={"Content-Type": "application/json"}
+    )
 
+    with urlopen(request, timeout=600) as response:
+        return json.loads(response.read().decode("utf-8"))
+
+
+for model in MODELS:
+    print(f"\nМодель: {model}")
+
+    # Вивантажуємо модель перед холодним стартом
+    ollama_request(model, "", 0)
+
+    for run in range(1, 4):
         start = time.perf_counter()
-        answer = ask_model(prompt, model)
-        duration = time.perf_counter() - start
 
-        print("Відповідь:", answer)
-        print(f"Час: {duration:.2f} секунд")
+        response = ollama_request(model, PROMPT, "10m")
 
-        times.append(duration)
-        results.append([model, i + 1, round(duration, 2)])
+        wall_seconds = time.perf_counter() - start
+        answer = response.get("response", "")
 
-    average = sum(times) / len(times)
-    print(f"\nСередній час {model}: {average:.2f} секунд")
+        total_seconds = response.get("total_duration", 0) / 1e9
+        load_seconds = response.get("load_duration", 0) / 1e9
+        eval_seconds = response.get("eval_duration", 0) / 1e9
+        tokens = response.get("eval_count", 0)
 
-with open("results.csv", "w", newline="", encoding="utf-8-sig") as file:
-    writer = csv.writer(file)
-    writer.writerow(["model", "run", "time_seconds"])
+        characters = len(answer)
+        chars_per_second = (
+            characters / eval_seconds
+            if eval_seconds > 0 else 0
+        )
+
+        result = {
+            "model": model,
+            "run": run,
+            "start_type": "cold" if run == 1 else "warm",
+            "wall_seconds": round(wall_seconds, 2),
+            "total_seconds": round(total_seconds, 2),
+            "load_seconds": round(load_seconds, 2),
+            "eval_seconds": round(eval_seconds, 2),
+            "tokens": tokens,
+            "characters": characters,
+            "chars_per_second": round(chars_per_second, 2),
+            "status": "ok" if answer.strip() else "empty"
+        }
+
+        results.append(result)
+
+        print(
+            f"Запуск {run}: "
+            f"{result['start_type']}, "
+            f"час {result['wall_seconds']} с, "
+            f"завантаження {result['load_seconds']} с, "
+            f"швидкість {result['chars_per_second']} симв./с, "
+            f"статус {result['status']}"
+        )
+
+with open(
+    "benchmark_results.csv",
+    "w",
+    newline="",
+    encoding="utf-8-sig"
+) as file:
+    writer = csv.DictWriter(
+        file,
+        fieldnames=results[0].keys()
+    )
+    writer.writeheader()
     writer.writerows(results)
 
+with open(
+    "benchmark_results.json",
+    "w",
+    encoding="utf-8"
+) as file:
+    json.dump(results, file, ensure_ascii=False, indent=2)
+
 print("\nТестування завершено!")
-print("Результати збережено у results.csv")
+print("Збережено benchmark_results.csv і benchmark_results.json")
