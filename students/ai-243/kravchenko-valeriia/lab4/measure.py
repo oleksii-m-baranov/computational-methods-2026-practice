@@ -17,8 +17,8 @@ import config
 from table import make_row, print_table
 
 CONFIGS = {
-    "none": {"COMPRESS": "none"},
-    "trim": {"COMPRESS": "trim"},
+    "none":       {"COMPRESS": "none", "USE_STATE": False},
+    "trim":       {"COMPRESS": "trim", "USE_STATE": False},
     "trim+state": {"COMPRESS": "trim", "USE_STATE": True},
     "summary":    {"COMPRESS": "summary", "USE_STATE": False},
 }

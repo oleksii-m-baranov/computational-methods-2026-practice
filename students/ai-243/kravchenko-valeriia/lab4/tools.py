@@ -11,7 +11,7 @@ def search_rules(query: str) -> str:
         with open(os.path.join(folder, filename), encoding="utf-8") as f:
             text = f.read()
         if q in text.lower():
-            found.append(text.split("\n")[0])
+            found.append(text)
     if not found:
         return f"За запитом '{query}' нічого не знайдено."
     return " | ".join(found)

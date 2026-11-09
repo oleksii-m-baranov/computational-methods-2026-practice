@@ -5,7 +5,7 @@ load_dotenv()
 BASE_URL = "http://localhost:11434/v1"
 API_KEY = "ollama"
 
-MODEL = "llama32-4k"
+MODEL = "qwen25-4k"
 MAX_STEPS = 8
 TEMPERATURE = 0
 
