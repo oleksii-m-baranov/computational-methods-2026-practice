@@ -1,10 +1,16 @@
 """Agent loop for library assistant. Variant 11 (Library)."""
+import os
+import sys
+
+# Додаємо корінь проєкту до sys.path для імпорту загальнодоступного логера utils.lab_logger
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../..")))
+
 from openai import OpenAI
 
 import config
 from schemas import SCHEMAS
 from dispatcher import call_tool
-from lab_logger import custom_logger
+from utils.lab_logger import custom_logger
 
 client = OpenAI(base_url=config.BASE_URL, api_key=config.API_KEY)
 logger = custom_logger('lab2')
