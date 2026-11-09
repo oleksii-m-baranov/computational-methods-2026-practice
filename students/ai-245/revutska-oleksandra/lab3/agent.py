@@ -1,10 +1,11 @@
+
 """Цикл агента з перевірками, повторними спробами та Langfuse."""
 
 from langfuse import observe
 from langfuse.openai import OpenAI
 
 import config
-from dispatcher import MODEL_ERRORS, call_tool, check_response
+from dispatcher import call_tool, check_response, MODEL_ERRORS
 from schemas import SCHEMAS
 from utils.lab_logger import custom_logger
 
@@ -19,7 +20,7 @@ logger = custom_logger(config.LAB_LOGFILE_NAME)
 
 @observe(name="run_agent")
 def run_agent(task):
-    """Виконує задачу користувача з перевірками."""
+    """Виконує задачу користувача з перевірками викликів."""
 
     messages = [
         {"role": "system", "content": config.SYSTEM},
@@ -33,6 +34,7 @@ def run_agent(task):
     logger.info(f"РЕЖИМ: {config.RUN_TAG}")
 
     for step in range(1, config.MAX_STEPS + 1):
+
         response = client.chat.completions.create(
             model=config.MODEL,
             messages=messages,
@@ -64,10 +66,6 @@ def run_agent(task):
             logger.info(f"  рівень   : {level}")
             logger.info(f"  текст    : {msg.content}")
 
-            # Обрив відповіді повторюємо без зміни історії
-            if level == "length":
-                continue
-
             retries += 1
 
             if retries > config.MAX_RETRIES:
@@ -82,6 +80,7 @@ def run_agent(task):
                     "role": "assistant",
                     "content": msg.content,
                 })
+
                 messages.append({
                     "role": "user",
                     "content": text,
@@ -89,18 +88,19 @@ def run_agent(task):
 
             continue
 
-        # 2. Звичайна відповідь
+        # 2. Якщо модель дала звичайну відповідь
         if not msg.tool_calls:
             logger.info(f"ВІДПОВІДЬ: {msg.content}")
             return msg.content
 
-        # 3. Зберігаємо виклики в історію
+        # 3. Додаємо виклики моделі в історію
         messages.append(msg)
 
         model_failed = False
 
-        # 4. Виконання інструментів
+        # 4. Перевірка та виконання інструментів
         for call in msg.tool_calls:
+
             name = call.function.name
             arguments = call.function.arguments
 
@@ -108,7 +108,7 @@ def run_agent(task):
                 f"  виклик   : {name}({arguments})"
             )
 
-            level, result = execute_tool(name, arguments)
+            level, result = call_tool(name, arguments)
 
             logger.info(f"  рівень   : {level}")
             logger.info(f"  результат: {result}")
@@ -122,7 +122,7 @@ def run_agent(task):
             if level in MODEL_ERRORS:
                 model_failed = True
 
-        # 5. Ліміт помилок моделі
+        # 5. Контроль кількості помилок моделі
         if model_failed:
             retries += 1
 
@@ -137,17 +137,12 @@ def run_agent(task):
                     "правильний виклик"
                 )
                 return None
+
         else:
             retries = 0
 
     logger.info("СТОП: вичерпано ліміт кроків")
     return None
-
-
-@observe(name="tool_execution")
-def execute_tool(name, arguments):
-    """Виконує інструмент із трасуванням."""
-    return call_tool(name, arguments)
 
 
 if __name__ == "__main__":
