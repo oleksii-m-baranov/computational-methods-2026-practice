@@ -23,7 +23,7 @@ logger = custom_logger("lab2")
 
 def run_agent(task: str) -> str:
     messages = [
-        {"role": "system", "content": config.SYSTEM_PROMPT},
+        {"role": "system", "content": config.SYSTEM},
         {"role": "user", "content": task},
     ]
 
