@@ -1,15 +1,35 @@
 """Виклик інструмента за назвою, отриманою від моделі."""
+
 import json
 from tools import TOOLS
 
 
 def call_tool(name: str, args_raw: str) -> str:
     if name not in TOOLS:
-        return (f"Помилка: інструмента '{name}' не існує. "
-                f"Доступні: {', '.join(TOOLS)}")
+        return (
+            f"Помилка: інструмента '{name}' не існує. "
+            f"Доступні: {', '.join(TOOLS)}"
+        )
+
     try:
         args = json.loads(args_raw)
+
+        if not isinstance(args, dict):
+            return "Помилка: аргументи повинні бути JSON-об'єктом."
+
+        if name == "search_laptops":
+            query = args.get("query")
+
+            if isinstance(query, list) and len(query) == 1:
+                query = query[0]
+
+            if not isinstance(query, str):
+                return "Помилка: query повинен бути текстовим рядком."
+
+            args["query"] = query
+
         return str(TOOLS[name](**args))
+
     except json.JSONDecodeError:
         return "Помилка: аргументи не є коректним JSON."
     except TypeError as e:
