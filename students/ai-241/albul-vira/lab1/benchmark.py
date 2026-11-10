@@ -36,16 +36,16 @@ def measure(client, model, prompt):
     }
 
 PROMPTS = {
-    "short": "Столиця Мексики?",
+    "short": "Столиця Франції?",
     "medium": "Поясни в одному абзаці, що таке рекурсія.",
-    "long": "Напиши інструкцію з 10 пунктів, як задокументувати проєкт",
+    "long": "Напиши інструкцію з 10 пунктів, як почати вивчати Python.",
 }
 
 rows = []
 
 for provider in ["local", "cloud"]:
     client, model = make_client(provider)
-    measure(client, model, "розігрів")  # прогрів, не рахуємо
+    # measure(client, model, "розігрів")  # прогрів, не рахуємо
 
     for name, prompt in PROMPTS.items():
         runs = [measure(client, model, prompt) for _ in range(3)]

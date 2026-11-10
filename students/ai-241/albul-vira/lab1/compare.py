@@ -4,7 +4,7 @@ from utils.lab_logger import custom_logger
 
 logger = custom_logger('lab1')
 
-QUESTION = "Поясни різницю між стеком і чергою в Python. Коротко."
+QUESTION = "Поясни різницю між списком і кортежем в Python. Коротко."
 for name in ["local", "cloud"]:
 # for name in ["cloud"]:
     client, model = make_client(name)

@@ -225,5 +225,3 @@ students/**/state/
 
 !students/**/*.log
 !docs/**/*.log
-
-.DS_Store
