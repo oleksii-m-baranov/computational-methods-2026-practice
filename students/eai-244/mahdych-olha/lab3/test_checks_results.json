@@ -1,0 +1,83 @@
+[
+  {
+    "case": "broken_json",
+    "name": "product_info",
+    "arguments": "{\"product\": \"рис\"",
+    "level": "syntax",
+    "message": "Помилка: аргументи не пройшли перевірку.\nПоле JSON: Invalid JSON: EOF while parsing an object at line 1 column 20\nВиправ аргументи і виклич інструмент ще раз.",
+    "expected_level": "syntax",
+    "passed": true
+  },
+  {
+    "case": "wrong_type",
+    "name": "scale_amount",
+    "arguments": "{\"amount\":\"сто\",\"base_servings\":4,\"target_servings\":10}",
+    "level": "schema",
+    "message": "Помилка: аргументи не пройшли перевірку.\nПоле amount: Input should be a valid number, unable to parse string as a number\nВиправ аргументи і виклич інструмент ще раз.",
+    "expected_level": "schema",
+    "passed": true
+  },
+  {
+    "case": "missing_field",
+    "name": "product_info",
+    "arguments": "{}",
+    "level": "schema",
+    "message": "Помилка: аргументи не пройшли перевірку.\nПоле product: Field required\nВиправ аргументи і виклич інструмент ще раз.",
+    "expected_level": "schema",
+    "passed": true
+  },
+  {
+    "case": "extra_field",
+    "name": "product_info",
+    "arguments": "{\"product\":\"рис\",\"x\":1}",
+    "level": "schema",
+    "message": "Помилка: аргументи не пройшли перевірку.\nПоле x: Extra inputs are not permitted\nВиправ аргументи і виклич інструмент ще раз.",
+    "expected_level": "schema",
+    "passed": true
+  },
+  {
+    "case": "unknown_tool",
+    "name": "delete_all",
+    "arguments": "{}",
+    "level": "name",
+    "message": "Помилка: інструмента 'delete_all' не існує. Доступні: search_recipes, product_info, scale_amount. Виклич один з доступних або повідом користувачу, що такої дії немає.",
+    "expected_level": "name",
+    "passed": true
+  },
+  {
+    "case": "forbidden_action",
+    "name": "place_order",
+    "arguments": "{\"product\":\"рис\"}",
+    "level": "permission",
+    "message": "Помилка: інструмент 'place_order' недоступний. Не повторюй виклик, повідом користувачу, що ця дія недоступна.",
+    "expected_level": "permission",
+    "passed": true
+  },
+  {
+    "case": "missing_product",
+    "name": "product_info",
+    "arguments": "{\"product\":\"лимон\"}",
+    "level": "meaning",
+    "message": "Помилка: продукту 'лимон' немає в довіднику. Потрібна назва наявного продукту в називному відмінку однини; перевір її у data/products.csv. Виправ назву або повідом користувачу, що даних про цей продукт немає.",
+    "expected_level": "meaning",
+    "passed": true
+  },
+  {
+    "case": "out_of_bounds",
+    "name": "scale_amount",
+    "arguments": "{\"amount\":300,\"base_servings\":0,\"target_servings\":10}",
+    "level": "schema",
+    "message": "Помилка: аргументи не пройшли перевірку.\nПоле base_servings: Input should be greater than 0\nВиправ аргументи і виклич інструмент ще раз.",
+    "expected_level": "schema",
+    "passed": true
+  },
+  {
+    "case": "valid_scale",
+    "name": "scale_amount",
+    "arguments": "{\"amount\":300,\"base_servings\":4,\"target_servings\":10}",
+    "level": "ok",
+    "message": "750.0",
+    "expected_level": "ok",
+    "passed": true
+  }
+]

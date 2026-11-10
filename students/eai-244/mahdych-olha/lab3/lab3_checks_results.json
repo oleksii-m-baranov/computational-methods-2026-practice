@@ -1,0 +1,521 @@
+{
+  "run_tag": "checks",
+  "model": "qwen2.5:3b",
+  "temperature": 0,
+  "max_steps": 6,
+  "max_retries": 2,
+  "langfuse": "4.18.0",
+  "started_at": "2026-10-14T20:35:19.606215+03:00",
+  "tasks": [
+    {
+      "id": "Z1",
+      "question": "Знайди щось із куркою",
+      "expected": "назва страви з корпусу, у складі якої є курка",
+      "steps": [
+        {
+          "step": 1,
+          "response": {
+            "id": "chatcmpl-122",
+            "choices": [
+              {
+                "finish_reason": "tool_calls",
+                "index": 0,
+                "logprobs": null,
+                "message": {
+                  "content": "",
+                  "refusal": null,
+                  "role": "assistant",
+                  "annotations": null,
+                  "audio": null,
+                  "function_call": null,
+                  "tool_calls": [
+                    {
+                      "id": "call_qqh94hkt",
+                      "function": {
+                        "arguments": "{\"query\":\"курка\"}",
+                        "name": "search_recipes"
+                      },
+                      "type": "function",
+                      "index": 0
+                    }
+                  ]
+                }
+              }
+            ],
+            "created": 1791999325,
+            "model": "qwen2.5:3b",
+            "object": "chat.completion",
+            "metadata": null,
+            "moderation": null,
+            "service_tier": null,
+            "system_fingerprint": "fp_ollama",
+            "usage": {
+              "completion_tokens": 23,
+              "prompt_tokens": 766,
+              "total_tokens": 789,
+              "completion_tokens_details": null,
+              "prompt_tokens_details": {
+                "audio_tokens": null,
+                "cache_write_tokens": null,
+                "cached_tokens": 748,
+                "image_tokens": null,
+                "text_tokens": null
+              }
+            }
+          },
+          "calls": [
+            {
+              "name": "search_recipes",
+              "arguments": "{\"query\":\"курка\"}",
+              "level": "ok",
+              "result": "Плов з куркою | Курка з овочами"
+            }
+          ],
+          "response_check": null
+        },
+        {
+          "step": 2,
+          "response": {
+            "id": "chatcmpl-531",
+            "choices": [
+              {
+                "finish_reason": "stop",
+                "index": 0,
+                "logprobs": null,
+                "message": {
+                  "content": "Ми знайшли два рецепти з куркою: \n1. Повалювання з куркою з овочами\n2. Курка з овочами",
+                  "refusal": null,
+                  "role": "assistant",
+                  "annotations": null,
+                  "audio": null,
+                  "function_call": null,
+                  "tool_calls": null
+                }
+              }
+            ],
+            "created": 1791999329,
+            "model": "qwen2.5:3b",
+            "object": "chat.completion",
+            "metadata": null,
+            "moderation": null,
+            "service_tier": null,
+            "system_fingerprint": "fp_ollama",
+            "usage": {
+              "completion_tokens": 45,
+              "prompt_tokens": 821,
+              "total_tokens": 866,
+              "completion_tokens_details": null,
+              "prompt_tokens_details": {
+                "audio_tokens": null,
+                "cache_write_tokens": null,
+                "cached_tokens": 781,
+                "image_tokens": null,
+                "text_tokens": null
+              }
+            }
+          },
+          "calls": [],
+          "response_check": null
+        }
+      ],
+      "answer": "Ми знайшли два рецепти з куркою: \n1. Повалювання з куркою з овочами\n2. Курка з овочами",
+      "error": null
+    },
+    {
+      "id": "Z2",
+      "question": "Знайди страву з рисом і скажи калорійність рису",
+      "expected": "назва страви та калорійність рису на 100 г",
+      "steps": [
+        {
+          "step": 1,
+          "response": {
+            "id": "chatcmpl-789",
+            "choices": [
+              {
+                "finish_reason": "tool_calls",
+                "index": 0,
+                "logprobs": null,
+                "message": {
+                  "content": "",
+                  "refusal": null,
+                  "role": "assistant",
+                  "annotations": null,
+                  "audio": null,
+                  "function_call": null,
+                  "tool_calls": [
+                    {
+                      "id": "call_2z2x0ob1",
+                      "function": {
+                        "arguments": "{\"query\":\"рис\"}",
+                        "name": "search_recipes"
+                      },
+                      "type": "function",
+                      "index": 0
+                    }
+                  ]
+                }
+              }
+            ],
+            "created": 1791999331,
+            "model": "qwen2.5:3b",
+            "object": "chat.completion",
+            "metadata": null,
+            "moderation": null,
+            "service_tier": null,
+            "system_fingerprint": "fp_ollama",
+            "usage": {
+              "completion_tokens": 21,
+              "prompt_tokens": 779,
+              "total_tokens": 800,
+              "completion_tokens_details": null,
+              "prompt_tokens_details": {
+                "audio_tokens": null,
+                "cache_write_tokens": null,
+                "cached_tokens": 752,
+                "image_tokens": null,
+                "text_tokens": null
+              }
+            }
+          },
+          "calls": [
+            {
+              "name": "search_recipes",
+              "arguments": "{\"query\":\"рис\"}",
+              "level": "ok",
+              "result": "Плов з куркою | Плов овочевий"
+            }
+          ],
+          "response_check": null
+        },
+        {
+          "step": 2,
+          "response": {
+            "id": "chatcmpl-253",
+            "choices": [
+              {
+                "finish_reason": "stop",
+                "index": 0,
+                "logprobs": null,
+                "message": {
+                  "content": "Калорійність рису на 100 г: 373 калорій. Рис використовується в стравах \"Плов з куркою\" та \"Плов овочевий\".",
+                  "refusal": null,
+                  "role": "assistant",
+                  "annotations": null,
+                  "audio": null,
+                  "function_call": null,
+                  "tool_calls": null
+                }
+              }
+            ],
+            "created": 1791999336,
+            "model": "qwen2.5:3b",
+            "object": "chat.completion",
+            "metadata": null,
+            "moderation": null,
+            "service_tier": null,
+            "system_fingerprint": "fp_ollama",
+            "usage": {
+              "completion_tokens": 63,
+              "prompt_tokens": 832,
+              "total_tokens": 895,
+              "completion_tokens_details": null,
+              "prompt_tokens_details": {
+                "audio_tokens": null,
+                "cache_write_tokens": null,
+                "cached_tokens": 794,
+                "image_tokens": null,
+                "text_tokens": null
+              }
+            }
+          },
+          "calls": [],
+          "response_check": null
+        }
+      ],
+      "answer": "Калорійність рису на 100 г: 373 калорій. Рис використовується в стравах \"Плов з куркою\" та \"Плов овочевий\".",
+      "error": null
+    },
+    {
+      "id": "Z3",
+      "question": "Рецепт плову розрахований на 4 порції і потребує 300 г рису. Скільки рису треба на 10 порцій?",
+      "expected": "750 г",
+      "steps": [
+        {
+          "step": 1,
+          "response": {
+            "id": "chatcmpl-61",
+            "choices": [
+              {
+                "finish_reason": "tool_calls",
+                "index": 0,
+                "logprobs": null,
+                "message": {
+                  "content": "",
+                  "refusal": null,
+                  "role": "assistant",
+                  "annotations": null,
+                  "audio": null,
+                  "function_call": null,
+                  "tool_calls": [
+                    {
+                      "id": "call_x0py365g",
+                      "function": {
+                        "arguments": "{\"amount\":300,\"base_servings\":4,\"target_servings\":10}",
+                        "name": "scale_amount"
+                      },
+                      "type": "function",
+                      "index": 0
+                    }
+                  ]
+                }
+              }
+            ],
+            "created": 1791999340,
+            "model": "qwen2.5:3b",
+            "object": "chat.completion",
+            "metadata": null,
+            "moderation": null,
+            "service_tier": null,
+            "system_fingerprint": "fp_ollama",
+            "usage": {
+              "completion_tokens": 39,
+              "prompt_tokens": 806,
+              "total_tokens": 845,
+              "completion_tokens_details": null,
+              "prompt_tokens_details": {
+                "audio_tokens": null,
+                "cache_write_tokens": null,
+                "cached_tokens": 748,
+                "image_tokens": null,
+                "text_tokens": null
+              }
+            }
+          },
+          "calls": [
+            {
+              "name": "scale_amount",
+              "arguments": "{\"amount\":300,\"base_servings\":4,\"target_servings\":10}",
+              "level": "ok",
+              "result": "750.0"
+            }
+          ],
+          "response_check": null
+        },
+        {
+          "step": 2,
+          "response": {
+            "id": "chatcmpl-34",
+            "choices": [
+              {
+                "finish_reason": "stop",
+                "index": 0,
+                "logprobs": null,
+                "message": {
+                  "content": "Для 10 порцій плова потрібно 750 г рису.",
+                  "refusal": null,
+                  "role": "assistant",
+                  "annotations": null,
+                  "audio": null,
+                  "function_call": null,
+                  "tool_calls": null
+                }
+              }
+            ],
+            "created": 1791999343,
+            "model": "qwen2.5:3b",
+            "object": "chat.completion",
+            "metadata": null,
+            "moderation": null,
+            "service_tier": null,
+            "system_fingerprint": "fp_ollama",
+            "usage": {
+              "completion_tokens": 26,
+              "prompt_tokens": 863,
+              "total_tokens": 889,
+              "completion_tokens_details": null,
+              "prompt_tokens_details": {
+                "audio_tokens": null,
+                "cache_write_tokens": null,
+                "cached_tokens": 821,
+                "image_tokens": null,
+                "text_tokens": null
+              }
+            }
+          },
+          "calls": [],
+          "response_check": null
+        }
+      ],
+      "answer": "Для 10 порцій плова потрібно 750 г рису.",
+      "error": null
+    },
+    {
+      "id": "P1",
+      "question": "Знайди рецепт стейка з тунця й скажи його калорійність",
+      "expected": "повідомлення, що такого рецепта в корпусі немає",
+      "steps": [
+        {
+          "step": 1,
+          "response": {
+            "id": "chatcmpl-273",
+            "choices": [
+              {
+                "finish_reason": "tool_calls",
+                "index": 0,
+                "logprobs": null,
+                "message": {
+                  "content": "",
+                  "refusal": null,
+                  "role": "assistant",
+                  "annotations": null,
+                  "audio": null,
+                  "function_call": null,
+                  "tool_calls": [
+                    {
+                      "id": "call_grs72m5p",
+                      "function": {
+                        "arguments": "{\"query\":\"стейк з тунця\"}",
+                        "name": "search_recipes"
+                      },
+                      "type": "function",
+                      "index": 0
+                    }
+                  ]
+                }
+              }
+            ],
+            "created": 1791999345,
+            "model": "qwen2.5:3b",
+            "object": "chat.completion",
+            "metadata": null,
+            "moderation": null,
+            "service_tier": null,
+            "system_fingerprint": "fp_ollama",
+            "usage": {
+              "completion_tokens": 28,
+              "prompt_tokens": 782,
+              "total_tokens": 810,
+              "completion_tokens_details": null,
+              "prompt_tokens_details": {
+                "audio_tokens": null,
+                "cache_write_tokens": null,
+                "cached_tokens": 748,
+                "image_tokens": null,
+                "text_tokens": null
+              }
+            }
+          },
+          "calls": [
+            {
+              "name": "search_recipes",
+              "arguments": "{\"query\":\"стейк з тунця\"}",
+              "level": "ok",
+              "result": "За запитом 'стейк з тунця' нічого не знайдено."
+            }
+          ],
+          "response_check": null
+        },
+        {
+          "step": 2,
+          "response": {
+            "id": "chatcmpl-945",
+            "choices": [
+              {
+                "finish_reason": "stop",
+                "index": 0,
+                "logprobs": null,
+                "message": {
+                  "content": "Не знайдено рецепту зовнішнього ресурсу, але я можу допомогти з формуванням рецепту. Що ж ви хочете додати до стейка з тунця?",
+                  "refusal": null,
+                  "role": "assistant",
+                  "annotations": null,
+                  "audio": null,
+                  "function_call": null,
+                  "tool_calls": null
+                }
+              }
+            ],
+            "created": 1791999351,
+            "model": "qwen2.5:3b",
+            "object": "chat.completion",
+            "metadata": null,
+            "moderation": null,
+            "service_tier": null,
+            "system_fingerprint": "fp_ollama",
+            "usage": {
+              "completion_tokens": 59,
+              "prompt_tokens": 849,
+              "total_tokens": 908,
+              "completion_tokens_details": null,
+              "prompt_tokens_details": {
+                "audio_tokens": null,
+                "cache_write_tokens": null,
+                "cached_tokens": 797,
+                "image_tokens": null,
+                "text_tokens": null
+              }
+            }
+          },
+          "calls": [],
+          "response_check": null
+        }
+      ],
+      "answer": "Не знайдено рецепту зовнішнього ресурсу, але я можу допомогти з формуванням рецепту. Що ж ви хочете додати до стейка з тунця?",
+      "error": null
+    },
+    {
+      "id": "P2",
+      "question": "Додай плов у мій список покупок",
+      "expected": "відмова: робота зі списком покупок недоступна",
+      "steps": [
+        {
+          "step": 1,
+          "response": {
+            "id": "chatcmpl-523",
+            "choices": [
+              {
+                "finish_reason": "stop",
+                "index": 0,
+                "logprobs": null,
+                "message": {
+                  "content": "I don't see a function to add items to a shopping list. Could you please provide more details or use the available functions to get the ingredients for the dish?",
+                  "refusal": null,
+                  "role": "assistant",
+                  "annotations": null,
+                  "audio": null,
+                  "function_call": null,
+                  "tool_calls": null
+                }
+              }
+            ],
+            "created": 1791999353,
+            "model": "qwen2.5:3b",
+            "object": "chat.completion",
+            "metadata": null,
+            "moderation": null,
+            "service_tier": null,
+            "system_fingerprint": "fp_ollama",
+            "usage": {
+              "completion_tokens": 34,
+              "prompt_tokens": 765,
+              "total_tokens": 799,
+              "completion_tokens_details": null,
+              "prompt_tokens_details": {
+                "audio_tokens": null,
+                "cache_write_tokens": null,
+                "cached_tokens": 748,
+                "image_tokens": null,
+                "text_tokens": null
+              }
+            }
+          },
+          "calls": [],
+          "response_check": null
+        }
+      ],
+      "answer": "I don't see a function to add items to a shopping list. Could you please provide more details or use the available functions to get the ingredients for the dish?",
+      "error": null
+    }
+  ],
+  "finished_at": "2026-10-14T20:35:53.813884+03:00"
+}

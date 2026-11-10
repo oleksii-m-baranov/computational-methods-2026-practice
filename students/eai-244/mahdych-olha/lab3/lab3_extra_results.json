@@ -1,0 +1,350 @@
+{
+  "experiment": "Провокаційні запити на самостійне відновлення (без підказки)",
+  "model": "qwen2.5:3b",
+  "temperature": 0,
+  "started_at": "2026-10-28T15:35:06.292185+03:00",
+  "finished_at": "2026-10-28T15:41:42.392921+03:00",
+  "attempts": [
+    {
+      "id": "E1a",
+      "question": "Рецепт на 4 порції потребує півкіло рису. Скільки рису треба на 6 порцій?",
+      "steps": [
+        {
+          "step": 1,
+          "response": {
+            "id": "chatcmpl-758",
+            "choices": [
+              {
+                "finish_reason": "tool_calls",
+                "index": 0,
+                "logprobs": null,
+                "message": {
+                  "content": "",
+                  "refusal": null,
+                  "role": "assistant",
+                  "annotations": null,
+                  "audio": null,
+                  "function_call": null,
+                  "tool_calls": [
+                    {
+                      "id": "call_ixgtjons",
+                      "function": {
+                        "arguments": "{\"amount\":0.5,\"base_servings\":4,\"target_servings\":6}",
+                        "name": "scale_amount"
+                      },
+                      "type": "function",
+                      "index": 0
+                    }
+                  ]
+                }
+              }
+            ],
+            "created": 1793190928,
+            "model": "qwen2.5:3b",
+            "object": "chat.completion",
+            "metadata": null,
+            "moderation": null,
+            "service_tier": null,
+            "system_fingerprint": "fp_ollama",
+            "usage": {
+              "completion_tokens": 38,
+              "prompt_tokens": 795,
+              "total_tokens": 833,
+              "completion_tokens_details": null,
+              "prompt_tokens_details": {
+                "audio_tokens": null,
+                "cache_write_tokens": null,
+                "cached_tokens": 0,
+                "image_tokens": null,
+                "text_tokens": null
+              }
+            }
+          },
+          "calls": [
+            {
+              "name": "scale_amount",
+              "arguments": "{\"amount\":0.5,\"base_servings\":4,\"target_servings\":6}",
+              "level": "ok",
+              "result": "0.8"
+            }
+          ],
+          "response_check": null
+        },
+        {
+          "step": 2,
+          "response": {
+            "id": "chatcmpl-604",
+            "choices": [
+              {
+                "finish_reason": "stop",
+                "index": 0,
+                "logprobs": null,
+                "message": {
+                  "content": "Для 6 порцій вам потрібно 0.8 кілограмів рису.",
+                  "refusal": null,
+                  "role": "assistant",
+                  "annotations": null,
+                  "audio": null,
+                  "function_call": null,
+                  "tool_calls": null
+                }
+              }
+            ],
+            "created": 1793190931,
+            "model": "qwen2.5:3b",
+            "object": "chat.completion",
+            "metadata": null,
+            "moderation": null,
+            "service_tier": null,
+            "system_fingerprint": "fp_ollama",
+            "usage": {
+              "completion_tokens": 29,
+              "prompt_tokens": 849,
+              "total_tokens": 878,
+              "completion_tokens_details": null,
+              "prompt_tokens_details": {
+                "audio_tokens": null,
+                "cache_write_tokens": null,
+                "cached_tokens": 810,
+                "image_tokens": null,
+                "text_tokens": null
+              }
+            }
+          },
+          "calls": [],
+          "response_check": null
+        }
+      ],
+      "answer": "Для 6 порцій вам потрібно 0.8 кілограмів рису."
+    },
+    {
+      "id": "E1b",
+      "question": "Курку з овочами я готую на 2 порції з 400 г курки, а сьогодні гостей нуль, тільки я. Скільки курки?",
+      "steps": [
+        {
+          "step": 1,
+          "response": {
+            "id": "chatcmpl-522",
+            "choices": [
+              {
+                "finish_reason": "tool_calls",
+                "index": 0,
+                "logprobs": null,
+                "message": {
+                  "content": "",
+                  "refusal": null,
+                  "role": "assistant",
+                  "annotations": null,
+                  "audio": null,
+                  "function_call": null,
+                  "tool_calls": [
+                    {
+                      "id": "call_lwpc1lzn",
+                      "function": {
+                        "arguments": "{\"amount\":400,\"base_servings\":2,\"target_servings\":1}",
+                        "name": "scale_amount"
+                      },
+                      "type": "function",
+                      "index": 0
+                    }
+                  ]
+                }
+              }
+            ],
+            "created": 1793190935,
+            "model": "qwen2.5:3b",
+            "object": "chat.completion",
+            "metadata": null,
+            "moderation": null,
+            "service_tier": null,
+            "system_fingerprint": "fp_ollama",
+            "usage": {
+              "completion_tokens": 38,
+              "prompt_tokens": 809,
+              "total_tokens": 847,
+              "completion_tokens_details": null,
+              "prompt_tokens_details": {
+                "audio_tokens": null,
+                "cache_write_tokens": null,
+                "cached_tokens": 748,
+                "image_tokens": null,
+                "text_tokens": null
+              }
+            }
+          },
+          "calls": [
+            {
+              "name": "scale_amount",
+              "arguments": "{\"amount\":400,\"base_servings\":2,\"target_servings\":1}",
+              "level": "ok",
+              "result": "200.0"
+            }
+          ],
+          "response_check": null
+        },
+        {
+          "step": 2,
+          "response": {
+            "id": "chatcmpl-389",
+            "choices": [
+              {
+                "finish_reason": "stop",
+                "index": 0,
+                "logprobs": null,
+                "message": {
+                  "content": "На 1 порцію курки потрібно 200 г курки.",
+                  "refusal": null,
+                  "role": "assistant",
+                  "annotations": null,
+                  "audio": null,
+                  "function_call": null,
+                  "tool_calls": null
+                }
+              }
+            ],
+            "created": 1793190937,
+            "model": "qwen2.5:3b",
+            "object": "chat.completion",
+            "metadata": null,
+            "moderation": null,
+            "service_tier": null,
+            "system_fingerprint": "fp_ollama",
+            "usage": {
+              "completion_tokens": 25,
+              "prompt_tokens": 865,
+              "total_tokens": 890,
+              "completion_tokens_details": null,
+              "prompt_tokens_details": {
+                "audio_tokens": null,
+                "cache_write_tokens": null,
+                "cached_tokens": 824,
+                "image_tokens": null,
+                "text_tokens": null
+              }
+            }
+          },
+          "calls": [],
+          "response_check": null
+        }
+      ],
+      "answer": "На 1 порцію курки потрібно 200 г курки."
+    },
+    {
+      "id": "E1-rephrased",
+      "question": "Для рецепта на чотири порції потрібно пів кілограма рису. Скільки грамів рису треба взяти, якщо готувати шість порцій?",
+      "steps": [
+        {
+          "step": 1,
+          "response": {
+            "id": "chatcmpl-13",
+            "choices": [
+              {
+                "finish_reason": "tool_calls",
+                "index": 0,
+                "logprobs": null,
+                "message": {
+                  "content": "",
+                  "refusal": null,
+                  "role": "assistant",
+                  "annotations": null,
+                  "audio": null,
+                  "function_call": null,
+                  "tool_calls": [
+                    {
+                      "id": "call_iwqi0y8h",
+                      "function": {
+                        "arguments": "{\"target_servings\":6,\"amount\":0.5,\"base_servings\":4}",
+                        "name": "scale_amount"
+                      },
+                      "type": "function",
+                      "index": 0
+                    }
+                  ]
+                }
+              }
+            ],
+            "created": 1793191298,
+            "model": "qwen2.5:3b",
+            "object": "chat.completion",
+            "metadata": null,
+            "moderation": null,
+            "service_tier": null,
+            "system_fingerprint": "fp_ollama",
+            "usage": {
+              "completion_tokens": 38,
+              "prompt_tokens": 817,
+              "total_tokens": 855,
+              "completion_tokens_details": null,
+              "prompt_tokens_details": {
+                "audio_tokens": null,
+                "cache_write_tokens": null,
+                "cached_tokens": 0,
+                "image_tokens": null,
+                "text_tokens": null
+              }
+            }
+          },
+          "calls": [
+            {
+              "name": "scale_amount",
+              "arguments": "{\"target_servings\":6,\"amount\":0.5,\"base_servings\":4}",
+              "level": "ok",
+              "result": "0.8"
+            }
+          ],
+          "response_check": null
+        },
+        {
+          "step": 2,
+          "response": {
+            "id": "chatcmpl-396",
+            "choices": [
+              {
+                "finish_reason": "stop",
+                "index": 0,
+                "logprobs": null,
+                "message": {
+                  "content": "Якщо ви хочете готувати шість порцій, вам потрібно взяти 0.8 кілограма рису.",
+                  "refusal": null,
+                  "role": "assistant",
+                  "annotations": null,
+                  "audio": null,
+                  "function_call": null,
+                  "tool_calls": null
+                }
+              }
+            ],
+            "created": 1793191302,
+            "model": "qwen2.5:3b",
+            "object": "chat.completion",
+            "metadata": null,
+            "moderation": null,
+            "service_tier": null,
+            "system_fingerprint": "fp_ollama",
+            "usage": {
+              "completion_tokens": 43,
+              "prompt_tokens": 871,
+              "total_tokens": 914,
+              "completion_tokens_details": null,
+              "prompt_tokens_details": {
+                "audio_tokens": null,
+                "cache_write_tokens": null,
+                "cached_tokens": 832,
+                "image_tokens": null,
+                "text_tokens": null
+              }
+            }
+          },
+          "calls": [],
+          "response_check": null
+        }
+      ],
+      "answer": "Якщо ви хочете готувати шість порцій, вам потрібно взяти 0.8 кілограма рису."
+    }
+  ],
+  "notes": [
+    "У початковому природному запиті й після одного переформулювання помилки схеми не було.",
+    "В обох запитах про рис модель передала amount=0.5; інструмент повернув 0.8.",
+    "У запиті про курку модель витлумачила «тільки я» як одну порцію і отримала 200.0 г."
+  ]
+}
