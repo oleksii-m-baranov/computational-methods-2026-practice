@@ -1,0 +1,140 @@
+[
+  {
+    "tool": "search_laptops",
+    "args": {
+      "query": "StudyBook 14"
+    },
+    "result": "StudyBook 14 | StudyBook 14 Plus"
+  },
+  {
+    "tool": "laptop_info",
+    "args": {
+      "model": "StudyBook 14"
+    },
+    "result": "Ціна: 24000 грн, на складі: 4 шт., гарантія: 12 міс."
+  },
+  {
+    "tool": "calc_installment",
+    "args": {
+      "months": 6,
+      "overpay_percent": 10,
+      "price": 3500
+    },
+    "result": "641.67 грн на місяць, усього 3850.0 грн"
+  },
+  {
+    "tool": "search_laptops",
+    "args": {
+      "query": "OfficeMate 15"
+    },
+    "result": "OfficeMate 15"
+  },
+  {
+    "tool": "laptop_info",
+    "args": {
+      "model": "OfficeMate 15"
+    },
+    "result": "Ціна: 27000 грн, на складі: 6 шт., гарантія: 12 міс."
+  },
+  {
+    "tool": "calc_installment",
+    "args": {
+      "price": 4500,
+      "months": 6,
+      "overpay_percent": 10
+    },
+    "result": "825.0 грн на місяць, усього 4950.0 грн"
+  },
+  {
+    "tool": "search_laptops",
+    "args": {
+      "query": "TravelLite 14"
+    },
+    "result": "TravelLite 14"
+  },
+  {
+    "tool": "laptop_info",
+    "args": {
+      "model": "TravelLite 14"
+    },
+    "result": "Ціна: 35000 грн, на складі: 2 шт., гарантія: 24 міс."
+  },
+  {
+    "tool": "calc_installment",
+    "args": {
+      "overpay_percent": 10,
+      "price": 3000,
+      "months": 6
+    },
+    "result": "550.0 грн на місяць, усього 3300.0 грн"
+  },
+  {
+    "tool": "search_laptops",
+    "args": {
+      "query": "CodeNova 15"
+    },
+    "result": "CodeNova 15"
+  },
+  {
+    "tool": "laptop_info",
+    "args": {
+      "model": "CodeNova 15"
+    },
+    "result": "Ціна: 42000 грн, на складі: 5 шт., гарантія: 24 міс."
+  },
+  {
+    "tool": "calc_installment",
+    "args": {
+      "price": 4800,
+      "months": 6,
+      "overpay_percent": 10
+    },
+    "result": "880.0 грн на місяць, усього 5280.0 грн"
+  },
+  {
+    "tool": "search_laptops",
+    "args": {
+      "query": "GameStorm X15"
+    },
+    "result": "GameStorm X15"
+  },
+  {
+    "tool": "laptop_info",
+    "args": {
+      "model": "GameStorm X15"
+    },
+    "result": "Ціна: 59000 грн, на складі: 3 шт., гарантія: 24 міс."
+  },
+  {
+    "tool": "calc_installment",
+    "args": {
+      "price": 5500,
+      "months": 6,
+      "overpay_percent": 10
+    },
+    "result": "1008.33 грн на місяць, усього 6050.0 грн"
+  },
+  {
+    "tool": "search_laptops",
+    "args": {
+      "query": "ArtVision 15"
+    },
+    "result": "ArtVision 15"
+  },
+  {
+    "tool": "laptop_info",
+    "args": {
+      "model": "ArtVision 15"
+    },
+    "result": "Ціна: 46000 грн, на складі: 4 шт., гарантія: 24 міс."
+  },
+  {
+    "tool": "calc_installment",
+    "args": {
+      "price": 4200,
+      "months": 6,
+      "overpay_percent": 10
+    },
+    "result": "770.0 грн на місяць, усього 4620.0 грн"
+  }
+]
