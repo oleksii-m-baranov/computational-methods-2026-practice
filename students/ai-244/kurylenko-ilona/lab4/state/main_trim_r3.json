@@ -1,0 +1,140 @@
+[
+  {
+    "tool": "search_articles",
+    "args": {
+      "query": "Кіт дряпає меблі"
+    },
+    "result": "Кіт дряпає меблі"
+  },
+  {
+    "tool": "vaccine_info",
+    "args": {
+      "vaccine": "комплексне"
+    },
+    "result": "Перше щеплення: у 2 міс., повторювати раз на 12 міс., ціна: 650 грн"
+  },
+  {
+    "tool": "calc_food",
+    "args": {
+      "weight_kg": 2,
+      "grams_per_kg": 25,
+      "days": 30
+    },
+    "result": "1500 г"
+  },
+  {
+    "tool": "search_articles",
+    "args": {
+      "query": "Кіт дряпає диван"
+    },
+    "result": "Кіт дряпає диван"
+  },
+  {
+    "tool": "vaccine_info",
+    "args": {
+      "vaccine": "від сказу"
+    },
+    "result": "Перше щеплення: у 3 міс., повторювати раз на 12 міс., ціна: 400 грн"
+  },
+  {
+    "tool": "calc_food",
+    "args": {
+      "weight_kg": 3,
+      "grams_per_kg": 25,
+      "days": 30
+    },
+    "result": "2250 г"
+  },
+  {
+    "tool": "search_articles",
+    "args": {
+      "query": "Кіт не їсть"
+    },
+    "result": "Кіт не їсть"
+  },
+  {
+    "tool": "vaccine_info",
+    "args": {
+      "vaccine": "каліцивіроз"
+    },
+    "result": "Перше щеплення: у 3 міс., повторювати раз на 12 міс., ціна: 550 грн"
+  },
+  {
+    "tool": "calc_food",
+    "args": {
+      "days": 30,
+      "weight_kg": 4,
+      "grams_per_kg": 25
+    },
+    "result": "3000 г"
+  },
+  {
+    "tool": "search_articles",
+    "args": {
+      "query": "Кіт сильно линяє"
+    },
+    "result": "Кіт сильно линяє"
+  },
+  {
+    "tool": "vaccine_info",
+    "args": {
+      "vaccine": "хламідіоз"
+    },
+    "result": "Перше щеплення: у 4 міс., повторювати раз на 12 міс., ціна: 700 грн"
+  },
+  {
+    "tool": "calc_food",
+    "args": {
+      "weight_kg": 5,
+      "grams_per_kg": 25,
+      "days": 30
+    },
+    "result": "3750 г"
+  },
+  {
+    "tool": "search_articles",
+    "args": {
+      "query": "Правильне годування кота"
+    },
+    "result": "Правильне годування кота"
+  },
+  {
+    "tool": "vaccine_info",
+    "args": {
+      "vaccine": "дерматофітія"
+    },
+    "result": "Перше щеплення: у 5 міс., повторювати раз на 24 міс., ціна: 0 грн"
+  },
+  {
+    "tool": "calc_food",
+    "args": {
+      "weight_kg": 6,
+      "grams_per_kg": 25,
+      "days": 30
+    },
+    "result": "4500 г"
+  },
+  {
+    "tool": "search_articles",
+    "args": {
+      "query": "Як годувати кота"
+    },
+    "result": "Як годувати кота"
+  },
+  {
+    "tool": "vaccine_info",
+    "args": {
+      "vaccine": "інфекційний перитоніт"
+    },
+    "result": "Перше щеплення: у 6 міс., повторювати раз на 36 міс., ціна: 1000 грн"
+  },
+  {
+    "tool": "calc_food",
+    "args": {
+      "weight_kg": 7,
+      "grams_per_kg": 25,
+      "days": 30
+    },
+    "result": "5250 г"
+  }
+]
