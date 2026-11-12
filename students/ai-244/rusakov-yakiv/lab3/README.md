@@ -24,4 +24,8 @@ python structured_demo.py   # додаткове завдання (за бажа
 
 `agent_baseline.py` + `dispatcher_baseline.py` + `schemas_baseline.py` — агент лабораторної №2
 з трасуванням (для базового прогону). `agent.py` + `dispatcher.py` + `schemas.py` — версія з перевірками.
-Файл `.env` і `*.log` ігноруються git — логи додавайте через `git add -f`.
+Файл `.env` містить ключі Langfuse — **не додавайте його в git** (`.gitignore` у каталозі відсутній, тож перевіряйте `git status` перед комітом). Логи (`*.log`) лежать у каталозі лаби й комітяться як є.
+
+Додаткові задачі: у `tasks.json` є Z4 і Z5g (провокаційне питання для події «помилка → виправлення»).
+Логи: `lab3_checks_new.log` (повторний прогін з Z4), `lab3_Z5g.log` (Z5g), `z5_attempts/` — усі спроби підібрати питання (Z5–Z5i).
+Скриншоти Langfuse з підписаними етапами — `screenshots/`.
