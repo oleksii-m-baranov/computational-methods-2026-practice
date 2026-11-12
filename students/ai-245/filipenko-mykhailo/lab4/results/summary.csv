@@ -1,0 +1,12 @@
+﻿tag,mode,num_ctx,runs,median_time_seconds,median_steps,median_tool_calls,median_prompt_tokens,median_completion_tokens,median_max_prompt_tokens,median_compressions,median_repeated_calls,correct_runs
+cache1,none,3072,1,0.12,3,34,6474,924,2808,0,15,0
+cache2,none,3072,1,0.15,3,34,6474,924,2808,0,15,0
+final,none,3072,3,16.2,3,33,6474,924,2808,0,10,0
+final,trim,3072,3,11.58,3,22,5040,641,2550,1,5,0
+final,trim+state,3072,3,152.03,25,25,54254,7270,2921,20,7,0
+final3072,none,3072,1,1170.58,7,4,18301,3011,3033,0,3,0
+probe,none,4096,1,483.48,3,21,5844,1337,2550,0,0,0
+probe_fixed,none,3072,1,37.04,7,30,17940,1973,3003,0,6,0
+probe_fixed,trim,3072,1,12.67,3,22,5019,643,2527,1,5,0
+probe_fixed,trim+state,3072,1,31.62,9,28,18701,1837,2550,4,3,0
+test3072,trim,3072,1,72.22,2,16,3197,691,2081,0,0,0

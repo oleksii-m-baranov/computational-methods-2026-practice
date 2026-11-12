@@ -1,0 +1,42 @@
+{
+  "variant": 9,
+  "question": "Потрібно порівняти шість ноутбуків: StudyNova 14, CodeNova 15, GameNova X16, DesignNova 16, OfficeNova 14, StudyNova 15. Для КОЖНОЇ моделі окремо виконай search_laptops із точною назвою моделі, потім laptop_info, а потім calc_installment. Розрахуй розстрочку на 12 місяців із переплатою 10%. Виведи для кожної моделі ціну та щомісячний платіж. Наприкінці обчисли суму шести щомісячних платежів, якщо купити всі шість ноутбуків одночасно. Не пропускай жодної моделі та не обчислюй розстрочку самостійно.",
+  "expected": {
+    "total_monthly_payment": 20716.67,
+    "details": [
+      {
+        "model": "StudyNova 14",
+        "price": 22000.0,
+        "monthly_payment": 2016.67
+      },
+      {
+        "model": "CodeNova 15",
+        "price": 35000.0,
+        "monthly_payment": 3208.33
+      },
+      {
+        "model": "GameNova X16",
+        "price": 65000.0,
+        "monthly_payment": 5958.33
+      },
+      {
+        "model": "DesignNova 16",
+        "price": 58000.0,
+        "monthly_payment": 5316.67
+      },
+      {
+        "model": "OfficeNova 14",
+        "price": 18000.0,
+        "monthly_payment": 1650.0
+      },
+      {
+        "model": "StudyNova 15",
+        "price": 28000.0,
+        "monthly_payment": 2566.67
+      }
+    ]
+  },
+  "min_calls": 18,
+  "months": 12,
+  "overpay_percent": 10
+}
