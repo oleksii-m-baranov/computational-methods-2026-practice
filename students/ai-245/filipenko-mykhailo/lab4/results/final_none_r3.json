@@ -1,0 +1,17 @@
+{
+  "run_id": "final_none_r3",
+  "mode": "none",
+  "repeat": 3,
+  "tag": "final",
+  "model": "qwen25-4k",
+  "num_ctx": 3072,
+  "compress": "none",
+  "use_state": false,
+  "use_cache": false,
+  "elapsed_seconds": 12.22,
+  "expected_total": 20716.67,
+  "answer": null,
+  "correct": false,
+  "min_calls": 18,
+  "log_path": "logs\\final_none_r3.log"
+}
