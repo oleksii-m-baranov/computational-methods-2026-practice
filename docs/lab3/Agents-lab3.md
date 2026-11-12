@@ -124,7 +124,7 @@
 1. Запустіть прогін на п'яти задачах:
 
    ```
-   python run_all.py
+   python agent_runner.py
    ```
 
 2. Перейменуйте `lab3.log` на `lab3_baseline.log`.
