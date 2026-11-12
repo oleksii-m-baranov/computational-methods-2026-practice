@@ -1,0 +1,140 @@
+[
+  {
+    "tool": "search_exercises",
+    "args": {
+      "query": "спина"
+    },
+    "result": "Тяга верхнього блоку | Тяга нижнього блоку | Гіперекстензія"
+  },
+  {
+    "tool": "schedule_info",
+    "args": {
+      "activity": "силове"
+    },
+    "result": "День: понеділок, час: 19:30, тренер: Андрій"
+  },
+  {
+    "tool": "calc_calories",
+    "args": {
+      "minutes": 60,
+      "weight_kg": 70,
+      "met": 6
+    },
+    "result": "441 ккал"
+  },
+  {
+    "tool": "search_exercises",
+    "args": {
+      "query": "ноги"
+    },
+    "result": "Присідання зі штангою | Випади з гантелями | Підйом ніг у висі | Гіперекстензія | Жим ногами в тренажері"
+  },
+  {
+    "tool": "schedule_info",
+    "args": {
+      "activity": "кардіо"
+    },
+    "result": "День: п'ятниця, час: 19:00, тренер: Ірина"
+  },
+  {
+    "tool": "calc_calories",
+    "args": {
+      "minutes": 40,
+      "weight_kg": 70,
+      "met": 8
+    },
+    "result": "392 ккал"
+  },
+  {
+    "tool": "search_exercises",
+    "args": {
+      "query": "прес"
+    },
+    "result": "Скручування на прес | Підйом ніг у висі"
+  },
+  {
+    "tool": "schedule_info",
+    "args": {
+      "activity": "йога"
+    },
+    "result": "День: вівторок, час: 18:00, тренер: Олена"
+  },
+  {
+    "tool": "calc_calories",
+    "args": {
+      "minutes": 50,
+      "weight_kg": 70,
+      "met": 3
+    },
+    "result": "184 ккал"
+  },
+  {
+    "tool": "search_exercises",
+    "args": {
+      "query": "рука"
+    },
+    "result": "Скручування на прес"
+  },
+  {
+    "tool": "schedule_info",
+    "args": {
+      "activity": "пілатес"
+    },
+    "result": "День: середа, час: 17:00, тренер: Марія"
+  },
+  {
+    "tool": "calc_calories",
+    "args": {
+      "minutes": 45,
+      "weight_kg": 70,
+      "met": 3.5
+    },
+    "result": "193 ккал"
+  },
+  {
+    "tool": "search_exercises",
+    "args": {
+      "query": "грудь"
+    },
+    "result": "Жим гантелей лежачи"
+  },
+  {
+    "tool": "schedule_info",
+    "args": {
+      "activity": "розтяжка"
+    },
+    "result": "День: четвер, час: 18:30, тренер: Олег"
+  },
+  {
+    "tool": "calc_calories",
+    "args": {
+      "minutes": 30,
+      "weight_kg": 70,
+      "met": 2.5
+    },
+    "result": "92 ккал"
+  },
+  {
+    "tool": "search_exercises",
+    "args": {
+      "query": "просунутий"
+    },
+    "result": "Присідання зі штангою | Підйом ніг у висі"
+  },
+  {
+    "tool": "schedule_info",
+    "args": {
+      "activity": "силове"
+    },
+    "result": "День: понеділок, час: 19:30, тренер: Андрій"
+  },
+  {
+    "tool": "calc_calories",
+    "args": {
+      "minutes": 75,
+      "weight_kg": 70,
+      "met": 5
+    },
+    "result": "459 ккал"
+  }
+]
