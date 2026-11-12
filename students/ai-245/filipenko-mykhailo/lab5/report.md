@@ -274,9 +274,16 @@
 
 **Місця для скріншотів із Langfuse:**
 
+<img width="960" height="646" alt="{6C43ED8C-A13E-4DFC-98F5-48D00927F994}" src="https://github.com/user-attachments/assets/104c5f3b-ecd8-4cf2-b40a-9346c7874b5f" />
 - Скріншот 1 — дерево траси для опису B.
+- 
+  <img width="966" height="858" alt="{15A5E216-798C-4D14-8F97-3A020300A486}" src="https://github.com/user-attachments/assets/f560717a-69fa-4fae-b476-189a67da41d7" />
 - Скріншот 2 — виклик `search_docs` та його результат для B.
+- 
+- <img width="964" height="706" alt="{F51D1DF4-BFD0-4103-B5EC-6F69A0B1F259}" src="https://github.com/user-attachments/assets/c3448c7e-7298-4496-92da-58bc1d1164f3" />
 - Скріншот 3 — дерево траси для опису C.
+- 
+- <img width="961" height="854" alt="{5804F35F-CEDF-4391-965F-18BA045F0065}" src="https://github.com/user-attachments/assets/e1381dde-033a-4adc-863c-891490e7d73f" />
 - Скріншот 4 — опис інструмента `search_docs` у запиті моделі.
 
 Скріншоти потрібно додати до звіту окремо, якщо вони вимагаються викладачем.
