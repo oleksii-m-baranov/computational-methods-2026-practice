@@ -14,7 +14,7 @@ TASKS = {
 
 results = {}
 
-for provider in ["local", "cloud"]:
+for provider in ["local", "local_qwen", "cloud"]:
     client, model = make_client(provider)
     results[model] = {}
     for task_id, prompt in TASKS.items():
