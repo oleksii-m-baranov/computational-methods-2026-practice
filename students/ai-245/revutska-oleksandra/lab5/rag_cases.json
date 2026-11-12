@@ -1,0 +1,73 @@
+
+[
+  {
+    "id": "direct_01",
+    "type": "direct",
+    "question": "Скільки друкованих книжок можна одночасно взяти додому?",
+    "expected": "6",
+    "source": "d01.txt"
+  },
+  {
+    "id": "direct_02",
+    "type": "direct",
+    "question": "О котрій годині відкривається читальна зала в суботу?",
+    "expected": "10:00",
+    "source": "d02.txt"
+  },
+  {
+    "id": "direct_03",
+    "type": "direct",
+    "question": "Яка базова вартість міжбібліотечного замовлення?",
+    "expected": "46",
+    "source": "d03.txt"
+  },
+  {
+    "id": "direct_04",
+    "type": "direct",
+    "question": "Який річний бюджет на придбання книжок?",
+    "expected": "480000",
+    "source": "d04.txt"
+  },
+  {
+    "id": "paraphrase_01",
+    "type": "paraphrase",
+    "question": "На який максимальний час дозволено забронювати місце для навчання в читальній залі?",
+    "expected": "4 години",
+    "source": "d02.txt"
+  },
+  {
+    "id": "paraphrase_02",
+    "type": "paraphrase",
+    "question": "Скільки днів читач має на повернення художнього роману?",
+    "expected": "21",
+    "source": "d01.txt"
+  },
+  {
+    "id": "paraphrase_03",
+    "type": "paraphrase",
+    "question": "Як довго залишається активним посилання на отриману електронну копію?",
+    "expected": "72",
+    "source": "d03.txt"
+  },
+  {
+    "id": "paraphrase_04",
+    "type": "paraphrase",
+    "question": "У які четверги місяця збираються учасники клубу «Сторінка»?",
+    "expected": "другий і четвертий",
+    "source": "d05.txt"
+  },
+  {
+    "id": "no_answer_01",
+    "type": "no_answer",
+    "question": "Який номер мобільного телефону директора бібліотеки?",
+    "expected": null,
+    "source": null
+  },
+  {
+    "id": "no_answer_02",
+    "type": "no_answer",
+    "question": "Який пароль адміністратора електронного каталогу?",
+    "expected": null,
+    "source": null
+  }
+]

@@ -1,0 +1,7 @@
+﻿configuration,method,chunk_size,overlap,with_title,chunks,evaluated,top1_correct,top1_accuracy,top3_correct,top3_accuracy
+fixed_400,fixed,400,0,False,58,8,7,0.875,7,0.875
+fixed_800,fixed,800,0,False,37,8,8,1.0,8,1.0
+fixed_800_overlap,fixed,800,100,False,38,8,8,1.0,8,1.0
+paragraphs_400,paragraphs,400,0,False,72,8,8,1.0,8,1.0
+paragraphs_800,paragraphs,800,0,False,39,8,8,1.0,8,1.0
+paragraphs_800_title,paragraphs,800,0,True,39,8,8,1.0,8,1.0

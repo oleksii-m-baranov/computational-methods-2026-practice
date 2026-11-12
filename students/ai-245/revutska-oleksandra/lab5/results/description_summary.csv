@@ -1,0 +1,4 @@
+﻿variant,tests,rag_used,rag_rate_percent,empty_answers,technical_success,avg_tokens,avg_seconds
+A,30,15,50.0,6,30,2599.9,49.1
+B,30,27,90.0,0,30,4028.2,66.6
+C,30,24,80.0,3,30,3664.6,74.4
