@@ -159,6 +159,12 @@ ARGS = {
 
 ![Langfuse: траса checks-P1, рівень meaning](screenshots/langfuse_checks-P1.png)
 
+Структура однієї події (трасу `checks-Z5g`, крок 4 з 5) з усіма п'ятьма частинами підписано на двох скриншотах: на першому — **крок** (вузол `OpenAI-generation` №4 у дереві `run_agent`), **вхід** (питання користувача та історія повідомлень) і **рішення** моделі (виклик `calc_total` з `part_price=900, quantity=2, work_price=600`); на другому — **дія** (вузол `call_tool`, виконання `calc_total`) і **результат** (`ok`, далі `2400.0 грн`).
+
+![Langfuse: крок, вхід, рішення (checks-Z5g, крок 4)](screenshots/langfuse_Z5g_step_decision.png)
+
+![Langfuse: дія та результат (checks-Z5g, call_tool calc_total)](screenshots/langfuse_Z5g_action_result.png)
+
 ### Табл. 6 — порівняння прогонів
 
 Кількість викликів моделі дорівнює кількості кроків у логах; токени — `prompt_tokens` (вхід), суми по кроках з `lab3_baseline.log` і `lab3_checks.log`. Час і вихідні токени дивіться в трасах Langfuse (імена трас `baseline-*`, `checks-*`); у цьому звіті їх не наведено, бо вони не знімалися.
