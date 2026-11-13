@@ -1,0 +1,28 @@
+"""Configuration settings for Library Agent (Variant 11)."""
+from dotenv import load_dotenv
+
+load_dotenv()
+
+LAB_LOGFILE_NAME = "lab3"
+
+BASE_URL = "http://localhost:11434/v1"
+API_KEY = "ollama"
+
+MODEL = "qwen2.5:3b"
+MAX_STEPS = 6
+TEMPERATURE = 0
+
+SYSTEM = """Ти помічник бібліотеки. Допомагаєш читачам знайти книжку
+та дізнатися умови видачі.
+Не вигадуй дані – усе, чого не знаєш, дізнавайся інструментом.
+Не рахуй самостійно, для цього є окремий інструмент.
+Якщо потрібного інструмента немає, чесно скажи про це.
+Коли даних достатньо, дай коротку відповідь українською."""
+
+MAX_RETRIES = 2      # скільки помилок моделі поспіль допускаємо
+
+# інструменти, які агентові дозволено викликати (варіант 11)
+ALLOWED = ["search_books", "book_info", "calculate"]
+
+# мітка прогону: за нею в Langfuse відрізнятимемо прогони
+RUN_TAG = "checks"
