@@ -1,0 +1,26 @@
+[
+  {
+    "mode": "none",
+    "attempted_runs": 3,
+    "final_answers": 3,
+    "median_seconds": 93.953,
+    "median_full_input": 5653,
+    "median_full_output": 603
+  },
+  {
+    "mode": "trim",
+    "attempted_runs": 3,
+    "final_answers": 1,
+    "median_seconds": 294.143,
+    "median_full_input": null,
+    "median_full_output": null
+  },
+  {
+    "mode": "trim+state",
+    "attempted_runs": 3,
+    "final_answers": 3,
+    "median_seconds": 213.543,
+    "median_full_input": 6936,
+    "median_full_output": 1426
+  }
+]

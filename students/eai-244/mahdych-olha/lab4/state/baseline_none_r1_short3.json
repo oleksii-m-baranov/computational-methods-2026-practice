@@ -1,0 +1,11 @@
+[
+  {
+    "tool": "scale_amount",
+    "args": {
+      "amount": 300,
+      "base_servings": 4,
+      "target_servings": 10
+    },
+    "result": "750.0"
+  }
+]
