@@ -16,5 +16,4 @@ python check_format.py      # json.loads-перевірка завдання 2
 python sampling.py          # завдання 6 -> sampling_results.json
 ```
 
-Після прогонів заповніть `report.md` і експортуйте його в `report.pdf` (вимога методички).
 Журнал виконання пишеться у `lab1.log` (модуль `logsetup.py`). `.env` у репозиторій не потрапляє (він у `.gitignore`).
