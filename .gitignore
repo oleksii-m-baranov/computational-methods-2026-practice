@@ -229,3 +229,5 @@ students/**/chroma_*/
 
 !students/**/*.log
 !docs/**/*.log
+
+.env
