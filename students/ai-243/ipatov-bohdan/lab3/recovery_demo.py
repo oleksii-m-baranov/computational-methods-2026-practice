@@ -12,9 +12,9 @@ from utils.lab_logger import custom_logger
 
 logger = custom_logger(config.LAB_LOGFILE_NAME)
 
-task = "Які правила видачі книги 'Основи програмування'? Подивись у довіднику книжок book_info."
+task = "Порахуй штраф через calculate з operation='mul', a=-5, b=10."
 logger.info("\n" + "=" * 60)
-logger.info(f"=== provoke-X1 | очікується: помилка meaning (немає в CSV), виправлення на 'Основи алгоритмів'")
+logger.info("=== provoke-X1 | очікується: помилка schema (a=-5 < 0), виправлення на a=5")
 with propagate_attributes(trace_name="provoke-X1", tags=["provoke"]):
     run_agent(task)
 
