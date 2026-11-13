@@ -1,0 +1,112 @@
+[
+  {
+    "run": 1,
+    "model": "llama3.2:3b",
+    "prompt": "У якому році випустили перший iPhone? Відповідай лише роком.",
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "seed": 42,
+    "answer": "2007.",
+    "seconds": 2.43,
+    "status": "ok"
+  },
+  {
+    "run": 2,
+    "model": "llama3.2:3b",
+    "prompt": "У якому році випустили перший iPhone? Відповідай лише роком.",
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "seed": 42,
+    "answer": "2007.",
+    "seconds": 2.25,
+    "status": "ok"
+  },
+  {
+    "run": 3,
+    "model": "llama3.2:3b",
+    "prompt": "У якому році випустили перший iPhone? Відповідай лише роком.",
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "seed": 42,
+    "answer": "2007.",
+    "seconds": 2.32,
+    "status": "ok"
+  },
+  {
+    "run": 4,
+    "model": "llama3.2:3b",
+    "prompt": "У якому році випустили перший iPhone? Відповідай лише роком.",
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "seed": 42,
+    "answer": "2007.",
+    "seconds": 2.39,
+    "status": "ok"
+  },
+  {
+    "run": 5,
+    "model": "llama3.2:3b",
+    "prompt": "У якому році випустили перший iPhone? Відповідай лише роком.",
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "seed": 42,
+    "answer": "2007.",
+    "seconds": 2.4,
+    "status": "ok"
+  },
+  {
+    "run": 6,
+    "model": "llama3.2:3b",
+    "prompt": "У якому році випустили перший iPhone? Відповідай лише роком.",
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "seed": 42,
+    "answer": "2007.",
+    "seconds": 2.39,
+    "status": "ok"
+  },
+  {
+    "run": 7,
+    "model": "llama3.2:3b",
+    "prompt": "У якому році випустили перший iPhone? Відповідай лише роком.",
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "seed": 42,
+    "answer": "2007.",
+    "seconds": 2.4,
+    "status": "ok"
+  },
+  {
+    "run": 8,
+    "model": "llama3.2:3b",
+    "prompt": "У якому році випустили перший iPhone? Відповідай лише роком.",
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "seed": 42,
+    "answer": "2007.",
+    "seconds": 2.4,
+    "status": "ok"
+  },
+  {
+    "run": 9,
+    "model": "llama3.2:3b",
+    "prompt": "У якому році випустили перший iPhone? Відповідай лише роком.",
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "seed": 42,
+    "answer": "2007.",
+    "seconds": 2.4,
+    "status": "ok"
+  },
+  {
+    "run": 10,
+    "model": "llama3.2:3b",
+    "prompt": "У якому році випустили перший iPhone? Відповідай лише роком.",
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "seed": 42,
+    "answer": "2007.",
+    "seconds": 2.4,
+    "status": "ok"
+  }
+]
