@@ -1,0 +1,11 @@
+{
+ "embed_model": "bge-m3",
+ "method": "fixed",
+ "size": 200,
+ "overlap": 0,
+ "with_title": false,
+ "dirs": [
+  "data/corpus",
+  "data/docs"
+ ]
+}
