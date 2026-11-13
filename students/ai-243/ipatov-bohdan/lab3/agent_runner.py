@@ -4,7 +4,10 @@ from langfuse import get_client, propagate_attributes
 
 import config
 from agent import run_agent
-from lab_logger import custom_logger
+import os
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../..")))
+from utils.lab_logger import custom_logger
 
 logger = custom_logger(config.LAB_LOGFILE_NAME, overwrite=True)
 

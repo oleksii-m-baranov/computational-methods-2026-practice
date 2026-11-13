@@ -5,7 +5,10 @@ from langfuse.openai import OpenAI
 import config
 from schemas import SCHEMAS
 from dispatcher import call_tool, check_response, MODEL_ERRORS
-from lab_logger import custom_logger
+import os
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../..")))
+from utils.lab_logger import custom_logger
 
 client = OpenAI(base_url=config.BASE_URL, api_key=config.API_KEY)
 logger = custom_logger(config.LAB_LOGFILE_NAME)
