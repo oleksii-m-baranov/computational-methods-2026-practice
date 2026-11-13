@@ -34,18 +34,19 @@ def make_client(provider):
             f"Не налаштовано API-ключ для {provider}"
         )
 
-    return OpenAI(
+    client = OpenAI(
         base_url=config["base_url"],
         api_key=config["api_key"],
     )
 
+    return client, config["model"]
+
 
 def ask_model(prompt, provider="llama", system="Відповідай українською."):
-    client = make_client(provider)
-    config = PROVIDERS[provider]
+    client, model = make_client(provider)
 
     response = client.chat.completions.create(
-        model=config["model"],
+        model=model,
         messages=[
             {"role": "system", "content": system},
             {"role": "user", "content": prompt},
@@ -53,7 +54,7 @@ def ask_model(prompt, provider="llama", system="Відповідай украї�
         temperature=0.7,
     )
 
-    return response.choices[0].message.content
+    return response.choices[0].message.content or ""
 
 
 if __name__ == "__main__":

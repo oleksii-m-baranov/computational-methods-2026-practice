@@ -1,4 +1,4 @@
-
+﻿
 import csv
 import json
 import statistics
@@ -22,7 +22,7 @@ results = []
 
 
 def measure(provider, prompt_type, prompt, run):
-    client = make_client(provider)
+    client, model = make_client(provider)
     model = PROVIDERS[provider]["model"]
 
     start = time.perf_counter()
@@ -174,3 +174,4 @@ if summary:
     plt.show()
 
 print("\nГотово! Результати збережено.")
+

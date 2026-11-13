@@ -1,4 +1,4 @@
-import json
+﻿import json
 import time
 from providers import make_client, PROVIDERS
 
@@ -58,7 +58,7 @@ results = {}
 for provider, model in MODELS:
     print(f"\nМодель: {model}")
 
-    client = make_client(provider)
+    client, model = make_client(provider)
     results[model] = {}
 
     for task_id, prompt in TASKS.items():
@@ -138,3 +138,4 @@ for provider, model in MODELS:
             )
 
 print("\nГотово! Результати у quality.json")
+

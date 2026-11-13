@@ -1,93 +1,50 @@
-
-import csv
-import json
+﻿import csv
 import time
+from providers import make_client
 
-from providers import PROVIDERS, make_client
-
-# Варіант 9
-TASKS = [
-    {
-        "id": "Q1",
-        "prompt": "Поясни різницю між функцією і методом у Python. Наведи короткий приклад."
-    },
-    {
-        "id": "Q2",
-        "prompt": "Космічний апарат летить 480 млн км зі швидкістю 60 000 км/год. Скільки годин і діб триватиме політ?"
-    },
-    {
-        "id": "Q3",
-        "prompt": "Поясни різницю між зіркою та планетою. Коротко."
-    }
-]
-
-SYSTEM = "Відповідай українською мовою, чітко та по суті."
+QUESTION = "Поясни різницю між функцією і методом. Коротко."
 
 results = []
 
-for task in TASKS:
-    for provider, config in PROVIDERS.items():
-        print(f"\nЗавдання: {task['id']}")
-        print(f"Модель: {config['model']}")
-        print("Очікуємо відповідь...")
+for provider in ["llama", "cloud"]:
+    client, model = make_client(provider)
 
-        try:
-            client = make_client(provider)
-            start = time.perf_counter()
+    start = time.perf_counter()
 
-            response = client.chat.completions.create(
-                model=config["model"],
-                messages=[
-                    {"role": "system", "content": SYSTEM},
-                    {"role": "user", "content": task["prompt"]}
-                ],
-                temperature=0.3,
-                max_tokens=4096
-            )
+    response = client.chat.completions.create(
+        model=model,
+        messages=[
+            {"role": "user", "content": QUESTION}
+        ],
+        temperature=0.7,
+    )
 
-            seconds = round(time.perf_counter() - start, 2)
-            answer = response.choices[0].message.content or ""
+    elapsed = round(time.perf_counter() - start, 2)
+    answer = response.choices[0].message.content or ""
+    usage = response.usage
 
-            usage = response.usage
-            prompt_tokens = usage.prompt_tokens if usage else 0
-            completion_tokens = usage.completion_tokens if usage else 0
+    result = {
+        "provider": provider,
+        "model": model,
+        "seconds": elapsed,
+        "completion_tokens": usage.completion_tokens if usage else 0,
+        "chars": len(answer),
+        "language": "потребує перевірки",
+        "factual_errors": "потребує перевірки",
+    }
 
-            result = {
-                "task": task["id"],
-                "provider": provider,
-                "model": config["model"],
-                "answer": answer,
-                "seconds": seconds,
-                "prompt_tokens": prompt_tokens,
-                "completion_tokens": completion_tokens,
-                "status": "ok" if answer.strip() else "empty"
-            }
+    results.append(result)
 
-        except Exception as error:
-            result = {
-                "task": task["id"],
-                "provider": provider,
-                "model": config["model"],
-                "answer": "",
-                "seconds": 0,
-                "prompt_tokens": 0,
-                "completion_tokens": 0,
-                "status": f"error: {error}"
-            }
-
-        results.append(result)
-
-        print("Статус:", result["status"])
-        print("Час:", result["seconds"], "с")
-        print("Відповідь:", result["answer"][:300])
-
-with open("compare_results.json", "w", encoding="utf-8") as file:
-    json.dump(results, file, ensure_ascii=False, indent=2)
+    print(f"\n===== {provider.upper()} ({model}) =====")
+    print(answer)
+    print(f"Час: {elapsed} с")
+    print(f"Токенів відповіді: {result['completion_tokens']}")
+    print(f"Символів: {result['chars']}")
 
 with open("compare_results.csv", "w", newline="", encoding="utf-8-sig") as file:
     writer = csv.DictWriter(file, fieldnames=results[0].keys())
     writer.writeheader()
     writer.writerows(results)
 
-print("\nПорівняння завершено!")
-print("Збережено compare_results.json і compare_results.csv")
+print("\nРезультати збережено у compare_results.csv")
+
