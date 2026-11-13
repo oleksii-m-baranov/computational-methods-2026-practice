@@ -6,7 +6,11 @@ from model import call_model
 from compress import compress_history
 from state import TaskState
 from dispatcher import call_tool, check_response, MODEL_ERRORS
-from lab_logger import custom_logger
+import os
+import sys
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../..")))
+from utils.lab_logger import custom_logger
 
 
 @observe()
