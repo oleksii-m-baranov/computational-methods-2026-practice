@@ -1,0 +1,3 @@
+FROM qwen25-lab4-4k-rp11
+PARAMETER num_ctx 3072
+PARAMETER repeat_penalty 1.1
