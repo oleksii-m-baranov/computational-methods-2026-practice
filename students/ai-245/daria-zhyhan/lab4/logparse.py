@@ -13,30 +13,30 @@ import re
 def find_status(block):
     """Як закінчився прогін. Визначаємо за рядками, які агент пише наприкінці."""
     if "ПОМИЛКА СЕРВЕРА" in block:
-        return "server_error"                    # сервер повернув помилку
+        return "server_error"                  
     if re.search(r"^ВІДПОВІДЬ:", block, flags=re.M):
-        return "final"                           # модель дала відповідь без виклику інструмента
+        return "final"                          
     if "СТОП: модель не змогла" in block:
-        return "retry_limit"                     # забагато помилок моделі поспіль
+        return "retry_limit"                    
     if "СТОП: вичерпано ліміт кроків" in block:
-        return "step_limit"                      # закінчилися кроки
+        return "step_limit"                   
     return "unknown"
 
 
 def parse_step(chunk):
     """Розбирає один крок: текст від слів «--- крок» до наступного кроку."""
-    first_line = chunk.split("\n", 1)[0]                          # заголовок кроку
+    first_line = chunk.split("\n", 1)[0]                      
     prompt = re.search(r"prompt_tokens=(\d+)", first_line)
     completion = re.search(r"completion_tokens=(\d+)", first_line)
     squeeze = re.search(r"^  СТИСНЕННЯ: вхід був (\d+) токенів, повідомлень (\d+) -> (\d+)",
                         chunk, flags=re.M)
-    extra = re.findall(r"підсумовування коштувало (\d+) токенів", chunk)   # для додаткового завдання
+    extra = re.findall(r"підсумовування коштувало (\d+) токенів", chunk)  
     return {
-        "n": int(re.match(r"\d+", chunk).group()),                # номер кроку
-        "tokens": int(prompt.group(1)) if prompt else None,       # токенів на вході моделі
+        "n": int(re.match(r"\d+", chunk).group()),              
+        "tokens": int(prompt.group(1)) if prompt else None,      
         "completion": int(completion.group(1)) if completion else 0,
-        "from_cache": "з кешу" in first_line,                     # відповідь узято з кешу
-        "calls": re.findall(r"^  виклик   : (.*)$", chunk, flags=re.M),   # виклики інструментів
+        "from_cache": "з кешу" in first_line,                  
+        "calls": re.findall(r"^  виклик   : (.*)$", chunk, flags=re.M),  
         "answer": bool(re.search(r"^ВІДПОВІДЬ:", chunk, flags=re.M)),
         "server_error": "ПОМИЛКА СЕРВЕРА" in first_line,
         "squeeze": tuple(int(x) for x in squeeze.groups()) if squeeze else None,
@@ -46,9 +46,9 @@ def parse_step(chunk):
 
 def parse_run(block):
     """Розбирає один прогін: текст від слова «ЗАДАЧА:» до наступного прогону."""
-    chunks = re.split(r"^--- крок ", block, flags=re.M)[1:]       # по одному шматку на крок
+    chunks = re.split(r"^--- крок ", block, flags=re.M)[1:]      
     return {
-        "task": block.split("\n", 1)[0],                          # текст задачі
+        "task": block.split("\n", 1)[0],                       
         "status": find_status(block),
         "steps": [parse_step(chunk) for chunk in chunks],
     }
@@ -56,7 +56,6 @@ def parse_run(block):
 
 def parse_log(text):
     """Ділить лог на прогони. У логу agent_runner.py їх п'ять, у логу measure.py - один."""
-    # логер додає на початок рядка «2026-10-20 11:26:38 - INFO - », прибираємо його
     text = re.sub(r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} - [A-Z]+ - ", "", text, flags=re.M)
     blocks = re.split(r"^ЗАДАЧА: ", text, flags=re.M)[1:]
     return [parse_run(block) for block in blocks]
