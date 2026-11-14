@@ -10,8 +10,8 @@ def drop_orphan_tools(tail):
     з відповідним викликом. Якщо виклик ми відрізали, а результат лишили, сервер видасть
     помилку або модель не зрозуміє, на що це відповідь. Тому такі результати відкидаємо.
     """
-    while tail and tail[0]["role"] == "tool":    # поки перше повідомлення - результат інструмента
-        tail = tail[1:]                          # відкидаємо його (беремо список без першого)
+    while tail and tail[0]["role"] == "tool":   
+        tail = tail[1:]                         
     return tail
 
 
@@ -20,7 +20,7 @@ def trim(messages, keep_last):
     Початок - це два перші повідомлення: системна інструкція і запитання користувача.
     Без них модель не знає, хто вона і про що її питали, тому їх не чіпаємо.
     """
-    head = messages[:2]                          # перші два повідомлення
-    tail = messages[2:][-keep_last:]             # з решти беремо лише останні keep_last
-    tail = drop_orphan_tools(tail)               # не починаємо «хвіст» з результату без виклику
-    return head + tail                           # склеюємо початок і хвіст в один список
+    head = messages[:2]                        
+    tail = messages[2:][-keep_last:]            
+    tail = drop_orphan_tools(tail)             
+    return head + tail                         
