@@ -8,8 +8,7 @@ from summary import compress_by_summary
 def attach_state(messages, task, state):
     """Дописує до запитання користувача список збережених результатів (див. state.py)."""
     note = state.render()
-    if note:                                     # якщо в стані вже щось є
-        # messages[1] - це запитання користувача (друге повідомлення в історії)
+    if note:                                    
         messages[1] = {"role": "user", "content": task + "\n\n" + note}
     return messages
 
