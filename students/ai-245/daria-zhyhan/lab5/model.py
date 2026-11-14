@@ -5,8 +5,6 @@ import config
 from schemas import SCHEMAS
 from cache import ask_model
 
-# Клієнт: адреса сервера й ключ беруться з config.py.
-# Версія OpenAI з langfuse автоматично записує кожен виклик у трасу.
 client = OpenAI(base_url=config.BASE_URL, api_key=config.API_KEY)
 
 
@@ -19,6 +17,6 @@ def call_model(messages, step, logger):
         return ask_model(client, model=config.MODEL, messages=messages,
                          tools=SCHEMAS, temperature=config.TEMPERATURE,
                          parallel_tool_calls=False)
-    except Exception as error:                  # будь-яка помилка під час виклику
+    except Exception as error:            
         logger.error(f"\n--- крок {step} | ПОМИЛКА СЕРВЕРА: {error}")
         return None, False
