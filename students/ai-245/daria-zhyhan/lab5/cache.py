@@ -27,7 +27,7 @@ def read_cache(path):
 
 def write_cache(path, response):
     """Зберігає відповідь сервера у файл."""
-    os.makedirs("cache", exist_ok=True)        # створюємо каталог cache, якщо його ще немає
+    os.makedirs("cache", exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         json.dump(response.model_dump(), f, ensure_ascii=False)
 
@@ -36,13 +36,12 @@ def ask_model(client, **request):
     """Викликає модель (через кеш, якщо він увімкнений).
     Повертає пару: (відповідь, True, якщо відповідь узято з кешу).
     """
-    if not config.USE_CACHE:                   # кеш вимкнений: просто звертаємось до сервера
+    if not config.USE_CACHE:               
         return client.chat.completions.create(**request), False
 
     path = f"cache/{make_key(request)}.json"
-    if os.path.exists(path):                   # такий запит уже був: беремо відповідь з файла
-        return read_cache(path), True
+    if os.path.exists(path):                
 
-    response = client.chat.completions.create(**request)   # такого запиту ще не було
-    write_cache(path, response)                             # запам'ятовуємо відповідь на майбутнє
+    response = client.chat.completions.create(**request)  
+    write_cache(path, response)                           
     return response, False
