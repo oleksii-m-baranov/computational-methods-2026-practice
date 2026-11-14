@@ -1,0 +1,155 @@
+[
+  {
+    "tool": "search_plants",
+    "args": {
+      "query": "Фікус"
+    },
+    "result": "Фікус\nРозсіяне світло, полив помірний, раз на 5-7 днів.\nЖовтіє листя при надмірному поливі або холодному повітрі.\nПри різкій зміні місця може спостерігатися опадання листя.\n---\nФікус Бенджаміна\nРозсіяне світло, помірний полив після підсихання верхнього шару ґрунту.\nЖовтіє листя і активно опадає листя через протяги або перестановку горщика.\nВзимку потребує регулярного обприскування листя."
+  },
+  {
+    "tool": "fertilizer_info",
+    "args": {
+      "plant": "Фікус"
+    },
+    "result": "Доза: 5 мл на літр, періодичність: раз на 14 днів"
+  },
+  {
+    "tool": "calc_dose",
+    "args": {
+      "pot_liters": 3,
+      "dose_ml_per_liter": 5
+    },
+    "result": "15.0 мл"
+  },
+  {
+    "tool": "calc_dose",
+    "args": {
+      "dose_ml_per_liter": 5,
+      "pot_liters": 2
+    },
+    "result": "10.0 мл"
+  },
+  {
+    "tool": "calc_dose",
+    "args": {
+      "dose_ml_per_liter": 5,
+      "pot_liters": 1.5
+    },
+    "result": "7.5 мл"
+  },
+  {
+    "tool": "calc_dose",
+    "args": {
+      "dose_ml_per_liter": 5,
+      "pot_liters": 4
+    },
+    "result": "20.0 мл"
+  },
+  {
+    "tool": "fertilizer_info",
+    "args": {
+      "plant": "Заміокулькас"
+    },
+    "result": "Доза: 3 мл на літр, періодичність: раз на 30 днів"
+  },
+  {
+    "tool": "calc_dose",
+    "args": {
+      "dose_ml_per_liter": 3,
+      "pot_liters": 3
+    },
+    "result": "9.0 мл"
+  },
+  {
+    "tool": "calc_dose",
+    "args": {
+      "dose_ml_per_liter": 3,
+      "pot_liters": 2
+    },
+    "result": "6.0 мл"
+  },
+  {
+    "tool": "calc_dose",
+    "args": {
+      "dose_ml_per_liter": 3,
+      "pot_liters": 1.5
+    },
+    "result": "4.5 мл"
+  },
+  {
+    "tool": "fertilizer_info",
+    "args": {
+      "plant": "Спатифілум"
+    },
+    "result": "Доза: 4 мл на літр, періодичність: раз на 14 днів"
+  },
+  {
+    "tool": "calc_dose",
+    "args": {
+      "dose_ml_per_liter": 4,
+      "pot_liters": 3
+    },
+    "result": "12.0 мл"
+  },
+  {
+    "tool": "calc_dose",
+    "args": {
+      "dose_ml_per_liter": 4,
+      "pot_liters": 2
+    },
+    "result": "8.0 мл"
+  },
+  {
+    "tool": "calc_dose",
+    "args": {
+      "pot_liters": 1.5,
+      "dose_ml_per_liter": 4
+    },
+    "result": "6.0 мл"
+  },
+  {
+    "tool": "fertilizer_info",
+    "args": {
+      "plant": "Драцена"
+    },
+    "result": "Доза: 5 мл на літр, періодичність: раз на 14 днів"
+  },
+  {
+    "tool": "calc_dose",
+    "args": {
+      "dose_ml_per_liter": 5,
+      "pot_liters": 3
+    },
+    "result": "15.0 мл"
+  },
+  {
+    "tool": "fertilizer_info",
+    "args": {
+      "plant": "Алое вера"
+    },
+    "result": "Доза: 2 мл на літр, періодичність: раз на 21 днів"
+  },
+  {
+    "tool": "calc_dose",
+    "args": {
+      "dose_ml_per_liter": 2,
+      "pot_liters": 2
+    },
+    "result": "4.0 мл"
+  },
+  {
+    "tool": "fertilizer_info",
+    "args": {
+      "plant": "Калатея"
+    },
+    "result": "Доза: 3 мл на літр, періодичність: раз на 14 днів"
+  },
+  {
+    "tool": "calc_dose",
+    "args": {
+      "dose_ml_per_liter": 3,
+      "pot_liters": 2.5
+    },
+    "result": "7.5 мл"
+  }
+]
