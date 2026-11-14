@@ -14,7 +14,6 @@ import agent
 import config
 from table import make_row, print_table
 
-# Конфігурації: які налаштування config змінюємо перед прогоном
 CONFIGS = {
     "none":       {"COMPRESS": "none", "USE_STATE": False},
     "trim":       {"COMPRESS": "trim", "USE_STATE": False},
@@ -42,18 +41,18 @@ def is_correct(answer, expected):
     """Чи є очікуване число у відповіді. Неправильні відповіді перевіряйте вручну."""
     if not answer:
         return False
-    text = answer.replace(" ", "").replace(",", ".")     # прибираємо пробіли, кому міняємо на крапку
+    text = answer.replace(" ", "").replace(",", ".")    
     return str(expected) in text
 
 
 def run_once(name, repeat, series, task):
     """Один прогін агента. Повертає (номер прогону, відповідь, час у секундах)."""
-    for key, value in CONFIGS[name].items():             # застосовуємо налаштування конфігурації
+    for key, value in CONFIGS[name].items():             
         setattr(config, key, value)
-    run_id = f"{series}_{name}_r{repeat}"                # наприклад: probe_none_r1
+    run_id = f"{series}_{name}_r{repeat}"                
 
     started = time.time()
-    # propagate_attributes дає трасі в Langfuse назву й мітки
+ 
     with propagate_attributes(trace_name=f"long-{run_id}", tags=[series, name]):
         answer = agent.run_agent(task=task["question"],
                                  max_steps=config.MAX_STEPS_LONG,
@@ -65,20 +64,20 @@ def run_once(name, repeat, series, task):
 
 def main():
     names, repeats, series = read_arguments()
-    config.USE_CACHE = series.startswith("cache")      # кеш вмикають лише серії, назва яких починається з cache
+    config.USE_CACHE = series.startswith("cache")     
     task = load_task()
     os.makedirs("logs", exist_ok=True)
-    rows = []                                            # сюди збираємо рядки результатів
+    rows = []                                          
 
-    for repeat in range(1, repeats + 1):                 # повтори - зовнішній цикл,
-        for name in names:                               # тож конфігурації чергуються
+    for repeat in range(1, repeats + 1):               
+        for name in names:                              
             run_id, answer, seconds = run_once(name, repeat, series, task)
             right = is_correct(answer, task["expected"])
             rows.append(make_row(run_id, name, right, seconds))
             print(f"\n[{run_id}] час {seconds} с | правильно: {'так' if right else 'ні'}")
             print(f"[{run_id}] відповідь: {(answer or '').replace(chr(10), ' ')[:200]}")
 
-    get_client().flush()                                 # дочекатися відправки трас у Langfuse
+    get_client().flush()                               
     print_table(rows)
 
 
