@@ -25,18 +25,15 @@ def format_validation_error(error):
 
 @observe(name="call_tool")
 def call_tool(name, args_raw):
-    # 1. чи існує інструмент
     if name not in TOOLS:
         return "name", (f"Помилка: інструмента '{name}' не існує. "
                         f"Доступні: {', '.join(config.ALLOWED)}. "
                         "Виклич один з доступних або повідом користувачу, що такої дії немає.")
 
-    # 2. чи дозволено його викликати
     if name not in config.ALLOWED:
         return "permission", (f"Помилка: інструмент '{name}' недоступний. "
                               "Не повторюй виклик, повідом користувачу, що ця дія недоступна.")
 
-    # 3. синтаксис і схема: Pydantic розбирає JSON і перевіряє поля
     try:
         args = ARGS[name].model_validate_json(args_raw)
     except ValidationError as error:
@@ -46,12 +43,10 @@ def call_tool(name, args_raw):
                 level = "syntax"
         return level, format_validation_error(error)
 
-    # 4. зміст: чи мають значення сенс для наших даних
     problem = check_meaning(name, args)
     if problem is not None:
         return "meaning", problem
 
-    # 5. виконання
     try:
         return "ok", str(TOOLS[name](**args.model_dump()))
     except Exception as error:
