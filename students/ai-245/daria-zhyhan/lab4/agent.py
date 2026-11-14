@@ -22,17 +22,17 @@ def run_agent(task, max_steps=None, logfile_name=config.LAB_LOGFILE_NAME, task_i
     ]
     retries = 0
 
-    state = TaskState(task_id)                # записник результатів інструментів
+    state = TaskState(task_id)             
     logger.info(f"\n{'=' * 60}")
     logger.info(f"ЗАДАЧА: {task}")
 
     for step in range(1, max_steps + 1):
         response, from_cache = call_model(messages, step, logger)
-        if response is None:                  # сервер повернув помилку (вона вже записана в лог)
+        if response is None:              
             return None
         choice = response.choices[0]
         msg = choice.message
-        used = response.usage.prompt_tokens       # скільки токенів було на вході цього виклику
+        used = response.usage.prompt_tokens     
 
         logger.info(f"\n--- крок {step} | помилок поспіль={retries} "
                     f"| prompt_tokens={response.usage.prompt_tokens} "
@@ -57,7 +57,6 @@ def run_agent(task, max_steps=None, logfile_name=config.LAB_LOGFILE_NAME, task_i
             logger.info(f"ВІДПОВІДЬ: {msg.content}")
             return msg.content
 
-        # Беремо по одному виклику за крок, щоб модель бачила результат перед наступним кроком
         calls = msg.tool_calls[:1]
         assistant_msg = msg.model_dump(exclude_none=True)
         assistant_msg["tool_calls"] = assistant_msg["tool_calls"][:1]
@@ -77,7 +76,6 @@ def run_agent(task, max_steps=None, logfile_name=config.LAB_LOGFILE_NAME, task_i
                 "tool_call_id": call.id,
                 "content": result,
             })
-            # у стан потрапляють лише успішні виклики
             if level == "ok":
                 state.record(call.function.name, call.function.arguments, result)
             if level in MODEL_ERRORS:
@@ -91,7 +89,6 @@ def run_agent(task, max_steps=None, logfile_name=config.LAB_LOGFILE_NAME, task_i
         else:
             retries = 0
 
-        # якщо вхід завеликий, скорочуємо історію
         messages = compress_history(messages, task, used, state, logger)
 
     logger.info("СТОП: вичерпано ліміт кроків")
