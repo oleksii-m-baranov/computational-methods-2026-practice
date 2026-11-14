@@ -8,8 +8,7 @@ from summary import compress_by_summary
 def attach_state(messages, task, state):
     """Дописує до запитання користувача список збережених результатів (див. state.py)."""
     note = state.render()
-    if note:                                     # якщо в стані вже щось є
-        # messages[1] - це запитання користувача (друге повідомлення в історії)
+    if note:                                   
         messages[1] = {"role": "user", "content": task + "\n\n" + note}
     return messages
 
@@ -29,10 +28,10 @@ def compress_by_trim(messages, task, used, state, logger):
 
 def compress_history(messages, task, used, state, logger):
     """Скорочує історію, якщо вхід перевищив поріг COMPRESS_AT. Повертає (нову) історію."""
-    if used <= config.COMPRESS_AT:               # вхід ще малий: нічого не робимо
+    if used <= config.COMPRESS_AT:          
         return messages
     if config.COMPRESS == "trim":
         return compress_by_trim(messages, task, used, state, logger)
     if config.COMPRESS == "summary":
         return compress_by_summary(messages, used, logger)
-    return messages                              # COMPRESS = "none": історія росте далі
+    return messages                         
