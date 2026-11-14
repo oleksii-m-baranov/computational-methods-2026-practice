@@ -37,7 +37,6 @@ def print_steps(run):
         if s["tokens"] is not None:
             previous = s["tokens"]
 
-    # ширина колонки - за найдовшим значенням; числа вирівнюємо праворуч
     widths = [max(len(r[i]) for r in [header] + rows) for i in range(len(header))]
     right = [True, True, True, False]
 
@@ -76,7 +75,6 @@ if __name__ == "__main__":
     if len(sys.argv) < 2:
         sys.exit(__doc__)
 
-    # відносний шлях рахуємо від теки скрипта, щоб не залежати від робочої теки
     path_to_log = os.path.join(os.path.dirname(os.path.abspath(__file__)), sys.argv[1])
     with open(path_to_log, encoding="utf-8") as f:
         runs = parse_log(f.read())
