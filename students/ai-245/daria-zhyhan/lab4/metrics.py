@@ -6,7 +6,7 @@ import config
 
 def count_repeats(steps):
     """Рахує повторні виклики: той самий інструмент з тими самими аргументами, що вже були."""
-    seen = set()                                  # виклики, які вже траплялися
+    seen = set()                                
     repeats = 0
     for step in steps:
         for call in step["calls"]:
@@ -31,8 +31,8 @@ def find_stall(tokens, typical):
     Це ознака того, що сервер мовчки обрізає вхід.
     """
     for (_, before), (number, after) in zip(tokens, tokens[1:]):
-        near_window = after >= 0.8 * config.NUM_CTX      # вхід уже займає понад 80% вікна
-        stopped = after - before <= 0.2 * typical        # а росте менш ніж на п'яту частину норми
+        near_window = after >= 0.8 * config.NUM_CTX    
+        stopped = after - before <= 0.2 * typical       
         if near_window and stopped:
             return number
     return None
@@ -47,16 +47,16 @@ def describe(run):
     first = tokens[0][1] if tokens else 0
     return {
         "status": run["status"],
-        "steps": n,                                              # скільки разів викликали модель
+        "steps": n,                                          
         "repeats": count_repeats(steps),
-        "first_tokens": first,                                   # вхід першого кроку
+        "first_tokens": first,                                  
         "typical_growth": typical,
         "max_tokens": max((t for _, t in tokens), default=0),
-        "prompt_tokens": sum(t for _, t in tokens),              # сума входів за прогін
+        "prompt_tokens": sum(t for _, t in tokens),            
         "completion_tokens": sum(s["completion"] for s in steps),
-        "extra_tokens": sum(s["extra"] for s in steps),          # знадобиться в додатковому завданні
-        "formula": n * first + typical * n * (n - 1) / 2,        # формула з лекції 7
+        "extra_tokens": sum(s["extra"] for s in steps),        
+        "formula": n * first + typical * n * (n - 1) / 2,     
         "stall": find_stall(tokens, typical),
         "cache_hits": sum(1 for s in steps if s["from_cache"]),
-        "squeezes": [s for s in steps if s["squeeze"]],          # кроки, після яких історію скорочували
+        "squeezes": [s for s in steps if s["squeeze"]],       
     }
