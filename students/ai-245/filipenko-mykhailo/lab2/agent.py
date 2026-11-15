@@ -1,4 +1,3 @@
-
 """AI-агент для вибору ноутбука. Варіант 9."""
 
 from openai import OpenAI
