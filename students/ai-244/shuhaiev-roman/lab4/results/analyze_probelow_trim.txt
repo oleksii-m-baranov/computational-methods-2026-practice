@@ -1,0 +1,464 @@
+
+Прогін: Я важу 70 кг. Для кожного з шести занять: йога (MET 2.5, впр
+  статус завершення            : step_limit
+  кроків                       : 25 (повторних викликів: 400)
+  вхід першого кроку           : 1147 токенів
+  типовий приріст за крок      : 0 токенів
+  найбільший вхід              : 1147 токенів (37% вікна 3072)
+  сума prompt_tokens за прогін : 28675
+  за формулою n*C + d*n*(n-1)/2: 28675
+  вхід перестав рости на кроці : не помічено
+  влучань у кеш                : 0
+  стиснення на кроці 1: вхід був 1147, повідомлень 20 -> 2
+  стиснення на кроці 2: вхід був 1147, повідомлень 20 -> 2
+  стиснення на кроці 3: вхід був 1147, повідомлень 20 -> 2
+  стиснення на кроці 4: вхід був 1147, повідомлень 20 -> 2
+  стиснення на кроці 5: вхід був 1147, повідомлень 20 -> 2
+  стиснення на кроці 6: вхід був 1147, повідомлень 20 -> 2
+  стиснення на кроці 7: вхід був 1147, повідомлень 20 -> 2
+  стиснення на кроці 8: вхід був 1147, повідомлень 20 -> 2
+  стиснення на кроці 9: вхід був 1147, повідомлень 20 -> 2
+  стиснення на кроці 10: вхід був 1147, повідомлень 20 -> 2
+  стиснення на кроці 11: вхід був 1147, повідомлень 20 -> 2
+  стиснення на кроці 12: вхід був 1147, повідомлень 20 -> 2
+  стиснення на кроці 13: вхід був 1147, повідомлень 20 -> 2
+  стиснення на кроці 14: вхід був 1147, повідомлень 20 -> 2
+  стиснення на кроці 15: вхід був 1147, повідомлень 20 -> 2
+  стиснення на кроці 16: вхід був 1147, повідомлень 20 -> 2
+  стиснення на кроці 17: вхід був 1147, повідомлень 20 -> 2
+  стиснення на кроці 18: вхід був 1147, повідомлень 20 -> 2
+  стиснення на кроці 19: вхід був 1147, повідомлень 20 -> 2
+  стиснення на кроці 20: вхід був 1147, повідомлень 20 -> 2
+  стиснення на кроці 21: вхід був 1147, повідомлень 20 -> 2
+  стиснення на кроці 22: вхід був 1147, повідомлень 20 -> 2
+  стиснення на кроці 23: вхід був 1147, повідомлень 20 -> 2
+  стиснення на кроці 24: вхід був 1147, повідомлень 20 -> 2
+  стиснення на кроці 25: вхід був 1147, повідомлень 20 -> 2
+
+| Крок | prompt_tokens | Приріст | Що зробила модель                                      |
+|-----:|--------------:|--------:|:-------------------------------------------------------|
+|    1 |          1147 |         | search_exercises({"query":"спина"})                    |
+|      |               |         | schedule_info({"activity":"йога"})                     |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"прес"})                     |
+|      |               |         | schedule_info({"activity":"пілатес"})                  |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":3})   |
+|      |               |         | search_exercises({"query":"груди"})                    |
+|      |               |         | schedule_info({"activity":"силове"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":5})   |
+|      |               |         | search_exercises({"query":"ноги"})                     |
+|      |               |         | schedule_info({"activity":"розтяжка"})                 |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"руки"})                     |
+|      |               |         | schedule_info({"activity":"кардіо"})                   |
+|      |               |         | calc_calories({"met":7,"minutes":30,"weight_kg":70})   |
+|      |               |         | search_exercises({"query":"просунутий"})               |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":8})   |
+|    2 |          1147 |       0 | search_exercises({"query":"спина"})                    |
+|      |               |         | schedule_info({"activity":"йога"})                     |
+|      |               |         | calc_calories({"met":2.5,"minutes":30,"weight_kg":70}) |
+|      |               |         | search_exercises({"query":"прес"})                     |
+|      |               |         | schedule_info({"activity":"пілатес"})                  |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":3})   |
+|      |               |         | search_exercises({"query":"груди"})                    |
+|      |               |         | schedule_info({"activity":"силове"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":5})   |
+|      |               |         | search_exercises({"query":"ноги"})                     |
+|      |               |         | schedule_info({"activity":"розтяжка"})                 |
+|      |               |         | calc_calories({"weight_kg":70,"met":2.5,"minutes":30}) |
+|      |               |         | search_exercises({"query":"руки"})                     |
+|      |               |         | schedule_info({"activity":"кардіо"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":7})   |
+|      |               |         | search_exercises({"query":"просунутий"})               |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":8})   |
+|    3 |          1147 |       0 | search_exercises({"query":"спина"})                    |
+|      |               |         | schedule_info({"activity":"йога"})                     |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"прес"})                     |
+|      |               |         | schedule_info({"activity":"пілатес"})                  |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":3})   |
+|      |               |         | search_exercises({"query":"груди"})                    |
+|      |               |         | schedule_info({"activity":"силове"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":5})   |
+|      |               |         | search_exercises({"query":"ноги"})                     |
+|      |               |         | schedule_info({"activity":"розтяжка"})                 |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"руки"})                     |
+|      |               |         | schedule_info({"activity":"кардіо"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":7})   |
+|      |               |         | search_exercises({"query":"просунутий"})               |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":8})   |
+|    4 |          1147 |       0 | search_exercises({"query":"спина"})                    |
+|      |               |         | schedule_info({"activity":"йога"})                     |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"прес"})                     |
+|      |               |         | schedule_info({"activity":"пілатес"})                  |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":3})   |
+|      |               |         | search_exercises({"query":"груди"})                    |
+|      |               |         | schedule_info({"activity":"силове"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":5})   |
+|      |               |         | search_exercises({"query":"ноги"})                     |
+|      |               |         | schedule_info({"activity":"розтяжка"})                 |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"руки"})                     |
+|      |               |         | schedule_info({"activity":"кардіо"})                   |
+|      |               |         | calc_calories({"met":7,"minutes":30,"weight_kg":70})   |
+|      |               |         | search_exercises({"query":"просунутий"})               |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":8})   |
+|    5 |          1147 |       0 | search_exercises({"query":"спина"})                    |
+|      |               |         | schedule_info({"activity":"йога"})                     |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"прес"})                     |
+|      |               |         | schedule_info({"activity":"пілатес"})                  |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":3})   |
+|      |               |         | search_exercises({"query":"груди"})                    |
+|      |               |         | schedule_info({"activity":"силове"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":5})   |
+|      |               |         | search_exercises({"query":"ноги"})                     |
+|      |               |         | schedule_info({"activity":"розтяжка"})                 |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"руки"})                     |
+|      |               |         | schedule_info({"activity":"кардіо"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":7})   |
+|      |               |         | search_exercises({"query":"просунутий"})               |
+|      |               |         | calc_calories({"met":8,"minutes":30,"weight_kg":70})   |
+|    6 |          1147 |       0 | search_exercises({"query":"спина"})                    |
+|      |               |         | schedule_info({"activity":"йога"})                     |
+|      |               |         | calc_calories({"met":2.5,"minutes":30,"weight_kg":70}) |
+|      |               |         | search_exercises({"query":"прес"})                     |
+|      |               |         | schedule_info({"activity":"пілатес"})                  |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":3})   |
+|      |               |         | search_exercises({"query":"груди"})                    |
+|      |               |         | schedule_info({"activity":"силове"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":5})   |
+|      |               |         | search_exercises({"query":"ноги"})                     |
+|      |               |         | schedule_info({"activity":"розтяжка"})                 |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"руки"})                     |
+|      |               |         | schedule_info({"activity":"кардіо"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":7})   |
+|      |               |         | search_exercises({"query":"просунутий"})               |
+|      |               |         | calc_calories({"weight_kg":70,"met":8,"minutes":30})   |
+|    7 |          1147 |       0 | search_exercises({"query":"спина"})                    |
+|      |               |         | schedule_info({"activity":"йога"})                     |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"прес"})                     |
+|      |               |         | schedule_info({"activity":"пілатес"})                  |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":3})   |
+|      |               |         | search_exercises({"query":"груди"})                    |
+|      |               |         | schedule_info({"activity":"силове"})                   |
+|      |               |         | calc_calories({"weight_kg":70,"met":5,"minutes":30})   |
+|      |               |         | search_exercises({"query":"ноги"})                     |
+|      |               |         | schedule_info({"activity":"розтяжка"})                 |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"руки"})                     |
+|      |               |         | schedule_info({"activity":"кардіо"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":7})   |
+|      |               |         | search_exercises({"query":"просунутий"})               |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":8})   |
+|    8 |          1147 |       0 | search_exercises({"query":"спина"})                    |
+|      |               |         | schedule_info({"activity":"йога"})                     |
+|      |               |         | calc_calories({"met":2.5,"minutes":30,"weight_kg":70}) |
+|      |               |         | search_exercises({"query":"прес"})                     |
+|      |               |         | schedule_info({"activity":"пілатес"})                  |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":3})   |
+|      |               |         | search_exercises({"query":"груди"})                    |
+|      |               |         | schedule_info({"activity":"силове"})                   |
+|      |               |         | calc_calories({"weight_kg":70,"met":5,"minutes":30})   |
+|      |               |         | search_exercises({"query":"ноги"})                     |
+|      |               |         | schedule_info({"activity":"розтяжка"})                 |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"руки"})                     |
+|      |               |         | schedule_info({"activity":"кардіо"})                   |
+|      |               |         | calc_calories({"met":7,"minutes":30,"weight_kg":70})   |
+|      |               |         | search_exercises({"query":"просунутий"})               |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":8})   |
+|    9 |          1147 |       0 | search_exercises({"query":"спина"})                    |
+|      |               |         | schedule_info({"activity":"йога"})                     |
+|      |               |         | calc_calories({"weight_kg":70,"met":2.5,"minutes":30}) |
+|      |               |         | search_exercises({"query":"прес"})                     |
+|      |               |         | schedule_info({"activity":"пілатес"})                  |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":3})   |
+|      |               |         | search_exercises({"query":"груди"})                    |
+|      |               |         | schedule_info({"activity":"силове"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":5})   |
+|      |               |         | search_exercises({"query":"ноги"})                     |
+|      |               |         | schedule_info({"activity":"розтяжка"})                 |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"руки"})                     |
+|      |               |         | schedule_info({"activity":"кардіо"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":7})   |
+|      |               |         | search_exercises({"query":"просунутий"})               |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":8})   |
+|   10 |          1147 |       0 | search_exercises({"query":"спина"})                    |
+|      |               |         | schedule_info({"activity":"йога"})                     |
+|      |               |         | calc_calories({"weight_kg":70,"met":2.5,"minutes":30}) |
+|      |               |         | search_exercises({"query":"прес"})                     |
+|      |               |         | schedule_info({"activity":"пілатес"})                  |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":3})   |
+|      |               |         | search_exercises({"query":"груди"})                    |
+|      |               |         | schedule_info({"activity":"силове"})                   |
+|      |               |         | calc_calories({"weight_kg":70,"met":5,"minutes":30})   |
+|      |               |         | search_exercises({"query":"ноги"})                     |
+|      |               |         | schedule_info({"activity":"розтяжка"})                 |
+|      |               |         | calc_calories({"weight_kg":70,"met":2.5,"minutes":30}) |
+|      |               |         | search_exercises({"query":"руки"})                     |
+|      |               |         | schedule_info({"activity":"кардіо"})                   |
+|      |               |         | calc_calories({"weight_kg":70,"met":7,"minutes":30})   |
+|      |               |         | search_exercises({"query":"просунутий"})               |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":8})   |
+|   11 |          1147 |       0 | search_exercises({"query":"спина"})                    |
+|      |               |         | schedule_info({"activity":"йога"})                     |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"прес"})                     |
+|      |               |         | schedule_info({"activity":"пілатес"})                  |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":3})   |
+|      |               |         | search_exercises({"query":"груди"})                    |
+|      |               |         | schedule_info({"activity":"силове"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":5})   |
+|      |               |         | search_exercises({"query":"ноги"})                     |
+|      |               |         | schedule_info({"activity":"розтяжка"})                 |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"руки"})                     |
+|      |               |         | schedule_info({"activity":"кардіо"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":7})   |
+|      |               |         | search_exercises({"query":"просунутий"})               |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":8})   |
+|   12 |          1147 |       0 | search_exercises({"query":"спина"})                    |
+|      |               |         | schedule_info({"activity":"йога"})                     |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"прес"})                     |
+|      |               |         | schedule_info({"activity":"пілатес"})                  |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":3})   |
+|      |               |         | search_exercises({"query":"груди"})                    |
+|      |               |         | schedule_info({"activity":"силове"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":5})   |
+|      |               |         | search_exercises({"query":"ноги"})                     |
+|      |               |         | schedule_info({"activity":"розтяжка"})                 |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"руки"})                     |
+|      |               |         | schedule_info({"activity":"кардіо"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":7})   |
+|      |               |         | search_exercises({"query":"просунутий"})               |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":8})   |
+|   13 |          1147 |       0 | search_exercises({"query":"спина"})                    |
+|      |               |         | schedule_info({"activity":"йога"})                     |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"прес"})                     |
+|      |               |         | schedule_info({"activity":"пілатес"})                  |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":3})   |
+|      |               |         | search_exercises({"query":"груди"})                    |
+|      |               |         | schedule_info({"activity":"силове"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":5})   |
+|      |               |         | search_exercises({"query":"ноги"})                     |
+|      |               |         | schedule_info({"activity":"розтяжка"})                 |
+|      |               |         | calc_calories({"weight_kg":70,"met":2.5,"minutes":30}) |
+|      |               |         | search_exercises({"query":"руки"})                     |
+|      |               |         | schedule_info({"activity":"кардіо"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":7})   |
+|      |               |         | search_exercises({"query":"просунутий"})               |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":8})   |
+|   14 |          1147 |       0 | search_exercises({"query":"спина"})                    |
+|      |               |         | schedule_info({"activity":"йога"})                     |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"прес"})                     |
+|      |               |         | schedule_info({"activity":"пілатес"})                  |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":3})   |
+|      |               |         | search_exercises({"query":"груди"})                    |
+|      |               |         | schedule_info({"activity":"силове"})                   |
+|      |               |         | calc_calories({"weight_kg":70,"met":5,"minutes":30})   |
+|      |               |         | search_exercises({"query":"ноги"})                     |
+|      |               |         | schedule_info({"activity":"розтяжка"})                 |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"руки"})                     |
+|      |               |         | schedule_info({"activity":"кардіо"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":7})   |
+|      |               |         | search_exercises({"query":"просунутий"})               |
+|      |               |         | calc_calories({"weight_kg":70,"met":8,"minutes":30})   |
+|   15 |          1147 |       0 | search_exercises({"query":"спина"})                    |
+|      |               |         | schedule_info({"activity":"йога"})                     |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"прес"})                     |
+|      |               |         | schedule_info({"activity":"пілатес"})                  |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":3})   |
+|      |               |         | search_exercises({"query":"груди"})                    |
+|      |               |         | schedule_info({"activity":"силове"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":5})   |
+|      |               |         | search_exercises({"query":"ноги"})                     |
+|      |               |         | schedule_info({"activity":"розтяжка"})                 |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"руки"})                     |
+|      |               |         | schedule_info({"activity":"кардіо"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":7})   |
+|      |               |         | search_exercises({"query":"просунутий"})               |
+|      |               |         | calc_calories({"weight_kg":70,"met":8,"minutes":30})   |
+|   16 |          1147 |       0 | search_exercises({"query":"спина"})                    |
+|      |               |         | schedule_info({"activity":"йога"})                     |
+|      |               |         | calc_calories({"met":2.5,"minutes":30,"weight_kg":70}) |
+|      |               |         | search_exercises({"query":"прес"})                     |
+|      |               |         | schedule_info({"activity":"пілатес"})                  |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":3})   |
+|      |               |         | search_exercises({"query":"груди"})                    |
+|      |               |         | schedule_info({"activity":"силове"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":5})   |
+|      |               |         | search_exercises({"query":"ноги"})                     |
+|      |               |         | schedule_info({"activity":"розтяжка"})                 |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"руки"})                     |
+|      |               |         | schedule_info({"activity":"кардіо"})                   |
+|      |               |         | calc_calories({"met":7,"minutes":30,"weight_kg":70})   |
+|      |               |         | search_exercises({"query":"просунутий"})               |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":8})   |
+|   17 |          1147 |       0 | search_exercises({"query":"спина"})                    |
+|      |               |         | schedule_info({"activity":"йога"})                     |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"прес"})                     |
+|      |               |         | schedule_info({"activity":"пілатес"})                  |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":3})   |
+|      |               |         | search_exercises({"query":"груди"})                    |
+|      |               |         | schedule_info({"activity":"силове"})                   |
+|      |               |         | calc_calories({"weight_kg":70,"met":5,"minutes":30})   |
+|      |               |         | search_exercises({"query":"ноги"})                     |
+|      |               |         | schedule_info({"activity":"розтяжка"})                 |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"руки"})                     |
+|      |               |         | schedule_info({"activity":"кардіо"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":7})   |
+|      |               |         | search_exercises({"query":"просунутий"})               |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":8})   |
+|   18 |          1147 |       0 | search_exercises({"query":"спина"})                    |
+|      |               |         | schedule_info({"activity":"йога"})                     |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"прес"})                     |
+|      |               |         | schedule_info({"activity":"пілатес"})                  |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":3})   |
+|      |               |         | search_exercises({"query":"груди"})                    |
+|      |               |         | schedule_info({"activity":"силове"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":5})   |
+|      |               |         | search_exercises({"query":"ноги"})                     |
+|      |               |         | schedule_info({"activity":"розтяжка"})                 |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"руки"})                     |
+|      |               |         | schedule_info({"activity":"кардіо"})                   |
+|      |               |         | calc_calories({"weight_kg":70,"met":7,"minutes":30})   |
+|      |               |         | search_exercises({"query":"просунутий"})               |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":8})   |
+|   19 |          1147 |       0 | search_exercises({"query":"спина"})                    |
+|      |               |         | schedule_info({"activity":"йога"})                     |
+|      |               |         | calc_calories({"weight_kg":70,"met":2.5,"minutes":30}) |
+|      |               |         | search_exercises({"query":"прес"})                     |
+|      |               |         | schedule_info({"activity":"пілатес"})                  |
+|      |               |         | calc_calories({"met":3,"minutes":30,"weight_kg":70})   |
+|      |               |         | search_exercises({"query":"груди"})                    |
+|      |               |         | schedule_info({"activity":"силове"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":5})   |
+|      |               |         | search_exercises({"query":"ноги"})                     |
+|      |               |         | schedule_info({"activity":"розтяжка"})                 |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"руки"})                     |
+|      |               |         | schedule_info({"activity":"кардіо"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":7})   |
+|      |               |         | search_exercises({"query":"просунутий"})               |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":8})   |
+|   20 |          1147 |       0 | search_exercises({"query":"спина"})                    |
+|      |               |         | schedule_info({"activity":"йога"})                     |
+|      |               |         | calc_calories({"met":2.5,"minutes":30,"weight_kg":70}) |
+|      |               |         | search_exercises({"query":"прес"})                     |
+|      |               |         | schedule_info({"activity":"пілатес"})                  |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":3})   |
+|      |               |         | search_exercises({"query":"груди"})                    |
+|      |               |         | schedule_info({"activity":"силове"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":5})   |
+|      |               |         | search_exercises({"query":"ноги"})                     |
+|      |               |         | schedule_info({"activity":"розтяжка"})                 |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"руки"})                     |
+|      |               |         | schedule_info({"activity":"кардіо"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":7})   |
+|      |               |         | search_exercises({"query":"просунутий"})               |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":8})   |
+|   21 |          1147 |       0 | search_exercises({"query":"спина"})                    |
+|      |               |         | schedule_info({"activity":"йога"})                     |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"прес"})                     |
+|      |               |         | schedule_info({"activity":"пілатес"})                  |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":3})   |
+|      |               |         | search_exercises({"query":"груди"})                    |
+|      |               |         | schedule_info({"activity":"силове"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":5})   |
+|      |               |         | search_exercises({"query":"ноги"})                     |
+|      |               |         | schedule_info({"activity":"розтяжка"})                 |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"руки"})                     |
+|      |               |         | schedule_info({"activity":"кардіо"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":7})   |
+|      |               |         | search_exercises({"query":"просунутий"})               |
+|      |               |         | calc_calories({"met":8,"minutes":30,"weight_kg":70})   |
+|   22 |          1147 |       0 | search_exercises({"query":"спина"})                    |
+|      |               |         | schedule_info({"activity":"йога"})                     |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"прес"})                     |
+|      |               |         | schedule_info({"activity":"пілатес"})                  |
+|      |               |         | calc_calories({"met":3,"minutes":30,"weight_kg":70})   |
+|      |               |         | search_exercises({"query":"груди"})                    |
+|      |               |         | schedule_info({"activity":"силове"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":5})   |
+|      |               |         | search_exercises({"query":"ноги"})                     |
+|      |               |         | schedule_info({"activity":"розтяжка"})                 |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"руки"})                     |
+|      |               |         | schedule_info({"activity":"кардіо"})                   |
+|      |               |         | calc_calories({"weight_kg":70,"met":7,"minutes":30})   |
+|      |               |         | search_exercises({"query":"просунутий"})               |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":8})   |
+|   23 |          1147 |       0 | search_exercises({"query":"спина"})                    |
+|      |               |         | schedule_info({"activity":"йога"})                     |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"прес"})                     |
+|      |               |         | schedule_info({"activity":"пілатес"})                  |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":3})   |
+|      |               |         | search_exercises({"query":"груди"})                    |
+|      |               |         | schedule_info({"activity":"силове"})                   |
+|      |               |         | calc_calories({"weight_kg":70,"met":5,"minutes":30})   |
+|      |               |         | search_exercises({"query":"ноги"})                     |
+|      |               |         | schedule_info({"activity":"розтяжка"})                 |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"руки"})                     |
+|      |               |         | schedule_info({"activity":"кардіо"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":7})   |
+|      |               |         | search_exercises({"query":"просунутий"})               |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":8})   |
+|   24 |          1147 |       0 | search_exercises({"query":"спина"})                    |
+|      |               |         | schedule_info({"activity":"йога"})                     |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"прес"})                     |
+|      |               |         | schedule_info({"activity":"пілатес"})                  |
+|      |               |         | calc_calories({"weight_kg":70,"met":3,"minutes":30})   |
+|      |               |         | search_exercises({"query":"груди"})                    |
+|      |               |         | schedule_info({"activity":"силове"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":5})   |
+|      |               |         | search_exercises({"query":"ноги"})                     |
+|      |               |         | schedule_info({"activity":"розтяжка"})                 |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"руки"})                     |
+|      |               |         | schedule_info({"activity":"кардіо"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":7})   |
+|      |               |         | search_exercises({"query":"просунутий"})               |
+|      |               |         | calc_calories({"weight_kg":70,"met":8,"minutes":30})   |
+|   25 |          1147 |       0 | search_exercises({"query":"спина"})                    |
+|      |               |         | schedule_info({"activity":"йога"})                     |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"прес"})                     |
+|      |               |         | schedule_info({"activity":"пілатес"})                  |
+|      |               |         | calc_calories({"weight_kg":70,"met":3,"minutes":30})   |
+|      |               |         | search_exercises({"query":"груди"})                    |
+|      |               |         | schedule_info({"activity":"силове"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":5})   |
+|      |               |         | search_exercises({"query":"ноги"})                     |
+|      |               |         | schedule_info({"activity":"розтяжка"})                 |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":2.5}) |
+|      |               |         | search_exercises({"query":"руки"})                     |
+|      |               |         | schedule_info({"activity":"кардіо"})                   |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":7})   |
+|      |               |         | search_exercises({"query":"просунутий"})               |
+|      |               |         | calc_calories({"minutes":30,"weight_kg":70,"met":8})   |
