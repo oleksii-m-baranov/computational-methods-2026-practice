@@ -1,0 +1,152 @@
+[
+  {
+    "provider": "local",
+    "model": "llama3.2:3b",
+    "prompt": "short",
+    "runs": [
+      {
+        "ttft_s": 0.064,
+        "total_s": 0.356,
+        "chars": 62,
+        "chars_per_s": 174.2
+      },
+      {
+        "ttft_s": 0.02,
+        "total_s": 0.175,
+        "chars": 35,
+        "chars_per_s": 199.9
+      },
+      {
+        "ttft_s": 0.034,
+        "total_s": 0.168,
+        "chars": 34,
+        "chars_per_s": 202.4
+      }
+    ]
+  },
+  {
+    "provider": "local",
+    "model": "llama3.2:3b",
+    "prompt": "medium",
+    "runs": [
+      {
+        "ttft_s": 0.04,
+        "total_s": 0.677,
+        "chars": 257,
+        "chars_per_s": 379.8
+      },
+      {
+        "ttft_s": 0.029,
+        "total_s": 1.246,
+        "chars": 384,
+        "chars_per_s": 308.2
+      },
+      {
+        "ttft_s": 0.034,
+        "total_s": 0.94,
+        "chars": 292,
+        "chars_per_s": 310.6
+      }
+    ]
+  },
+  {
+    "provider": "local",
+    "model": "llama3.2:3b",
+    "prompt": "long",
+    "runs": [
+      {
+        "ttft_s": 0.053,
+        "total_s": 10.811,
+        "chars": 2990,
+        "chars_per_s": 276.6
+      },
+      {
+        "ttft_s": 0.078,
+        "total_s": 1.643,
+        "chars": 469,
+        "chars_per_s": 285.5
+      },
+      {
+        "ttft_s": 0.037,
+        "total_s": 7.711,
+        "chars": 2316,
+        "chars_per_s": 300.3
+      }
+    ]
+  },
+  {
+    "provider": "cloud",
+    "model": "gemini-3.5-flash-lite",
+    "prompt": "short",
+    "runs": [
+      {
+        "ttft_s": 0.826,
+        "total_s": 0.929,
+        "chars": 57,
+        "chars_per_s": 61.3
+      },
+      {
+        "ttft_s": 0.871,
+        "total_s": 1.029,
+        "chars": 132,
+        "chars_per_s": 128.2
+      },
+      {
+        "ttft_s": 1.025,
+        "total_s": 1.182,
+        "chars": 153,
+        "chars_per_s": 129.4
+      }
+    ]
+  },
+  {
+    "provider": "cloud",
+    "model": "gemini-3.5-flash-lite",
+    "prompt": "medium",
+    "runs": [
+      {
+        "ttft_s": 0.621,
+        "total_s": 1.193,
+        "chars": 492,
+        "chars_per_s": 412.3
+      },
+      {
+        "ttft_s": 0.599,
+        "total_s": 1.091,
+        "chars": 436,
+        "chars_per_s": 399.6
+      },
+      {
+        "ttft_s": 0.682,
+        "total_s": 1.083,
+        "chars": 411,
+        "chars_per_s": 379.4
+      }
+    ]
+  },
+  {
+    "provider": "cloud",
+    "model": "gemini-3.5-flash-lite",
+    "prompt": "long",
+    "runs": [
+      {
+        "ttft_s": 0.637,
+        "total_s": 3.694,
+        "chars": 3039,
+        "chars_per_s": 822.7
+      },
+      {
+        "ttft_s": 0.629,
+        "total_s": 3.728,
+        "chars": 2777,
+        "chars_per_s": 744.8
+      },
+      {
+        "ttft_s": 0.657,
+        "total_s": 4.942,
+        "chars": 3443,
+        "chars_per_s": 696.7
+      }
+    ]
+  }
+]
