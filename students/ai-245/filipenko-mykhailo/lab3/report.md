@@ -117,7 +117,7 @@ lab3/
 
 ```python
 from langfuse import observe, get_client
-from langfuse.openai import OpenAI
+from openai import OpenAI
 ```
 
 Основну функцію агента позначено декоратором:
@@ -135,7 +135,7 @@ with propagate_attributes(
     trace_name=f"{config.RUN_TAG}-{task['id']}",
     tags=[config.RUN_TAG]
 ):
-    result = run_agent(task)
+result = run_agent(task["question"])
 ```
 
 Після виконання тестових задач використовується:
@@ -525,6 +525,30 @@ Langfuse дозволяє досліджувати послідовність д
 
 *Рисунок 3 — Трасування прогону агента з перевірками.*
 
+10.2. П'ять частин кроку агента в Langfuse
+
+Для демонстрації п'яти частин кроку агента було використано трасу checks-Z3, отриману під час виконання завдання з вибору ноутбука для навчання та розрахунку розстрочки.
+
+На рисунку 8 показано:
+
+Input (вхід) — запит користувача про вибір ноутбука та розстрочку на 6 місяців із переплатою 10%.
+
+Decision (рішення) — модель визначила необхідність пошуку ноутбука для навчання.
+
+Action (дія) — виклик інструмента search_laptops з аргументом {"query":"навчання"}.
+
+Result (результат) — перевірка повернула ok, а інструмент знайшов StudyNova 14 | StudyNova 15.
+
+Next step (наступний крок) — агент перейшов до виклику laptop_info для отримання характеристик обраної моделі.
+
+<img width="957" height="911" alt="image" src="https://github.com/user-attachments/assets/7b24e971-2feb-431a-85d2-3fc11ff73636" />
+<img width="959" height="870" alt="image" src="https://github.com/user-attachments/assets/059e7a98-84a7-4abf-8e62-47def4312c38" />
+<img width="955" height="903" alt="image" src="https://github.com/user-attachments/assets/3ef9c1b8-9c12-4ec5-8d9c-451afcff2a6b" />
+
+
+Рисунок 8 — П'ять частин кроку агента в Langfuse.
+
+Отже, трасування підтверджує, що модель самостійно приймає рішення про використання інструмента, диспетчер перевіряє виклик, а отриманий результат передається моделі для наступного кроку.
 ---
 
 # 11. Аналіз двох трас
