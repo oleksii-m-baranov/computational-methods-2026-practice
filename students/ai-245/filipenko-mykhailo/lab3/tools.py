@@ -1,19 +1,19 @@
 import csv
 import os
 import re
+from pathlib import Path
+
+
+BASE_DIR = Path(__file__).resolve().parent
+CORPUS_DIR = BASE_DIR / "data" / "corpus"
+LAPTOPS_FILE = BASE_DIR / "data" / "laptops.csv"
 
 
 def search_laptops(query: str) -> str:
-    words = re.findall(r"\w+", query.lower())
-    folder = "data/corpus"
-    found = []
-    best_score = 0
+    words = re.findall(r"\w+", query.casefold())
 
     if not words:
         return "Пошуковий запит порожній."
-
-    if "8k" in words or "8к" in words:
-        return f"За запитом '{query}' нічого не знайдено."
 
     stop_words = {
         "ноутбук", "ноутбуки", "ноутбука",
@@ -22,39 +22,68 @@ def search_laptops(query: str) -> str:
         "складі", "ціна", "ціну", "коштує"
     }
 
-    keywords = [word for word in words if word not in stop_words]
+    keywords = [
+        word for word in words
+        if word not in stop_words
+    ]
 
     if not keywords:
         return f"За запитом '{query}' нічого не знайдено."
 
-    for filename in sorted(os.listdir(folder)):
-        with open(os.path.join(folder, filename), encoding="utf-8") as f:
-            text = f.read()
+    if not CORPUS_DIR.is_dir():
+        raise FileNotFoundError(
+            f"Каталог документів не знайдено: {CORPUS_DIR}"
+        )
 
-        content = text.lower()
+    matches = []
+
+    for filepath in sorted(CORPUS_DIR.iterdir()):
+        if not filepath.is_file():
+            continue
+
+        text = filepath.read_text(encoding="utf-8")
+        content = text.casefold()
+
         score = sum(
             1 for word in set(keywords)
             if word in content
         )
 
-        if score > best_score:
-            best_score = score
-            found = [text.splitlines()[0]]
-        elif score == best_score and score > 0:
-            found.append(text.splitlines()[0])
+        if score > 0:
+            lines = text.splitlines()
+            title = lines[0].strip() if lines else filepath.name
 
-    if not found:
+            matches.append((score, title))
+
+    if not matches:
         return f"За запитом '{query}' нічого не знайдено."
 
-    return " | ".join(found)
+    matches.sort(key=lambda item: (-item[0], item[1]))
+
+    return " | ".join(
+        title for _, title in matches
+    )
 
 
 def laptop_info(model: str) -> str:
-    with open("data/laptops.csv", encoding="utf-8") as f:
-        for row in csv.DictReader(f):
-            if row["model"].lower() == model.lower():
+    if not LAPTOPS_FILE.is_file():
+        raise FileNotFoundError(
+            f"Файл каталогу не знайдено: {LAPTOPS_FILE}"
+        )
+
+    requested_model = model.strip().casefold()
+
+    with LAPTOPS_FILE.open(
+        encoding="utf-8-sig",
+        newline=""
+    ) as file:
+        for row in csv.DictReader(file):
+            catalog_model = row["model"].strip()
+
+            if catalog_model.casefold() == requested_model:
                 return (
-                    f"Ціна: {row['price']} грн, "
+                    f"Модель: {catalog_model}, "
+                    f"ціна: {row['price']} грн, "
                     f"на складі: {row['in_stock']} шт., "
                     f"гарантія: {row['warranty_months']} міс."
                 )
@@ -68,18 +97,34 @@ def calc_installment(
     overpay_percent: float
 ) -> str:
     if months <= 0:
-        return "Помилка: кількість місяців має бути більшою за нуль."
+        return (
+            "Помилка: кількість місяців "
+            "має бути більшою за нуль."
+        )
+
+    if price < 0:
+        return "Помилка: ціна не може бути від'ємною."
+
+    if overpay_percent < 0:
+        return (
+            "Помилка: відсоток переплати "
+            "не може бути від'ємним."
+        )
 
     total = price * (1 + overpay_percent / 100)
+    monthly = total / months
 
     return (
-        f"{round(total / months, 2)} грн на місяць, "
-        f"усього {round(total, 2)} грн"
+        f"{monthly:.2f} грн на місяць, "
+        f"усього {total:.2f} грн"
     )
 
 
 def place_order(model: str) -> str:
-    return f"Оформлення замовлення для '{model}' заборонено."
+    return (
+        f"Оформлення замовлення для '{model}' "
+        "заборонено."
+    )
 
 
 TOOLS = {

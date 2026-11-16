@@ -4,7 +4,7 @@ from langfuse import get_client, propagate_attributes
 
 import config
 from agent import run_agent
-from utils.lab_logger import custom_logger
+from lab_logger import custom_logger
 
 logger = custom_logger(config.LAB_LOGFILE_NAME)
 
