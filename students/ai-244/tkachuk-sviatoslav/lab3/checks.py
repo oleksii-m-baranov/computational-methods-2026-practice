@@ -23,8 +23,6 @@ def check_meaning(name, args):
                     f"Доступні: {', '.join(row['vaccine'] for row in VACCINES.values())}. "
                     "Виправ назву згідно з довідником або повідом, що даних немає.")
 
-
-
         row = VACCINES[key]
         try:
             age = int(row["first_age_months"])

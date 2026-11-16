@@ -25,5 +25,4 @@ for question in [
         print('Pydantic:', cls.model_validate_json(raw))
     except Exception as error:
         print('Не вдалося завершити перевірку (підтримка моделі/API або валідація):', error)
-        print('У звіті зазнач, чи вдалося відтворити structured output у твоїй Ollama.')
     print()

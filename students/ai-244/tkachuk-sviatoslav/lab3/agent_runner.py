@@ -1,4 +1,4 @@
-"""Запуск контрольних задач у режимах baseline і checks."""
+"""Прогін п’яти задач із перевірками та записом трас Langfuse."""
 import argparse
 import json
 import os
@@ -15,35 +15,31 @@ import config
 
 
 def main():
-    parser = argparse.ArgumentParser(description="ЛР №3, baseline / checks")
-    parser.add_argument("--run", required=True, choices=["baseline", "checks"])
-    opts = parser.parse_args()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--run", choices=["checks"], default="checks")
+    options = parser.parse_args()
     os.chdir(HERE)
-    config.RUN_TAG = opts.run
+    config.RUN_TAG = options.run
     logger = custom_logger(config.LAB_LOGFILE_NAME, overwrite=True)
     from agent import run_agent
     from langfuse import get_client, propagate_attributes
+
+    if not os.getenv("LANGFUSE_PUBLIC_KEY") or not os.getenv("LANGFUSE_SECRET_KEY"):
+        raise SystemExit("Не задано ключі Langfuse у файлі .env")
+
     with (HERE / "tasks.json").open(encoding="utf-8") as f:
         tasks = json.load(f)
-    logger.info(f"РЕЖИМ: {opts.run} | модель: {config.MODEL} | temperature={config.TEMPERATURE}")
-    public = os.getenv("LANGFUSE_PUBLIC_KEY", "")
-    secret = os.getenv("LANGFUSE_SECRET_KEY", "")
-    if not public or not secret or "PLACEHOLDER" in public or "PLACEHOLDER" in secret:
-        raise SystemExit("Не налаштовані справжні ключі Langfuse. "
-                         "Скопіюй .env.example у .env, встав API Keys із Langfuse і повтори.")
+    logger.info(f"РЕЖИМ: {options.run} | модель: {config.MODEL} | temperature={config.TEMPERATURE}")
     for task in tasks:
         logger.info(f"\n=== {task['id']} | очікується: {task['expected']}")
-        with propagate_attributes(trace_name=f"{opts.run}-{task['id']}", tags=[opts.run]):
-            run_agent(task['question'])
+        with propagate_attributes(trace_name=f"{config.RUN_TAG}-{task['id']}", tags=[config.RUN_TAG]):
+            run_agent(task["question"])
     get_client().flush()
-    logger.info(f"\nОброблено задач: {len(tasks)}. Прогін: {opts.run}")
+    logger.info(f"\nОброблено задач: {len(tasks)}. Прогін: {config.RUN_TAG}")
     for handler in logger.handlers:
         handler.flush()
-    src = HERE / "logs" / f"{config.LAB_LOGFILE_NAME}.log"
-    dst = HERE / f"lab3_{opts.run}.log"
-    shutil.copy2(src, dst)
-    print(f"Збережено: {dst.name} (5 задач). Траси: {opts.run}-Z1...{opts.run}-P2")
+    shutil.copy2(HERE / "logs" / f"{config.LAB_LOGFILE_NAME}.log", HERE / "lab3_checks.log")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
