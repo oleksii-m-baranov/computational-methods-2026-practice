@@ -8,11 +8,11 @@ API_KEY = "ollama"
 
 MODEL = "llama3.2:3b"
 MAX_STEPS = 6
-TEMPERATURE = 0
+TEMPERATURE = 0.2
 
 MAX_RETRIES = 2       # кількість помилок моделі поспіль
-ALLOWED = ["search_routes", "route_info", "calculate_trip"] # інструменти 
-RUN_TAG = "checks"  # мітка прогону для Langfuse
+ALLOWED = ["search_routes", "transport_info", "calc_budget"]  # Дозволені інструменти (без заглушки)
+RUN_TAG = "baseline"  # Змініть на "checks" перед запуском прогону з перевірками!
 LAB_LOGFILE_NAME = "lab3"
 
 SYSTEM = """Ти помічник турагента. Підбираєш маршрути вихідного дня
