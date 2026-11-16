@@ -15,7 +15,7 @@ client = OpenAI(
     api_key=config.API_KEY,
 )
 
-logger = custom_logger(config.LAB_LOGFILE_NAME)
+logger = custom_logger("lab3")
 
 
 @observe(name="run_agent")
