@@ -33,7 +33,7 @@ def call_tool(name: str, args_raw: str):
     """Ланцюжок перевірок виклику інструмента.
     Повертає (level, message_or_result)."""
     # 1. Рівень name: чи існує інструмент взагалі
-    if name not in TOOLS and name not in ARGS:
+    if name not in TOOLS:
         return "name", (
             f"Помилка: інструмента '{name}' не існує. "
             f"Доступні: {', '.join(config.ALLOWED)}. "
