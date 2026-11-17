@@ -1,6 +1,13 @@
-
 import json
-from tools import TOOLS
+
+from tools import search_recipes, product_info, scale_amount
+
+
+TOOLS = {
+    "search_recipes": search_recipes,
+    "product_info": product_info,
+    "scale_amount": scale_amount,
+}
 
 
 def call_tool(name: str, args_raw: str) -> str:
