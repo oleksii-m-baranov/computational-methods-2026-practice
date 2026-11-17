@@ -155,9 +155,11 @@
 
 ### Траси Langfuse
 
-> **[ВСТАВИТИ СКРІНШОТ: траса `long-main_none_r1` (дерево: один виклик моделі й 19 викликів `call_tool`)]**
+<img width="1124" height="907" alt="image" src="https://github.com/user-attachments/assets/6c3efc2b-c8c1-47a7-8c63-03be2d338a93" />
 
-> **[ВСТАВИТИ СКРІНШОТ: траса `long-main_trim+state_r1` (виклик моделі після стиснення зі збереженими результатами в запитанні користувача)]**
+
+<img width="757" height="614" alt="image" src="https://github.com/user-attachments/assets/b256baf8-726d-4f08-af58-a9c7cea7d5bf" />
+
 
 **Токени входу першого виклику після стиснення** (крок 3, номер кроку з `analyze.py`): у `trim+state` **2552**, у `none` на тому самому кроці **2604**. Для порівняння, у `trim` без стану на цьому кроці було 1248: різницю в 1304 токени складає блок стану.
 
