@@ -12,7 +12,11 @@ TEMPERATURE = 0.2
 
 MAX_RETRIES = 2       # кількість помилок моделі поспіль
 ALLOWED = ["search_routes", "transport_info", "calc_budget"]  # Дозволені інструменти (без заглушки)
+<<<<<<< Updated upstream
+RUN_TAG = "checks"  # Змініть на "checks" перед запуском прогону з перевірками!
+=======
 RUN_TAG = "baseline"  # Змініть на "checks" перед запуском прогону з перевірками!
+>>>>>>> Stashed changes
 LAB_LOGFILE_NAME = "lab3"
 
 SYSTEM = """Ти помічник турагента. Підбираєш маршрути вихідного дня

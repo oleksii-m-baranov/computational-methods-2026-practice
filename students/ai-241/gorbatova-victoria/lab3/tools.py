@@ -4,29 +4,26 @@ import csv
 import os
 
 def search_routes(query: str) -> str:
-    filepath = "data/transport.csv"
-    if not os.path.exists(filepath):
-        return f"Помилка: файл '{filepath}' не знайдено."
-    
     q = query.lower()
     found = []
-    
-    with open(filepath, encoding="utf-8") as f:
-        for row in csv.DictReader(f):
-            r_lower = row["route"].lower()
-            desc_lower = row.get("description", "").lower()
-            
-            if q in r_lower or q in desc_lower:
-                found.append(row["route"])
+    folder = "data/corpus"
+    if not os.path.exists(folder):
+        return f"Помилка: каталог '{folder}' не знайдено."
+        
+    for filename in sorted(os.listdir(folder)):
+        filepath = os.path.join(folder, filename)
+        if os.path.isfile(filepath):
+            with open(filepath, encoding="utf-8") as f:
+                text = f.read()
+            if q in text.lower():
+                found.append(text.split("\n")[0])
                 
     if not found:
-        # Fallback: якщо нічого не знайдено за запитом
         return f"За запитом '{query}' нічого не знайдено."
-        
     return " | ".join(found)
 
 
-def route_info(route: str) -> str:
+def transport_info(route: str) -> str:
     filepath = "data/transport.csv"
     if not os.path.exists(filepath):
         return f"Помилка: файл '{filepath}' не знайдено."
@@ -34,30 +31,28 @@ def route_info(route: str) -> str:
     with open(filepath, encoding="utf-8") as f:
         for row in csv.DictReader(f):
             if row["route"].lower() == route.lower():
-                return (f"Маршрут: {row['route']}, "
-                        f"вартість проїзду: {row['price']} грн, "
-                        f"час у дорозі: {row['hours']} год, "
+                return (f"Вартість проїзду: {row['price']} грн, "
+                        f"у дорозі: {row['hours']} год, "
                         f"рейсів на день: {row['departures']}")
-                        
     return f"Маршруту '{route}' немає в довіднику."
 
 
-def calculate_trip(price_per_person: float, people: int, extra: float) -> str:
+def calc_budget(price_per_person: float, people: float, extra: float) -> str:
     try:
-        total = round(float(price_per_person) * int(people) + float(extra), 2)
+        total = round(float(price_per_person) * float(people) + float(extra), 2)
         return f"Загальний бюджет поїздки: {total} грн"
     except Exception as e:
         return f"Помилка обчислення: {e}"
 
 
-def buy_tickets(route: str, people: int) -> str:
-    return "Вибачте, але купівля квитків через цей сервіс недоступна. Агент може лише підбирати маршрути та рахувати бюджет."
+def buy_ticket(ticket_id: str) -> str:
+    """Заглушка: агентові ця дія заборонена."""
+    return "Бронювання/купівля квитків недоступна."
 
 
-# Реєстр усіх доступних інструментів
 TOOLS = {
     "search_routes": search_routes,
-    "route_info": route_info,
-    "calculate_trip": calculate_trip,
-    "buy_tickets": buy_tickets,
+    "transport_info": transport_info,
+    "calc_budget": calc_budget,
+    "buy_ticket": buy_ticket,
 }

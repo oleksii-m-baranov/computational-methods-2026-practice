@@ -14,25 +14,27 @@ logger = custom_logger(config.LAB_LOGFILE_NAME)
 
 @observe()
 def run_agent(task: str):
-    """task – питання користувача
+    """task – питання користувача.
     Повертає текст відповіді або None, якщо вичерпано ліміт."""
 
+    # Історія розмови: системне повідомлення і питання
     messages = [
         {"role": "system", "content": config.SYSTEM},
         {"role": "user", "content": task},
     ]
-    retries = 0  # помилок моделі поспіль
+    retries = 0  # Помилок моделі поспіль
 
     logger.info(f"\n{'=' * 60}")
     logger.info(f"ЗАДАЧА: {task}")
 
     for step in range(1, config.MAX_STEPS + 1):
+        # 1. Запит до моделі: передаємо всю історію заново
         response = client.chat.completions.create(
             model=config.MODEL,
             messages=messages,
             tools=SCHEMAS,
             temperature=config.TEMPERATURE,
-            max_tokens=300,  # обмежуємо максимальну довжину відповіді моделі
+            max_tokens=300,
         )
         choice = response.choices[0]
         msg = choice.message
@@ -40,7 +42,7 @@ def run_agent(task: str):
         prompt_tokens = response.usage.prompt_tokens if response.usage else "N/A"
         logger.info(f"\n--- крок {step} | помилок поспіль={retries} | prompt_tokens={prompt_tokens}")
 
-        # Перевірка обриву або зламаного виклику в тексті відповіді
+        # Обрив або зламаний виклик у тексті відповіді
         problem = check_response(choice)
         if problem is not None:
             level, text = problem
@@ -55,22 +57,25 @@ def run_agent(task: str):
                 messages.append({"role": "user", "content": text})
             continue
 
+        # 2. Немає tool_calls – модель дала звичайну відповідь, виходимо
         if not msg.tool_calls:
             logger.info(f"ВІДПОВІДЬ: {msg.content}")
             return msg.content
 
+        # 3. Пропозицію моделі кладемо в історію
         messages.append(msg)
 
+        # 4. Виконуємо кожен запитаний виклик інструмента
         model_failed = False
         for call in msg.tool_calls:
             logger.info(f"  виклик   : {call.function.name}({call.function.arguments})")
 
-            # Отримуємо рівень і чистий рядок результату (або тексту помилки)
             level, result = call_tool(call.function.name, call.function.arguments)
 
             logger.info(f"  рівень   : {level}")
             logger.info(f"  результат: {result}")
 
+            # 5. Результат повертаємо моделі з роллю tool
             messages.append({
                 "role": "tool",
                 "tool_call_id": call.id,
@@ -90,3 +95,8 @@ def run_agent(task: str):
 
     logger.info("СТОП: вичерпано ліміт кроків")
     return None
+
+
+if __name__ == "__main__":
+    # Локальний запуск для перевірки однієї задачі
+    run_agent("Знайди маршрут для відпочинку в горах та дізнайся вартість квитка.")
