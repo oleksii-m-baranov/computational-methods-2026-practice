@@ -1,3 +1,5 @@
+"""Перевірка та виконання інструментів AI-агента. ЛР3."""
+
 import json
 
 from langfuse import observe
@@ -9,12 +11,48 @@ from checks import check_meaning
 from tools import TOOLS
 
 
-MODEL_ERRORS = {"name", "permission", "syntax", "schema", "meaning"}
+MODEL_ERRORS = {
+    "name",
+    "permission",
+    "syntax",
+    "schema",
+    "meaning"
+}
 
 
 @observe(name="call_tool")
-def call_tool(name, arguments):
-    if not isinstance(name, str) or name not in TOOLS:
+def call_tool(name, arguments, context=None):
+    """
+    Перевіряє виклик інструмента перед виконанням.
+
+    context містить підтверджені дані, які агент
+    отримав під час поточного завдання.
+
+    Повертає (рівень_результату, повідомлення).
+    """
+
+    if context is None:
+        context = {}
+
+    # 1. Перевірка назви інструмента
+    if not isinstance(name, str):
+        return (
+            "name",
+            "Помилка: назва інструмента має бути рядком. "
+            "Використай правильну назву інструмента."
+        )
+
+    # 2. Перевірка забороненої дії
+    if name == "place_order":
+        return (
+            "permission",
+            "Помилка: оформлення замовлення заборонено. "
+            "Ця дія недоступна. Не повторюй виклик, "
+            "повідом користувачу про обмеження."
+        )
+
+    # 3. Перевірка існування інструмента
+    if name not in TOOLS:
         return (
             "name",
             f"Помилка: інструмента '{name}' не існує. "
@@ -23,6 +61,7 @@ def call_tool(name, arguments):
             "що такої дії немає."
         )
 
+    # 4. Перевірка дозволів
     if name not in config.ALLOWED:
         return (
             "permission",
@@ -31,8 +70,14 @@ def call_tool(name, arguments):
             "повідом користувачу про обмеження."
         )
 
+    # 5. Перевірка синтаксису JSON
     try:
-        data = json.loads(arguments) if isinstance(arguments, str) else arguments
+        data = (
+            json.loads(arguments)
+            if isinstance(arguments, str)
+            else arguments
+        )
+
     except (json.JSONDecodeError, TypeError, ValueError) as error:
         return (
             "syntax",
@@ -41,11 +86,13 @@ def call_tool(name, arguments):
             "Виправ синтаксис і повтори виклик."
         )
 
+    # 6. Перевірка схеми через Pydantic
     try:
         model_class = ARGUMENT_MODELS[name]
         validated = model_class.model_validate(data)
         data = validated.model_dump()
-    except (ValidationError, KeyError) as error:
+
+    except (ValidationError, KeyError, TypeError, ValueError) as error:
         return (
             "schema",
             f"Помилка: аргументи не відповідають схемі ({error}). "
@@ -53,8 +100,14 @@ def call_tool(name, arguments):
             "Виправ аргументи й повтори виклик."
         )
 
+    # 7. Семантична перевірка з урахуванням контексту
     try:
-        valid, message = check_meaning(name, data)
+        valid, message = check_meaning(
+            name,
+            data,
+            context=context
+        )
+
     except Exception as error:
         return (
             "meaning",
@@ -66,13 +119,14 @@ def call_tool(name, arguments):
         return (
             "meaning",
             f"Помилка: {message} "
-            "Використай допустиме значення або повідом користувачу, "
-            "що відповідних даних немає."
+            "Виправ аргументи та повтори виклик."
         )
 
+    # 8. Виконання оригінального інструмента ЛР2
     try:
         result = TOOLS[name](**data)
         return "ok", str(result)
+
     except Exception as error:
         return (
             "tool",
@@ -83,17 +137,26 @@ def call_tool(name, arguments):
 
 
 def check_response(response):
+    """Перевіряє структуру відповіді мовної моделі."""
+
+    # 9. Перевірка наявності відповіді
     if not response.choices:
-        return "response", "Модель не повернула відповіді."
+        return (
+            "response",
+            "Модель не повернула відповіді."
+        )
 
     choice = response.choices[0]
     message = choice.message
 
+    # 10. Перевірка ліміту токенів
     if choice.finish_reason == "length":
         return "length", None
 
+    # 11. Перевірка структури викликів інструментів
     if message.tool_calls:
         for call in message.tool_calls:
+
             if not call.function or not call.function.name:
                 return (
                     "syntax",
@@ -108,6 +171,7 @@ def check_response(response):
                     "Виправ формат і повтори виклик."
                 )
 
+    # 12. Перевірка неправильного tool calling
     if not message.tool_calls and message.content:
         content = message.content.strip()
 

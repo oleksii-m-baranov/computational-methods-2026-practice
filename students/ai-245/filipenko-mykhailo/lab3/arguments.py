@@ -23,19 +23,16 @@ class CalcInstallmentArgs(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     price: float = Field(
-        gt=0,
+        ge=0,
         description="Вартість ноутбука у гривнях"
     )
 
-    months: int = Field(
-        ge=1,
-        le=60,
+    months: float = Field(
+        gt=0,
         description="Кількість місяців розстрочки"
     )
 
     overpay_percent: float = Field(
-        ge=0,
-        le=100,
         description="Відсоток переплати"
     )
 

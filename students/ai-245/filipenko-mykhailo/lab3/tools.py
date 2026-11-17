@@ -1,89 +1,31 @@
 import csv
 import os
-import re
-from pathlib import Path
-
-
-BASE_DIR = Path(__file__).resolve().parent
-CORPUS_DIR = BASE_DIR / "data" / "corpus"
-LAPTOPS_FILE = BASE_DIR / "data" / "laptops.csv"
 
 
 def search_laptops(query: str) -> str:
-    words = re.findall(r"\w+", query.casefold())
+    q = query.lower()
+    found = []
+    folder = "data/corpus"
 
-    if not words:
-        return "Пошуковий запит порожній."
+    for filename in sorted(os.listdir(folder)):
+        with open(os.path.join(folder, filename), encoding="utf-8") as f:
+            text = f.read()
 
-    stop_words = {
-        "ноутбук", "ноутбуки", "ноутбука",
-        "потрібен", "порадь", "знайди",
-        "на", "для", "і", "та", "з",
-        "складі", "ціна", "ціну", "коштує"
-    }
+        if q in text.lower():
+            found.append(text.split("\n")[0])
 
-    keywords = [
-        word for word in words
-        if word not in stop_words
-    ]
-
-    if not keywords:
+    if not found:
         return f"За запитом '{query}' нічого не знайдено."
 
-    if not CORPUS_DIR.is_dir():
-        raise FileNotFoundError(
-            f"Каталог документів не знайдено: {CORPUS_DIR}"
-        )
-
-    matches = []
-
-    for filepath in sorted(CORPUS_DIR.iterdir()):
-        if not filepath.is_file():
-            continue
-
-        text = filepath.read_text(encoding="utf-8")
-        content = text.casefold()
-
-        score = sum(
-            1 for word in set(keywords)
-            if word in content
-        )
-
-        if score > 0:
-            lines = text.splitlines()
-            title = lines[0].strip() if lines else filepath.name
-
-            matches.append((score, title))
-
-    if not matches:
-        return f"За запитом '{query}' нічого не знайдено."
-
-    matches.sort(key=lambda item: (-item[0], item[1]))
-
-    return " | ".join(
-        title for _, title in matches
-    )
+    return " | ".join(found)
 
 
 def laptop_info(model: str) -> str:
-    if not LAPTOPS_FILE.is_file():
-        raise FileNotFoundError(
-            f"Файл каталогу не знайдено: {LAPTOPS_FILE}"
-        )
-
-    requested_model = model.strip().casefold()
-
-    with LAPTOPS_FILE.open(
-        encoding="utf-8-sig",
-        newline=""
-    ) as file:
-        for row in csv.DictReader(file):
-            catalog_model = row["model"].strip()
-
-            if catalog_model.casefold() == requested_model:
+    with open("data/laptops.csv", encoding="utf-8") as f:
+        for row in csv.DictReader(f):
+            if row["model"].lower() == model.lower():
                 return (
-                    f"Модель: {catalog_model}, "
-                    f"ціна: {row['price']} грн, "
+                    f"Ціна: {row['price']} грн, "
                     f"на складі: {row['in_stock']} шт., "
                     f"гарантія: {row['warranty_months']} міс."
                 )
@@ -97,39 +39,18 @@ def calc_installment(
     overpay_percent: float
 ) -> str:
     if months <= 0:
-        return (
-            "Помилка: кількість місяців "
-            "має бути більшою за нуль."
-        )
-
-    if price < 0:
-        return "Помилка: ціна не може бути від'ємною."
-
-    if overpay_percent < 0:
-        return (
-            "Помилка: відсоток переплати "
-            "не може бути від'ємним."
-        )
+        return "Помилка: кількість місяців має бути більшою за нуль."
 
     total = price * (1 + overpay_percent / 100)
-    monthly = total / months
 
     return (
-        f"{monthly:.2f} грн на місяць, "
-        f"усього {total:.2f} грн"
-    )
-
-
-def place_order(model: str) -> str:
-    return (
-        f"Оформлення замовлення для '{model}' "
-        "заборонено."
+        f"{round(total / months, 2)} грн на місяць, "
+        f"усього {round(total, 2)} грн"
     )
 
 
 TOOLS = {
     "search_laptops": search_laptops,
     "laptop_info": laptop_info,
-    "calc_installment": calc_installment,
-    "place_order": place_order
+    "calc_installment": calc_installment
 }

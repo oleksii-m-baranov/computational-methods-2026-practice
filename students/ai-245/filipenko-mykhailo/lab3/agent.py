@@ -1,9 +1,14 @@
+"""AI-агент для вибору ноутбука. Варіант 9. ЛР3."""
+
+import json
+import re
 
 from langfuse import observe, get_client, propagate_attributes
 from openai import OpenAI
 
 import config
 from schemas import SCHEMAS
+from tools import TOOLS
 from dispatcher import call_tool, check_response
 from lab_logger import custom_logger
 
@@ -15,8 +20,8 @@ client = OpenAI(
 
 logger = custom_logger(config.LAB_LOGFILE_NAME)
 
-# Помилки моделі, які враховуються в MAX_RETRIES.
-# Помилка "tool" не входить до цього переліку.
+RUN_TAG = getattr(config, "RUN_TAG", "checks").lower()
+
 MODEL_ERRORS = {
     "name",
     "permission",
@@ -26,6 +31,50 @@ MODEL_ERRORS = {
     "response",
     "length"
 }
+
+
+def baseline_call_tool(name: str, args_raw: str) -> str:
+    """
+    Початкова логіка dispatcher.py із ЛР2.
+    Без додаткових перевірок ЛР3.
+    """
+    if name not in TOOLS:
+        return (
+            f"Помилка: інструмента '{name}' не існує. "
+            f"Доступні: {', '.join(TOOLS)}"
+        )
+
+    try:
+        args = json.loads(args_raw)
+        return str(TOOLS[name](**args))
+
+    except json.JSONDecodeError:
+        return "Помилка: аргументи не є коректним JSON."
+
+    except TypeError as error:
+        return f"Помилка в аргументах: {error}"
+
+    except Exception as error:
+        return f"Помилка виконання: {error}"
+
+
+def extract_verified_price(result):
+    """
+    Отримує ціну з успішної відповіді laptop_info.
+
+    Наприклад:
+    'Ціна: 22000 грн, на складі: 5 шт.'
+    """
+    match = re.search(
+        r"Ціна:\s*(\d+(?:[.,]\d+)?)\s*грн",
+        str(result),
+        flags=re.IGNORECASE
+    )
+
+    if match is None:
+        return None
+
+    return float(match.group(1).replace(",", "."))
 
 
 @observe(name="agent_step")
@@ -60,28 +109,24 @@ def agent_step(messages, step):
             usage_details=usage_details
         )
 
+    tokens = (
+        response.usage.prompt_tokens
+        if response.usage else "невідомо"
+    )
+
+    logger.info(
+        f"\n--- крок {step} | prompt_tokens={tokens}"
+    )
+
+    if RUN_TAG == "baseline":
+        return response, "ok", ""
+
     status, explanation = check_response(response)
 
-    choice = response.choices[0] if response.choices else None
-    message = choice.message if choice else None
-
-    logger.info(f"\n--- КРОК {step} ---")
     logger.info(f"Перевірка відповіді: {status}")
 
     if explanation:
         logger.info(f"Пояснення: {explanation}")
-
-    if response.usage is not None:
-        logger.info(
-            f"ТОКЕНИ: вхід={response.usage.prompt_tokens}, "
-            f"вихід={response.usage.completion_tokens}"
-        )
-
-    if message and message.tool_calls:
-        for tool_call in message.tool_calls:
-            logger.info(
-                f"Рішення моделі: {tool_call.function.name}"
-            )
 
     return response, status, explanation
 
@@ -89,31 +134,30 @@ def agent_step(messages, step):
 @observe(name="run_agent")
 def run_agent(task):
     messages = [
-        {
-            "role": "system",
-            "content": config.SYSTEM
-        },
-        {
-            "role": "user",
-            "content": task
-        }
+        {"role": "system", "content": config.SYSTEM},
+        {"role": "user", "content": task}
     ]
 
     retries = 0
 
+    # Окремий контекст для кожного завдання.
+    # У режимі baseline не використовується.
+    context = {}
+
     logger.info("\n" + "=" * 60)
-    logger.info(f"ЗАВДАННЯ: {task}")
+    logger.info(f"РЕЖИМ: {RUN_TAG}")
+    logger.info(f"ЗАДАЧА: {task}")
 
     for step in range(1, config.MAX_STEPS + 1):
+
         response, status, explanation = agent_step(
             messages,
             step
         )
 
-        # Перевірка відповіді мовної моделі
-        if status != "ok":
-            if status in MODEL_ERRORS:
-                retries += 1
+        # Перевірка структури відповіді моделі.
+        if RUN_TAG == "checks" and status != "ok":
+            retries += 1
 
             logger.warning(
                 f"Помилка відповіді моделі: {status}"
@@ -121,7 +165,7 @@ def run_agent(task):
 
             if retries > config.MAX_RETRIES:
                 logger.error(
-                    "Перевищено кількість повторних спроб."
+                    "Перевищено ліміт повторних спроб."
                 )
                 return None
 
@@ -136,18 +180,21 @@ def run_agent(task):
 
             continue
 
-        message = response.choices[0].message
+        if not response.choices:
+            logger.error("Модель не повернула відповідь.")
+            return None
 
-        # Якщо модель не викликала інструмент
-        if not message.tool_calls:
-            answer = (message.content or "").strip()
+        msg = response.choices[0].message
 
-            if not answer:
+        if not msg.tool_calls:
+            answer = msg.content
+
+            if RUN_TAG == "checks" and not (answer or "").strip():
                 retries += 1
 
                 if retries > config.MAX_RETRIES:
                     logger.error(
-                        "Модель повернула порожню відповідь."
+                        "Перевищено ліміт повторних спроб."
                     )
                     return None
 
@@ -155,8 +202,7 @@ def run_agent(task):
                     "role": "user",
                     "content": (
                         "Попередня відповідь була порожньою. "
-                        "Дай змістовну відповідь або "
-                        "використай потрібний інструмент."
+                        "Виправ відповідь або виклич інструмент."
                     )
                 })
 
@@ -165,25 +211,42 @@ def run_agent(task):
             logger.info(f"ВІДПОВІДЬ: {answer}")
             return answer
 
-        # Зберігаємо справжнє рішення моделі
-        messages.append(message)
+        messages.append(msg)
 
         has_model_error = False
         has_tool_error = False
         has_successful_call = False
 
-        for tool_call in message.tool_calls:
+        # Ціна, підтверджена ДО поточного кроку.
+        # Нові результати цього кроку стануть доступними
+        # для перевірок лише на наступному кроці.
+        step_context = context.copy()
+        pending_context = context.copy()
+
+        for tool_call in msg.tool_calls:
             name = tool_call.function.name
             arguments = tool_call.function.arguments
 
             logger.info(
-                f"ВИКЛИК: {name}({arguments})"
+                f"  виклик   : {name}({arguments})"
             )
 
-            level, result = call_tool(name, arguments)
+            if RUN_TAG == "baseline":
+                result = baseline_call_tool(
+                    name,
+                    arguments
+                )
+                level = "baseline"
 
-            logger.info(f"РІВЕНЬ: {level}")
-            logger.info(f"РЕЗУЛЬТАТ: {result}")
+            else:
+                level, result = call_tool(
+                    name,
+                    arguments,
+                    context=step_context
+                )
+
+            logger.info(f"  рівень   : {level}")
+            logger.info(f"  результат: {result}")
 
             messages.append({
                 "role": "tool",
@@ -191,64 +254,77 @@ def run_agent(task):
                 "content": str(result)
             })
 
-            if level in MODEL_ERRORS:
-                has_model_error = True
+            if RUN_TAG == "checks":
 
-            elif level == "tool":
-                has_tool_error = True
+                if level in MODEL_ERRORS:
+                    has_model_error = True
 
-            elif level == "ok":
-                has_successful_call = True
+                elif level == "tool":
+                    has_tool_error = True
 
-        # Помилки моделі враховуємо в ліміті
-        if has_model_error:
-            retries += 1
+                elif level == "ok":
+                    has_successful_call = True
 
-            logger.warning(
-                "Помилка перевірки виклику. "
-                "Результат передано моделі."
-            )
+                    # Зберігаємо лише підтверджену ціну
+                    # після успішного laptop_info.
+                    if name == "laptop_info":
+                        verified_price = extract_verified_price(
+                            result
+                        )
 
-            if retries > config.MAX_RETRIES:
-                logger.error(
-                    "Перевищено ліміт помилок моделі."
+                        if verified_price is not None:
+                            pending_context["verified_price"] = (
+                                verified_price
+                            )
+
+                            logger.info(
+                                "  підтверджена ціна: "
+                                f"{verified_price} грн"
+                            )
+
+        if RUN_TAG == "checks":
+            context = pending_context
+
+            if has_model_error:
+                retries += 1
+
+                logger.warning(
+                    "Помилка перевірки виклику. "
+                    "Результат передано моделі."
                 )
-                return None
 
-        # Помилки інструмента не зараховуємо моделі
-        elif has_tool_error:
-            logger.warning(
-                "Помилка виконання інструмента. "
-                "Повідомлення передано моделі. "
-                "Помилка не враховується в MAX_RETRIES."
-            )
+                if retries > config.MAX_RETRIES:
+                    logger.error(
+                        "Перевищено ліміт помилок моделі."
+                    )
+                    return None
 
-        # Після успішного виклику обнуляємо лічильник
-        elif has_successful_call:
-            retries = 0
+            elif has_tool_error:
+                logger.warning(
+                    "Помилка виконання інструмента. "
+                    "Не враховується в MAX_RETRIES."
+                )
 
-    logger.error(
-        "Вичерпано ліміт кроків агента."
-    )
+            elif has_successful_call:
+                retries = 0
 
+    logger.info("СТОП: вичерпано ліміт кроків")
     return None
 
 
 if __name__ == "__main__":
-    task = (
-        "Знайди ноутбук для навчання, "
-        "перевір його ціну та наявність."
-    )
+    task = "Потрібен ноутбук для навчання"
 
     with propagate_attributes(
-        trace_name="lab3-real-agent",
-        tags=["lab3", "real-tool-calling"]
+        trace_name=f"lab3-{RUN_TAG}-real-agent",
+        tags=["lab3", RUN_TAG]
     ):
         result = run_agent(task)
 
     get_client().flush()
 
     print("\n" + "=" * 60)
+    print("РЕЖИМ:", RUN_TAG)
     print("РЕЗУЛЬТАТ:")
     print(result)
     print("=" * 60)

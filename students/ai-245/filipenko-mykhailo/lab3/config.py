@@ -1,20 +1,14 @@
-"""Налаштування агента. Лабораторна робота №3. Варіант 9."""
+import os
 
-from dotenv import load_dotenv
-
-# Завантаження налаштувань Langfuse
-load_dotenv()
-
-# Локальна модель Ollama
+# Налаштування локальної моделі Ollama
 BASE_URL = "http://localhost:11434/v1"
 API_KEY = "ollama"
 MODEL = "qwen2.5:3b"
 
 MAX_STEPS = 8
 TEMPERATURE = 0
-MAX_RETRIES = 2
 
-# Оригінальне системне повідомлення з ЛР2
+# Оригінальний системний промпт із ЛР2
 SYSTEM = """Ти консультант магазину техніки. Підбираєш ноутбук
 і рахуєш умови покупки.
 Не вигадуй дані — усе, чого не знаєш, дізнавайся інструментом.
@@ -22,13 +16,22 @@ SYSTEM = """Ти консультант магазину техніки. Під�
 Якщо потрібного інструмента немає, чесно скажи про це.
 Коли даних достатньо, дай коротку відповідь українською."""
 
-# Дозволені інструменти
+# Додаткові налаштування ЛР3
+MAX_RETRIES = 3
+
 ALLOWED = [
     "search_laptops",
     "laptop_info",
     "calc_installment"
 ]
 
-# Налаштування лабораторної №3
-RUN_TAG = "checks"
-LAB_LOGFILE_NAME = "lab3_checks"
+# Режим експерименту: baseline або checks
+RUN_TAG = os.getenv("RUN_TAG", "checks").strip().lower()
+
+if RUN_TAG not in ("baseline", "checks"):
+    raise ValueError(
+        "Некоректний RUN_TAG. Використовуй baseline або checks."
+    )
+
+# Окремий лог для кожного режиму
+LAB_LOGFILE_NAME = f"lab3_{RUN_TAG}"
