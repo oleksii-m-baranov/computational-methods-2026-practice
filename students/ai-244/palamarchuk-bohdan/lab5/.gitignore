@@ -1,0 +1,12 @@
+index/embeddings_cache.json
+chroma_db/
+chroma_cos/
+chroma_default/
+out/
+stage*.ps1
+set_param.py
+logs/lab5.log
+logs/experiments/
+results/experiments/
+__pycache__/
+state/
