@@ -1,0 +1,4 @@
+openai>=1.55,<3
+langfuse>=4,<5
+pydantic>=2,<3
+python-dotenv>=1,<2
