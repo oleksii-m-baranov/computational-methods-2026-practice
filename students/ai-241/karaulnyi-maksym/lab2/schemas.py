@@ -1,0 +1,67 @@
+"""Описи інструментів для моделі."""
+
+SCHEMAS = [
+    {
+        "type": "function",
+        "function": {
+            "name": "search_books",
+            "description": "Шукає книжки за темою, жанром або рівнем складності. "
+                           "Використовуй, коли користувач описує, яку книжку хоче, але не називає точної назви.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "Жанр, тема або рівень складності, одне-два слова українською, не все питання користувача цілком.",
+                    },
+                },
+                "required": ["query"],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "book_info",
+            "description": "Шукає книжку в довіднику за точною назвою. "
+                           "Використовуй, коли точна назва книжки вже відома, наприклад її щойно повернув search_books.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "description": "Точна назва книжки, як вона записана в каталозі.",
+                    },
+                },
+                "required": ["title"],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate",
+            "description": "Виконує арифметичну дію над двома числами. "
+                           "Використовуй завжди, коли треба щось порахувати; самостійно модель не рахує.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "operation": {
+                        "type": "string",
+                        "enum": ["mul", "add", "sub"],
+                        "description": "mul — множення, add — додавання, sub — віднімання",
+                    },
+                    "a": {
+                        "type": "number",
+                        "description": "перший операнд",
+                    },
+                    "b": {
+                        "type": "number",
+                        "description": "другий операнд",
+                    },
+                },
+                "required": ["operation", "a", "b"],
+            },
+        },
+    },
+]
