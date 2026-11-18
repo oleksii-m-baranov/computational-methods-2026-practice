@@ -20,7 +20,7 @@ PROVIDERS = {
     "cloud": {
         "base_url": "https://generativelanguage.googleapis.com/v1beta/openai/",
         "api_key": os.getenv("GEMINI_API_KEY"),
-        "model": "gemini-3.8-flash",
+        "model": "gemini-3.5-flash-lite",
     },
 }
 
