@@ -1,2 +1,2 @@
-FROM qwen3:4b
-PARAMETER num_ctx 4096
+FROM qwen3:4b-instruct
+PARAMETER num_ctx 3072
