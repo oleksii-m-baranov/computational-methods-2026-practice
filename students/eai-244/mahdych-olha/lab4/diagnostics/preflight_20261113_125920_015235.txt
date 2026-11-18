@@ -1,0 +1,1 @@
+{"ok": true, "version": {"version": "0.40.15"}, "model": "qwen25-lab4-final-3k", "answer": "OK", "seconds": 4.827, "purpose": "diagnostic_only"}
