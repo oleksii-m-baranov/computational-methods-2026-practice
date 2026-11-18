@@ -1,0 +1,10 @@
+.env
+venv/
+__pycache__/
+index/embeddings_cache.json
+chroma_db/
+results/*.tmp
+
+.venv/
+report_backup.md
+*.pyc
