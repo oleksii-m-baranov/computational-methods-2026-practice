@@ -1,0 +1,105 @@
+{
+  "model": "llama3.2:3b",
+  "temperature": {
+    "0.0": {
+      "answers": [
+        "\"DomDom\"",
+        "\"DomDom\"",
+        "\"DomDom\"",
+        "\"DomDom\"",
+        "\"DomDom\""
+      ],
+      "unique": 1
+    },
+    "0.7": {
+      "answers": [
+        "\"DomDom\"",
+        "DomHome",
+        "\"HomeDeliver\"",
+        "\"DomDom Delivery\"",
+        "\"BitesDeliver\""
+      ],
+      "unique": 5
+    },
+    "1.5": {
+      "answers": [
+        "Мистичний Гостинець.",
+        "\"Delicio\"",
+        "\"Гастропаска\"",
+        "БуфетНа дом",
+        "\"БуфеДomic\""
+      ],
+      "unique": 5
+    }
+  },
+  "top_p": {
+    "0.1": {
+      "answers": [
+        "\"DomDom\"",
+        "\"DomDom\"",
+        "\"DomDom\"",
+        "\"DomDom\"",
+        "\"DomDom\""
+      ],
+      "unique": 1
+    },
+    "0.5": {
+      "answers": [
+        "\"DomHome\"",
+        "\"DomHomeDelivery\"",
+        "\"DomDom\"",
+        "\"Майстерна Дом\"",
+        "\"DomDom\""
+      ],
+      "unique": 4
+    },
+    "1.0": {
+      "answers": [
+        "\"Домашнє смачно\"",
+        "\"Domashnyi Vybor\"",
+        "Меню-додаток.",
+        "\"DomHomeDelivery\"",
+        "\"Домашнє Готування на Дорогу\""
+      ],
+      "unique": 5
+    }
+  },
+  "factual": {
+    "0.0": {
+      "answers": [
+        "1896",
+        "1896",
+        "1896",
+        "1896",
+        "1896"
+      ],
+      "correct": 5
+    },
+    "1.5": {
+      "answers": [
+        "1896.",
+        "1896",
+        "1896",
+        "1896.",
+        "1896."
+      ],
+      "correct": 5
+    }
+  },
+  "reproducibility": {
+    "answers": [
+      "1896",
+      "1896",
+      "1896",
+      "1896",
+      "1896",
+      "1896",
+      "1896",
+      "1896",
+      "1896",
+      "1896"
+    ],
+    "unique": 1,
+    "all_same": true
+  }
+}
