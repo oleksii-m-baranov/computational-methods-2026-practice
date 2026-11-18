@@ -34,14 +34,6 @@ def call_tool(name, arguments, context=None):
     if context is None:
         context = {}
 
-    # 1. Перевірка назви інструмента
-    if not isinstance(name, str):
-        return (
-            "name",
-            "Помилка: назва інструмента має бути рядком. "
-            "Використай правильну назву інструмента."
-        )
-
     # 2. Перевірка забороненої дії
     if name == "place_order":
         return (
