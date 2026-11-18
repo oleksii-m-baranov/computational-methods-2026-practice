@@ -1,0 +1,10 @@
+﻿run_id,status,attempts,steps_with_usage,tool_calls,known_input,known_output,usage_complete,seconds
+main_none_r1,final,3,3,7,5653,723,True,102.169
+main_none_r2,final,3,3,8,5582,603,True,93.953
+main_none_r3,final,3,3,11,5798,514,True,80.605
+main_trim+state_r1,final,4,4,13,6936,1548,True,213.543
+main_trim+state_r2,final,9,9,23,18579,1426,True,269.839
+main_trim+state_r3,final,2,2,3,2303,369,True,42.005
+main_trim_r1,server_error,6,5,15,7301,348,False,308.648
+main_trim_r2,server_error,4,3,11,4275,275,False,294.143
+main_trim_r3,final,2,2,3,2303,369,True,39.432

@@ -1,0 +1,22 @@
+[
+  {
+    "question": "Скільки калорій я спалю за 45 хвилин тренування при вазі 70 кг? Сформуй аргументи для розрахунку калорій.",
+    "answer": "{ \"minutes\": 45, \"weight_kg\": 70, \"met\": 9 }",
+    "pydantic": "OK: minutes=45.0 weight_kg=70.0 met=9.0"
+  },
+  {
+    "question": "Я важу 82 кілограми і бігав пів години з MET 9. Сформуй аргументи для розрахунку калорій.",
+    "answer": "{ \"minutes\": 30, \"weight_kg\": 82, \"met\": 9 }",
+    "pydantic": "OK: minutes=30.0 weight_kg=82.0 met=9.0"
+  },
+  {
+    "question": "Півтори години йоги, вага шістдесят кілограмів. Сформуй аргументи для розрахунку калорій.",
+    "answer": "{ \"minutes\": 75, \"weight_kg\": 60, \"met\": 5 }",
+    "pydantic": "OK: minutes=75.0 weight_kg=60.0 met=5.0"
+  },
+  {
+    "question": "Скільки калорій спалить слон вагою 700 кг за 45 хвилин? Сформуй аргументи для розрахунку калорій.",
+    "answer": "{ \"minutes\": 45, \"weight_kg\": 700, \"met\": 1.5 }",
+    "pydantic": "ValidationError: ('weight_kg',): Input should be less than or equal to 250"
+  }
+]
