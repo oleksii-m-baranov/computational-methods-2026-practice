@@ -1,0 +1,9 @@
+FAISS, схожість           : 0.7098
+Chroma cosine, відстань   : 0.2902
+Chroma за замовчуванням   : 0.5804
+
+--- Перевірка повернених чанків ---
+FAISS           : source=d01.txt, chunk=15
+Chroma cosine   : source=d01.txt, chunk=15
+Chroma default  : source=d01.txt, chunk=15
+Чи збігаються чанки: ТАК
