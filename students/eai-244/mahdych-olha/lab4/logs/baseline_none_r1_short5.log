@@ -1,0 +1,7 @@
+2026-11-13 19:58:55 - INFO - 
+============================================================
+2026-11-13 19:58:55 - INFO - ЗАДАЧА: Додай плов у мій список покупок
+2026-11-13 19:58:55 - INFO - Очікування моделі: крок 1, ліміт HTTP 240 с
+2026-11-13 19:58:58 - INFO - 
+--- крок 1 | помилок поспіль=0 | prompt_tokens=748 | completion_tokens=37
+2026-11-13 19:58:58 - INFO - ВІДПОВІДЬ: I can help you add ingredients for the recipe, but I need to know what specific items are required. Could you provide me with a list of ingredients needed for making Plov?
