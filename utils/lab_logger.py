@@ -18,7 +18,8 @@ def custom_logger(name: str, overwrite: bool = False) -> logging.Logger:
     caller_dir = os.path.dirname(os.path.abspath(caller_filename))
 
     # Construct the full path to the log file
-    log_file_path = os.path.join(caller_dir, f"{name}.log")
+    log_file_path = os.path.join(caller_dir, 'logs', f"{name}.log")
+    os.makedirs(os.path.dirname(log_file_path), exist_ok=True)
 
     # Create the logger
     logger = logging.getLogger(name)
