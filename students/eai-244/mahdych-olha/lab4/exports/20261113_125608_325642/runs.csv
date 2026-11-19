@@ -1,0 +1,7 @@
+﻿run_id,series,configuration,status,model,num_ctx,seconds,steps,tool_calls,prompt,completion,repeats,squeezes,cache_hits,number_present,manual_correct
+main_none_r1,main,none,final,qwen25-lab4-final-3k,3072,102.169,3,7,5653,723,0,0,0,False,
+main_trim_r1,main,trim,server_error,qwen25-lab4-final-3k,3072,308.648,5,15,7301,348,5,1,0,False,
+original_probe_none_r1,original_probe,none,final,qwen25-lab4-final-3k,3072,153.495,3,11,5799,1092,0,0,0,False,
+original_probe_trim+state_r1,original_probe,trim+state,final,qwen25-lab4-final-3k,3072,126.829,5,9,8640,720,0,1,0,False,
+original_probe_trim_r1,original_probe,trim,final,qwen25-lab4-final-3k,3072,65.954,4,8,5879,424,0,0,0,False,
+probe_none_r1,probe,none,final,qwen25-lab4-final-3k,3072,50.505,2,3,2847,310,0,0,0,False,
