@@ -1,0 +1,2 @@
+FROM qwen25-lab4-4k
+PARAMETER repeat_penalty 1.1
