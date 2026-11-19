@@ -1,0 +1,4 @@
+﻿mode,runs,median_steps,median_prompt_tokens,median_completion_tokens,median_total_tokens,median_max_prompt_tokens,median_seconds,median_compressions,median_repeated_calls,correct_runs,accuracy_percent
+none,3,3,6474,924,7398,2808,16.2,0,10,0,0.0
+trim,3,3,5040,641,5681,2550,11.58,1,6,0,0.0
+trim+state,3,25,54254,7270,61524,2921,152.03,20,7,0,0.0

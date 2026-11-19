@@ -30,40 +30,58 @@ def check_answer(answer, expected, task=None):
     if not answer:
         return False
 
-    text = str(answer)
-    normalized = normalize_number(text)
+    normalized = normalize_number(answer)
+    expected_text = normalize_number(f"{expected:.2f}")
 
-    if normalize_number(f"{expected:.2f}") not in normalized:
+    return expected_text in normalized
+
+
+def result_is_complete(result_path, log_path, run_id):
+    """
+    Перевіряє, чи існує завершений результат запуску.
+
+    Не пропускаємо запуск, якщо JSON пошкоджений,
+    має неправильний run_id або відсутній журнал.
+    """
+    if not result_path.exists() or not log_path.exists():
         return False
 
-    if task is None:
-        return True
+    try:
+        with open(result_path, encoding="utf-8") as file:
+            data = json.load(file)
 
-    details = task.get("expected", {}).get("details", [])
+        return (
+            isinstance(data, dict)
+            and data.get("run_id") == run_id
+            and "elapsed_seconds" in data
+            and "correct" in data
+        )
+    except (OSError, ValueError, TypeError):
+        return False
 
-    for item in details:
-        model = item["model"]
 
-        if model not in text:
-            return False
+def save_result(result_path, result):
+    """
+    Спочатку записує результат у тимчасовий файл,
+    а потім переносить його на остаточне місце.
+    """
+    temp_path = result_path.with_suffix(".json.tmp")
 
-        price = float(item["price"])
-        months = int(task["months"])
-        overpay = float(task["overpay_percent"])
-
-        monthly = round(
-            price * (1 + overpay / 100) / months,
-            2
+    with open(temp_path, "w", encoding="utf-8") as file:
+        json.dump(
+            result,
+            file,
+            ensure_ascii=False,
+            indent=2
         )
 
-        if normalize_number(f"{monthly:.2f}") not in normalized:
-            return False
-
-    return True
+    temp_path.replace(result_path)
 
 
 def main():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        description="Вимірювання роботи агента"
+    )
 
     parser.add_argument(
         "mode",
@@ -79,6 +97,12 @@ def main():
         "tag",
         nargs="?",
         default="main"
+    )
+
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Повторно виконати вже завершені запуски"
     )
 
     args = parser.parse_args()
@@ -109,6 +133,23 @@ def main():
 
     config.USE_CACHE = args.tag.startswith("cache")
 
+    total_runs = len(modes) * args.repeats
+    completed = 0
+    skipped = 0
+    failed = 0
+
+    print("\n" + "=" * 60)
+    print("ЗАПУСК ЕКСПЕРИМЕНТІВ")
+    print("=" * 60)
+    print(f"Модель: {config.MODEL}")
+    print(f"Контекст: {config.NUM_CTX}")
+    print(f"Режими: {', '.join(modes)}")
+    print(f"Повторів на режим: {args.repeats}")
+    print(f"Заплановано запусків: {total_runs}")
+    print(f"Кеш: {config.USE_CACHE}")
+    print(f"Примусовий повтор: {args.force}")
+    print("=" * 60)
+
     for mode in modes:
         config.COMPRESS = (
             "trim" if mode != "none" else "none"
@@ -127,16 +168,66 @@ def main():
                 Path("results") / f"{run_id}.json"
             )
 
+            if not args.force and result_is_complete(
+                result_path,
+                log_path,
+                run_id
+            ):
+                skipped += 1
+
+                print(
+                    f"\nПРОПУЩЕНО: {run_id} "
+                    "(результат уже існує)"
+                )
+
+                continue
+
+            print("\n" + "-" * 60)
+            print(f"ПОЧАТОК: {run_id}")
+            print(f"Режим: {mode}")
+            print(f"Стиснення: {config.COMPRESS}")
+            print(f"Збереження стану: {config.USE_STATE}")
+            print(f"Кеш: {config.USE_CACHE}")
+            print("-" * 60)
+
             started = time.perf_counter()
 
-            answer = run_agent(
-                task["question"],
-                max_steps=config.MAX_STEPS_LONG,
-                logfile_name=str(log_path.with_suffix("")),
-                task_id=run_id,
-                log_overwrite=True,
-                task_data=task
-            )
+            try:
+                answer = run_agent(
+                    task["question"],
+                    max_steps=config.MAX_STEPS_LONG,
+                    logfile_name=str(
+                        log_path.with_suffix("")
+                    ),
+                    task_id=run_id,
+                    log_overwrite=True,
+                    task_data=task
+                )
+
+            except KeyboardInterrupt:
+                print(
+                    f"\nЗУПИНЕНО КОРИСТУВАЧЕМ: {run_id}"
+                )
+                print(
+                    "Попередні завершені результати "
+                    "збережено."
+                )
+                raise SystemExit(130)
+
+            except Exception as error:
+                failed += 1
+
+                print(
+                    f"\nПОМИЛКА ЗАПУСКУ {run_id}: "
+                    f"{type(error).__name__}: {error}"
+                )
+
+                print(
+                    "Результат не записано. "
+                    "Цей запуск можна повторити."
+                )
+
+                continue
 
             elapsed = round(
                 time.perf_counter() - started,
@@ -167,32 +258,43 @@ def main():
                 "log_path": str(log_path)
             }
 
-            with open(
+            save_result(
                 result_path,
-                "w",
-                encoding="utf-8"
-            ) as file:
-                json.dump(
-                    result,
-                    file,
-                    ensure_ascii=False,
-                    indent=2
-                )
+                result
+            )
+
+            completed += 1
 
             print("\n" + "=" * 60)
-            print(f"Запуск: {run_id}")
+            print(f"ЗАВЕРШЕНО: {run_id}")
             print(f"Режим: {mode}")
             print(f"Стиснення: {config.COMPRESS}")
             print(f"Збереження стану: {config.USE_STATE}")
             print(f"Кеш: {config.USE_CACHE}")
             print(f"Час: {elapsed} с")
             print(
-                f"Очікувана сума: {expected:.2f} грн"
+                f"Очікувана сума: "
+                f"{expected:.2f} грн"
             )
             print(f"Правильність відповіді: {correct}")
             print(f"Лог: {log_path}")
             print(f"Результат: {result_path}")
             print("=" * 60)
+
+    print("\n" + "=" * 60)
+    print("ПІДСУМОК ЕКСПЕРИМЕНТІВ")
+    print("=" * 60)
+    print(f"Заплановано: {total_runs}")
+    print(f"Пропущено готових: {skipped}")
+    print(f"Нових завершених: {completed}")
+    print(f"Помилок запуску: {failed}")
+    print("=" * 60)
+
+    if failed:
+        print(
+            "Увага: частина запусків не завершилася. "
+            "Їх можна повторити тією самою командою."
+        )
 
 
 if __name__ == "__main__":

@@ -1,0 +1,10 @@
+﻿mode,repeat,elapsed_seconds,correct,steps,prompt_tokens,completion_tokens,total_tokens,max_prompt_tokens,compressions,repeated_calls,cache_hits,cache_misses
+none,1,16.2,False,3,6474,924,7398,2808,0,18,0,3
+none,2,52.21,False,5,11949,3020,14969,3035,0,10,0,5
+none,3,12.22,False,3,6430,641,7071,2787,0,4,0,3
+trim,1,12.51,False,3,5040,641,5681,2550,1,6,0,3
+trim,2,11.0,False,3,5040,641,5681,2550,1,6,0,3
+trim,3,11.58,False,3,5040,641,5681,2550,1,6,0,3
+trim+state,1,222.32,False,25,62804,11283,74087,3043,20,5,0,25
+trim+state,2,152.03,False,25,54254,7270,61524,2899,20,7,0,25
+trim+state,3,82.67,False,13,27301,3675,30976,2921,5,23,0,13

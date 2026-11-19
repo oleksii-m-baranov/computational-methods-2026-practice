@@ -1,4 +1,3 @@
-
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -6,12 +5,12 @@ load_dotenv()
 BASE_URL = "http://localhost:11434/v1"
 API_KEY = "ollama"
 
-MODEL = "qwen25-4k"
+MODEL = "qwen25-lab4-4096"
 
 MAX_STEPS = 8
 MAX_STEPS_LONG = 25
 
-NUM_CTX = 3072
+NUM_CTX = 4096
 
 TEMPERATURE = 0
 
@@ -43,11 +42,18 @@ RUN_TAG = "ctx-control"
 
 LAB_LOGFILE_NAME = "lab4"
 
+# Режими: none, trim, trim+state
 COMPRESS = "none"
-COMPRESS_AT = 2150
+
+# Поріг стискання для контексту 4096 токенів
+COMPRESS_AT = 2800
+
+# Кількість останніх повідомлень, які зберігаємо
 KEEP_LAST = 6
 
+# Збереження стану задачі
 USE_STATE = False
 STATE_RESULT_CHARS = 200
 
+# Кешування запитів до моделі
 USE_CACHE = False

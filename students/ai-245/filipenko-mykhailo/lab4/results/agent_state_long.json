@@ -1,0 +1,140 @@
+{
+  "tool_1": {
+    "tool": "search_laptops",
+    "arguments": {
+      "query": "StudyNova 14"
+    },
+    "result": "StudyNova 14"
+  },
+  "tool_2": {
+    "tool": "laptop_info",
+    "arguments": {
+      "model": "StudyNova 14"
+    },
+    "result": "Ціна: 22000 грн, на складі: 5 шт., гарантія: 24 міс."
+  },
+  "tool_3": {
+    "tool": "calc_installment",
+    "arguments": {
+      "price": 22000,
+      "months": 12,
+      "overpay_percent": 10
+    },
+    "result": "2016.67 грн на місяць, усього 24200.0 грн"
+  },
+  "tool_4": {
+    "tool": "search_laptops",
+    "arguments": {
+      "query": "CodeNova 15"
+    },
+    "result": "CodeNova 15 | CodeNova 15 Pro"
+  },
+  "tool_5": {
+    "tool": "laptop_info",
+    "arguments": {
+      "model": "CodeNova 15"
+    },
+    "result": "Ціна: 35000 грн, на складі: 4 шт., гарантія: 24 міс."
+  },
+  "tool_6": {
+    "tool": "calc_installment",
+    "arguments": {
+      "months": 12,
+      "overpay_percent": 10,
+      "price": 35000
+    },
+    "result": "3208.33 грн на місяць, усього 38500.0 грн"
+  },
+  "tool_7": {
+    "tool": "search_laptops",
+    "arguments": {
+      "query": "GameNova X16"
+    },
+    "result": "GameNova X16"
+  },
+  "tool_8": {
+    "tool": "laptop_info",
+    "arguments": {
+      "model": "GameNova X16"
+    },
+    "result": "Ціна: 65000 грн, на складі: 3 шт., гарантія: 36 міс."
+  },
+  "tool_9": {
+    "tool": "calc_installment",
+    "arguments": {
+      "months": 12,
+      "overpay_percent": 10,
+      "price": 65000
+    },
+    "result": "5958.33 грн на місяць, усього 71500.0 грн"
+  },
+  "tool_10": {
+    "tool": "search_laptops",
+    "arguments": {
+      "query": "DesignNova 16"
+    },
+    "result": "DesignNova 16"
+  },
+  "tool_11": {
+    "tool": "laptop_info",
+    "arguments": {
+      "model": "DesignNova 16"
+    },
+    "result": "Ціна: 58000 грн, на складі: 2 шт., гарантія: 36 міс."
+  },
+  "tool_12": {
+    "tool": "calc_installment",
+    "arguments": {
+      "price": 58000,
+      "months": 12,
+      "overpay_percent": 10
+    },
+    "result": "5316.67 грн на місяць, усього 63800.0 грн"
+  },
+  "tool_13": {
+    "tool": "search_laptops",
+    "arguments": {
+      "query": "OfficeNova 14"
+    },
+    "result": "OfficeNova 14"
+  },
+  "tool_14": {
+    "tool": "laptop_info",
+    "arguments": {
+      "model": "OfficeNova 14"
+    },
+    "result": "Ціна: 18000 грн, на складі: 7 шт., гарантія: 12 міс."
+  },
+  "tool_15": {
+    "tool": "calc_installment",
+    "arguments": {
+      "price": 18000,
+      "months": 12,
+      "overpay_percent": 10
+    },
+    "result": "1650.0 грн на місяць, усього 19800.0 грн"
+  },
+  "tool_16": {
+    "tool": "search_laptops",
+    "arguments": {
+      "query": "StudyNova 15"
+    },
+    "result": "StudyNova 15"
+  },
+  "tool_17": {
+    "tool": "laptop_info",
+    "arguments": {
+      "model": "StudyNova 15"
+    },
+    "result": "Ціна: 28000 грн, на складі: 6 шт., гарантія: 24 міс."
+  },
+  "tool_18": {
+    "tool": "calc_installment",
+    "arguments": {
+      "months": 12,
+      "overpay_percent": 10,
+      "price": 28000
+    },
+    "result": "2566.67 грн на місяць, усього 30800.0 грн"
+  }
+}
