@@ -58,7 +58,7 @@ def run_once(name, repeat, series, task):
     with propagate_attributes(trace_name=f"long-{run_id}", tags=[series, name]):
         answer = agent.run_agent(task=task["question"],
                                  max_steps=config.MAX_STEPS_LONG,
-                                 logfile_name=f"logs/{run_id}",
+                                 logfile_name=run_id,
                                  task_id=run_id,
                                  log_overwrite=True)
     return run_id, answer, round(time.time() - started, 1)
