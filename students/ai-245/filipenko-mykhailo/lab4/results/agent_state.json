@@ -1,0 +1,25 @@
+{
+  "tool_1": {
+    "tool": "search_laptops",
+    "arguments": {
+      "query": "StudyNova 14"
+    },
+    "result": "StudyNova 14"
+  },
+  "tool_2": {
+    "tool": "laptop_info",
+    "arguments": {
+      "model": "StudyNova 14"
+    },
+    "result": "Ціна: 22000 грн, на складі: 5 шт., гарантія: 24 міс."
+  },
+  "tool_3": {
+    "tool": "calc_installment",
+    "arguments": {
+      "price": 22000,
+      "months": 12,
+      "overpay_percent": 10
+    },
+    "result": "2016.67 грн на місяць, усього 24200.0 грн"
+  }
+}
