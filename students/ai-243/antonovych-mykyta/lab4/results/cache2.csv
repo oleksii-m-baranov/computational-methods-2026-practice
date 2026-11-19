@@ -1,0 +1,2 @@
+config,right,seconds,steps,prompt,completion,extra,squeezes,repeats,run_id,calls,ok_calls,complete,cache_hits,max_prompt,status
+none,0,0.2,6,15545,825,0,0,3,cache2_none_r1,25,23,0,6,3039,final
