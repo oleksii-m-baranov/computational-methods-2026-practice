@@ -1,0 +1,302 @@
+[
+  {
+    "tool": "search_plants",
+    "args": {
+      "query": "Фікус Бенджаміна"
+    },
+    "result": "Фікус Бенджаміна"
+  },
+  {
+    "tool": "fertilizer_info",
+    "args": {
+      "plant": "Фікус Бенджаміна"
+    },
+    "result": "Доза: 5 мл на літр, періодичність: раз на 14 днів"
+  },
+  {
+    "tool": "search_plants",
+    "args": {
+      "query": "Монстера Адансона"
+    },
+    "result": "Монстера Адансона"
+  },
+  {
+    "tool": "fertilizer_info",
+    "args": {
+      "plant": "Монстера Адансона"
+    },
+    "result": "Доза: 6 мл на літр, періодичність: раз на 14 днів"
+  },
+  {
+    "tool": "search_plants",
+    "args": {
+      "query": "Заміокулькас"
+    },
+    "result": "Заміокулькас"
+  },
+  {
+    "tool": "fertilizer_info",
+    "args": {
+      "plant": "Заміокулькас"
+    },
+    "result": "Доза: 0 мл на літр, періодичність: раз на 30 днів"
+  },
+  {
+    "tool": "search_plants",
+    "args": {
+      "query": "Сансевієрія трисмугова"
+    },
+    "result": "Сансевієрія трисмугова"
+  },
+  {
+    "tool": "fertilizer_info",
+    "args": {
+      "plant": "Сансевієрія трисмугова"
+    },
+    "result": "Доза: 2 мл на літр, періодичність: раз на 30 днів"
+  },
+  {
+    "tool": "search_plants",
+    "args": {
+      "query": "Ечеверія витончена"
+    },
+    "result": "Ечеверія витончена"
+  },
+  {
+    "tool": "fertilizer_info",
+    "args": {
+      "plant": "Ечеверія витончена"
+    },
+    "result": "Доза: 3 мл на літр, періодичність: раз на 21 днів"
+  },
+  {
+    "tool": "search_plants",
+    "args": {
+      "query": "Аспідістра висока"
+    },
+    "result": "Аспідістра висока"
+  },
+  {
+    "tool": "fertilizer_info",
+    "args": {
+      "plant": "Аспідістра висока"
+    },
+    "result": "Доза: 4 мл на літр, періодичність: раз на 14 днів"
+  },
+  {
+    "tool": "search_plants",
+    "args": {
+      "query": "Фікус Бенджаміна"
+    },
+    "result": "Фікус Бенджаміна"
+  },
+  {
+    "tool": "fertilizer_info",
+    "args": {
+      "plant": "Фікус Бенджаміна"
+    },
+    "result": "Доза: 5 мл на літр, періодичність: раз на 14 днів"
+  },
+  {
+    "tool": "search_plants",
+    "args": {
+      "query": "Монстера Адансона"
+    },
+    "result": "Монстера Адансона"
+  },
+  {
+    "tool": "fertilizer_info",
+    "args": {
+      "plant": "Монстера Адансона"
+    },
+    "result": "Доза: 6 мл на літр, періодичність: раз на 14 днів"
+  },
+  {
+    "tool": "search_plants",
+    "args": {
+      "query": "Заміокулькас"
+    },
+    "result": "Заміокулькас"
+  },
+  {
+    "tool": "fertilizer_info",
+    "args": {
+      "plant": "Заміокулькас"
+    },
+    "result": "Доза: 0 мл на літр, періодичність: раз на 30 днів"
+  },
+  {
+    "tool": "search_plants",
+    "args": {
+      "query": "Сансевієрія трисмугова"
+    },
+    "result": "Сансевієрія трисмугова"
+  },
+  {
+    "tool": "fertilizer_info",
+    "args": {
+      "plant": "Сансевієрія трисмугова"
+    },
+    "result": "Доза: 2 мл на літр, періодичність: раз на 30 днів"
+  },
+  {
+    "tool": "search_plants",
+    "args": {
+      "query": "Ечеверія витончена"
+    },
+    "result": "Ечеверія витончена"
+  },
+  {
+    "tool": "fertilizer_info",
+    "args": {
+      "plant": "Ечеверія витончена"
+    },
+    "result": "Доза: 3 мл на літр, періодичність: раз на 21 днів"
+  },
+  {
+    "tool": "search_plants",
+    "args": {
+      "query": "Аспідістра висока"
+    },
+    "result": "Аспідістра висока"
+  },
+  {
+    "tool": "fertilizer_info",
+    "args": {
+      "plant": "Аспідістра висока"
+    },
+    "result": "Доза: 4 мл на літр, періодичність: раз на 14 днів"
+  },
+  {
+    "tool": "search_plants",
+    "args": {
+      "query": "Фікус Бенджаміна"
+    },
+    "result": "Фікус Бенджаміна"
+  },
+  {
+    "tool": "fertilizer_info",
+    "args": {
+      "plant": "Фікус Бенджаміна"
+    },
+    "result": "Доза: 5 мл на літр, періодичність: раз на 14 днів"
+  },
+  {
+    "tool": "calc_dose",
+    "args": {
+      "dose_ml_per_liter": 5,
+      "pot_liters": 5
+    },
+    "result": "25.0 мл"
+  },
+  {
+    "tool": "search_plants",
+    "args": {
+      "query": "Монстера Адансона"
+    },
+    "result": "Монстера Адансона"
+  },
+  {
+    "tool": "fertilizer_info",
+    "args": {
+      "plant": "Монстера Адансона"
+    },
+    "result": "Доза: 6 мл на літр, періодичність: раз на 14 днів"
+  },
+  {
+    "tool": "calc_dose",
+    "args": {
+      "dose_ml_per_liter": 6,
+      "pot_liters": 3
+    },
+    "result": "18.0 мл"
+  },
+  {
+    "tool": "search_plants",
+    "args": {
+      "query": "Заміокулькас"
+    },
+    "result": "Заміокулькас"
+  },
+  {
+    "tool": "fertilizer_info",
+    "args": {
+      "plant": "Заміокулькас"
+    },
+    "result": "Доза: 0 мл на літр, періодичність: раз на 30 днів"
+  },
+  {
+    "tool": "calc_dose",
+    "args": {
+      "dose_ml_per_liter": 0,
+      "pot_liters": 1
+    },
+    "result": "0.0 мл"
+  },
+  {
+    "tool": "search_plants",
+    "args": {
+      "query": "Сансевієрія трисмугова"
+    },
+    "result": "Сансевієрія трисмугова"
+  },
+  {
+    "tool": "fertilizer_info",
+    "args": {
+      "plant": "Сансевієрія трисмугова"
+    },
+    "result": "Доза: 2 мл на літр, періодичність: раз на 30 днів"
+  },
+  {
+    "tool": "calc_dose",
+    "args": {
+      "pot_liters": 0.5,
+      "dose_ml_per_liter": 2
+    },
+    "result": "1.0 мл"
+  },
+  {
+    "tool": "search_plants",
+    "args": {
+      "query": "Ечеверія витончена"
+    },
+    "result": "Ечеверія витончена"
+  },
+  {
+    "tool": "fertilizer_info",
+    "args": {
+      "plant": "Ечеверія витончена"
+    },
+    "result": "Доза: 3 мл на літр, періодичність: раз на 21 днів"
+  },
+  {
+    "tool": "calc_dose",
+    "args": {
+      "dose_ml_per_liter": 3,
+      "pot_liters": 0.3
+    },
+    "result": "0.9 мл"
+  },
+  {
+    "tool": "search_plants",
+    "args": {
+      "query": "Аспідістра висока"
+    },
+    "result": "Аспідістра висока"
+  },
+  {
+    "tool": "fertilizer_info",
+    "args": {
+      "plant": "Аспідістра висока"
+    },
+    "result": "Доза: 4 мл на літр, періодичність: раз на 14 днів"
+  },
+  {
+    "tool": "calc_dose",
+    "args": {
+      "dose_ml_per_liter": 4,
+      "pot_liters": 1.5
+    },
+    "result": "6.0 мл"
+  }
+]
