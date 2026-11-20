@@ -58,12 +58,6 @@ def run_agent(task, max_steps=None, logfile_name=config.LAB_LOGFILE_NAME, task_i
             logger.info(f"ВІДПОВІДЬ: {msg.content}")
             return msg.content
 
-        # модель може запропонувати одразу багато викликів; виконуємо лише перші
-        if len(msg.tool_calls) > config.MAX_CALLS_PER_STEP:
-            logger.info(f"  модель запропонувала викликів: {len(msg.tool_calls)}, "
-                        f"виконуємо перші {config.MAX_CALLS_PER_STEP}")
-            msg.tool_calls = msg.tool_calls[:config.MAX_CALLS_PER_STEP]
-
         # зберігаємо повідомлення моделі як словник: trim читає з нього ключ "role"
         messages.append(msg.model_dump(exclude_none=True))
 
