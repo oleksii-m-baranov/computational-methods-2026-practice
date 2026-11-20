@@ -4,7 +4,6 @@ import config
 
 
 def count_repeats(steps):
-    """Рахує повторні виклики."""
     seen = set()
     repeats = 0
     for step in steps:
@@ -16,7 +15,6 @@ def count_repeats(steps):
 
 
 def typical_growth(tokens):
-    """Типовий приріст входу за крок."""
     growth = [after - before
               for (_, before), (_, after) in zip(tokens, tokens[1:])
               if after > before]
@@ -24,7 +22,6 @@ def typical_growth(tokens):
 
 
 def find_stall(tokens, typical):
-    """Шукає крок, на якому вхід підійшов до межі вікна і майже не росте."""
     for (_, before), (number, after) in zip(tokens, tokens[1:]):
         near_window = after >= 0.8 * config.NUM_CTX
         stopped = after - before <= 0.2 * typical
@@ -34,7 +31,6 @@ def find_stall(tokens, typical):
 
 
 def describe(run):
-    """Збирає всі показники одного прогону в один словник."""
     steps = run["steps"]
     tokens = [(s["n"], s["tokens"]) for s in steps if s["tokens"] is not None]
     typical = typical_growth(tokens)

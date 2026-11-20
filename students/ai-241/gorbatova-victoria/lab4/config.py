@@ -6,18 +6,19 @@ load_dotenv()
 BASE_URL = "http://localhost:11434/v1"
 API_KEY = "ollama"
 
+# Використовуємо створену модель з вузьким вікном через Modelfile (крок 1)
 MODEL = "llama32-4k"
 MAX_STEPS = 6
 TEMPERATURE = 0
 
 MAX_RETRIES = 2       # кількість помилок моделі поспіль
-ALLOWED = ["search_routes", "route_info", "calculate_trip"] # інструменти 
+ALLOWED = ["search_routes", "transport_info", "calculate_trip"]  # інструменти Варіанта 7
 RUN_TAG = "ctx-control"  # мітка прогону для Langfuse
 LAB_LOGFILE_NAME = "lab4"
-NUM_CTX = 4096          # розмір вікна, який ви задасте в кроці 1
-MAX_STEPS_LONG = 25     # ліміт кроків для довгої задачі (MAX_STEPS не змінюємо)
+NUM_CTX = 3072          # розмір вікна, заданий у Modelfile (або 3072 за потреби)
+MAX_STEPS_LONG = 25     # ліміт кроків для довгої задачі
 COMPRESS = "none"       # "none" або "trim": скорочувати історію чи ні
-COMPRESS_AT = 2800      # скорочуємо, коли prompt_tokens перевищив це число
+COMPRESS_AT = 2800      # скорочуємо, коли prompt_tokens перевищив цей поріг
 KEEP_LAST = 6           # скільки останніх повідомлень лишати при обрізанні
 USE_STATE = False       # чи додавати в контекст збережені результати
 STATE_RESULT_CHARS = 200  # довші результати в стані скорочуються до цієї довжини

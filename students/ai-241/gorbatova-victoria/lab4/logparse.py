@@ -3,7 +3,6 @@ import re
 
 
 def find_status(block):
-    """Як закінчився прогін."""
     if "ПОМИЛКА СЕРВЕРА" in block:
         return "server_error"
     if re.search(r"^ВІДПОВІДЬ:", block, flags=re.M):
@@ -16,7 +15,6 @@ def find_status(block):
 
 
 def parse_step(chunk):
-    """Розбирає один крок."""
     first_line = chunk.split("\n", 1)[0]
     prompt = re.search(r"prompt_tokens=(\d+)", first_line)
     completion = re.search(r"completion_tokens=(\d+)", first_line)
@@ -37,7 +35,6 @@ def parse_step(chunk):
 
 
 def parse_run(block):
-    """Розбирає один прогін."""
     chunks = re.split(r"^--- крок ", block, flags=re.M)[1:]
     return {
         "task": block.split("\n", 1)[0],
@@ -47,7 +44,6 @@ def parse_run(block):
 
 
 def parse_log(text):
-    """Ділить лог на прогони."""
     text = re.sub(r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} (?:\[[A-Z]+\]|- [A-Z]+ -)\s*", "", text, flags=re.M)
     blocks = re.split(r"^ЗАДАЧА: ", text, flags=re.M)[1:]
     return [parse_run(block) for block in blocks]

@@ -6,11 +6,11 @@ class RouteSearchArgs(BaseModel):
     model_config = ConfigDict(extra="forbid")
     query: str = Field(description="Ключове слово для пошуку маршруту, наприклад: 'гори', 'одеса', 'львів'.")
 
-class RouteInfoArgs(BaseModel):
+class TransportInfoArgs(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    route: str = Field(description="ТОЧНА повна назва маршруту з довідника (наприклад, 'Львів Гастрономічний' або 'Яремче'). Ніяких інших полів не передавай!")
+    route: str = Field(description="ТОЧНА повна назва маршруту з довідника (наприклад, 'Кам'янець-Подільський').")
 
-class CalculateTripArgs(BaseModel):
+class CalcBudgetArgs(BaseModel):
     model_config = ConfigDict(extra="forbid")
     price_per_person: float = Field(gt=0, description="Точна вартість квитка на одну особу з довідника (більше за 0).")
     people: int = Field(gt=0, description="Кількість людей у групі.")
@@ -18,6 +18,6 @@ class CalculateTripArgs(BaseModel):
 
 ARGS = {
     "search_routes": RouteSearchArgs,
-    "route_info": RouteInfoArgs,
-    "calculate_trip": CalculateTripArgs,
+    "transport_info": TransportInfoArgs,
+    "calc_budget": CalcBudgetArgs,
 }

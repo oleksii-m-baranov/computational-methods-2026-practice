@@ -1,5 +1,3 @@
-"""Описи інструментів для моделі (JSON Schema)."""
-
 """Описи інструментів для моделі, згенеровані з класів аргументів."""
 import config
 from arguments import ARGS
@@ -9,11 +7,11 @@ DESCRIPTIONS = {
         "Шукає маршрути вихідного дня за типом відпочинку або назвою місця. "
         "Використовуй, коли користувач описує, куди або як хоче поїхати."
     ),
-    "route_info": (
-        "Шукає маршрут у довіднику транспорту, повертає вартість проїзду на 1 особу, "
+    "transport_info": (
+        "Шукає маршрут у довіднику транспорту за точною назвою, повертає вартість проїзду на 1 особу, "
         "час у дорозі та кількість рейсів на день. Використовуй, коли точну назву маршруту вже обрано."
     ),
-    "calculate_trip": (
+    "calc_budget": (
         "Обчислює загальний бюджет поїздки на групу. "
         "Використовуй ЗАВЖДИ, коли треба порахувати сумарний бюджет, не рахуй самостійно."
     ),
@@ -21,11 +19,12 @@ DESCRIPTIONS = {
 
 SCHEMAS = []
 for name in config.ALLOWED:
-    SCHEMAS.append({
-        "type": "function",
-        "function": {
-            "name": name,
-            "description": DESCRIPTIONS[name],
-            "parameters": ARGS[name].model_json_schema(),
-        },
-    })
+    if name in ARGS:
+        SCHEMAS.append({
+            "type": "function",
+            "function": {
+                "name": name,
+                "description": DESCRIPTIONS[name],
+                "parameters": ARGS[name].model_json_schema(),
+            },
+        })

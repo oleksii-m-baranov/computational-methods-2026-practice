@@ -7,12 +7,10 @@ from arguments import ARGS
 from checks import check_meaning
 from tools import TOOLS
 
-# Рівні, на яких помилилася модель (на відміну від "ok" і "tool")
 MODEL_ERRORS = ["name", "permission", "syntax", "schema", "meaning"]
 
 
 def format_validation_error(error):
-    """Збирає з помилки Pydantic коротке повідомлення для моделі."""
     lines = ["Помилка: аргументи не пройшли перевірку."]
     for err in error.errors():
         field = err["loc"][0] if err["loc"] else "JSON"
@@ -23,18 +21,15 @@ def format_validation_error(error):
 
 @observe(name="call_tool")
 def call_tool(name, args_raw):
-    # 1. Чи існує інструмент
     if name not in TOOLS:
         return "name", (f"Помилка: інструмента '{name}' не існує. "
                         f"Доступні: {', '.join(config.ALLOWED)}. "
                         f"Виклич один з доступних або повідом користувачу, що такої дії немає.")
 
-    # 2. Чи дозволено його викликати
     if name not in config.ALLOWED:
         return "permission", (f"Помилка: інструмент '{name}' недоступний. "
                               "Не повторюй виклик, повідом користувачу, що ця дія недоступна.")
 
-    # 3. Синтаксис і схема: Pydantic розбирає JSON і перевіряє поля
     try:
         args = ARGS[name].model_validate_json(args_raw)
     except ValidationError as error:
@@ -44,12 +39,10 @@ def call_tool(name, args_raw):
                 level = "syntax"
         return level, format_validation_error(error)
 
-    # 4. Зміст: чи мають значення сенс для наших даних
     problem = check_meaning(name, args)
     if problem is not None:
         return "meaning", problem
 
-    # 5. Виконання
     try:
         return "ok", str(TOOLS[name](**args.model_dump()))
     except Exception as error:
@@ -58,8 +51,6 @@ def call_tool(name, args_raw):
 
 
 def check_response(choice):
-    """Перевіряє відповідь моделі в цілому, до обробки викликів.
-    Повертає None, якщо все гаразд, або (рівень, текст)."""
     if choice.finish_reason == "length":
         return "length", None
 

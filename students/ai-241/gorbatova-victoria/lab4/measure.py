@@ -3,9 +3,7 @@ import json
 import os
 import sys
 import time
-
 from langfuse import get_client
-
 import agent
 import config
 from table import make_row, print_table
@@ -55,10 +53,10 @@ def run_once(name, repeat, series, task):
 
 def main():
     names, repeats, series = read_arguments()
-    config.USE_CACHE = series.startswith("cache")      # кеш вмикають лише серії, назва яких починається з cache
+    config.USE_CACHE = series.startswith("cache")
     task = load_task()
     os.makedirs("logs", exist_ok=True)
-    rows = []                                            # сюди збираємо рядки результатів
+    rows = []
 
     for repeat in range(1, repeats + 1):
         for name in names:

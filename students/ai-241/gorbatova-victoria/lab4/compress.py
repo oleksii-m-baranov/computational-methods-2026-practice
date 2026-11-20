@@ -3,17 +3,15 @@ import config
 from context import trim
 from summary import compress_by_summary
 
+
 def attach_state(messages, task, state):
-    """Дописує до запитання користувача список збережених результатів."""
     note = state.render()
     if note:
-        # messages[1] - це запитання користувача
         messages[1] = {"role": "user", "content": task + "\n\n" + note}
     return messages
 
 
 def compress_by_trim(messages, task, used, state, logger):
-    """Обрізає історію і, якщо ввімкнено стан, додає його до запитання."""
     before = len(messages)
     messages = trim(messages, config.KEEP_LAST)
     if config.USE_STATE:
@@ -26,7 +24,6 @@ def compress_by_trim(messages, task, used, state, logger):
 
 
 def compress_history(messages, task, used, state, logger):
-    """Скорочує історію, якщо вхід перевищив поріг COMPRESS_AT."""
     if used <= config.COMPRESS_AT:
         return messages
     if config.COMPRESS == "trim":
