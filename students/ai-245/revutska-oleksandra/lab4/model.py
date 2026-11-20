@@ -52,7 +52,8 @@ def call_model(messages):
         if config.USE_CACHE and cache_key is not None:
             model_cache.set(cache_key, response)
 
-        return response, True
+        # False означає, що відповідь отримана від Ollama, а не з кешу.
+        return response, False
 
     except Exception as error:
         print(f"Помилка виклику моделі: {error}")

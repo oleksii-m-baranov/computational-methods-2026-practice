@@ -1,5 +1,4 @@
 
-
 """Запуск експериментів із контекстом, станом і кешем агента."""
 
 import json
@@ -65,7 +64,9 @@ def main():
     try:
         run_number = int(sys.argv[2])
     except ValueError:
-        raise ValueError("Номер запуску має бути цілим числом")
+        raise ValueError(
+            "Номер запуску має бути цілим числом"
+        )
 
     tag = sys.argv[3]
 
@@ -85,8 +86,11 @@ def main():
         logs_dir / f"{tag}_{mode}_steps_r{run_number}.log"
     )
 
-    # Кожен експеримент починається з порожнього кешу.
-    clear_cache()
+    # Для звичайних експериментів кеш не використовується.
+    # Для cache1 очищуємо кеш перед першим запуском.
+    # Для cache2 залишаємо кеш із попереднього запуску.
+    if mode == "cache" and tag.lower() == "cache1":
+        clear_cache()
 
     # Основний лог агента накопичує запуски.
     # Запам'ятовуємо його поточний розмір.
@@ -100,6 +104,7 @@ def main():
 
     print(f"Режим: {mode}")
     print(f"Запуск: {run_number}")
+    print(f"Серія: {tag}")
     print(f"Задача: {task_data['id']}")
     print(f"Мінімум викликів: {task_data['min_calls']}")
     print(f"COMPRESS: {config.COMPRESS}")
@@ -122,7 +127,10 @@ def main():
             new_log = f.read()
 
         steps_path.write_text(
-            new_log.decode("utf-8", errors="replace"),
+            new_log.decode(
+                "utf-8",
+                errors="replace",
+            ),
             encoding="utf-8",
         )
 
@@ -131,6 +139,7 @@ def main():
     with result_path.open("w", encoding="utf-8") as f:
         f.write(f"mode={mode}\n")
         f.write(f"run={run_number}\n")
+        f.write(f"tag={tag}\n")
         f.write(f"task_id={task_data['id']}\n")
         f.write(
             f"expected={task_data['expected']['total_fine']}\n"

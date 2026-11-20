@@ -1,61 +1,39 @@
 
-"""Інструменти бібліотечного агента для лабораторної роботи № 3."""
+
+"""Інструменти бібліотечного агента для лабораторної роботи № 4."""
 
 import csv
 import os
-import re
 
 
 def search_books(query: str) -> str:
-    """Пошук книжок за ключовими словами в корпусі."""
+    """Пошук книжок за назвою в каталозі books.csv."""
 
-    folder = "data/corpus"
+    filepath = "data/books.csv"
 
-    if not os.path.isdir(folder):
-        return "Помилка: каталог книжок не знайдено."
+    if not os.path.isfile(filepath):
+        return "Помилка: файл books.csv не знайдено."
 
-    query_words = re.findall(r"\w+", query.lower())
+    query = query.strip().casefold()
 
-    if not query_words:
+    if not query:
         return "Помилка: порожній пошуковий запит."
 
     found = []
 
-    for filename in sorted(os.listdir(folder)):
-        filepath = os.path.join(folder, filename)
+    with open(filepath, encoding="utf-8-sig", newline="") as f:
+        reader = csv.DictReader(f)
 
-        if not os.path.isfile(filepath):
-            continue
+        for row in reader:
+            title = row["title"].strip()
 
-        with open(filepath, encoding="utf-8") as f:
-            text = f.read()
-
-        if not text.strip():
-            continue
-
-        text_lower = text.lower()
-
-        # Підрахунок кількості збігів із пошуковими словами
-        matches = sum(
-            1
-            for word in query_words
-            if word in text_lower
-        )
-
-        if matches > 0:
-            title = text.splitlines()[0].strip()
-            found.append((matches, title))
+            if query in title.casefold():
+                found.append(title)
 
     if not found:
         return f"За запитом '{query}' нічого не знайдено."
 
-    # Сортування за релевантністю
-    found.sort(key=lambda item: (-item[0], item[1]))
-
-    # Повернення назв знайдених книжок
-    return " | ".join(
-        title for _, title in found
-    )
+    return " | ".join(found)
 
 
 def book_info(title: str) -> str:
@@ -66,7 +44,7 @@ def book_info(title: str) -> str:
     if not os.path.isfile(filepath):
         return "Помилка: файл books.csv не знайдено."
 
-    with open(filepath, encoding="utf-8") as f:
+    with open(filepath, encoding="utf-8-sig", newline="") as f:
         reader = csv.DictReader(f)
 
         for row in reader:

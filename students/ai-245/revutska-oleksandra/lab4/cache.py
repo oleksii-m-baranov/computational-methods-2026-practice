@@ -1,67 +1,63 @@
 
-"""Кеш відповідей мовної моделі."""
 
-import copy
+"""Файловий кеш відповідей мовної моделі."""
+
 import hashlib
 import json
+import os
+
+from openai.types.chat import ChatCompletion
 
 
 class ModelCache:
-    """Зберігає відповіді моделі за ключем запиту."""
-
     def __init__(self):
-        self.storage = {}
+        self.cache_dir = "cache"
+        os.makedirs(self.cache_dir, exist_ok=True)
         self.hits = 0
         self.misses = 0
 
     def make_key(self, model, messages, tools, temperature):
-        """Створює унікальний ключ запиту."""
-
         data = {
             "model": model,
             "messages": messages,
             "tools": tools,
             "temperature": temperature,
         }
-
         serialized = json.dumps(
-            data,
-            ensure_ascii=False,
-            sort_keys=True,
-            default=str,
+            data, ensure_ascii=False, sort_keys=True, default=str
         )
-
-        return hashlib.sha256(
-            serialized.encode("utf-8")
-        ).hexdigest()
+        return hashlib.sha256(serialized.encode("utf-8")).hexdigest()
 
     def get(self, key):
-        """Повертає відповідь із кешу."""
+        path = os.path.join(self.cache_dir, key + ".json")
 
-        if key in self.storage:
+        if os.path.exists(path):
+            with open(path, encoding="utf-8") as f:
+                response = ChatCompletion.model_validate(json.load(f))
             self.hits += 1
-            return copy.deepcopy(self.storage[key])
+            return response
 
         self.misses += 1
         return None
 
     def set(self, key, response):
-        """Зберігає відповідь моделі."""
-
-        self.storage[key] = copy.deepcopy(response)
+        path = os.path.join(self.cache_dir, key + ".json")
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(response.model_dump(), f, ensure_ascii=False)
 
     def stats(self):
-        """Повертає статистику кешування."""
-
         return {
             "hits": self.hits,
             "misses": self.misses,
-            "size": len(self.storage),
+            "size": len([
+                name for name in os.listdir(self.cache_dir)
+                if name.endswith(".json")
+            ]),
         }
 
     def clear(self):
-        """Очищає кеш і статистику."""
-
-        self.storage.clear()
+        for name in os.listdir(self.cache_dir):
+            if name.endswith(".json"):
+                os.remove(os.path.join(self.cache_dir, name))
         self.hits = 0
         self.misses = 0

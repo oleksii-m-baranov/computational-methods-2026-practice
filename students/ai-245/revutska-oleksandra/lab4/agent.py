@@ -1,6 +1,7 @@
+"""Бібліотечний агент: контекст, стан, кеш і Langfuse."""
 
-
-"""Бібліотечний агент із контекстом, станом і Langfuse."""
+import logging
+from pathlib import Path
 
 from langfuse import observe
 
@@ -9,17 +10,44 @@ from compress import compress_messages
 from dispatcher import MODEL_ERRORS, call_tool
 from model import call_model
 from state import AgentState
-from utils.lab_logger import custom_logger
+
+
+def create_logger():
+    """Створює лог у папці logs для measure.py."""
+
+    Path("logs").mkdir(exist_ok=True)
+
+    logger = logging.getLogger("lab4_agent")
+    logger.setLevel(logging.INFO)
+    logger.propagate = False
+
+    # Не додаємо однакові обробники повторно.
+    if not logger.handlers:
+        handler = logging.FileHandler(
+            Path("logs") / f"{config.LAB_LOGFILE_NAME}.log",
+            mode="a",
+            encoding="utf-8",
+        )
+        handler.setFormatter(logging.Formatter("%(message)s"))
+        logger.addHandler(handler)
+
+    return logger
 
 
 @observe(name="run_agent")
-def run_agent(task, max_steps=None):
-    """Виконує задачу користувача зі збереженням стану."""
-
-    logger = custom_logger(config.LAB_LOGFILE_NAME)
+def run_agent(
+    task,
+    max_steps=None,
+    logfile_name=None,
+    task_id="task",
+    log_overwrite=False,
+):
+    """Виконує завдання через Ollama та інструменти."""
 
     if max_steps is None:
         max_steps = config.MAX_STEPS
+
+    logger = create_logger()
 
     messages = [
         {"role": "system", "content": config.SYSTEM},
@@ -36,9 +64,9 @@ def run_agent(task, max_steps=None):
     logger.info(f"РЕЖИМ: {config.RUN_TAG}")
     logger.info(f"СТИСНЕННЯ: {config.COMPRESS}")
     logger.info(f"ЗБЕРЕЖЕННЯ СТАНУ: {config.USE_STATE}")
+    logger.info(f"КЕШ: {config.USE_CACHE}")
 
     for step in range(1, max_steps + 1):
-
         old_count = len(messages)
 
         messages = compress_messages(
@@ -51,8 +79,6 @@ def run_agent(task, max_steps=None):
                 f"TRIM: повідомлень {old_count} -> {len(messages)}"
             )
 
-        # Після стиснення повертаємо важливі дані
-        # зі стану агента до контексту моделі.
         request_messages = list(messages)
 
         if state is not None and state.tool_results:
@@ -63,10 +89,7 @@ def run_agent(task, max_steps=None):
                 {
                     "role": "system",
                     "content": (
-                        "Нижче наведено збережені результати "
-                        "викликів інструментів. "
-                        "Використовуй їх як фактичні дані, "
-                        "але продовжуй виконувати задачу.\n\n"
+                        "Збережені результати інструментів:\n\n"
                         + summary
                     ),
                 },
@@ -77,11 +100,11 @@ def run_agent(task, max_steps=None):
                 f"{state.get_tool_count()}"
             )
 
-        response, success = call_model(request_messages)
+        response, from_cache = call_model(request_messages)
 
-        if not success or response is None:
+        if response is None:
             logger.error(
-                f"Помилка виклику моделі на кроці {step}"
+                f"ПОМИЛКА СЕРВЕРА на кроці {step}"
             )
             return None
 
@@ -102,16 +125,19 @@ def run_agent(task, max_steps=None):
         last_prompt_tokens = prompt_tokens
 
         logger.info(
-            f"\n--- крок {step} | "
+            f"--- крок {step} | "
             f"prompt_tokens={prompt_tokens} | "
             f"completion_tokens={completion_tokens}"
+            + (" | CACHE HIT" if from_cache else "")
         )
 
         if not msg.tool_calls:
             logger.info(f"ВІДПОВІДЬ: {msg.content}")
             return msg.content
 
-        messages.append(msg)
+        messages.append(
+            msg.model_dump(exclude_none=True)
+        )
 
         model_failed = False
 
@@ -123,12 +149,19 @@ def run_agent(task, max_steps=None):
                 f"  виклик: {name}({arguments})"
             )
 
-            level, result = execute_tool(name, arguments)
-
-            logger.info(f"  рівень перевірки: {level}")
-            logger.info(f"  результат: {result}")
+            level, result = call_tool(
+                name,
+                arguments,
+            )
 
             result_text = str(result)
+
+            logger.info(
+                f"  рівень перевірки: {level}"
+            )
+            logger.info(
+                f"  результат: {result_text}"
+            )
 
             if state is not None and level == "ok":
                 state.add_tool_result(
@@ -136,13 +169,6 @@ def run_agent(task, max_steps=None):
                     arguments,
                     result_text,
                 )
-
-            # Обмежуємо довжину результату,
-            # якщо ввімкнено збереження стану.
-            if state is not None:
-                result_text = result_text[
-                    :config.STATE_RESULT_CHARS
-                ]
 
             messages.append(
                 {
@@ -158,11 +184,6 @@ def run_agent(task, max_steps=None):
         if model_failed:
             retries += 1
 
-            logger.info(
-                f"  помилок поспіль: "
-                f"{retries}/{config.MAX_RETRIES}"
-            )
-
             if retries > config.MAX_RETRIES:
                 logger.info(
                     "СТОП: перевищено кількість помилок"
@@ -173,12 +194,6 @@ def run_agent(task, max_steps=None):
 
     logger.info("СТОП: вичерпано ліміт кроків")
     return None
-
-
-@observe(name="tool_execution")
-def execute_tool(name, arguments):
-    """Виконує інструмент через диспетчер перевірок."""
-    return call_tool(name, arguments)
 
 
 if __name__ == "__main__":
@@ -193,5 +208,4 @@ if __name__ == "__main__":
         )
 
     print("Відповідь агента:", answer)
-
     get_client().flush()
