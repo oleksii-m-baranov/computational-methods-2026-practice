@@ -1,0 +1,164 @@
+[
+  {
+    "run_id": "main_none_r1",
+    "config": "none",
+    "seconds": 8.3,
+    "right_number_detected": false,
+    "answer": null,
+    "metrics": {
+      "config": "none",
+      "right": 0,
+      "seconds": 8.3,
+      "steps": 8,
+      "prompt": 12925,
+      "completion": 562,
+      "extra": 0,
+      "squeezes": 0,
+      "repeats": 1
+    }
+  },
+  {
+    "run_id": "main_trim_r1",
+    "config": "trim",
+    "seconds": 4.8,
+    "right_number_detected": false,
+    "answer": "Для поїздок з Кам'янець-Подільським, Хотином, Одесою, Карпатами, Шацькими озерами та Львівом загальний бюджет буде 7600 грн.",
+    "metrics": {
+      "config": "trim",
+      "right": 0,
+      "seconds": 4.8,
+      "steps": 19,
+      "prompt": 33992,
+      "completion": 603,
+      "extra": 0,
+      "squeezes": 1,
+      "repeats": 3
+    }
+  },
+  {
+    "run_id": "main_trim+state_r1",
+    "config": "trim+state",
+    "seconds": 3.9,
+    "right_number_detected": false,
+    "answer": "Для поїздки з Кам'янець-Подільським (3 особи), Хотином (2 особи), Одесою (4 особи), Карпатами (3 особи), Шацькі озера (2 особи), Львівом (5 особ) загальний бюджет буде 1950.0 грн.",
+    "metrics": {
+      "config": "trim+state",
+      "right": 0,
+      "seconds": 3.9,
+      "steps": 13,
+      "prompt": 23619,
+      "completion": 476,
+      "extra": 0,
+      "squeezes": 1,
+      "repeats": 0
+    }
+  },
+  {
+    "run_id": "main_none_r2",
+    "config": "none",
+    "seconds": 6.2,
+    "right_number_detected": false,
+    "answer": "Для кожного з шести відрізків маршруту загальний бюджет усіх шести поїздок: 420.0 + 760.0 + 1200.0 + 1950.0 + 610.0 + 1220.0 = 6360.0 грн",
+    "metrics": {
+      "config": "none",
+      "right": 0,
+      "seconds": 6.2,
+      "steps": 16,
+      "prompt": 31068,
+      "completion": 826,
+      "extra": 0,
+      "squeezes": 0,
+      "repeats": 0
+    }
+  },
+  {
+    "run_id": "main_trim_r2",
+    "config": "trim",
+    "seconds": 4.1,
+    "right_number_detected": false,
+    "answer": null,
+    "metrics": {
+      "config": "trim",
+      "right": 0,
+      "seconds": 4.1,
+      "steps": 8,
+      "prompt": 12925,
+      "completion": 562,
+      "extra": 0,
+      "squeezes": 0,
+      "repeats": 1
+    }
+  },
+  {
+    "run_id": "main_trim+state_r2",
+    "config": "trim+state",
+    "seconds": 4.6,
+    "right_number_detected": false,
+    "answer": "Для поїздки в Кам'янець-Подільський (3 особи), Хотин (2 особи), Одеса (4 особи), Карпати (3 особи), Шацькі озера (2 особи), Львів (5 особ): \n\n1. Кам'янець-Подільський: 1260.0 грн\n2. Хотин: 760.0 грн\n3. Одеса: 1200.0 грн\n4. Карпати: 1950.0 грн\n5. Шацькі озера: 760.0 грн\n6. Львів: 3150.0 грн\n\nЗагальний бюджет усіх шести поїздок: 8420.0 грн",
+    "metrics": {
+      "config": "trim+state",
+      "right": 0,
+      "seconds": 4.6,
+      "steps": 13,
+      "prompt": 23619,
+      "completion": 585,
+      "extra": 0,
+      "squeezes": 1,
+      "repeats": 0
+    }
+  },
+  {
+    "run_id": "main_none_r3",
+    "config": "none",
+    "seconds": 6.5,
+    "right_number_detected": false,
+    "answer": "Головний загальний бюджет для всіх шести поїздок становить 2500.0 грн.",
+    "metrics": {
+      "config": "none",
+      "right": 0,
+      "seconds": 6.5,
+      "steps": 19,
+      "prompt": 39252,
+      "completion": 841,
+      "extra": 0,
+      "squeezes": 0,
+      "repeats": 0
+    }
+  },
+  {
+    "run_id": "main_trim_r3",
+    "config": "trim",
+    "seconds": 6.5,
+    "right_number_detected": false,
+    "answer": "Для кожного з шести відрізків маршруту загальний бюджет усіх шести поїздок: 2500.0 грн",
+    "metrics": {
+      "config": "trim",
+      "right": 0,
+      "seconds": 6.5,
+      "steps": 19,
+      "prompt": 33992,
+      "completion": 844,
+      "extra": 0,
+      "squeezes": 1,
+      "repeats": 3
+    }
+  },
+  {
+    "run_id": "main_trim+state_r3",
+    "config": "trim+state",
+    "seconds": 5.6,
+    "right_number_detected": false,
+    "answer": "Для поїздки з Кам'янець-Подільським, Хотином, Одесою, Карпатами, Шацькі озера, Львівом на 3, 2, 4, 3, 2, 5 особинь без додаткових витрат бюджет становить 1950.0 грн.",
+    "metrics": {
+      "config": "trim+state",
+      "right": 0,
+      "seconds": 5.6,
+      "steps": 13,
+      "prompt": 23619,
+      "completion": 743,
+      "extra": 0,
+      "squeezes": 1,
+      "repeats": 0
+    }
+  }
+]
