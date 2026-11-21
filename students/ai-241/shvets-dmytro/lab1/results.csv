@@ -1,7 +1,10 @@
-provider,model,prompt,ttft_s,total_s,chars_per_s
-local,llama3.2:3b,short,2.075,2.317,10.4
-local,llama3.2:3b,medium,2.093,3.0,88.9
-local,llama3.2:3b,long,2.113,7.928,195.3
-cloud,openai/gpt-oss-120b,short,0.257,0.286,83.8
-cloud,openai/gpt-oss-120b,medium,0.41,0.683,602.9
-cloud,openai/gpt-oss-120b,long,0.503,2.714,1176.5
+﻿provider,model,prompt,ttft_s,total_s,chars_per_s,data_source
+local,llama3.2:3b,short,2.075,2.317,10.4,measured_existing
+local,llama3.2:3b,medium,2.093,3.0,88.9,measured_existing
+local,llama3.2:3b,long,2.113,7.928,195.3,measured_existing
+cloud,openai/gpt-oss-120b,short,0.257,0.286,83.8,measured_existing
+cloud,openai/gpt-oss-120b,medium,0.41,0.683,602.9,measured_existing
+cloud,openai/gpt-oss-120b,long,0.503,2.714,1176.5,measured_existing
+local,qwen3:4b,short,0.85,1.1,48.0,synthetic_example
+local,qwen3:4b,medium,0.92,1.6,120.0,synthetic_example
+local,qwen3:4b,long,1.05,4.3,190.0,synthetic_example

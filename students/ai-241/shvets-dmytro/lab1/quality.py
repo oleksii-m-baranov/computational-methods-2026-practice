@@ -12,8 +12,12 @@ TASKS = {
     "6_language": "Поясни чим контейнерне перевезення відрізняється від навалочного. Поясни українською, два абзаци.",
 }
 
+# Додаткову локальну модель потрібно встановити: ollama pull qwen3:4b
+# Запуск: python quality.py (перезаписує quality.json лише після успішних тестів)
+PROVIDERS_TO_TEST = ["local", "qwen", "cloud"]
+
 results = {}
-for provider in ["local", "cloud"]:
+for provider in PROVIDERS_TO_TEST:
     client, model = make_client(provider)
     results[model] = {}
     for task_id, prompt in TASKS.items():
