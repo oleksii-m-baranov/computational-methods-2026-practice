@@ -3,37 +3,40 @@ import os
 
 
 def search_books(query: str) -> str:
+    """Пошук книжки в корпусі коротких анотацій (data/corpus/)."""
     q = query.lower()
     found = []
     folder = "data/corpus"
+    if not os.path.exists(folder):
+        return f"За запитом '{query}' нічого не знайдено."
     for filename in sorted(os.listdir(folder)):
+        if not filename.endswith(".txt"):
+            continue
         with open(os.path.join(folder, filename), encoding="utf-8") as f:
             text = f.read()
         if q in text.lower():
-            found.append(text.split("\n")[0])
+            found.append(text.split("\n")[0].strip())
     if not found:
         return f"За запитом '{query}' нічого не знайдено."
     return " | ".join(found)
 
 
-def find_book_info(title: str) -> tuple[int, int, int]:
-    with open("data/books.csv", encoding="utf-8") as f:
-        for row in csv.DictReader(f):
-            if row["title"].lower() == title.lower():
-                return int(row['copies']), int(row['loan_days']), int(row['fine_per_day'])
-    return None
-
 def book_info(title: str) -> str:
-    book_information = find_book_info(title)
-    if book_information:
-        return (f"Примірників: {book_information[0]}, "
-                f"термін видачі: {book_information[1]} днів, "
-                f"штраф: {book_information[2]} грн/день")
-    else:
+    """Отримання умов видачі книги з довідника (data/books.csv)."""
+    csv_path = "data/books.csv"
+    if not os.path.exists(csv_path):
         return f"Книжки '{title}' немає в довіднику."
+    with open(csv_path, encoding="utf-8") as f:
+        for row in csv.DictReader(f):
+            if row["title"].strip().lower() == title.strip().lower():
+                return (f"Примірників: {row['copies']}, "
+                        f"термін видачі: {row['loan_days']} днів, "
+                        f"штраф: {row['fine_per_day']} грн/день")
+    return f"Книжки '{title}' немає в довіднику."
 
 
 def calculate(operation: str, a: float, b: float) -> str:
+    """Арифметичні обчислення: mul — множення, add — додавання, sub — віднімання."""
     ops = {
         "mul": lambda x, y: x * y,
         "add": lambda x, y: x + y,
@@ -45,7 +48,8 @@ def calculate(operation: str, a: float, b: float) -> str:
 
 
 def issue_book(title: str) -> str:
-    return f"Книгу '{title}' видано"
+    """Дія бронювання/видачі (заборонена агенту в ЛР3-4)."""
+    return f"Книгу '{title}' видано читачеві."
 
 
 TOOLS = {

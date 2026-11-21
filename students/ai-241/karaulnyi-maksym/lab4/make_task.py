@@ -1,64 +1,57 @@
-"""Створює long_task.json: довге питання, правильну відповідь і мінімум викликів.
-
-Запуск:  python make_task.py
-
-Приклад нижче - для варіанта 1 (бібліотека). Для свого варіанта замініть:
-імпорти, список ITEMS, текст QUESTION і функцію compute().
-"""
 import json
+from tools import search_books, book_info, calculate
 
-# Беремо власні функції-інструменти з tools.py. ЗАМІНІТЬ на свої.
-from tools import calculate, find_book_info
+# 6 книг із каталогу студента:
+SELECTED_BOOKS = [
+    ("Основи алгоритмів", 2),
+    ("Місто вічної ночі", 3),
+    ("Кулінарія для лінивих", 4),
+    ("Тіні старого Києва", 2),
+    ("Місто вічної зорі", 1),
+    ("Основи баз даних", 2),
+]
 
-# Шість позицій. У варіанті 1 кожна позиція - пара (книжка, кількість книжок).
-ITEMS = [("Світло забутих маяків", 2), ("Світло забутих вогнищ", 2),
-         ("Мистецтво швидкого сортування: від вибору до злиття", 1),
-         ("Ехо червоної планети", 1), ("Анатомія кулінарії: температура і смак", 5),
-         ("Фортеці Поділля: камінь і порох", 2)]
+def generate_long_task():
+    subtasks = []
+    total_fine = 0
 
-# Питання для агента. У ньому має бути перелік усіх шести позицій.
-QUESTION = (
-    "Для кожної з шести книжок: Світло забутих маяків (2 книжки), Світло забутих вогнищ (2 книжки), "
-    "Мистецтво швидкого сортування: від вибору до злиття (1 книжка), "
-    "Ехо червоної планети (1 книжка), Анатомія кулінарії: температура і смак (5 книжок), "
-    "Фортеці Поділля: камінь і порох (2 книжки). "
-    "Для кожної: (а) термін видачі в днях, і наведи одним реченням; "
-    "(б) знайди в довіднику штраф за затримку повернення книжки; "
-    "(в) порахуй вартість затримки на 3 дні для заданої кількості книжок. "
-    "У кінці назви загальну суму штрафу для усіх книжок."
-)
+    for title, copies in SELECTED_BOOKS:
+        # 1. Пошук анотації
+        res_search = search_books(title)
+        
+        # 2. Отримання умов видачі
+        res_info = book_info(title)
+        # Парсимо штраф
+        fine = 0
+        for part in res_info.split(","):
+            if "штраф" in part:
+                fine = int(part.split(":")[1].replace("грн/день", "").strip())
+        
+        # 3. Розрахунок затримки на 3 дні
+        sub_fine = int(float(calculate("mul", fine * copies, 3)))
+        total_fine += sub_fine
+        
+        subtasks.append(f"{title} ({copies} книж{'ки' if copies < 5 else 'ок'})")
 
-# Мінімум викликів інструментів для повного розв'язання: шість позицій по три інструменти.
-MIN_CALLS = 18
+    question = (
+        f"Для кожної з шести книжок: {', '.join(subtasks)}. "
+        "Для кожної: (а) термін видачі в днях, і наведи одним реченням; "
+        "(б) знайди в довіднику штраф за затримку повернення книжки; "
+        "(в) порахуй вартість затримки на 3 дні для заданої кількості книжок. "
+        "У кінці назви загальну суму штрафу для усіх книжок."
+    )
 
-
-def fine_per_book(book_title, book_number):
-    """Штраф за затримку заданої кількості книг на 3 дні."""
-    fine_per_day = find_book_info(book_title)[2]         # штраф з довідника
-    return float(calculate('mul', book_number, fine_per_day * 3)) if fine_per_day is not None else 0  # множення через калькулятор
-
-
-def compute():
-    """Правильна відповідь: сума по всіх шести позиціях. Рахуємо самі, без моделі."""
-    total = 0.0
-    for titles, book_number in ITEMS:
-        total += fine_per_book(titles, book_number)
-    return total
-
-
-def save_task(total):
-    """Записує питання, правильну відповідь і MIN_CALLS у файл long_task.json."""
     task = {
         "id": "L1",
-        "question": QUESTION,
-        "expected": format(round(total, 2), "g"),   # число як текст, без зайвих нулів: 142.5
-        "min_calls": MIN_CALLS,
+        "question": question,
+        "expected": str(total_fine),
+        "min_calls": len(SELECTED_BOOKS) * 3,
     }
+
     with open("long_task.json", "w", encoding="utf-8") as f:
         json.dump(task, f, ensure_ascii=False, indent=2)
-    return task
 
+    print(f"Згенеровано long_task.json: очікувана сума = {total_fine} грн, min_calls = {task['min_calls']}")
 
-task = save_task(compute())
-print("Правильна відповідь:", task["expected"])
-print("Файл long_task.json записано")
+if __name__ == "__main__":
+    generate_long_task()
