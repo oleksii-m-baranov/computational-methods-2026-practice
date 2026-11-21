@@ -17,12 +17,20 @@ def search_recipes(query: str) -> str:
     if not query:
         return "Порожній пошуковий запит."
 
+    search_terms = (
+        ("курка", "курки", "курку", "куркою",
+         "курці", "куряч", "куриц", "курин")
+        if query in {"курка", "курки", "курку",
+                     "куркою", "курці", "куриця"}
+        else (query,)
+    )
+
     found = []
 
     for path in sorted(RECIPES_DIR.glob("*.txt")):
         content = path.read_text(encoding="utf-8")
 
-        if query in content.lower():
+        if any(term in content.lower() for term in search_terms):
             first_line = content.splitlines()[0].strip()
             found.append(first_line)
 

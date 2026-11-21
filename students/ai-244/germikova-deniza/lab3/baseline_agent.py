@@ -2,7 +2,7 @@
 """Цикл кухонного агента Baseline з трасуванням Langfuse."""
 
 from langfuse import observe
-from openai import OpenAI
+from langfuse.openai import OpenAI
 
 import config
 from baseline_schemas import SCHEMAS
