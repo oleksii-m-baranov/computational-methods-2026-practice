@@ -119,10 +119,10 @@
 
 У Langfuse перевірено виклики `OpenAI-generation` і `call_tool` для B та C: перший фрагмент пошуку правильний в обох випадках, однак відповіді відрізняються.
 
-![Langfuse: опис B](<screenshots/screen1.png>)
-![Langfuse: виклик B](<screenshots/screen2.png>)
-![Langfuse: опис C](<screen3.png>)
-![Langfuse: виклик C](<screenshots/screen4.png>)
+![Langfuse:](<screenshots/screen1.png.png>)
+![Langfuse:](<screenshots/screen2.png.png>)
+![Langfuse:](<screenshots/screen3.png.png>)
+![Langfuse:](<screenshots/screen4.png.png>)
 
 ## 7. Порівняння із лабораторною №4
 
