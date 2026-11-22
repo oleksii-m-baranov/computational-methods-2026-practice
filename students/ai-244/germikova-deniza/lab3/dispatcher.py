@@ -10,20 +10,9 @@ import config
 from arguments import ARGS
 from checks import check_meaning
 
-from tools import (
-    search_recipes,
-    product_info,
-    scale_amount,
-    place_order,
-)
+from tools import TOOLS
 
 
-TOOLS = {
-    "search_recipes": search_recipes,
-    "product_info": product_info,
-    "scale_amount": scale_amount,
-    "place_order": place_order,
-}
 
 
 MODEL_ERRORS = {
