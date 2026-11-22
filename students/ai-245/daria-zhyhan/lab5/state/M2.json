@@ -1,0 +1,17 @@
+[
+  {
+    "tool": "fertilizer_info",
+    "args": {
+      "plant": "Монстера"
+    },
+    "result": "Доза: 6 мл на літр, періодичність: раз на 14 днів"
+  },
+  {
+    "tool": "calc_dose",
+    "args": {
+      "pot_liters": 4,
+      "dose_ml_per_liter": 6
+    },
+    "result": "24.0 мл"
+  }
+]
