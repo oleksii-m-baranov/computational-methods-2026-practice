@@ -1,7 +1,8 @@
 ﻿"""Інструменти агента для варіанта 'Догляд за рослинами'."""
 import csv
 import os
-
+import rag
+import config
 
 def search_plants(query: str) -> str:
     q = query.lower()
@@ -33,9 +34,21 @@ def calc_dose(pot_liters: float, dose_ml_per_liter: float) -> str:
 def order_fertilizer(plant: str, amount_ml: float) -> str:
     return "Добриво замовлено"
 
+def search_docs(query: str) -> str:
+    """Векторний пошук по документах: повертає фрагменти разом з назвами файлів."""
+    candidates = rag.get_index().search(query, config.TOP_K)
+    found = [r for r in candidates if r["score"] >= config.MIN_SCORE]
+    rag.TRACE.append({"query": query,
+                      "top_score": candidates[0]["score"] if candidates else None,
+                      "results": found})
+    if not found:
+        return "У документах нічого схожого не знайдено."
+    return "\n\n".join(f"[{n}] Джерело: {r['source']}\n{r['text']}" for n, r in enumerate(found, 1))
+
 TOOLS = {
     "search_plants": search_plants,
     "fertilizer_info": fertilizer_info,
     "calc_dose": calc_dose,
     "order_fertilizer": order_fertilizer,
+    "search_docs": search_docs,
 }

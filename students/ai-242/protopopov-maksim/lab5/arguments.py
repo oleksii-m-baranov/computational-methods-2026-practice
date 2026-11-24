@@ -42,9 +42,15 @@ class ConvertCurrencyArgs(BaseModel):
     from_currency: Literal["USD", "EUR", "UAH"] = Field(..., description="Вхідна валюта")
     to_currency: Literal["USD", "EUR", "UAH"] = Field(..., description="Цільова валюта")
 
+class DocsArgs(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    query: str = Field(min_length=3, max_length=300,
+                       description="Що знайти: одне-два речення українською, словами користувача")
+
 ARGS = {
     "search_plants": SearchPlantsArgs,
     "fertilizer_info": FertilizerInfoArgs,
     "calc_dose": CalcDoseArgs,
     "convert_currency": ConvertCurrencyArgs,
+    "search_docs": DocsArgs,
 }

@@ -18,7 +18,7 @@ SYSTEM = """Ти консультант з догляду за кімнатни�
 
 MAX_RETRIES = 2
 
-ALLOWED = ["search_plants", "fertilizer_info", "calc_dose"]
+ALLOWED = ["search_docs", "fertilizer_info", "calc_dose"]
 
 RUN_TAG = "ctx-control"
 
