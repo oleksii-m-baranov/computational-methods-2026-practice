@@ -1,0 +1,10 @@
+config,right,seconds,steps,prompt,completion,extra,squeezes,repeats,run_id,calls,ok_calls,complete,cache_hits,max_prompt,status
+none,0,45.5,6,15545,827,0,0,2,main_none_r1,25,23,0,0,3039,final
+trim,0,57.0,11,18626,1056,0,2,8,main_trim_r1,38,37,0,0,2773,final
+trim+state,0,127.2,8,17694,2012,0,3,5,main_trim+state_r1,26,24,0,0,2773,retry_limit
+none,0,36.2,6,15545,825,0,0,3,main_none_r2,25,23,0,0,3039,final
+trim,0,60.3,11,18626,1056,0,2,8,main_trim_r2,38,37,0,0,2773,final
+trim+state,0,32.9,3,5901,652,0,1,2,main_trim+state_r2,22,21,0,0,2773,final
+none,0,37.5,6,15545,825,0,0,2,main_none_r3,25,23,0,0,3039,final
+trim,0,62.2,11,18626,1056,0,2,8,main_trim_r3,38,37,0,0,2773,final
+trim+state,0,37.6,4,8065,700,0,1,4,main_trim+state_r3,23,21,0,0,2773,final
