@@ -1,0 +1,9 @@
+venv/
+.env
+__pycache__/
+cache/
+state/
+index/embeddings_cache.json
+chroma_db/
+chroma_cos/
+chroma_default/
