@@ -34,3 +34,17 @@ KEEP_LAST = 6           # скільки останніх повідомлень
 USE_STATE = False
 STATE_RESULT_CHARS = 200
 USE_CACHE = False
+
+EMBED_MODEL = "bge-m3"                   # модель ембедингів
+DOC_DIRS = ["data/corpus", "data/docs"]  # де лежать документи
+INDEX_DIR = "index"                      # куди зберігається індекс
+CHUNK_METHOD = "fixed"              # "fixed" (за кількістю символів) або "paragraphs" (за абзацами)
+CHUNK_SIZE = 500                         # розмір чанка в символах
+CHUNK_OVERLAP = 100                        # перекриття чанків (для "fixed")
+WITH_TITLE = False                       # дописувати назву документа до кожного чанка
+TOP_K = 3                                # скільки чанків повертає пошук
+MIN_SCORE = 0.0                          # поріг схожості: у кроці 5 ви підберете значення
+DOCS_DESCRIPTION = "B"                   # який опис search_docs використовувати: "A", "B" або "C"
+
+## CHUNK_METHOD, CHUNK_SIZE, CHUNK_OVERLAP, WITH_TITLE
+## "name": "fixed-500-100",     "method": "fixed",      "size": 500,  "overlap": 100, "title": False
