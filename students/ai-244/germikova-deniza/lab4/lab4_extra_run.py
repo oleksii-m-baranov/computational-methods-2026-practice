@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 here=Path(__file__).resolve().parent
-repo=here.parents[3]  # /Users/deniza/lab3
+repo=here.parents[3]  # корінь репозиторію
 if str(repo) not in sys.path:
     sys.path.insert(0,str(repo))
 

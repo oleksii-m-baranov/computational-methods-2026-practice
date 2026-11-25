@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Install real Langfuse screenshot and portable logger into the user's Lab4.
+"""Install the Langfuse screenshot and local logger in lab4.
 
 Works in lab4, makes report backup, leaves all experimental logs/config untouched.
 """
@@ -35,7 +35,7 @@ def main() -> None:
         source = next((p for p in sources if p.is_file()), None)
         if source is None:
             raise SystemExit('ПОМИЛКА: не знайдено utils/lab_logger.py у батьківських папках. ' 
-                             'Залишаємо проєкт без змін; перевірте корінь /Users/deniza/lab3.')
+                             'Залишаємо проєкт без змін; перевірте корінь репозиторію.')
         source_text = source.read_text(encoding='utf-8')
         ast.parse(source_text, filename=str(source))
         dest.parent.mkdir(exist_ok=True)
