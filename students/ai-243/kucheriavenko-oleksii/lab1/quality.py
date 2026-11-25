@@ -23,7 +23,6 @@ for provider in ["local", "local_reason", "cloud"]:
                 model=model,
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0.7,
-                max_tokens=350,
             )
             answers.append(r.choices[0].message.content)
         results[model][task_id] = answers
