@@ -1,0 +1,99 @@
+[
+  {
+    "tool": "search_plants",
+    "args": {
+      "query": "Фікус Бенджаміна, Монстера Адансона, Заміокулькас, Сансевієрія трисмугова, Ечеверія витончена, Аспідістра висока"
+    },
+    "result": "За запитом 'Фікус Бенджаміна, Монстера Адансона, Заміокулькас, Сансевієрія трисмугова, Ечеверія витончена, Аспідістра висока' нічого не знайдено."
+  },
+  {
+    "tool": "fertilizer_info",
+    "args": {
+      "plant": "Фікус Бенджаміна"
+    },
+    "result": "Доза: 5 мл на літр, періодичність: раз на 14 днів"
+  },
+  {
+    "tool": "fertilizer_info",
+    "args": {
+      "plant": "Монстера Адансона"
+    },
+    "result": "Доза: 6 мл на літр, періодичність: раз на 14 днів"
+  },
+  {
+    "tool": "fertilizer_info",
+    "args": {
+      "plant": "Заміокулькас"
+    },
+    "result": "Доза: 0 мл на літр, періодичність: раз на 30 днів"
+  },
+  {
+    "tool": "fertilizer_info",
+    "args": {
+      "plant": "Сансевієрія трисмугова"
+    },
+    "result": "Доза: 2 мл на літр, періодичність: раз на 30 днів"
+  },
+  {
+    "tool": "fertilizer_info",
+    "args": {
+      "plant": "Ечеверія витончена"
+    },
+    "result": "Доза: 3 мл на літр, періодичність: раз на 21 днів"
+  },
+  {
+    "tool": "fertilizer_info",
+    "args": {
+      "plant": "Аспідістра висока"
+    },
+    "result": "Доза: 4 мл на літр, періодичність: раз на 14 днів"
+  },
+  {
+    "tool": "calc_dose",
+    "args": {
+      "pot_liters": "5",
+      "dose_ml_per_liter": 10
+    },
+    "result": "50.0 мл"
+  },
+  {
+    "tool": "calc_dose",
+    "args": {
+      "dose_ml_per_liter": 15,
+      "pot_liters": "3"
+    },
+    "result": "45.0 мл"
+  },
+  {
+    "tool": "calc_dose",
+    "args": {
+      "pot_liters": "1",
+      "dose_ml_per_liter": 20
+    },
+    "result": "20.0 мл"
+  },
+  {
+    "tool": "calc_dose",
+    "args": {
+      "pot_liters": "0.5",
+      "dose_ml_per_liter": 40
+    },
+    "result": "20.0 мл"
+  },
+  {
+    "tool": "calc_dose",
+    "args": {
+      "pot_liters": "0.3",
+      "dose_ml_per_liter": 50
+    },
+    "result": "15.0 мл"
+  },
+  {
+    "tool": "calc_dose",
+    "args": {
+      "pot_liters": "1.5",
+      "dose_ml_per_liter": 20
+    },
+    "result": "30.0 мл"
+  }
+]
