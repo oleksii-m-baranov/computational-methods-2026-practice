@@ -1,3 +1,4 @@
+
 import config
 
 from langfuse.openai import OpenAI
@@ -13,6 +14,7 @@ client = OpenAI(
     max_retries=0,
 )
 
+
 def call_model(messages, step, logger, tool_choice=None):
     try:
         request = {
@@ -26,18 +28,6 @@ def call_model(messages, step, logger, tool_choice=None):
             request["tool_choice"] = tool_choice
 
         return ask_model(client, **request)
-
-    except Exception as error:
-        logger.error(f"\n--- крок {step} | ПОМИЛКА СЕРВЕРА: {error}")
-        return None, False
-    try:
-        return ask_model(
-            client,
-            model=config.MODEL,
-            messages=messages,
-            tools=SCHEMAS,
-            temperature=config.TEMPERATURE,
-        )
 
     except Exception as error:
         logger.error(

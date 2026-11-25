@@ -38,7 +38,7 @@ def trim(messages, keep_last):
     start = max(0, len(history) - keep_last)
 
     # Не починаємо історію з відповіді інструмента.
-    while start > 0 and (
+    while start > 0 and start < len(history) and (
         history[start].get("role") == "tool"
         or history[start - 1].get("role") == "tool"
     ):

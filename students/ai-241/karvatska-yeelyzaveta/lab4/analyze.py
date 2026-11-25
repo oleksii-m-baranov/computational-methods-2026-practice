@@ -99,6 +99,7 @@ def print_summary(run):
         f"({d['max_tokens'] / config.NUM_CTX:.0%} вікна {config.NUM_CTX})"
     )
     print(f"  сума prompt_tokens за прогін : {d['prompt_tokens']}")
+    print(f"  додаткові токени підсумовування: {d['extra_tokens']}")
     print(f"  за формулою n*C + d*n*(n-1)/2: {d['formula']:.0f}")
     print(f"  вхід перестав рости на кроці : {d['stall'] or 'не помічено'}")
     print(f"  влучань у кеш                : {d['cache_hits']}")

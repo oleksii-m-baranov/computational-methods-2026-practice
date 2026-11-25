@@ -7,7 +7,7 @@ from agent import run_agent
 from utils.lab_logger import custom_logger
 
 
-logger = custom_logger("lab3_runner", f"lab3_{config.RUN_TAG}.log")
+logger = custom_logger("lab4_runner", f"lab4_{config.RUN_TAG}.log")
 
 
 def main():
@@ -42,7 +42,7 @@ def main():
     finally:
         get_client().flush()
 
-    print(f"\nТестування завершено. Перевір файл lab3_{config.RUN_TAG}.log.")
+    print(f"\nТестування завершено. Перевір файл lab4_{config.RUN_TAG}.log.")
 
 
 if __name__ == "__main__":

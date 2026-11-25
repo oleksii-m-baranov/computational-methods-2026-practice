@@ -423,7 +423,8 @@ def run_agent(
             retries = 0
             successful_tool_calls += 1
 
-            state.record(name, args_raw, result)
+            if config.USE_STATE:
+                state.record(name, args_raw, result)
 
             if strict_plan:
                 expected_name, expected_product, expected_grams = (

@@ -1,6 +1,7 @@
 
 import json
 import os
+import re
 import sys
 import time
 
@@ -26,6 +27,9 @@ def read_arguments():
     repeats = int(sys.argv[2]) if len(sys.argv) > 2 else 3
     series = sys.argv[3] if len(sys.argv) > 3 else "main"
 
+    if repeats < 1:
+        raise ValueError("Кількість повторів має бути не меншою за 1.")
+
     names = list(CONFIGS) if which == "all" else [which]
 
     if any(name not in CONFIGS for name in names):
@@ -41,12 +45,14 @@ def load_task():
 
 
 def is_correct(answer, expected):
-    """Перевіряє, чи є очікуване число у відповіді."""
+    """Перевіряє наявність точного очікуваного числа у відповіді."""
     if not answer:
         return False
 
-    text = answer.replace(" ", "").replace(",", ".")
-    return str(expected) in text
+    text = answer.replace(",", ".")
+    pattern = rf"(?<!\d){re.escape(str(expected))}(?!\d)"
+
+    return re.search(pattern, text) is not None
 
 
 def run_once(name, repeat, series, task):
@@ -74,11 +80,15 @@ def run_once(name, repeat, series, task):
     seconds = round(time.time() - started, 1)
 
     timings_path = "logs/timings.csv"
-    write_header = not os.path.exists(timings_path) or os.path.getsize(timings_path) == 0
+    write_header = (
+        not os.path.exists(timings_path)
+        or os.path.getsize(timings_path) == 0
+    )
 
     with open(timings_path, "a", encoding="utf-8") as f:
         if write_header:
             f.write("run_id,seconds\n")
+
         f.write(f"{run_id},{seconds}\n")
 
     return run_id, answer, seconds
@@ -86,20 +96,29 @@ def run_once(name, repeat, series, task):
 
 def main():
     names, repeats, series = read_arguments()
+
     config.USE_CACHE = series.startswith("cache")
+
     task = load_task()
 
     os.makedirs("logs", exist_ok=True)
+
     rows = []
 
     for repeat in range(1, repeats + 1):
         for name in names:
             run_id, answer, seconds = run_once(
-                name, repeat, series, task
+                name,
+                repeat,
+                series,
+                task,
             )
 
             right = is_correct(answer, task["expected"])
-            rows.append(make_row(run_id, name, right, seconds))
+
+            rows.append(
+                make_row(run_id, name, right, seconds)
+            )
 
             print(
                 f"\n[{run_id}] час {seconds} с | "
@@ -112,6 +131,7 @@ def main():
             )
 
     get_client().flush()
+
     print_table(rows)
 
 
