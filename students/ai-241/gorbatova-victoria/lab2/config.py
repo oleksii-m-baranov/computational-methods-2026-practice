@@ -3,7 +3,7 @@
 BASE_URL = "http://localhost:11434/v1"
 API_KEY = "ollama"
 
-MODEL = "llama3.2:3b"
+MODEL = "qwen2.5:3b"
 MAX_STEPS = 6
 TEMPERATURE = 0.2
 

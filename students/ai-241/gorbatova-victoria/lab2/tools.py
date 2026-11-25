@@ -27,8 +27,9 @@ def transport_info(route: str) -> str:
     return f"Маршруту '{route}' немає в довіднику."
 
 
-def calc_budget(price_per_person: float, people: float, extra: float) -> str:
-    return f"{round(float(price_per_person) * float(people) + float(extra), 2)} грн"
+def calc_budget(price_per_person: float, people: float,
+                extra: float) -> str:
+    return f"{round(price_per_person * people + extra, 2)} грн"
 
 
 TOOLS = {
