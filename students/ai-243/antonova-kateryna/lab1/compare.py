@@ -3,7 +3,7 @@ from providers import make_client
 
 QUESTION = "Поясни різницю між списком і кортежем у Python. Коротко."
 
-for name in ["local", "cloud"]:
+for name in ["local1", "cloud"]:
     client, model = make_client(name)
 
     t0 = time.perf_counter()

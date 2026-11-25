@@ -5,11 +5,18 @@ from dotenv import load_dotenv
 load_dotenv()   
 
 PROVIDERS = {
-    "local": {
+    "local1": {
         "base_url": "http://localhost:11434/v1",
         "api_key": "ollama",
         "model": "llama3.2:3b",
     },
+
+    "local2": {
+        "base_url": "http://localhost:11434/v1",
+        "api_key": "ollama",
+        "model": "qwen3:4b",
+    },
+
     "cloud": {
         "base_url": "https://api.groq.com/openai/v1",
         "api_key": os.getenv("CLOUD_API_KEY"),

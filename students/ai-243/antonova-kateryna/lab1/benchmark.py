@@ -39,7 +39,7 @@ PROMPTS = {
 }
 
 rows = []
-for provider in ["local", "cloud"]:
+for provider in ["local1", "cloud"]:
     client, model = make_client(provider)
 
     measure(client, model, "розігрів")          # прогрів, не рахуємо
