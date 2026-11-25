@@ -35,7 +35,7 @@ def summarize(old_messages):
     request = ("Стисло перекажи, що вже зроблено в цій роботі. Збережи всі точні числа, "
                "назви й результати інструментів без змін:\n" + render_messages(old_messages))
     response = client.chat.completions.create(
-        model=config.MODEL, temperature=0, max_tokens=config.MAX_TOKENS,
+        model=config.MODEL, temperature=0,
         messages=[{"role": "user", "content": request}])
     used = response.usage.prompt_tokens + response.usage.completion_tokens
     return response.choices[0].message.content, used
