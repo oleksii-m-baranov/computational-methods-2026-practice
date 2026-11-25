@@ -18,8 +18,7 @@ def call_model(messages, step, logger):
     """
     try:
         return ask_model(client, model=config.MODEL, messages=messages,
-                         tools=SCHEMAS, temperature=config.TEMPERATURE,
-                         max_tokens=config.MAX_TOKENS)
+                         tools=SCHEMAS, temperature=config.TEMPERATURE)
     except Exception as error:                  # будь-яка помилка під час виклику
         logger.error(f"\n--- крок {step} | ПОМИЛКА СЕРВЕРА: {error}")
         return None, False

@@ -35,7 +35,7 @@ for desc in ["A", "B", "C"]:
         out = []
         for tools in (schemas.SCHEMAS, schemas.SCHEMAS + [trap]):
             r = call("/api/chat", {"model": config.MODEL, "messages": messages, "tools": tools, "stream": False,
-                                   "options": {"temperature": 0, "num_predict": config.MAX_TOKENS}})
+                                   "options": {"temperature": 0}})
             m = r["message"]
             calls = [c["function"]["name"] + json.dumps(c["function"]["arguments"], ensure_ascii=False)
                      for c in m.get("tool_calls") or []]

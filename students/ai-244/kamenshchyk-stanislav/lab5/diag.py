@@ -24,12 +24,12 @@ def post(path, body):
 
 print("=== 1. OpenAI-сумісний API (як в агенті)")
 r = client.chat.completions.create(model=config.MODEL, messages=messages, tools=schemas.SCHEMAS,
-                                   temperature=0, max_tokens=config.MAX_TOKENS)
+                                   temperature=0)
 print(json.dumps(r.choices[0].model_dump(), ensure_ascii=False, indent=1))
 
 print("\n=== 2. Рідний API Ollama /api/chat")
 r = post("/api/chat", {"model": config.MODEL, "messages": messages, "tools": schemas.SCHEMAS, "stream": False,
-                       "options": {"temperature": 0, "num_predict": config.MAX_TOKENS}})
+                       "options": {"temperature": 0}})
 print(json.dumps(r.get("message"), ensure_ascii=False, indent=1), "| done_reason:", r.get("done_reason"))
 
 print("\n=== 3. Сирий текст моделі (той самий запит, але без розбору викликів)")
@@ -41,5 +41,5 @@ prompt = ("<|im_start|>system\n" + config.SYSTEM + "\n\n# Tools\n\nYou may call 
           "<tool_call></tool_call> XML tags:\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n"
           "</tool_call><|im_end|>\n<|im_start|>user\n" + question + "<|im_end|>\n<|im_start|>assistant\n")
 r = post("/api/generate", {"model": config.MODEL, "prompt": prompt, "raw": True, "stream": False,
-                           "options": {"temperature": 0, "num_predict": config.MAX_TOKENS}})
+                           "options": {"temperature": 0}})
 print(repr(r.get("response")))

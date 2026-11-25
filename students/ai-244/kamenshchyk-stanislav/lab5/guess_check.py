@@ -13,7 +13,7 @@ with open("rag_cases.json", encoding="utf-8") as f:
 for case_id in ["D1", "D3", "P2"]:
     case = cases[case_id]
     response = client.chat.completions.create(
-        model=config.MODEL, temperature=0, max_tokens=200,
+        model=config.MODEL, temperature=0,
         messages=[{"role": "user", "content": case["question"]}])
     answer = response.choices[0].message.content.strip().replace("\n", " ")
     print(f"{case_id} | {case['question']}\n   правильно: {case['expected']} | модель: {answer}\n")
