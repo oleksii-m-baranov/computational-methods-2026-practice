@@ -1,0 +1,126 @@
+[
+  {
+    "tool": "search_books",
+    "args": {
+      "query": "Мережі без таємниць"
+    },
+    "result": "Мережі без таємниць"
+  },
+  {
+    "tool": "search_books",
+    "args": {
+      "query": "Інженерія надійних систем"
+    },
+    "result": "Інженерія надійних систем"
+  },
+  {
+    "tool": "search_books",
+    "args": {
+      "query": "Світло далеких маяків"
+    },
+    "result": "Світло далеких маяків"
+  },
+  {
+    "tool": "search_books",
+    "args": {
+      "query": "Місячний садівник"
+    },
+    "result": "Місячний садівник"
+  },
+  {
+    "tool": "search_books",
+    "args": {
+      "query": "Імперія солі та вітру"
+    },
+    "result": "Імперія солі та вітру"
+  },
+  {
+    "tool": "search_books",
+    "args": {
+      "query": "Ремонт на балконі своїми руками"
+    },
+    "result": "Ремонт на балконі своїми руками"
+  },
+  {
+    "tool": "book_info",
+    "args": {
+      "title": "Мережі без таємниць"
+    },
+    "result": "Примірників: 3, термін видачі: 14 днів, штраф: 7 грн/день"
+  },
+  {
+    "tool": "calculate",
+    "args": {
+      "operation": "add",
+      "a": 7,
+      "b": 14
+    },
+    "result": "21.0"
+  },
+  {
+    "tool": "book_info",
+    "args": {
+      "title": "Інженерія надійних систем"
+    },
+    "result": "Примірників: 1, термін видачі: 14 днів, штраф: 15 грн/день"
+  },
+  {
+    "tool": "calculate",
+    "args": {
+      "b": 14,
+      "operation": "add",
+      "a": 15
+    },
+    "result": "29.0"
+  },
+  {
+    "tool": "book_info",
+    "args": {
+      "title": "Світло далеких маяків"
+    },
+    "result": "Примірників: 3, термін видачі: 14 днів, штраф: 10 грн/день"
+  },
+  {
+    "tool": "calculate",
+    "args": {
+      "a": 10,
+      "b": 14,
+      "operation": "add"
+    },
+    "result": "24.0"
+  },
+  {
+    "tool": "book_info",
+    "args": {
+      "title": "Імперія солі та вітру"
+    },
+    "result": "Примірників: 2, термін видачі: 14 днів, штраф: 10 грн/день"
+  },
+  {
+    "tool": "calculate",
+    "args": {
+      "operation": "add",
+      "a": 10,
+      "b": 14
+    },
+    "result": "24.0"
+  },
+  {
+    "tool": "calculate",
+    "args": {
+      "b": 10,
+      "operation": "sub",
+      "a": 14
+    },
+    "result": "4.0"
+  },
+  {
+    "tool": "calculate",
+    "args": {
+      "a": 14,
+      "b": 10,
+      "operation": "add"
+    },
+    "result": "24.0"
+  }
+]
