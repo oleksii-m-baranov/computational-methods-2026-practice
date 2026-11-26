@@ -1,0 +1,33 @@
+{
+  "chosen": "v2",
+  "tried": {
+    "v2": {
+      "status": "final",
+      "steps": 2,
+      "repeats": 1,
+      "first_tokens": 1185,
+      "typical_growth": 2011,
+      "max_tokens": 3196,
+      "prompt_tokens": 4381,
+      "completion_tokens": 610,
+      "extra_tokens": 0,
+      "formula": 4381.0,
+      "stall": null,
+      "cache_hits": 0
+    },
+    "v3": {
+      "status": "final",
+      "steps": 2,
+      "repeats": 1,
+      "first_tokens": 1194,
+      "typical_growth": 2146,
+      "max_tokens": 3340,
+      "prompt_tokens": 4534,
+      "completion_tokens": 613,
+      "extra_tokens": 0,
+      "formula": 4534.0,
+      "stall": null,
+      "cache_hits": 0
+    }
+  }
+}
