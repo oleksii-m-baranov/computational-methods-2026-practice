@@ -1,0 +1,6 @@
+FAISS, схожість           : 0.6598
+Chroma cosine, відстань   : 0.3402
+Chroma за замовчуванням   : 0.6805
+FAISS d01.txt 3
+Chroma cosine d01.txt 3
+Chroma default d01.txt 3
