@@ -4,6 +4,8 @@ import re
 import time
 from pathlib import Path
 
+from langfuse import get_client, propagate_attributes
+
 import config
 from agent import run_agent
 
@@ -37,12 +39,6 @@ def check_answer(answer, expected, task=None):
 
 
 def result_is_complete(result_path, log_path, run_id):
-    """
-    Перевіряє, чи існує завершений результат запуску.
-
-    Не пропускаємо запуск, якщо JSON пошкоджений,
-    має неправильний run_id або відсутній журнал.
-    """
     if not result_path.exists() or not log_path.exists():
         return False
 
@@ -61,10 +57,6 @@ def result_is_complete(result_path, log_path, run_id):
 
 
 def save_result(result_path, result):
-    """
-    Спочатку записує результат у тимчасовий файл,
-    а потім переносить його на остаточне місце.
-    """
     temp_path = result_path.with_suffix(".json.tmp")
 
     with open(temp_path, "w", encoding="utf-8") as file:
@@ -115,6 +107,8 @@ def main():
     task = load_task()
     expected = get_expected(task)
 
+    langfuse = get_client()
+
     Path("logs").mkdir(
         parents=True,
         exist_ok=True
@@ -160,6 +154,12 @@ def main():
         for repeat in range(1, args.repeats + 1):
             run_id = f"{args.tag}_{mode}_r{repeat}"
 
+            trace_name = (
+                run_id
+                if run_id.startswith("long-")
+                else f"long-{run_id}"
+            )
+
             log_path = (
                 Path("logs") / f"{run_id}.log"
             )
@@ -184,6 +184,7 @@ def main():
 
             print("\n" + "-" * 60)
             print(f"ПОЧАТОК: {run_id}")
+            print(f"Langfuse trace: {trace_name}")
             print(f"Режим: {mode}")
             print(f"Стиснення: {config.COMPRESS}")
             print(f"Збереження стану: {config.USE_STATE}")
@@ -193,16 +194,41 @@ def main():
             started = time.perf_counter()
 
             try:
-                answer = run_agent(
-                    task["question"],
-                    max_steps=config.MAX_STEPS_LONG,
-                    logfile_name=str(
-                        log_path.with_suffix("")
-                    ),
-                    task_id=run_id,
-                    log_overwrite=True,
-                    task_data=task
-                )
+                with langfuse.start_as_current_observation(
+                    as_type="span",
+                    name=trace_name
+                ) as root_span:
+
+                    with propagate_attributes(
+                        trace_name=trace_name,
+                        tags=["lab4", args.tag, mode]
+                    ):
+                        root_span.update(
+                            input=task["question"],
+                            metadata={
+                                "run_id": run_id,
+                                "mode": mode,
+                                "model": config.MODEL,
+                                "num_ctx": config.NUM_CTX,
+                                "compress": config.COMPRESS,
+                                "use_state": config.USE_STATE,
+                                "use_cache": config.USE_CACHE,
+                                "repeat": repeat
+                            }
+                        )
+
+                        answer = run_agent(
+                            task["question"],
+                            max_steps=config.MAX_STEPS_LONG,
+                            logfile_name=str(
+                                log_path.with_suffix("")
+                            ),
+                            task_id=run_id,
+                            log_overwrite=True,
+                            task_data=task
+                        )
+
+                        root_span.update(output=answer)
 
             except KeyboardInterrupt:
                 print(
@@ -212,6 +238,7 @@ def main():
                     "Попередні завершені результати "
                     "збережено."
                 )
+                langfuse.flush()
                 raise SystemExit(130)
 
             except Exception as error:
@@ -227,6 +254,7 @@ def main():
                     "Цей запуск можна повторити."
                 )
 
+                langfuse.flush()
                 continue
 
             elapsed = round(
@@ -242,6 +270,7 @@ def main():
 
             result = {
                 "run_id": run_id,
+                "trace_name": trace_name,
                 "mode": mode,
                 "repeat": repeat,
                 "tag": args.tag,
@@ -265,8 +294,11 @@ def main():
 
             completed += 1
 
+            langfuse.flush()
+
             print("\n" + "=" * 60)
             print(f"ЗАВЕРШЕНО: {run_id}")
+            print(f"Langfuse trace: {trace_name}")
             print(f"Режим: {mode}")
             print(f"Стиснення: {config.COMPRESS}")
             print(f"Збереження стану: {config.USE_STATE}")
@@ -280,6 +312,8 @@ def main():
             print(f"Лог: {log_path}")
             print(f"Результат: {result_path}")
             print("=" * 60)
+
+    langfuse.flush()
 
     print("\n" + "=" * 60)
     print("ПІДСУМОК ЕКСПЕРИМЕНТІВ")
