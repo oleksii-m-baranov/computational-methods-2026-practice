@@ -1,0 +1,133 @@
+[
+  {
+    "tool": "product_info",
+    "args": {
+      "product": "рис"
+    },
+    "result": "Калорійність: 344 ккал на 100 г, ціна: 45 грн/кг"
+  },
+  {
+    "tool": "search_recipes",
+    "args": {
+      "query": "рис"
+    },
+    "result": "Рис з куркою | Рисова запіканка з куркою | Овочевий суп з квасолею | Картопля з грибами"
+  },
+  {
+    "tool": "product_info",
+    "args": {
+      "product": "куряче філе"
+    },
+    "result": "Калорійність: 165 ккал на 100 г, ціна: 180 грн/кг"
+  },
+  {
+    "tool": "search_recipes",
+    "args": {
+      "query": "куряче філе"
+    },
+    "result": "Рис з куркою | Рисова запіканка з куркою"
+  },
+  {
+    "tool": "product_info",
+    "args": {
+      "product": "морква"
+    },
+    "result": "Калорійність: 35 ккал на 100 г, ціна: 30 грн/кг"
+  },
+  {
+    "tool": "search_recipes",
+    "args": {
+      "query": "морква"
+    },
+    "result": "Рис з куркою | Салат зі свіжої капусти | Гречка з овочами"
+  },
+  {
+    "tool": "product_info",
+    "args": {
+      "product": "цибуля"
+    },
+    "result": "Калорійність: 40 ккал на 100 г, ціна: 25 грн/кг"
+  },
+  {
+    "tool": "search_recipes",
+    "args": {
+      "query": "цибуля"
+    },
+    "result": "Рис з куркою | Крем-суп із гарбуза | Гречка з овочами"
+  },
+  {
+    "tool": "product_info",
+    "args": {
+      "product": "картопля"
+    },
+    "result": "Калорійність: 77 ккал на 100 г, ціна: 28 грн/кг"
+  },
+  {
+    "tool": "search_recipes",
+    "args": {
+      "query": "картопля"
+    },
+    "result": "Крем-суп із гарбуза | Картопля з грибами"
+  },
+  {
+    "tool": "product_info",
+    "args": {
+      "product": "яблуко"
+    },
+    "result": "Калорійність: 52 ккал на 100 г, ціна: 38 грн/кг"
+  },
+  {
+    "tool": "scale_amount",
+    "args": {
+      "amount": 344,
+      "base_servings": 100,
+      "target_servings": 150
+    },
+    "result": "516.0"
+  },
+  {
+    "tool": "scale_amount",
+    "args": {
+      "amount": 165,
+      "base_servings": 100,
+      "target_servings": 200
+    },
+    "result": "330.0"
+  },
+  {
+    "tool": "scale_amount",
+    "args": {
+      "target_servings": 80,
+      "amount": 35,
+      "base_servings": 100
+    },
+    "result": "28.0"
+  },
+  {
+    "tool": "scale_amount",
+    "args": {
+      "amount": 35,
+      "base_servings": 100,
+      "target_servings": 50
+    },
+    "result": "17.5"
+  },
+  {
+    "tool": "scale_amount",
+    "args": {
+      "amount": 40,
+      "base_servings": 100,
+      "target_servings": 200
+    },
+    "result": "80.0"
+  },
+  {
+    "tool": "scale_amount",
+    "args": {
+      "target_servings": 100,
+      "amount": 77,
+      "base_servings": 100
+    },
+    "result": "77.0"
+  }
+]

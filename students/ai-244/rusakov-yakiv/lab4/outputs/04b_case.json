@@ -1,0 +1,32 @@
+{
+  "window_4096": {
+    "case": "C",
+    "status": "final",
+    "steps": 2,
+    "repeats": 1,
+    "first_tokens": 1185,
+    "typical_growth": 2015,
+    "max_tokens": 3200,
+    "prompt_tokens": 4385,
+    "completion_tokens": 611,
+    "extra_tokens": 0,
+    "formula": 4385.0,
+    "stall": null,
+    "cache_hits": 0
+  },
+  "window_3072": {
+    "case": "B",
+    "status": "final",
+    "steps": 5,
+    "repeats": 2,
+    "first_tokens": 1185,
+    "typical_growth": 147,
+    "max_tokens": 3055,
+    "prompt_tokens": 12694,
+    "completion_tokens": 734,
+    "extra_tokens": 0,
+    "formula": 7395.0,
+    "stall": 5,
+    "cache_hits": 0
+  }
+}
