@@ -1,0 +1,98 @@
+[
+  {
+    "tool": "search_recipes",
+    "args": {
+      "query": "рис"
+    },
+    "result": "Плов з куркою, Омлет із сиром"
+  },
+  {
+    "tool": "scale_amount",
+    "args": {
+      "target_servings": 6,
+      "amount": 300,
+      "base_servings": 4
+    },
+    "result": "450.0"
+  },
+  {
+    "tool": "search_recipes",
+    "args": {
+      "query": "курка"
+    },
+    "result": "За запитом 'курка' нічого не знайдено."
+  },
+  {
+    "tool": "scale_amount",
+    "args": {
+      "amount": 400,
+      "base_servings": 4,
+      "target_servings": 6
+    },
+    "result": "600.0"
+  },
+  {
+    "tool": "search_recipes",
+    "args": {
+      "query": "морква"
+    },
+    "result": "Плов з куркою"
+  },
+  {
+    "tool": "scale_amount",
+    "args": {
+      "base_servings": 4,
+      "target_servings": 6,
+      "amount": 100
+    },
+    "result": "150.0"
+  },
+  {
+    "tool": "search_recipes",
+    "args": {
+      "query": "цибуля"
+    },
+    "result": "Плов з куркою, Грибний крем-суп"
+  },
+  {
+    "tool": "scale_amount",
+    "args": {
+      "base_servings": 4,
+      "target_servings": 6,
+      "amount": 80
+    },
+    "result": "120.0"
+  },
+  {
+    "tool": "search_recipes",
+    "args": {
+      "query": "картопля"
+    },
+    "result": "Грибний крем-суп, Запечена картопля з грибами"
+  },
+  {
+    "tool": "scale_amount",
+    "args": {
+      "target_servings": 6,
+      "amount": 500,
+      "base_servings": 4
+    },
+    "result": "750.0"
+  },
+  {
+    "tool": "search_recipes",
+    "args": {
+      "query": "молоко"
+    },
+    "result": "Омлет із сиром"
+  },
+  {
+    "tool": "scale_amount",
+    "args": {
+      "amount": 200,
+      "base_servings": 2,
+      "target_servings": 4
+    },
+    "result": "400.0"
+  }
+]
