@@ -1,0 +1,32 @@
+{
+  "window_4096": {
+    "case": "C",
+    "status": "final",
+    "steps": 2,
+    "repeats": 0,
+    "first_tokens": 1078,
+    "typical_growth": 1199,
+    "max_tokens": 2277,
+    "prompt_tokens": 3355,
+    "completion_tokens": 740,
+    "extra_tokens": 0,
+    "formula": 3355.0,
+    "stall": null,
+    "cache_hits": 0
+  },
+  "window_3072": {
+    "case": "C",
+    "status": "final",
+    "steps": 2,
+    "repeats": 0,
+    "first_tokens": 1078,
+    "typical_growth": 1199,
+    "max_tokens": 2277,
+    "prompt_tokens": 3355,
+    "completion_tokens": 957,
+    "extra_tokens": 0,
+    "formula": 3355.0,
+    "stall": null,
+    "cache_hits": 0
+  }
+}
