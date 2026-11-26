@@ -1,0 +1,12 @@
+Authentication error: Langfuse client initialized without public_key. Client will be disabled. Provide a public_key parameter or set LANGFUSE_PUBLIC_KEY environment variable. 
+Authentication error: Langfuse client initialized without public_key. Client will be disabled. Provide a public_key parameter or set LANGFUSE_PUBLIC_KEY environment variable. 
+ПИТАННЯ: Яка ціна оренди шафки для відвідувачів навчального центру? 
+
+рівень: ok
+У документах нічого схожого не знайдено.
+
+Занадто короткий запит -> рівень: schema
+Помилка: аргументи не пройшли перевірку.
+Поле query: String should have at least 3 characters
+Перевір типи, обов'язкові поля та допустимі значення.
+Виправ аргументи і виклич інструмент ще раз.

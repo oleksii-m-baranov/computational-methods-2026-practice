@@ -1,0 +1,78 @@
+[
+  {
+    "tool": "search_exercises",
+    "args": {
+      "query": "спина"
+    },
+    "result": "Тяга верхнього блоку | Тяга нижнього блоку | Жим ногами в тренажері | Станова тяга"
+  },
+  {
+    "tool": "schedule_info",
+    "args": {
+      "activity": "йога"
+    },
+    "result": "День: понеділок, час: 09:00, тренер: Олена"
+  },
+  {
+    "tool": "calc_calories",
+    "args": {
+      "minutes": 45,
+      "weight_kg": 70,
+      "met": 3
+    },
+    "result": "165 ккал"
+  },
+  {
+    "tool": "search_exercises",
+    "args": {
+      "query": "ноги"
+    },
+    "result": "Присідання зі штангою | Жим ногами в тренажері | Підйом ніг у висі | Випади з гантелями"
+  },
+  {
+    "tool": "schedule_info",
+    "args": {
+      "activity": "кардіо"
+    },
+    "result": "День: понеділок, час: 08:00, тренер: Михайло"
+  },
+  {
+    "tool": "calc_calories",
+    "args": {
+      "met": 8,
+      "minutes": 30,
+      "weight_kg": 65
+    },
+    "result": "273 ккал"
+  },
+  {
+    "tool": "search_exercises",
+    "args": {
+      "query": "прес"
+    },
+    "result": "Скручування на прес | Підйом ніг у висі"
+  },
+  {
+    "tool": "schedule_info",
+    "args": {
+      "activity": "пілатес"
+    },
+    "result": "День: вівторок, час: 10:00, тренер: Ірина"
+  },
+  {
+    "tool": "calc_calories",
+    "args": {
+      "met": 4,
+      "minutes": 50,
+      "weight_kg": 60
+    },
+    "result": "210 ккал"
+  },
+  {
+    "tool": "search_exercises",
+    "args": {
+      "query": "руки"
+    },
+    "result": "Згинання рук з гантелями | Віджимання на трицепс від лави"
+  }
+]

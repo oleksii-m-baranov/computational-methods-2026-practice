@@ -1,0 +1,11 @@
+.env
+.venv/
+venv/
+__pycache__/
+cache/
+state/
+index/embeddings_cache.json
+chroma_db/
+.DS_Store
+chroma_cos/
+chroma_default/
