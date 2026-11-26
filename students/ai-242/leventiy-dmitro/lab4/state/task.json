@@ -1,0 +1,9 @@
+[
+  {
+    "tool": "search_articles",
+    "args": {
+      "query": "дряпає"
+    },
+    "result": "Чому кіт дряпає меблі"
+  }
+]
