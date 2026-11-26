@@ -1,0 +1,92 @@
+{
+  "run_id": "main_trim_r2",
+  "configuration": "trim",
+  "series": "main",
+  "status": "server_error",
+  "started_at": "2026-11-13T11:04:38.698153+00:00",
+  "answer": null,
+  "model": "qwen25-lab4-final-3k",
+  "num_ctx": 3072,
+  "temperature": 0,
+  "compress_at": 2150,
+  "keep_last": 6,
+  "state_result_chars": 200,
+  "use_cache": false,
+  "request_timeout": 240.0,
+  "cache_namespace": "lab4-final-qwen25-3k-v1",
+  "task_sha256": "255f552df9174770b2b319cd7b1aff9373b03ed7c6d0648c3c8b08ee9471a968",
+  "source_sha256": {
+    "agent.py": "c2202a3493f91abebc4bf1cbb41b7ddeace0cab549f30b73e9a172d24d9b90e2",
+    "agent_runner.py": "77a4209d6e8dbc0efadd963ecf4088101c03e77ca4edd8ec422f7ea509349dc2",
+    "analyze.py": "1cd3f248bff9efd7524b17b1660823ff5dc9d17558bde0890c19ba29283aa5b6",
+    "arguments.py": "a1097d7fc74ababc73db0f05eb96481a4a6bb60e9b52f0ff00275cf23b019f7d",
+    "cache.py": "8940d49e82243a5a23a0d1aef4166ba71056d4dd8d1a2c65cf3aef83858f3bed",
+    "check_tracing.py": "84a155a5186f0be7a94ea89a636a3b8cf82f3fc0291984350196bc53393c0c29",
+    "checks.py": "744c728f7d39534ea1845c63b7db9e855a50d7831bfe86c4a4f7fbf75ad1af6a",
+    "collect_results.py": "9c4da344e319d66052f7c2f30b4f61ae6c6da6b889b0cc39a936fe83ec89e0e8",
+    "compress.py": "6e115e709873fcc7a7a8e4dba90042b06a1b4d62299a6d39f621dac0ce07ceea",
+    "config.py": "ad5211fb997bbccd70f82dfdeee37bbe99237974c471668b15cf7b2793e5ab94",
+    "context.py": "679def2835e801a894c029fc38f36663c6108fca3cb2cbc5d1ee06ec633fd4af",
+    "dispatcher.py": "9001fdcf081780acd4e4cabfd205dff574336cc3bd7ef8873c502c18a714de14",
+    "logparse.py": "7a925eec9db35cfc9e5258ab4fa3119bb34036725e3649f5195cb0983d7440e9",
+    "make_task.py": "bdf5d3db72ebf1fecb3481b41baee3665661b4bb77701bb5d92789a7fd4971c0",
+    "measure.py": "b78ee34ab6f322fe0351a09756282ea327e9b10e534c533a54775c84566b25c3",
+    "metrics.py": "f34cc9d3eed3b97b48fc8d74af534cf98903aa0a09586cb7cb38d00ab440237a",
+    "model.py": "2228e1a344dc5c4c4e7090bfdd217cc2dde6077b5d39aa00d9b1ad39e7d27556",
+    "preflight.py": "91b3d003d8c8a65bdc09cfe9a7622b71f56e5b3cb825666822b790f83069c503",
+    "refine_task.py": "3f65ae7cac9743a92f4a8241575396b0fc0fb9b931852524a48d6692a937b613",
+    "run.py": "c1062e5d36e177981dce0f20eed530b458a4272faa500f46f54ae2a835be35f6",
+    "schemas.py": "9041aeb3337a9274124f639ca74a95daa40409285235f0c36fcd6c03056392c1",
+    "self_check.py": "0558e121823d90f7e999de3fe2de116c6be87ff04e333515336ecaaaf84584b4",
+    "state.py": "33082b3aff397a67e0764adce6d0fffa2127a3b54f8b797d47c7f308187d4699",
+    "table.py": "3c922f1e40550ee210cece1b4be6498ca07c670c05986b86f3f45a8d3f7c762d",
+    "tools.py": "2e6ef2b636ed9e8bb4b5071b97e21d3c2f6bc737f91034dc4bf40d65211ed64b",
+    "worker.py": "4cd4ae1254f0f6672f913d0b79364e77381f59172759f7cf6bd0bd1d5421ff97"
+  },
+  "python_version": "3.12.2 (tags/v3.12.2:6abddd9, Feb  6 2024, 21:26:36) [MSC v.1937 64 bit (AMD64)]",
+  "packages": {
+    "openai": "3.31.0",
+    "pydantic": "2.14.1",
+    "langfuse": "4.18.0",
+    "python-dotenv": "1.2.4"
+  },
+  "seconds": 294.143,
+  "metrics": {
+    "status": "server_error",
+    "steps": 3,
+    "repeats": 2,
+    "first_tokens": 971,
+    "typical_growth": 1307,
+    "max_tokens": 2278,
+    "prompt_tokens": 4275,
+    "completion_tokens": 275,
+    "extra_tokens": 0,
+    "formula": 6834.0,
+    "stall": null,
+    "cache_hits": 0,
+    "squeezes": [
+      {
+        "n": 2,
+        "tokens": 2278,
+        "completion": 34,
+        "from_cache": false,
+        "calls": [
+          "scale_amount({\"amount\":80,\"base_servings\":100,\"target_servings\":1})"
+        ],
+        "answer": false,
+        "server_error": false,
+        "squeeze": [
+          2278,
+          12,
+          4
+        ],
+        "extra": 0
+      }
+    ]
+  },
+  "tool_calls": 11,
+  "min_calls": 18,
+  "expected": "1298.9",
+  "expected_number_present": false,
+  "manual_correct": null
+}

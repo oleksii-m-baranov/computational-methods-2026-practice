@@ -1,0 +1,12 @@
+model,price,in_stock,warranty_months
+StudyNova 14,22000,5,24
+CodeNova 15,35000,4,24
+GameNova X16,65000,3,36
+DesignNova 16,58000,2,36
+OfficeNova 14,18000,7,12
+CodeNova 15 Pro,52000,2,36
+GameNova Lite 15,42000,0,24
+StudyNova 15,28000,6,24
+DesignNova Pro 17,85000,1,36
+OfficeNova Lite 13,16000,8,12
+CodeNova Air 14,39000,3,24
