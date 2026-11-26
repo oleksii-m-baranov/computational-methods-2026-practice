@@ -1,19 +1,46 @@
+
+import json
 import time
-from providers import make_client
+from providers import local, cloud, LOCAL_MODEL, CLOUD_MODEL
 
-QUESTION = "Поясни різницю між стеком і чергою. Коротко."
+PROMPT = "Поясни різницю між стеком і чергою. Коротко."
 
-for name in ["local", "cloud"]:
-    client, model = make_client(name)
-    t0 = time.perf_counter()
+results = []
+
+for client, model in [
+    (local, LOCAL_MODEL),
+    (cloud, CLOUD_MODEL)
+]:
+    start = time.perf_counter()
+
     response = client.chat.completions.create(
         model=model,
-        messages=[{"role": "user", "content": QUESTION}],
-        temperature=0.7,
+        messages=[
+            {"role": "user", "content": PROMPT}
+        ],
+        temperature=0.7
     )
-    elapsed = time.perf_counter() - t0
-    print(f"===== {name.upper()} ({model}) =====")
-    print(response.choices[0].message.content)
-    print(f"Час: {elapsed:.2f} c")
-    print(response.usage)
-    print()
+
+    elapsed = time.perf_counter() - start
+    text = response.choices[0].message.content or ""
+
+    result = {
+        "model": model,
+        "response": text,
+        "time_s": round(elapsed, 3),
+        "chars": len(text),
+        "prompt_tokens": response.usage.prompt_tokens,
+        "completion_tokens": response.usage.completion_tokens,
+        "total_tokens": response.usage.total_tokens
+    }
+
+    results.append(result)
+
+    print(json.dumps(
+        result, ensure_ascii=False, indent=2
+    ))
+
+with open("task3_results.json", "w", encoding="utf-8") as f:
+    json.dump(results, f, ensure_ascii=False, indent=2)
+
+print("Результати збережено у task3_results.json")

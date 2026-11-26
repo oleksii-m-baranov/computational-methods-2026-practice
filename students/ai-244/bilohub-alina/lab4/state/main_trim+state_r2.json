@@ -1,0 +1,204 @@
+[
+  {
+    "tool": "search_books",
+    "args": {
+      "query": "Мережі без таємниць"
+    },
+    "result": "Мережі без таємниць"
+  },
+  {
+    "tool": "search_books",
+    "args": {
+      "query": "Інженерія надійних систем"
+    },
+    "result": "Інженерія надійних систем"
+  },
+  {
+    "tool": "search_books",
+    "args": {
+      "query": "Світло далеких маяків"
+    },
+    "result": "Світло далеких маяків"
+  },
+  {
+    "tool": "search_books",
+    "args": {
+      "query": "Місячний садівник"
+    },
+    "result": "Місячний садівник"
+  },
+  {
+    "tool": "book_info",
+    "args": {
+      "title": "Мережі без таємниць"
+    },
+    "result": "Примірників: 3, термін видачі: 14 днів, штраф: 7 грн/день"
+  },
+  {
+    "tool": "calculate",
+    "args": {
+      "operation": "mul",
+      "a": 7,
+      "b": 3
+    },
+    "result": "21.0"
+  },
+  {
+    "tool": "search_books",
+    "args": {
+      "query": "Світло далеких маяків"
+    },
+    "result": "Світло далеких маяків"
+  },
+  {
+    "tool": "book_info",
+    "args": {
+      "title": "Світло далеких маяків"
+    },
+    "result": "Примірників: 3, термін видачі: 14 днів, штраф: 10 грн/день"
+  },
+  {
+    "tool": "calculate",
+    "args": {
+      "b": 3,
+      "operation": "mul",
+      "a": 10
+    },
+    "result": "30.0"
+  },
+  {
+    "tool": "calculate",
+    "args": {
+      "a": 30,
+      "b": 5,
+      "operation": "sub"
+    },
+    "result": "25.0"
+  },
+  {
+    "tool": "calculate",
+    "args": {
+      "operation": "add",
+      "a": 25,
+      "b": 10
+    },
+    "result": "35.0"
+  },
+  {
+    "tool": "calculate",
+    "args": {
+      "b": 5,
+      "operation": "sub",
+      "a": 35
+    },
+    "result": "30.0"
+  },
+  {
+    "tool": "calculate",
+    "args": {
+      "a": 30,
+      "b": 10,
+      "operation": "add"
+    },
+    "result": "40.0"
+  },
+  {
+    "tool": "calculate",
+    "args": {
+      "a": 40,
+      "b": 10,
+      "operation": "sub"
+    },
+    "result": "30.0"
+  },
+  {
+    "tool": "calculate",
+    "args": {
+      "a": 30,
+      "b": 10,
+      "operation": "mul"
+    },
+    "result": "300.0"
+  },
+  {
+    "tool": "calculate",
+    "args": {
+      "a": 300,
+      "b": 10,
+      "operation": "add"
+    },
+    "result": "310.0"
+  },
+  {
+    "tool": "calculate",
+    "args": {
+      "a": 310,
+      "b": 10,
+      "operation": "sub"
+    },
+    "result": "300.0"
+  },
+  {
+    "tool": "calculate",
+    "args": {
+      "a": 300,
+      "b": 10,
+      "operation": "mul"
+    },
+    "result": "3000.0"
+  },
+  {
+    "tool": "calculate",
+    "args": {
+      "operation": "add",
+      "a": 3000,
+      "b": 10
+    },
+    "result": "3010.0"
+  },
+  {
+    "tool": "calculate",
+    "args": {
+      "a": 3010,
+      "b": 10,
+      "operation": "sub"
+    },
+    "result": "3000.0"
+  },
+  {
+    "tool": "calculate",
+    "args": {
+      "a": 3000,
+      "b": 10,
+      "operation": "mul"
+    },
+    "result": "30000.0"
+  },
+  {
+    "tool": "calculate",
+    "args": {
+      "a": 30000,
+      "b": 10,
+      "operation": "add"
+    },
+    "result": "30010.0"
+  },
+  {
+    "tool": "calculate",
+    "args": {
+      "a": 30010,
+      "b": 10,
+      "operation": "sub"
+    },
+    "result": "30000.0"
+  },
+  {
+    "tool": "calculate",
+    "args": {
+      "a": 30000,
+      "b": 10,
+      "operation": "mul"
+    },
+    "result": "300000.0"
+  }
+]

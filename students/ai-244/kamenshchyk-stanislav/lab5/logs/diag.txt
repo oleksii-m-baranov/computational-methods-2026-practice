@@ -1,0 +1,24 @@
+=== 1. OpenAI-сумісний API (як в агенті)
+{
+ "finish_reason": "stop",
+ "index": 0,
+ "logprobs": null,
+ "message": {
+  "content": "",
+  "refusal": null,
+  "role": "assistant",
+  "annotations": null,
+  "audio": null,
+  "function_call": null,
+  "tool_calls": null
+ }
+}
+
+=== 2. Рідний API Ollama /api/chat
+{
+ "role": "assistant",
+ "content": ""
+} | done_reason: stop
+
+=== 3. Сирий текст моделі (той самий запит, але без розбору викликів)
+'<tool_call>\n{"name": "search_docs", "arguments": {"query": "ТО-1 пробіг"}}\n</tool_call>'
