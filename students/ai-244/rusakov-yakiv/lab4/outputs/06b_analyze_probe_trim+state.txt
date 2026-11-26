@@ -1,0 +1,37 @@
+$ /usr/bin/python3 analyze.py logs/probe_trim+state_r1.log steps
+
+Прогін: Для кожної з шести робіт: заміна масла (4 деталі), заміна св
+  статус завершення            : retry_limit
+  кроків                       : 3 (повторних викликів: 3)
+  вхід першого кроку           : 1185 токенів
+  типовий приріст за крок      : 1644 токенів
+  найбільший вхід              : 2829 токенів (92% вікна 3072)
+  сума prompt_tokens за прогін : 6341
+  за формулою n*C + d*n*(n-1)/2: 8487
+  вхід перестав рости на кроці : не помічено
+  влучань у кеш                : 0
+  стиснення на кроці 2: вхід був 2829, повідомлень 23 -> 4
+
+| Крок | prompt_tokens | Приріст | Що зробила модель                                            |
+|-----:|--------------:|--------:|:-------------------------------------------------------------|
+|    1 |          1185 |         | search_service({"query":"заміна масла"})                     |
+|      |               |         | price_info({"service":"заміна масла"})                       |
+|      |               |         | calc_total({"work_price":200,"part_price":50,"quantity":4})  |
+|      |               |         | search_service({"query":"заміна свічок запалювання"})        |
+|      |               |         | price_info({"service":"заміна свічок запалювання"})          |
+|      |               |         | calc_total({"quantity":4,"work_price":200,"part_price":15})  |
+|      |               |         | search_service({"query":"заміна гальмівних колодок"})        |
+|      |               |         | price_info({"service":"заміна гальмівних колодок"})          |
+|      |               |         | calc_total({"work_price":200,"part_price":50,"quantity":2})  |
+|      |               |         | search_service({"query":"заміна гальмівних дисків"})         |
+|      |               |         | price_info({"service":"заміна гальмівних дисків"})           |
+|      |               |         | calc_total({"part_price":50,"quantity":2,"work_price":200})  |
+|      |               |         | search_service({"query":"заміна амортизаторів"})             |
+|      |               |         | price_info({"service":"заміна амортизаторів"})               |
+|      |               |         | calc_total({"work_price":200,"part_price":50,"quantity":2})  |
+|      |               |         | search_service({"query":"заміна акумулятора"})               |
+|      |               |         | price_info({"service":"заміна акумулятора"})                 |
+|      |               |         | calc_total({"work_price":200,"part_price":100,"quantity":... |
+|    2 |          2829 |    1644 | calc_total({"part_price":3500,"quantity":1,"work_price":2... |
+|    3 |          2327 |    -502 | price_info({"service":"заміна акумулятора"})                 |
+|      |               |         | calc_total({"part_price":3500,"quantity":1,"work_price":2... |
