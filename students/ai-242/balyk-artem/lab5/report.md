@@ -270,11 +270,11 @@
 * **`rag-B-r1-D1`:** вхід `{"query": "скільки хвилин слабкого кипіння потрібно підтримувати після закипання води для овочевого відвару"}`; вихід — 2 чанки (`d01.txt` та `r03.txt`).
 * **`rag-C-r1-D1`:** вхід `{"query": "кількість хвилин після закипання води для овочевого відвару"}`; вихід — 3 чанки (`d01.txt`, `r03.txt` та `r12.txt`).
 
-<img width="1516" height="908" alt="image" src="https://github.com/user-attachments/assets/fe8119fa-db68-43b8-b34e-1ca5e5996955" />
+![rag-B-r1-D1.png](screenshots/rag-B-r1-D1.png)
 
 рис.1 - Траса rag-B-r1-D1
 
-<img width="1242" height="897" alt="image" src="https://github.com/user-attachments/assets/667079fd-89ff-4229-88dd-fc02d66a52c7" />
+![rag-C-r1-D1.png](screenshots/rag-C-r1-D1.png)
 
 рис.2 - Траса rag-C-r1-D1
 
