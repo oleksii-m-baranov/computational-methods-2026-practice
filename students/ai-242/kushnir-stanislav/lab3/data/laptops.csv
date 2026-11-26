@@ -1,0 +1,12 @@
+model,price,in_stock,warranty_months
+LearnPad 14,27000,4,12
+CodeForge 15,48000,2,24
+CodeForge 15 Max,71000,0,36
+DevBox 16,56000,3,24
+TurboPlay G7,62000,5,24
+ArenaX 17,88000,1,36
+PixelStudio 16,79000,2,36
+OfficeLite 15,17500,9,12
+WorkMate 14,33000,6,12
+TravelBook 13,29000,7,12
+SlimAir 13,52000,3,24

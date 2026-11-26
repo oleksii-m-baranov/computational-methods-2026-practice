@@ -1,0 +1,40 @@
+import csv
+import os
+
+
+def search_exercises(query: str) -> str:
+    q = query.lower()
+    found = []
+    folder = "data/corpus"
+    for filename in sorted(os.listdir(folder)):
+        with open(os.path.join(folder, filename), encoding="utf-8") as f:
+            text = f.read().strip()
+        if q in text.lower():
+            found.append(text)
+    if not found:
+        return f"За запитом '{query}' нічого не знайдено."
+    return "\n---\n".join(found)
+
+
+def schedule_info(activity: str) -> str:
+    with open("data/schedule.csv", encoding="utf-8") as f:
+        for row in csv.DictReader(f):
+            if row["activity"].lower() == activity.lower():
+                return (f"День: {row['weekday']}, час: {row['time']}, "
+                        f"тренер: {row['trainer']}")
+    return f"Заняття '{activity}' немає в розкладі."
+
+
+def calc_calories(minutes: float, weight_kg: float, met: float) -> str:
+    return f"{round(met * 3.5 * weight_kg / 200 * minutes)} ккал"
+
+
+def book_session(activity: str, weekday: str) -> str:
+    return "Запис виконано"  
+
+TOOLS = {
+    "search_exercises": search_exercises,
+    "schedule_info": schedule_info,
+    "calc_calories": calc_calories,
+    "book_session": book_session,
+}
