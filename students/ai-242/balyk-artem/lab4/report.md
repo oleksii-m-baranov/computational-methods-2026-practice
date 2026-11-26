@@ -24,9 +24,10 @@
 **Базова модель:** qwen2.5:3b
 
 **Розміри контекстного вікна:**
-
-- 4096 токенів (`llama32-4k`) - початкове значення
-- 2048 токенів (`llama32-2k`) - остаточне значення, що дозволяє побачити обрізання контексного віка моделі (завдання 3).
+- `context length` базової моделі — 32768 токенів;
+- 4096 токенів (`llama32-4k`) - початкове значення;
+- 2048 токенів (`llama32-2k`) - остаточне значення, що дозволяє побачити обрізання контексного віка моделі (завдання 3);
+- контекстне вікно було звужене у (32768/2048) = 16 разів.
 
 ## 3. Довга задача
 
@@ -201,21 +202,21 @@
 
 ### 7.3. Порівняння трас Langfuse
 
-**Скріншот 1.1 — Траса `long-main_none_r1` у Langfuse**
+**Скріншот 1.1 — Траса `long-main_none_r1` у Langfuse**:
 
-<img width="1562" height="907" alt="image" src="https://github.com/user-attachments/assets/d649724e-4ec0-41d6-9722-6dbb263b7a84" />
+![long-main_none_r1.png](screenshots/long-main_none_r1.png)
 
-**Скріншот 1.2 — Траса `long-main_none_r1` у Langfuse на 3 кроці**
+**Скріншот 1.2 — Траса `long-main_none_r1` у Langfuse на 3 кроці**:
 
-<img width="1901" height="913" alt="image" src="https://github.com/user-attachments/assets/66c039ce-c6e0-4492-81fb-4a8fb78e42a7" />
+![long-main_none_r1_step3.png](screenshots/long-main_none_r1_step3.png)
 
-**Скріншот 2.1 — Траса `long-main_trim+state_r1` у Langfuse**
+**Скріншот 2.1 — Траса `long-main_trim+state_r1` у Langfuse**:
 
-<img width="1660" height="902" alt="image" src="https://github.com/user-attachments/assets/b6c8c84a-ed36-4581-a762-4140ac49af04" />
+![long-main_trim+state_r1.png](screenshots/long-main_trim%2Bstate_r1.png)
 
-**Скріншот 2.2 — Траса `long-main_trim+state_r1` у Langfuse на 3 кроці**
+**Скріншот 2.2 — Траса `long-main_trim+state_r1` у Langfuse на 3 кроці**:
 
-<img width="1900" height="907" alt="image" src="https://github.com/user-attachments/assets/544e46f3-d456-488c-8673-9d0d03535093" />
+![long-main_trim+state_r1_step3.png](screenshots/long-main_trim%2Bstate_r1_step3.png)
 
 Для порівняння було вибрано траси `long-main_none_r1` та `long-main_trim+state_r1`.
 
