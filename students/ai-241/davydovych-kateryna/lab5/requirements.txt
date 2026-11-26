@@ -1,0 +1,7 @@
+openai
+pydantic>=2
+python-dotenv
+langfuse>=4,<5
+numpy
+faiss-cpu
+chromadb   # лише для додаткового завдання
