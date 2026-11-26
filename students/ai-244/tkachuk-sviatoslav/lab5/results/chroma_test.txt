@@ -1,0 +1,14 @@
+Дата: 2026-11-20T21:02:05+02:00
+Модель ембедингів: bge-m3
+Нарізання: paragraphs, 800, overlap=0, title=True
+Кількість однакових чанків: 52; розмірність вектора: 1024
+Питання D1: Яка тестова порція у грамах за макетом внутрішнього маршруту?
+FAISS, cosine similarity: 0.693364; top-1: d01.txt / 0
+Chroma cosine, distance: 0.306636; top-1: d01.txt / 0
+Chroma default L2, squared distance: 0.613271; top-1: d01.txt / 0
+FAISS top-1 == Chroma cosine top-1: True
+FAISS top-1 == Chroma default top-1: True
+Теоретично 1 - s = 0.306636
+Теоретично 2 - 2*s = 0.613271
+Похибка cosine від 1-s: 5.96046e-08
+Похибка L2 від 2-2*s: 2.98023e-07
