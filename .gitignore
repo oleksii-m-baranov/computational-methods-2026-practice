@@ -219,11 +219,9 @@ __marimo__/
 
 # Misc
 docs/**/cache/
-docs/**/state/
 docs/**/index/embeddings_cache.json
 docs/**/chroma_*/
 students/**/cache/
-students/**/state/
 students/**/index/embeddings_cache.json
 students/**/chroma_*/
 
