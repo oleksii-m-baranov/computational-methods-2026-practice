@@ -1,0 +1,24 @@
+Authentication error: Langfuse client initialized without public_key. Client will be disabled. Provide a public_key parameter or set LANGFUSE_PUBLIC_KEY environment variable. 
+2026-11-25 08:57:35 - INFO - 
+============================================================
+2026-11-25 08:57:35 - INFO - ЗАДАЧА: Скільки примірників мають картки тушкування?
+Authentication error: Langfuse client initialized without public_key. Client will be disabled. Provide a public_key parameter or set LANGFUSE_PUBLIC_KEY environment variable. 
+2026-11-25 08:57:42 - INFO - 
+--- крок 1 | помилок поспіль=0 | prompt_tokens=766 | completion_tokens=23
+2026-11-25 08:57:42 - INFO -   виклик   : search_docs({"query":"Кількість примірників карток тушкування"})
+Authentication error: Langfuse client initialized without public_key. Client will be disabled. Provide a public_key parameter or set LANGFUSE_PUBLIC_KEY environment variable. 
+Authentication error: Langfuse client initialized without public_key. Client will be disabled. Provide a public_key parameter or set LANGFUSE_PUBLIC_KEY environment variable. 
+2026-11-25 08:57:47 - INFO -   рівень   : ok
+2026-11-25 08:57:47 - INFO -   результат: [1] Джерело: d01.txt
+кладач порівнює результати за однаковими критеріями. У навчальному фонді картки тушкування мають 17 примірників, які зберігаються біля дошки для пояснень та видаються на початку уроку. Після роботи уч
+
+[2] Джерело: d01.txt
+ня теми, інвентарю та очікуваного результату; кожна картка має свій внутрішній код.
+
+На заняттях з тушкування учасники спостерігають, як змінюються текстура й аромат під час оброблення продуктів, а ви
+Authentication error: Langfuse client initialized without public_key. Client will be disabled. Provide a public_key parameter or set LANGFUSE_PUBLIC_KEY environment variable. 
+2026-11-25 08:57:52 - INFO - 
+--- крок 2 | помилок поспіль=0 | prompt_tokens=342 | completion_tokens=14
+2026-11-25 08:57:52 - INFO - ВІДПОВІДЬ: Картки тушкування мають 17 примірників.
+
+ВІДПОВІДЬ: Картки тушкування мають 17 примірників.
