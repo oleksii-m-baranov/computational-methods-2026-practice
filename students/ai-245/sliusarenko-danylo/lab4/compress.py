@@ -1,6 +1,7 @@
 """Скорочення історії, коли вхід став завеликим."""
 import config
 from context import trim
+from summary import compress_by_summary
 
 
 def attach_state(messages, task, state):
@@ -29,4 +30,6 @@ def compress_history(messages, task, used, state, logger):
         return messages
     if config.COMPRESS == "trim":
         return compress_by_trim(messages, task, used, state, logger)
+    if config.COMPRESS == "summary":
+        return compress_by_summary(messages, used, logger)
     return messages
