@@ -4,7 +4,7 @@
 ЗАХИСТ: максимум 8 викликів за крок
 ЗАХИСТ: повторні виклики = повторне використання результату
   КЕШ: MISS
---- крок 1 | помилок поспіль=0 | prompt_tokens=1176 | completion_tokens=456
+--- крок 1 | помилок поспіль=0 | prompt_tokens=1232 | completion_tokens=455
   МОДЕЛЬ ЗАПРОПОНУВАЛА ВИКЛИКІВ: 15
   виклик 1/15: search_laptops({"query":"StudyNova 14"})
   рівень   : ok
@@ -21,7 +21,7 @@
   виклик 5/15: laptop_info({"model":"CodeNova 15"})
   рівень   : ok
   результат: Ціна: 35000 грн, на складі: 4 шт., гарантія: 24 міс.
-  виклик 6/15: calc_installment({"months":12,"overpay_percent":10,"price":12000})
+  виклик 6/15: calc_installment({"price":12000,"months":12,"overpay_percent":10})
   рівень   : meaning
   результат: Помилка: Ціна 12000.0 грн відсутня в довіднику. Виклич laptop_info для потрібної моделі та використай отриману ціну. Використай допустиме значення або повідом користувачу, що відповідних даних немає.
   виклик 7/15: search_laptops({"query":"GameNova X16"})
@@ -30,13 +30,13 @@
   виклик 8/15: laptop_info({"model":"GameNova X16"})
   рівень   : ok
   результат: Ціна: 65000 грн, на складі: 3 шт., гарантія: 36 міс.
-  виклик 9/15: calc_installment({"price":15000,"months":12,"overpay_percent":10})
+  виклик 9/15: calc_installment({"overpay_percent":10,"price":15000,"months":12})
   ЛІМІТ ВИКЛИКІВ: 8
   виклик 10/15: search_laptops({"query":"DesignNova 16"})
   ЛІМІТ ВИКЛИКІВ: 8
   виклик 11/15: laptop_info({"model":"DesignNova 16"})
   ЛІМІТ ВИКЛИКІВ: 8
-  виклик 12/15: calc_installment({"price":18000,"months":12,"overpay_percent":10})
+  виклик 12/15: calc_installment({"months":12,"overpay_percent":10,"price":18000})
   ЛІМІТ ВИКЛИКІВ: 8
   виклик 13/15: search_laptops({"query":"OfficeNova 14"})
   ЛІМІТ ВИКЛИКІВ: 8
@@ -47,7 +47,7 @@
   ПІДСУМОК ВИКЛИКІВ: реальних=8, повторних=0, відхилених=7
 ПРОГРЕС: Готово моделей: 0/6. Успішних викликів: 6. Невиконано: StudyNova 14: installment, CodeNova 15: installment, GameNova X16: installment, DesignNova 16: search, DesignNova 16: info, DesignNova 16: installment, OfficeNova 14: search, OfficeNova 14: info, OfficeNova 14: installment, StudyNova 15: search, StudyNova 15: info, StudyNova 15: installment
   КЕШ: MISS
---- крок 2 | помилок поспіль=1 | prompt_tokens=2572 | completion_tokens=436
+--- крок 2 | помилок поспіль=1 | prompt_tokens=2628 | completion_tokens=436
   МОДЕЛЬ ЗАПРОПОНУВАЛА ВИКЛИКІВ: 18
   виклик 1/18: search_laptops({"query":"StudyNova 14"})
   ПОВТОРНИЙ ВИКЛИК: використано попередній результат
@@ -69,7 +69,7 @@
   ПОВТОРНИЙ ВИКЛИК: використано попередній результат
   рівень   : ok
   результат: Ціна: 35000 грн, на складі: 4 шт., гарантія: 24 міс.
-  виклик 6/18: calc_installment({"price":12000,"months":12,"overpay_percent":10})
+  виклик 6/18: calc_installment({"months":12,"overpay_percent":10,"price":12000})
   ПОВТОРНИЙ ВИКЛИК: використано попередній результат
   рівень   : meaning
   результат: Помилка: Ціна 12000.0 грн відсутня в довіднику. Виклич laptop_info для потрібної моделі та використай отриману ціну. Використай допустиме значення або повідом користувачу, що відповідних даних немає.
@@ -81,7 +81,7 @@
   ПОВТОРНИЙ ВИКЛИК: використано попередній результат
   рівень   : ok
   результат: Ціна: 65000 грн, на складі: 3 шт., гарантія: 36 міс.
-  виклик 9/18: calc_installment({"price":15000,"months":12,"overpay_percent":10})
+  виклик 9/18: calc_installment({"months":12,"overpay_percent":10,"price":15000})
   рівень   : meaning
   результат: Помилка: Ціна 15000.0 грн відсутня в довіднику. Виклич laptop_info для потрібної моделі та використай отриману ціну. Використай допустиме значення або повідом користувачу, що відповідних даних немає.
   виклик 10/18: search_laptops({"query":"DesignNova 16"})
@@ -99,7 +99,7 @@
   виклик 14/18: laptop_info({"model":"OfficeNova 14"})
   рівень   : ok
   результат: Ціна: 18000 грн, на складі: 7 шт., гарантія: 12 міс.
-  виклик 15/18: calc_installment({"overpay_percent":10,"price":11000,"months":12})
+  виклик 15/18: calc_installment({"price":11000,"months":12,"overpay_percent":10})
   рівень   : meaning
   результат: Помилка: Ціна 11000.0 грн відсутня в довіднику. Виклич laptop_info для потрібної моделі та використай отриману ціну. Використай допустиме значення або повідом користувачу, що відповідних даних немає.
   виклик 16/18: search_laptops({"query":"StudyNova 15"})
@@ -107,12 +107,12 @@
   результат: StudyNova 15
   виклик 17/18: laptop_info({"model":"StudyNova 15"})
   ЛІМІТ ВИКЛИКІВ: 8
-  виклик 18/18: calc_installment({"price":13000,"months":12,"overpay_percent":10})
+  виклик 18/18: calc_installment({"months":12,"overpay_percent":10,"price":13000})
   ЛІМІТ ВИКЛИКІВ: 8
   ПІДСУМОК ВИКЛИКІВ: реальних=8, повторних=8, відхилених=2
 ПРОГРЕС: Готово моделей: 0/6. Успішних викликів: 11. Невиконано: StudyNova 14: installment, CodeNova 15: installment, GameNova X16: installment, DesignNova 16: installment, OfficeNova 14: installment, StudyNova 15: info, StudyNova 15: installment
   КЕШ: MISS
---- крок 3 | помилок поспіль=2 | prompt_tokens=3800 | completion_tokens=236
+--- крок 3 | помилок поспіль=2 | prompt_tokens=3856 | completion_tokens=235
   МОДЕЛЬ ЗАПРОПОНУВАЛА ВИКЛИКІВ: 8
   виклик 1/8: laptop_info({"model":"StudyNova 15"})
   рівень   : ok
@@ -120,11 +120,11 @@
   виклик 2/8: calc_installment({"months":12,"overpay_percent":10,"price":13000})
   рівень   : meaning
   результат: Помилка: Ціна 13000.0 грн відсутня в довіднику. Виклич laptop_info для потрібної моделі та використай отриману ціну. Використай допустиме значення або повідом користувачу, що відповідних даних немає.
-  виклик 3/8: calc_installment({"months":12,"overpay_percent":10,"price":18000})
+  виклик 3/8: calc_installment({"price":18000,"months":12,"overpay_percent":10})
   ПОВТОРНИЙ ВИКЛИК: використано попередній результат
   рівень   : ok
   результат: 1650.0 грн на місяць, усього 19800.0 грн
-  виклик 4/8: calc_installment({"overpay_percent":10,"price":15000,"months":12})
+  виклик 4/8: calc_installment({"months":12,"overpay_percent":10,"price":15000})
   ПОВТОРНИЙ ВИКЛИК: використано попередній результат
   рівень   : meaning
   результат: Помилка: Ціна 15000.0 грн відсутня в довіднику. Виклич laptop_info для потрібної моделі та використай отриману ціну. Використай допустиме значення або повідом користувачу, що відповідних даних немає.
@@ -132,7 +132,7 @@
   ПОВТОРНИЙ ВИКЛИК: використано попередній результат
   рівень   : meaning
   результат: Помилка: Ціна 12000.0 грн відсутня в довіднику. Виклич laptop_info для потрібної моделі та використай отриману ціну. Використай допустиме значення або повідом користувачу, що відповідних даних немає.
-  виклик 6/8: calc_installment({"overpay_percent":10,"price":10000,"months":12})
+  виклик 6/8: calc_installment({"months":12,"overpay_percent":10,"price":10000})
   ПОВТОРНИЙ ВИКЛИК: використано попередній результат
   рівень   : meaning
   результат: Помилка: Ціна 10000.0 грн відсутня в довіднику. Виклич laptop_info для потрібної моделі та використай отриману ціну. Використай допустиме значення або повідом користувачу, що відповідних даних немає.
