@@ -1,0 +1,54 @@
+{
+  "experiment": "main1500",
+  "threshold": 1500,
+  "baseline_threshold": 2150,
+  "guided": false,
+  "cache": false,
+  "runs": {
+    "main1500_none_r1": {
+      "time_seconds": 117.8,
+      "correct_by_expected_substring": false,
+      "finished_at_epoch": 1795537754
+    },
+    "main1500_trim_r1": {
+      "time_seconds": 133.2,
+      "correct_by_expected_substring": false,
+      "finished_at_epoch": 1795537887
+    },
+    "main1500_trim+state_r1": {
+      "time_seconds": 86.9,
+      "correct_by_expected_substring": false,
+      "finished_at_epoch": 1795538008
+    },
+    "main1500_none_r2": {
+      "time_seconds": 45.5,
+      "correct_by_expected_substring": false,
+      "finished_at_epoch": 1795548251
+    },
+    "main1500_trim_r2": {
+      "time_seconds": 46.3,
+      "correct_by_expected_substring": false,
+      "finished_at_epoch": 1795548303
+    },
+    "main1500_trim+state_r2": {
+      "time_seconds": 29.7,
+      "correct_by_expected_substring": false,
+      "finished_at_epoch": 1795548334
+    },
+    "main1500_none_r3": {
+      "time_seconds": 33.7,
+      "correct_by_expected_substring": false,
+      "finished_at_epoch": 1795548368
+    },
+    "main1500_trim_r3": {
+      "time_seconds": 49.7,
+      "correct_by_expected_substring": false,
+      "finished_at_epoch": 1795548418
+    },
+    "main1500_trim+state_r3": {
+      "time_seconds": 31.0,
+      "correct_by_expected_substring": false,
+      "finished_at_epoch": 1795548449
+    }
+  }
+}

@@ -1,0 +1,3 @@
+$ /usr/bin/python3 make_task.py
+Правильна відповідь: 24970
+Файл long_task.json записано
