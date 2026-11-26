@@ -1,0 +1,7 @@
+PASS: Python syntax
+PASS: SYSTEM unchanged
+PASS: tasks.json byte-identical
+PASS: original data byte-identical
+Документів: 17; символів: 18444; приблизно токенів: 7378 (вікно 4096)
+Питань: 10 ({'direct': 4, 'paraphrase': 4, 'none': 2})
+Усе гаразд
