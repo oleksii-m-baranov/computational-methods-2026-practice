@@ -1,0 +1,19 @@
+Ollama: {'version': '0.40.17'}
+A D1: звичайні tools -> '' | + search_service -> ['search_service{"query": "ТО-1 пробіг"}'] | eval_count=25
+A D2: звичайні tools -> 'Для обчислення ціни на основі цієї роботи, потрібно знати в | + search_service -> ['search_service{"query": "зберігання комплекту з чотирьох шин без дисків за сезон"}'] | eval_count=42
+A D3: звичайні tools -> ['price_info{"service": "зчитування кодів помилок базове"}'] | + search_service -> ['price_info{"service": "зчитування кодів помилок базове"}'] | eval_count=33
+A D4: звичайні tools -> '' | + search_service -> ['search_service{"query": "гарантия кузов фарбування"}'] | eval_count=32
+A N1: звичайні tools -> 'Для обчислення вартості евакуації автомобіля до станції, по | + search_service -> ['search_service{"query": "евакуація автомобіля до станції"}'] | eval_count=34
+A N2: звичайні tools -> ['price_info{"service": "полірування фар"}'] | + search_service -> ['search_service{"query": "полірування фар"}'] | eval_count=26
+B D1: звичайні tools -> '' | + search_service -> ['search_service{"query": "ТО-1 пробіг"}'] | eval_count=25
+B D2: звичайні tools -> ['calc_total{"quantity": 1, "part_price": 1200}'] | + search_service -> ['search_service{"query": "зберігання комплекту з чотирьох шин без дисків за сезон"}'] | eval_count=42
+B D3: звичайні tools -> ['price_info{"service": "зчитування кодів помилок базове"}'] | + search_service -> ['search_service{"query": "зчитування кодів помилок базове"}'] | eval_count=33
+B D4: звичайні tools -> '' | + search_service -> ['search_service{"query": "гарантія кузов фарбування"}'] | eval_count=32
+B N1: звичайні tools -> ['calc_total{"quantity": 1, "work_price": 2000, "part_price": 0}'] | + search_service -> ['search_service{"query": "евакуація автомобіля до станції"}'] | eval_count=34
+B N2: звичайні tools -> ['calc_total{"part_price": 200, "quantity": 1}'] | + search_service -> ['search_service{"query": "полірування фар"}'] | eval_count=26
+C D1: звичайні tools -> '' | + search_service -> ['search_service{"query": "ТО-1 пробіг"}'] | eval_count=25
+C D2: звичайні tools -> 'Для розрахунку цьої суми, потрібно знати вартість роботи та | + search_service -> ['search_service{"query": "зберігання комплекту з чотирьох шин без дисків за сезон"}'] | eval_count=42
+C D3: звичайні tools -> ['price_info{"service": "зчитування-кодів-помилок-базове"}'] | + search_service -> ['search_service{"query": "зчитування кодів помилок базове"}'] | eval_count=33
+C D4: звичайні tools -> ['search_docs{"query": "гарантія на роботи з кузовом і фарбуванням місяців"}'] | + search_service -> ['search_service{"query": "гарантія на роботи з кузовом і фарбуванням"}'] | eval_count=41
+C N1: звичайні tools -> ['calc_total{"work_price": 0, "part_price": 0, "quantity": 1}'] | + search_service -> ['search_service{"query": "евакуація автомобіля до станції"}'] | eval_count=34
+C N2: звичайні tools -> ['price_info{"service": "полірування фар"}'] | + search_service -> ['search_service{"query": "полірування фар"}'] | eval_count=26
