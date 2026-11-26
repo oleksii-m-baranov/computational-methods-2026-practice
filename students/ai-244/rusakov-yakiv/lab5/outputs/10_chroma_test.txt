@@ -1,0 +1,6 @@
+$ /usr/bin/python3 chroma_test.py
+Питання D1: Через скільки кілометрів проводиться ТО-1?
+FAISS, схожість           : 0.6699
+Chroma cosine, відстань   : 0.3301
+Chroma за замовчуванням   : 0.6601
+Чанки: FAISS ('d01.txt', 1) | Chroma cosine ('d01.txt', 1) | Chroma default ('d01.txt', 1)
