@@ -6,7 +6,28 @@ from model import call_model
 from compress import compress_history
 from state import TaskState
 from dispatcher import call_tool, check_response, MODEL_ERRORS
+import time
+from pathlib import Path
+
+## TODO delete
+import sys
+sys.path.append(str(Path(__file__).resolve().parents[4]))
 from utils.lab_logger import custom_logger
+
+LAST_RUN = {}
+
+
+def _finish(status, answer, steps, prompt_tokens, completion_tokens, started):
+    """Записує підсумок прогону в LAST_RUN і повертає відповідь."""
+    LAST_RUN.clear()
+    LAST_RUN.update({
+        "status": status,
+        "steps": steps,                              # скільки разів модель відповіла
+        "prompt_tokens": prompt_tokens,              # сума входів за прогін
+        "completion_tokens": completion_tokens,
+        "seconds": round(time.time() - started, 1),
+    })
+    return answer
 
 
 @observe()
@@ -25,13 +46,23 @@ def run_agent(task, max_steps=None, logfile_name=config.LAB_LOGFILE_NAME, task_i
     logger.info(f"\n{'=' * 60}")
     logger.info(f"ЗАДАЧА: {task}")
 
+    started = time.time()                                             # НОВЕ: для LAST_RUN
+    steps = prompt_total = completion_total = 0
+
+    def finish(status, answer=None):
+        return _finish(status, answer, steps, prompt_total, completion_total, started)
+
     for step in range(1, max_steps + 1):
         response, from_cache = call_model(messages, step, logger)
         if response is None:  # сервер повернув помилку (вона вже записана в лог)
-            return None
+            return finish("server_error")
         choice = response.choices[0]
         msg = choice.message
         used = response.usage.prompt_tokens  # скільки токенів було на вході цього виклику
+
+        steps += 1
+        prompt_total += response.usage.prompt_tokens
+        completion_total += response.usage.completion_tokens
 
         logger.info(f"\n--- крок {step} | помилок поспіль={retries} "
                     f"| prompt_tokens={response.usage.prompt_tokens} "
@@ -46,7 +77,7 @@ def run_agent(task, max_steps=None, logfile_name=config.LAB_LOGFILE_NAME, task_i
             retries = retries + 1
             if retries > config.MAX_RETRIES:
                 logger.info("СТОП: модель не змогла сформувати правильний виклик")
-                return None
+                return finish("retry_limit")
             if text is not None:
                 messages.append({"role": "assistant", "content": msg.content})
                 messages.append({"role": "user", "content": text})
@@ -54,7 +85,7 @@ def run_agent(task, max_steps=None, logfile_name=config.LAB_LOGFILE_NAME, task_i
 
         if not msg.tool_calls:
             logger.info(f"ВІДПОВІДЬ: {msg.content}")
-            return msg.content
+            return finish("final", msg.content)
 
         # зберігаємо повідомлення моделі як словник: trim читає з нього ключ "role"
         messages.append(msg.model_dump(exclude_none=True))
@@ -83,7 +114,7 @@ def run_agent(task, max_steps=None, logfile_name=config.LAB_LOGFILE_NAME, task_i
             retries = retries + 1
             if retries > config.MAX_RETRIES:
                 logger.info("СТОП: модель не змогла сформувати правильний виклик")
-                return None
+                return finish("retry_limit")
         else:
             retries = 0
             # якщо вхід завеликий, скорочуємо історію
@@ -91,7 +122,7 @@ def run_agent(task, max_steps=None, logfile_name=config.LAB_LOGFILE_NAME, task_i
         messages = compress_history(messages, task, used, state, logger)
 
     logger.info("СТОП: вичерпано ліміт кроків")
-    return None
+    return finish("step_limit")
 
 
 if __name__ == "__main__":
