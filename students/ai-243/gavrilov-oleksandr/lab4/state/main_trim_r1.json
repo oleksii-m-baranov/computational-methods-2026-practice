@@ -1,0 +1,140 @@
+[
+  {
+    "tool": "search_exercises",
+    "args": {
+      "query": "йога"
+    },
+    "result": "За запитом 'йога' нічого не знайдено."
+  },
+  {
+    "tool": "schedule_info",
+    "args": {
+      "activity": "йога"
+    },
+    "result": "День: вівторок, час: 18:00, тренер: Олена"
+  },
+  {
+    "tool": "calc_calories",
+    "args": {
+      "minutes": 60,
+      "weight_kg": 70,
+      "met": 5
+    },
+    "result": "368 ккал"
+  },
+  {
+    "tool": "search_exercises",
+    "args": {
+      "query": "пілатес"
+    },
+    "result": "За запитом 'пілатес' нічого не знайдено."
+  },
+  {
+    "tool": "schedule_info",
+    "args": {
+      "activity": "пілатес"
+    },
+    "result": "День: понеділок, час: 19:00, тренер: Марина"
+  },
+  {
+    "tool": "calc_calories",
+    "args": {
+      "met": 5,
+      "minutes": 50,
+      "weight_kg": 70
+    },
+    "result": "306 ккал"
+  },
+  {
+    "tool": "search_exercises",
+    "args": {
+      "query": "силове"
+    },
+    "result": "За запитом 'силове' нічого не знайдено."
+  },
+  {
+    "tool": "schedule_info",
+    "args": {
+      "activity": "силове"
+    },
+    "result": "День: понеділок, час: 19:30, тренер: Андрій"
+  },
+  {
+    "tool": "calc_calories",
+    "args": {
+      "minutes": 60,
+      "weight_kg": 70,
+      "met": 5
+    },
+    "result": "368 ккал"
+  },
+  {
+    "tool": "search_exercises",
+    "args": {
+      "query": "розтяжка"
+    },
+    "result": "За запитом 'розтяжка' нічого не знайдено."
+  },
+  {
+    "tool": "schedule_info",
+    "args": {
+      "activity": "розтяжка"
+    },
+    "result": "День: вівторок, час: 20:00, тренер: Ірина"
+  },
+  {
+    "tool": "calc_calories",
+    "args": {
+      "minutes": 45,
+      "weight_kg": 70,
+      "met": 5
+    },
+    "result": "276 ккал"
+  },
+  {
+    "tool": "search_exercises",
+    "args": {
+      "query": "кардіо"
+    },
+    "result": "За запитом 'кардіо' нічого не знайдено."
+  },
+  {
+    "tool": "schedule_info",
+    "args": {
+      "activity": "кардіо"
+    },
+    "result": "День: понеділок, час: 07:00, тренер: Василь"
+  },
+  {
+    "tool": "calc_calories",
+    "args": {
+      "minutes": 45,
+      "weight_kg": 70,
+      "met": 5
+    },
+    "result": "276 ккал"
+  },
+  {
+    "tool": "search_exercises",
+    "args": {
+      "query": "стретчинг"
+    },
+    "result": "За запитом 'стретчинг' нічого не знайдено."
+  },
+  {
+    "tool": "schedule_info",
+    "args": {
+      "activity": "стретчинг"
+    },
+    "result": "День: середа, час: 20:30, тренер: Ірина"
+  },
+  {
+    "tool": "calc_calories",
+    "args": {
+      "met": 5,
+      "minutes": 45,
+      "weight_kg": 70
+    },
+    "result": "276 ккал"
+  }
+]
