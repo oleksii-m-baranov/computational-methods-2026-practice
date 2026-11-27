@@ -43,7 +43,7 @@ CHUNK_SIZE = 500                         # розмір чанка в симво
 CHUNK_OVERLAP = 100                        # перекриття чанків (для "fixed")
 WITH_TITLE = False                       # дописувати назву документа до кожного чанка
 TOP_K = 3                                # скільки чанків повертає пошук
-MIN_SCORE = 0.0                          # поріг схожості: у кроці 5 ви підберете значення
+MIN_SCORE = 0.52                        # поріг схожості: у кроці 5 ви підберете значення
 DOCS_DESCRIPTION = "B"                   # який опис search_docs використовувати: "A", "B" або "C"
 
 ## CHUNK_METHOD, CHUNK_SIZE, CHUNK_OVERLAP, WITH_TITLE
