@@ -1,0 +1,9 @@
+
+venv/
+cache/
+chroma_db/
+index/embeddings_cache.json
+.env
+state/
+chroma_cos/
+chroma_default/
