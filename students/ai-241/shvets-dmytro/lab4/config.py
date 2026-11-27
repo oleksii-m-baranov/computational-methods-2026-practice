@@ -5,7 +5,7 @@ load_dotenv()                      # завантажує ключі Langfuse з
 BASE_URL = "http://localhost:11434/v1"
 API_KEY = "ollama"
 
-MODEL = "qwen25-4k"
+MODEL = "qwen25-3k"
 MAX_STEPS = 6
 MAX_STEPS_LONG = 25
 TEMPERATURE = 0
@@ -69,10 +69,10 @@ SYSTEM = """
    калорійність кожного продукту
    та загальну суму в ккал.
 """
-NUM_CTX = 4096
+NUM_CTX = 3072
 
 COMPRESS = "none"
-COMPRESS_AT = 2800
+COMPRESS_AT = 2150
 KEEP_LAST = 6
 
 USE_STATE = False

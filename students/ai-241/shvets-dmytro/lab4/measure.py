@@ -10,35 +10,14 @@ from langfuse import get_client, propagate_attributes
 
 import agent
 import config
+from table import make_row, print_table
 
 
 
 CONFIGS = {
-    "none": {
-        "COMPRESS": "none",
-        "USE_STATE": False,
-        "USE_CACHE": False
-    },
-    "trim": {
-        "COMPRESS": "trim",
-        "USE_STATE": False,
-        "USE_CACHE": False
-    },
-    "trim+state": {
-        "COMPRESS": "trim",
-        "USE_STATE": True,
-        "USE_CACHE": False
-    },
-    "trim+state+cache": {
-        "COMPRESS": "trim",
-        "USE_STATE": True,
-        "USE_CACHE": True
-    },
-    "cache": {
-    "COMPRESS": "none",
-    "USE_STATE": False,
-    "USE_CACHE": True
-}
+    "none": {"COMPRESS": "none", "USE_STATE": False},
+    "trim": {"COMPRESS": "trim", "USE_STATE": False},
+    "trim+state": {"COMPRESS": "trim", "USE_STATE": True},
 }
 
 
@@ -93,9 +72,11 @@ def run_once(name, repeat, series, task):
 
 def main():
     names, repeats, series = read_arguments()
+    config.USE_CACHE = series.startswith("cache")
 
     task = load_task()
     os.makedirs("logs", exist_ok=True)
+    rows = []
 
     for repeat in range(1, repeats + 1):
         for name in names:
@@ -112,6 +93,7 @@ def main():
                 task["expected"]
             )
 
+            rows.append(make_row(run_id, name, right, seconds))
             print(
                 f"\n[{run_id}] час {seconds} с "
                 f"| правильно: {'так' if right else 'ні'}"
@@ -123,6 +105,9 @@ def main():
             )
 
     get_client().flush()
+    print_table(rows)
+    with open(f"logs/{series}_results.json", "w", encoding="utf-8") as f:
+        json.dump(rows, f, ensure_ascii=False, indent=2)
 
 
 if __name__ == "__main__":
