@@ -12,13 +12,13 @@ MAX_STEPS = 6
 TEMPERATURE = 0
 
 MAX_RETRIES = 2       # кількість помилок моделі поспіль
-ALLOWED = ["search_routes", "transport_info", "calculate_trip"]  # інструменти Варіанта 7
+ALLOWED = ["search_routes", "transport_info", "calc_budget"]  # інструменти Варіанта 7
 RUN_TAG = "ctx-control"  # мітка прогону для Langfuse
 LAB_LOGFILE_NAME = "lab4"
 NUM_CTX = 3072          # розмір вікна, заданий у Modelfile (або 3072 за потреби)
 MAX_STEPS_LONG = 25     # ліміт кроків для довгої задачі
 COMPRESS = "none"       # "none" або "trim": скорочувати історію чи ні
-COMPRESS_AT = 2800      # скорочуємо, коли prompt_tokens перевищив цей поріг
+COMPRESS_AT = 2150      # скорочуємо, коли prompt_tokens перевищив цей поріг
 KEEP_LAST = 6           # скільки останніх повідомлень лишати при обрізанні
 USE_STATE = False       # чи додавати в контекст збережені результати
 STATE_RESULT_CHARS = 200  # довші результати в стані скорочуються до цієї довжини

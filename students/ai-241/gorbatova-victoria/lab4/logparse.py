@@ -18,8 +18,11 @@ def parse_step(chunk):
     first_line = chunk.split("\n", 1)[0]
     prompt = re.search(r"prompt_tokens=(\d+)", first_line)
     completion = re.search(r"completion_tokens=(\d+)", first_line)
-    squeeze = re.search(r"^  СТИСНЕННЯ: вхід був (\d+) токенів, повідомлень (\d+) -> (\d+)",
-                        chunk, flags=re.M)
+    squeeze = re.search(
+        r"^  СТИСНЕННЯ: вхід був (\d+) токенів, повідомлень (\d+) -> (\d+)",
+        chunk,
+        flags=re.M,
+    )
     extra = re.findall(r"підсумовування коштувало (\d+) токенів", chunk)
     return {
         "n": int(re.match(r"\d+", chunk).group()),
@@ -44,6 +47,11 @@ def parse_run(block):
 
 
 def parse_log(text):
-    text = re.sub(r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} (?:\[[A-Z]+\]|- [A-Z]+ -)\s*", "", text, flags=re.M)
+    text = re.sub(
+        r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} (?:\[[A-Z]+\]|- [A-Z]+ -) ",
+        "",
+        text,
+        flags=re.M,
+    )
     blocks = re.split(r"^ЗАДАЧА: ", text, flags=re.M)[1:]
     return [parse_run(block) for block in blocks]
