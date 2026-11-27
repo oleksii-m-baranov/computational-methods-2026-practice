@@ -1,0 +1,109 @@
+2026-11-27 14:52:53 [INFO] 
+============================================================
+2026-11-27 14:52:53 [INFO] ЗАДАЧА: Розрахуй загальний бюджет для шести поїздок для груп різної чисельності: 1) Кам'янець-Подільський для 4 людей; 2) Яремче для 2 людей; 3) Львів Гастрономічний для 3 людей; 4) Одеса для 5 людей; 5) Чернівці для 2 людей; 6) Синевир для 4 людей. Для кожної поїздки: (а) знайди в довіднику вартість проїзду на одну особу через transport_info; (б) порахуй бюджет поїздки для групи через calc_budget (додаткові витрати extra = 0). У кінці назви загальну суму бюджету всіх шести поїздок одним числом.
+2026-11-27 14:52:53 [INFO] 
+--- крок 1 | помилок поспіль=0 | prompt_tokens=858 | completion_tokens=28 | з кешу
+2026-11-27 14:52:53 [INFO]   виклик   : calc_budget({"price_per_person":null,"people":null,"extra":0,"calc_budget":null})
+2026-11-27 14:52:53 [INFO]   рівень   : schema
+2026-11-27 14:52:53 [INFO]   результат: Помилка: аргументи не пройшли перевірку.
+Поле calc_budget: Extra inputs are not permitted
+Поле price_per_person: Input should be a valid number
+Поле people: Input should be a valid integer
+Виправ аргументи і виклич інструмент ще раз.
+2026-11-27 14:52:53 [INFO] 
+--- крок 2 | помилок поспіль=1 | prompt_tokens=438 | completion_tokens=215 | з кешу
+2026-11-27 14:52:53 [INFO]   виклик   : transport_info({"from":"Кам'янець-Подільський","to":"Яремче"})
+2026-11-27 14:52:53 [INFO]   рівень   : schema
+2026-11-27 14:52:53 [INFO]   результат: Помилка: аргументи не пройшли перевірку.
+Поле from: Extra inputs are not permitted
+Поле to: Extra inputs are not permitted
+Поле route: Field required
+Виправ аргументи і виклич інструмент ще раз.
+2026-11-27 14:52:53 [INFO]   виклик   : transport_info({"from":"Яремче","to":"Львів Гастрономічний"})
+2026-11-27 14:52:53 [INFO]   рівень   : schema
+2026-11-27 14:52:53 [INFO]   результат: Помилка: аргументи не пройшли перевірку.
+Поле from: Extra inputs are not permitted
+Поле to: Extra inputs are not permitted
+Поле route: Field required
+Виправ аргументи і виклич інструмент ще раз.
+2026-11-27 14:52:53 [INFO]   виклик   : transport_info({"from":"Львів Гастрономічний","to":"Одеса"})
+2026-11-27 14:52:53 [INFO]   рівень   : schema
+2026-11-27 14:52:53 [INFO]   результат: Помилка: аргументи не пройшли перевірку.
+Поле from: Extra inputs are not permitted
+Поле to: Extra inputs are not permitted
+Поле route: Field required
+Виправ аргументи і виклич інструмент ще раз.
+2026-11-27 14:52:53 [INFO]   виклик   : transport_info({"from":"Одеса","to":"Чернівці"})
+2026-11-27 14:52:53 [INFO]   рівень   : schema
+2026-11-27 14:52:53 [INFO]   результат: Помилка: аргументи не пройшли перевірку.
+Поле from: Extra inputs are not permitted
+Поле to: Extra inputs are not permitted
+Поле route: Field required
+Виправ аргументи і виклич інструмент ще раз.
+2026-11-27 14:52:53 [INFO]   виклик   : transport_info({"from":"Чернівці","to":"Синевир"})
+2026-11-27 14:52:53 [INFO]   рівень   : schema
+2026-11-27 14:52:53 [INFO]   результат: Помилка: аргументи не пройшли перевірку.
+Поле from: Extra inputs are not permitted
+Поле to: Extra inputs are not permitted
+Поле route: Field required
+Виправ аргументи і виклич інструмент ще раз.
+2026-11-27 14:52:53 [INFO]   виклик   : transport_info({"from":"Синевир","to":"Кам'янець-Подільський"})
+2026-11-27 14:52:53 [INFO]   рівень   : schema
+2026-11-27 14:52:53 [INFO]   результат: Помилка: аргументи не пройшли перевірку.
+Поле from: Extra inputs are not permitted
+Поле to: Extra inputs are not permitted
+Поле route: Field required
+Виправ аргументи і виклич інструмент ще раз.
+2026-11-27 14:52:53 [INFO]   виклик   : calc_budget({"calc_budget":null,"extra":0,"people":null,"price_per_person":null})
+2026-11-27 14:52:53 [INFO]   рівень   : schema
+2026-11-27 14:52:53 [INFO]   результат: Помилка: аргументи не пройшли перевірку.
+Поле calc_budget: Extra inputs are not permitted
+Поле price_per_person: Input should be a valid number
+Поле people: Input should be a valid integer
+Виправ аргументи і виклич інструмент ще раз.
+2026-11-27 14:52:53 [INFO] 
+--- крок 3 | помилок поспіль=2 | prompt_tokens=1082 | completion_tokens=281 | з кешу
+2026-11-27 14:52:53 [INFO]   виклик   : transport_info({"route":"Кам'янець-Подільський - Яремче","price_per_person":1000,"people":2})
+2026-11-27 14:52:53 [INFO]   рівень   : schema
+2026-11-27 14:52:53 [INFO]   результат: Помилка: аргументи не пройшли перевірку.
+Поле price_per_person: Extra inputs are not permitted
+Поле people: Extra inputs are not permitted
+Виправ аргументи і виклич інструмент ще раз.
+2026-11-27 14:52:53 [INFO]   виклик   : transport_info({"route":"Яремче - Львів Гастрономічний","price_per_person":800,"people":3})
+2026-11-27 14:52:53 [INFO]   рівень   : schema
+2026-11-27 14:52:53 [INFO]   результат: Помилка: аргументи не пройшли перевірку.
+Поле price_per_person: Extra inputs are not permitted
+Поле people: Extra inputs are not permitted
+Виправ аргументи і виклич інструмент ще раз.
+2026-11-27 14:52:53 [INFO]   виклик   : transport_info({"route":"Львів Гастрономічний - Одеса","price_per_person":1200,"people":5})
+2026-11-27 14:52:53 [INFO]   рівень   : schema
+2026-11-27 14:52:53 [INFO]   результат: Помилка: аргументи не пройшли перевірку.
+Поле price_per_person: Extra inputs are not permitted
+Поле people: Extra inputs are not permitted
+Виправ аргументи і виклич інструмент ще раз.
+2026-11-27 14:52:53 [INFO]   виклик   : transport_info({"route":"Одеса - Чернівці","price_per_person":900,"people":2})
+2026-11-27 14:52:53 [INFO]   рівень   : schema
+2026-11-27 14:52:53 [INFO]   результат: Помилка: аргументи не пройшли перевірку.
+Поле price_per_person: Extra inputs are not permitted
+Поле people: Extra inputs are not permitted
+Виправ аргументи і виклич інструмент ще раз.
+2026-11-27 14:52:53 [INFO]   виклик   : transport_info({"route":"Чернівці - Синевир","price_per_person":700,"people":4})
+2026-11-27 14:52:53 [INFO]   рівень   : schema
+2026-11-27 14:52:53 [INFO]   результат: Помилка: аргументи не пройшли перевірку.
+Поле price_per_person: Extra inputs are not permitted
+Поле people: Extra inputs are not permitted
+Виправ аргументи і виклич інструмент ще раз.
+2026-11-27 14:52:53 [INFO]   виклик   : transport_info({"route":"Синевир - Кам'янець-Подільський","price_per_person":600,"people":4})
+2026-11-27 14:52:53 [INFO]   рівень   : schema
+2026-11-27 14:52:53 [INFO]   результат: Помилка: аргументи не пройшли перевірку.
+Поле price_per_person: Extra inputs are not permitted
+Поле people: Extra inputs are not permitted
+Виправ аргументи і виклич інструмент ще раз.
+2026-11-27 14:52:53 [INFO]   виклик   : calc_budget({"calc_budget":0,"extra":0,"people":0,"price_per_person":0})
+2026-11-27 14:52:53 [INFO]   рівень   : schema
+2026-11-27 14:52:53 [INFO]   результат: Помилка: аргументи не пройшли перевірку.
+Поле calc_budget: Extra inputs are not permitted
+Поле price_per_person: Input should be greater than 0
+Поле people: Input should be greater than 0
+Виправ аргументи і виклич інструмент ще раз.
+2026-11-27 14:52:53 [INFO] СТОП: модель не змогла сформувати правильний виклик
