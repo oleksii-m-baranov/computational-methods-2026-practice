@@ -1,0 +1,11 @@
+{
+ "embed_model": "qwen3-embedding:0.6b",
+ "method": "fixed",
+ "size": 500,
+ "overlap": 0,
+ "with_title": false,
+ "dirs": [
+  "data/corpus",
+  "data/docs"
+ ]
+}
