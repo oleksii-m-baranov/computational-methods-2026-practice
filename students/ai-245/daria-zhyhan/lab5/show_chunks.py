@@ -1,19 +1,21 @@
+"""Показує, як документ нарізається на чанки.
+Запуск: python show_chunks.py data/docs/d01.txt fixed 200 0
+        python show_chunks.py data/docs/d01.txt paragraphs 800"""
+import sys
+
 import chunking
-import config
 
-docs = chunking.load_documents(config.DOC_DIRS)
-configs = [
-    ("fixed", 400, 0),
-    ("fixed", 400, 80),
-    ("fixed", 800, 0),
-    ("fixed", 800, 150),
-    ("paragraphs", 800, 0),
-]
+path, method, size = sys.argv[1], sys.argv[2], int(sys.argv[3])
+overlap = int(sys.argv[4]) if len(sys.argv) > 4 else 0
 
-print(f"{'Метод':<12} {'Розмір':<8} {'Перекриття':<12} {'Чанків':<8} {'Середн. довжина':<17} {'Мін':<6} {'Макс':<6}")
-print("-" * 75)
-for method, size, overlap in configs:
-    chunks = chunking.make_chunks(docs, method, size, overlap)
-    lengths = [len(c["text"]) for c in chunks]
-    avg_len = sum(lengths) / len(lengths)
-    print(f"{method:<12} {size:<8} {overlap:<12} {len(chunks):<8} {avg_len:<17.1f} {min(lengths):<6} {max(lengths):<6}")
+with open(path, encoding="utf-8") as f:
+    text = f.read().strip()
+parts = chunking.split_fixed(text, size, overlap) if method == "fixed" else chunking.split_paragraphs(text, size)
+
+cut = 0
+for number, part in enumerate(parts, 1):
+    ends_ok = part.rstrip().endswith((".", "!", "?", "…", ":"))
+    cut += 0 if ends_ok else 1
+    print(f"--- чанк {number}, {len(part)} символів" + ("" if ends_ok else "  [закінчується посеред речення]"))
+    print(part)
+print(f"\nУсього чанків: {len(parts)}; закінчуються посеред речення: {cut}")

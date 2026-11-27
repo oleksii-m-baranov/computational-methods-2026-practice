@@ -1,27 +1,21 @@
 import csv
 import os
+import config
 import rag
-
-_INDEX = None
-
-
-def _get_index():
-    global _INDEX
-    if _INDEX is None:
-        _INDEX = rag.build_index()
-    return _INDEX
 
 
 def search_docs(query: str) -> str:
-    idx = _get_index()
-    results = idx.search(query)
-    if not results:
-        return (f"За запитом '{query}' у документах нічого не знайдено. "
-                "Повідом користувачу, що цієї інформації немає в базі знань.")
-    parts = []
-    for r in results:
-        parts.append(f"[{r['source']}#{r['chunk']}] (score={r['score']})\n{r['text']}")
-    return "\n---\n".join(parts)
+    """Векторний пошук по документах: повертає фрагменти разом з назвами файлів."""
+    candidates = rag.get_index().search(query, config.TOP_K)
+    found = [r for r in candidates if r["score"] >= config.MIN_SCORE]
+    rag.TRACE.append({
+        "query": query,
+        "top_score": candidates[0]["score"] if candidates else None,
+        "results": found,
+    })
+    if not found:
+        return "У документах нічого схожого не знайдено."
+    return "\n\n".join(f"[{n}] Джерело: {r['source']}\n{r['text']}" for n, r in enumerate(found, 1))
 
 
 def search_plants(query: str) -> str:

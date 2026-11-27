@@ -34,5 +34,5 @@ CHUNK_SIZE = 800
 CHUNK_OVERLAP = 0                      
 WITH_TITLE = False                      
 TOP_K = 3                                
-MIN_SCORE = 0.52
-DOCS_DESCRIPTION = "C"            
+MIN_SCORE = 0.585
+DOCS_DESCRIPTION = "B"            
