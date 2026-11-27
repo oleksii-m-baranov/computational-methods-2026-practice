@@ -19,11 +19,11 @@ SYSTEM = """Ти оператор служби доставки. Перевір�
 
 MAX_RETRIES = 2
 
-ALLOWED = ["tariff_info", "calc_price", "search_docs"]   # у кроці 6 search_rules -> search_docs
+ALLOWED = ["tariff_info", "calc_price", "search_docs"]
 
 RUN_TAG = "ctx-control"
 
-LAB_LOGFILE_NAME = "lab5"   # ім'я лога для agent.py і agent_runner.py: logs/lab5.log
+LAB_LOGFILE_NAME = "lab5"
 
 NUM_CTX = 3072
 MAX_STEPS_LONG = 25
@@ -32,17 +32,17 @@ KEEP_LAST = 6
 COMPRESS_AT = 2150
 STATE_RESULT_CHARS = 200
 
-COMPRESS = "none"           # скорочення історії вимкнено (лабораторна № 4)
+COMPRESS = "none"
 USE_STATE = False
 USE_CACHE = False
 
-EMBED_MODEL = "bge-m3"                   # модель ембедингів
-DOC_DIRS = ["data/corpus", "data/docs"]  # де лежать документи
-INDEX_DIR = "index"                      # куди зберігається індекс
-CHUNK_METHOD = "paragraphs"              # "fixed" (за кількістю символів) або "paragraphs" (за абзацами)
-CHUNK_SIZE = 800                         # розмір чанка в символах
-CHUNK_OVERLAP = 0                        # перекриття чанків (для "fixed")
-WITH_TITLE = False                       # дописувати назву документа до кожного чанка
-TOP_K = 3                                # скільки чанків повертає пошук
+EMBED_MODEL = "bge-m3"
+DOC_DIRS = ["data/corpus", "data/docs"]
+INDEX_DIR = "index"
+CHUNK_METHOD = "paragraphs"
+CHUNK_SIZE = 800
+CHUNK_OVERLAP = 0
+WITH_TITLE = False
+TOP_K = 3
 MIN_SCORE = 0.60
-DOCS_DESCRIPTION = "B"                   # який опис search_docs використовувати: "A", "B" або "C"
+DOCS_DESCRIPTION = "B"
