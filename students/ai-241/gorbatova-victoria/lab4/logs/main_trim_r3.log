@@ -1,0 +1,42 @@
+2026-11-18 18:46:04 [INFO] 
+============================================================
+2026-11-18 18:46:04 [INFO] ЗАДАЧА: Розрахуй загальний бюджет для шести поїздок для груп різної чисельності: 1) Кам'янець-Подільський для 4 людей; 2) Яремче для 2 людей; 3) Львів Гастрономічний для 3 людей; 4) Одеса для 5 людей; 5) Чернівці для 2 людей; 6) Синевир для 4 людей. Для кожної поїздки: (а) знайди в довіднику вартість проїзду на одну особу через transport_info; (б) порахуй бюджет поїздки для групи через calc_budget (додаткові витрати extra = 0). У кінці назви загальну суму бюджету всіх шести поїздок одним числом.
+2026-11-18 18:46:07 [INFO] 
+--- крок 1 | помилок поспіль=0 | prompt_tokens=626 | completion_tokens=155
+2026-11-18 18:46:07 [INFO]   рівень   : syntax
+2026-11-18 18:46:07 [INFO]   текст    : {"name":"calc_budget","parameters":{"route":"Кам'янець-Подільський","group_size":4,"extra":0}} 
+{"name":"calc_budget","parameters":{"route":"Яремче","group_size":2,"extra":0}} 
+{"name":"calc_budget","parameters":{"route":"Львів Гастрономічний","group_size":3,"extra":0}} 
+{"name":"calc_budget","parameters":{"route":"Одеса","group_size":5,"extra":0}} 
+{"name":"calc_budget","parameters":{"route":"Чернівці","group_size":2,"extra":0}} 
+{"name":"calc_budget","parameters":{"route":"Синевир","group_size":4,"extra":0}}
+2026-11-18 18:46:11 [INFO] 
+--- крок 2 | помилок поспіль=1 | prompt_tokens=840 | completion_tokens=101
+2026-11-18 18:46:11 [INFO]   виклик   : transport_info({"route":"Кам'янець-Подільський"})
+2026-11-18 18:46:11 [INFO]   рівень   : ok
+2026-11-18 18:46:11 [INFO]   результат: Вартість проїзду: 420 грн, у дорозі: 6 год, рейсів на день: 3
+2026-11-18 18:46:11 [INFO]   виклик   : transport_info({"route":"Яремче"})
+2026-11-18 18:46:11 [INFO]   рівень   : ok
+2026-11-18 18:46:11 [INFO]   результат: Вартість проїзду: 650 грн, у дорозі: 9 год, рейсів на день: 2
+2026-11-18 18:46:11 [INFO]   виклик   : transport_info({"route":"Львів Гастрономічний"})
+2026-11-18 18:46:11 [INFO]   рівень   : ok
+2026-11-18 18:46:11 [INFO]   результат: Вартість проїзду: 550 грн, у дорозі: 7 год, рейсів на день: 5
+2026-11-18 18:46:11 [INFO]   виклик   : transport_info({"route":"Одеса"})
+2026-11-18 18:46:11 [INFO]   рівень   : ok
+2026-11-18 18:46:11 [INFO]   результат: Вартість проїзду: 300 грн, у дорозі: 3 год, рейсів на день: 6
+2026-11-18 18:46:11 [INFO]   виклик   : transport_info({"route":"Чернівці"})
+2026-11-18 18:46:11 [INFO]   рівень   : ok
+2026-11-18 18:46:11 [INFO]   результат: Вартість проїзду: 480 грн, у дорозі: 8 год, рейсів на день: 3
+2026-11-18 18:46:11 [INFO]   виклик   : transport_info({"route":"Синевир"})
+2026-11-18 18:46:11 [INFO]   рівень   : ok
+2026-11-18 18:46:11 [INFO]   результат: Вартість проїзду: 700 грн, у дорозі: 11 год, рейсів на день: 1
+2026-11-18 18:46:18 [INFO] 
+--- крок 3 | помилок поспіль=0 | prompt_tokens=868 | completion_tokens=275
+2026-11-18 18:46:18 [INFO] ВІДПОВІДЬ: Окей, зараз я зможу розрахувати бюджет для кожного поїзду.
+
+{"name":"calc_budget","parameters":{"route":"Кам'янець-Подільський","group_size":4,"extra":0,"transport_cost":420,"transport_time":6,"flights_per_day":3}} 
+{"name":"calc_budget","parameters":{"route":"Яремче","group_size":2,"extra":0,"transport_cost":650,"transport_time":9,"flights_per_day":2}} 
+{"name":"calc_budget","parameters":{"route":"Львів Гастрономічний","group_size":3,"extra":0,"transport_cost":550,"transport_time":7,"flights_per_day":5}} 
+{"name":"calc_budget","parameters":{"route":"Одеса","group_size":5,"extra":0,"transport_cost":300,"transport_time":3,"flights_per_day":6}} 
+{"name":"calc_budget","parameters":{"route":"Чернівці","group_size":2,"extra":0,"transport_cost":480,"transport_time":8,"flights_per_day":3}} 
+{"name":"calc_budget","parameters":{"route":"Синевир","group_size":4,"extra":0,"transport_cost":700,"transport_time":11,"flights_per_day":1}}
