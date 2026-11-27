@@ -1,5 +1,4 @@
 {
- "backend": "chroma",
  "embed_model": "bge-m3",
  "method": "fixed",
  "size": 500,

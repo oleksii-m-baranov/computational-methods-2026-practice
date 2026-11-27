@@ -21,6 +21,7 @@ SYSTEM = (
 )
 
 LAB_LOGFILE_NAME = "lab5"
+RUN_TAG = "rag-tasks"
 
 COMPRESS = "none"           # скорочення історії вимкнено (лабораторна № 4)
 COMPRESS_AT = 2000

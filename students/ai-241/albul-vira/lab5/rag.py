@@ -1,10 +1,9 @@
-"""Векторний індекс на ChromaDB: побудова, збереження, завантаження, пошук."""
+"""Векторний індекс на FAISS: побудова, збереження, завантаження, пошук."""
 import json
 import os
 
-os.environ.setdefault("ANONYMIZED_TELEMETRY", "False")
-
-import chromadb
+import faiss
+import numpy as np
 
 import chunking
 import config
@@ -16,35 +15,19 @@ _index = None     # поточний індекс, який використов
 
 def settings():
     """Параметри, від яких залежить індекс. Зберігаються разом з ним."""
-    return {"backend": "chroma", "embed_model": config.EMBED_MODEL, "method": config.CHUNK_METHOD,
+    return {"embed_model": config.EMBED_MODEL, "method": config.CHUNK_METHOD,
             "size": config.CHUNK_SIZE, "overlap": config.CHUNK_OVERLAP,
             "with_title": config.WITH_TITLE, "dirs": config.DOC_DIRS}
-
-
-def _populate_collection(client, chunks, vectors):
-    try:
-        client.delete_collection("docs")
-    except Exception:
-        pass
-    collection = client.create_collection(name="docs", metadata={"hnsw:space": "cosine"})
-    if chunks:
-        collection.add(
-            ids=[f"c{i}" for i in range(len(chunks))],
-            embeddings=vectors,
-            documents=[c["text"] for c in chunks],
-            metadatas=[{"idx": i, "source": c["source"], "chunk": c["chunk"]} for i, c in enumerate(chunks)],
-        )
-    return collection
 
 
 class Index:
     def __init__(self, chunks, vectors, meta=None):
         self.chunks = chunks
-        self.vectors = vectors
         self.meta = meta or {}
-        self.dim = len(vectors[0]) if vectors else 0
-        self.client = chromadb.EphemeralClient()
-        self.collection = _populate_collection(self.client, chunks, vectors)
+        matrix = np.array(vectors, dtype="float32")
+        faiss.normalize_L2(matrix)                      # довжина кожного вектора стає 1
+        self.faiss = faiss.IndexFlatIP(matrix.shape[1])  # IP = скалярний добуток = косинус для нормалізованих
+        self.faiss.add(matrix)
 
     @classmethod
     def build(cls, chunks):
@@ -53,27 +36,20 @@ class Index:
 
     def search(self, query, k=3):
         """Повертає до k найближчих чанків: [{"score", "source", "chunk", "text"}], від найближчого."""
-        if not self.chunks:
-            return []
-        q = embedder.embed([query])
-        res = self.collection.query(
-            query_embeddings=q,
-            n_results=min(k, len(self.chunks)),
-            include=["distances", "metadatas"],
-        )
+        q = np.array(embedder.embed([query]), dtype="float32")
+        faiss.normalize_L2(q)
+        scores, ids = self.faiss.search(q, k)
         result = []
-        for dist, meta in zip(res["distances"][0], res["metadatas"][0]):
-            score = 1.0 - float(dist)          # косинусна відстань -> косинусна схожість
-            result.append({"score": score, **self.chunks[meta["idx"]]})
-        result.sort(key=lambda item: item["score"], reverse=True)
+        for score, i in zip(scores[0], ids[0]):
+            if i == -1:                                  # чанків менше за k: FAISS заповнює -1
+                continue
+            result.append({"score": float(score), **self.chunks[i]})
         return result
 
     def save(self, directory=None):
         directory = directory or config.INDEX_DIR
         os.makedirs(directory, exist_ok=True)
-        chroma_dir = os.path.join(directory, "chroma")
-        self.client = chromadb.PersistentClient(path=chroma_dir)
-        self.collection = _populate_collection(self.client, self.chunks, self.vectors)
+        faiss.write_index(self.faiss, os.path.join(directory, "docs.faiss"))
         with open(os.path.join(directory, "chunks.json"), "w", encoding="utf-8") as f:
             json.dump(self.chunks, f, ensure_ascii=False, indent=1)
         with open(os.path.join(directory, "meta.json"), "w", encoding="utf-8") as f:
@@ -82,22 +58,16 @@ class Index:
     @classmethod
     def load(cls, directory=None):
         directory = directory or config.INDEX_DIR
-        meta_path = os.path.join(directory, "meta.json")
-        if not os.path.exists(meta_path):
-            raise RuntimeError("Індекс ChromaDB не знайдено. Перебудуйте: python build_index.py")
-        with open(meta_path, encoding="utf-8") as f:
+        with open(os.path.join(directory, "meta.json"), encoding="utf-8") as f:
             meta = json.load(f)
         if meta != settings():
             raise RuntimeError("Індекс збудовано з іншими параметрами, ніж у config.py. "
                                f"В індексі: {meta}. У config.py: {settings()}. Перебудуйте: python build_index.py")
         obj = cls.__new__(cls)
-        obj.meta = meta
-        obj.vectors = None
+        obj.faiss = faiss.read_index(os.path.join(directory, "docs.faiss"))
         with open(os.path.join(directory, "chunks.json"), encoding="utf-8") as f:
             obj.chunks = json.load(f)
-        obj.dim = 0
-        obj.client = chromadb.PersistentClient(path=os.path.join(directory, "chroma"))
-        obj.collection = obj.client.get_collection(name="docs")
+        obj.meta = meta
         return obj
 
 
