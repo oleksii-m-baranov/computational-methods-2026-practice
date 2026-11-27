@@ -1,49 +1,70 @@
-import config
-from arguments import ARGS
-
-RAG_DESCRIPTIONS = {
-    "A": "Шукає книжки за темою, жанром або рівнем складності. "
-         "Використовуй, коли користувач описує, яку книжку хоче, але не називає точної назви. "
-         "Повертає назви знайдених книжок одним рядком",
-    "B": ("ЄДИНЕ джерело даних про роботу бібліотеки. Викликай ЗАВЖДИ, коли питання стосується будь-якої "                                                                                                                           
-          "послуги, ціни, суми, застави, терміну, ліміту чи правила бібліотеки, навіть якщо тема здається незвичною. "                                                                                                               
-          "Ніколи не відповідай «немає інформації» чи «немає інструмента», не викликавши спершу цей інструмент. "                                                                                                                    
-          "Документи охоплюють: реєстрацію й читацький квиток, правила видачі, продовження, штрафи; "                                                                                                                                
-          "читальну залу, комп'ютери, копіювання, обладнання й прилади для читачів; "                                                                                                                                                
-          "міжбібліотечний абонемент: замовлення книжок з інших міст і бібліотек, доставку, збори, бронювання, сповіщення; "                                                                                                         
-          "фонд: комплектування, сховище, депозитарій, списання; гуртки, клуби, заходи, оренду залів. "                                                                                                                              
-          "Запит формулюй повним реченням. Відповідай лише за знайденими фрагментами; "                                                                                                                                              
-          "якщо потрібного там немає, так і скажи користувачу."),
-    "C": "Шукає інформацію.",
-}
+"""Описи інструментів для різних конфігурацій агента."""
 
 DESCRIPTIONS = {
-    'search_books': "Шукає книжки за темою, жанром або рівнем складності."
-                     "Використовуй, коли користувач описує, яку книжку хоче, але не називає точної назви. "
-                     "Повертає назви знайдених книжок одним рядком",
-    'book_info': "Шукає книжку в довіднику за точною назвою. "
-                 "Використовуй ЗАВЖДИ коли точна назва книжки вже відома, "
-                 "наприклад її щойно повернув search_books. "
-                 "Повертає кількість примірників, термін видачі в днях, штраф за день прострочення",
-    'calculate': "Виконує арифметичну дію над двома числами."
-                 "Використовую ЗАВЖДИ коли треба щось порахувати; Самостійно нічого не рахуй!",
-    'search_docs': RAG_DESCRIPTIONS[config.DOCS_DESCRIPTION]
+    "search_docs": {
+        "A": "Шукає інформацію про тренування та правила залу FitZone.",
+        "B": "Шукає в документах FitZone інформацію про техніку безпеки, тренування для початківців, відновлення й харчування, абонементи, заморожування та користування обладнанням.",
+        "C": "Шукає інформацію.",
+    },
+    "calculate": {
+        "A": "Виконує базові числові обчислення.",
+        "B": "Виконує точні арифметичні обчислення для числових показників.",
+        "C": "Виконує арифметичну дію над двома числами.",
+    },
 }
 
-SCHEMAS = []
-for name in config.ALLOWED:
-    SCHEMAS.append({
-        'type': 'function',
-        'function': {
-            'name': name,
-            'description': DESCRIPTIONS[name],
-            'parameters': ARGS[name].model_json_schema(),
+RAG_DESCRIPTIONS = {
+    "A": DESCRIPTIONS["search_docs"]["A"],
+    "B": DESCRIPTIONS["search_docs"]["B"],
+    "C": DESCRIPTIONS["search_docs"]["C"],
+}
+
+SCHEMAS = [
+    {
+        "type": "function",
+        "function": {
+            "name": "search_docs",
+            "description": DESCRIPTIONS["search_docs"]["B"],
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "Пошуковий запит українською мовою",
+                    }
+                },
+                "required": ["query"],
+            },
         },
-    })
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate",
+            "description": DESCRIPTIONS["calculate"]["B"],
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "expression": {
+                        "type": "string",
+                        "description": "Арифметичний вираз для обчислення",
+                    }
+                },
+                "required": ["expression"],
+            },
+        },
+    },
+]
 
 
-def set_description(name, text):
-   """Підміняє опис інструмента в SCHEMAS: це той самий список, який читає agent.py."""
-   for item in SCHEMAS:
-       if item["function"]["name"] == name:
-           item["function"]["description"] = text
+def set_description(tool_name, desc):
+    if tool_name in DESCRIPTIONS and desc in RAG_DESCRIPTIONS.values():
+        for key, val in RAG_DESCRIPTIONS.items():
+            if val == desc and key in DESCRIPTIONS[tool_name]:
+                desc = DESCRIPTIONS[tool_name][key]
+                break
+    for schema in SCHEMAS:
+        if isinstance(schema, dict):
+            fn = schema.get("function", schema)
+            if isinstance(fn, dict) and fn.get("name") == tool_name:
+                fn["description"] = desc
