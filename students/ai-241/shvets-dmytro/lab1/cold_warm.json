@@ -1,0 +1,16 @@
+{
+  "cold": {
+    "ttft_s": 4.245,
+    "total_s": 4.399,
+    "chars": 24,
+    "chars_per_s": 5.5,
+    "response": "Столицею Японії є Токіо."
+  },
+  "warm": {
+    "ttft_s": 2.071,
+    "total_s": 2.197,
+    "chars": 24,
+    "chars_per_s": 10.9,
+    "response": "Столицею Японії є Токіо."
+  }
+}
