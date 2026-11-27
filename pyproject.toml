@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "computational-methods-2026-practice"
+version = "0.1.0"
+description = "Computational Methods 2026 practice labs and shared utilities"
+requires-python = ">=3.12"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["utils*"]

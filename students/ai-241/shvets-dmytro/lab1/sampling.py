@@ -1,36 +1,118 @@
-from providers import make_client
 
-client, model = make_client("local")
+import json
+from providers import local, LOCAL_MODEL
 
-CREATIVE = "Запропонуй назву застосунку нагадувань про ліки. Відповідай тільки назвою."
-FACTUAL = "Рік відкриття Київського метрополітену. Відповідай лише роком."
+CREATIVE = (
+    "Запропонуй назву застосунку нагадувань "
+    "про ліки. Відповідай тільки назвою."
+)
+
+FACTUAL = (
+    "Рік відкриття Київського метрополітену. "
+    "Відповідай лише роком."
+)
+
 
 def run(prompt, n=5, **params):
     answers = []
-    for _ in range(n):
-        r = client.chat.completions.create(
-            model=model,
-            messages=[{"role": "user", "content": prompt}],
-            **params,
+
+    for i in range(n):
+        r = local.chat.completions.create(
+            model=LOCAL_MODEL,
+            messages=[
+                {"role": "user", "content": prompt}
+            ],
+            **params
         )
-        answers.append(r.choices[0].message.content.strip())
+
+        answer = (
+            r.choices[0].message.content or ""
+        ).strip()
+
+        answers.append(answer)
+        print(f"{i + 1}/{n}: {answer}")
+
     return answers
 
-print("=== Temperature Tests ===")
+
+results = {
+    "temperature": {},
+    "top_p": {},
+    "factual": {},
+    "reproducibility": {}
+}
+
+
+# 1. Вплив temperature
 for t in [0.0, 0.7, 1.5]:
-    ans = run(CREATIVE, temperature=t)
-    print(f"temp={t}: unique={len(set(ans))}/5 -> {ans}")
+    print(f"\nTemperature = {t}")
 
-print("\n=== Top_P Tests ===")
+    answers = run(CREATIVE, temperature=t)
+
+    results["temperature"][str(t)] = {
+        "answers": answers,
+        "unique": len(set(answers))
+    }
+
+
+# 2. Вплив top_p
 for p in [0.1, 0.5, 1.0]:
-    ans = run(CREATIVE, temperature=0.7, top_p=p)
-    print(f"top_p={p}: unique={len(set(ans))}/5 -> {ans}")
+    print(f"\nTop_p = {p}")
 
-print("\n=== Factual Tests ===")
+    answers = run(
+        CREATIVE,
+        temperature=0.7,
+        top_p=p
+    )
+
+    results["top_p"][str(p)] = {
+        "answers": answers,
+        "unique": len(set(answers))
+    }
+
+
+# 3. Фактичне питання
 for t in [0.0, 1.5]:
-    ans = run(FACTUAL, temperature=t)
-    print(f"temp={t}: {ans}")
+    print(f"\nФактичне питання, temperature={t}")
 
-print("\n=== Reproducibility Test ===")
-ans_rep = run(FACTUAL, n=10, temperature=0.0)
-print(f"All identical: {len(set(ans_rep)) == 1} ({set(ans_rep)})")
+    answers = run(FACTUAL, temperature=t)
+
+    correct = sum(
+        a.strip().rstrip(".") == "1960"
+        for a in answers
+    )
+
+    results["factual"][str(t)] = {
+        "answers": answers,
+        "correct": correct
+    }
+
+
+# 4. Відтворюваність
+print("\nПеревірка відтворюваності")
+
+answers = run(
+    FACTUAL,
+    n=10,
+    temperature=0.0
+)
+
+results["reproducibility"] = {
+    "answers": answers,
+    "unique": len(set(answers)),
+    "all_identical": len(set(answers)) == 1
+}
+
+
+with open(
+    "sampling_results.json",
+    "w",
+    encoding="utf-8"
+) as f:
+    json.dump(
+        results, f,
+        ensure_ascii=False,
+        indent=2
+    )
+
+print("\nРезультати збережено.")
