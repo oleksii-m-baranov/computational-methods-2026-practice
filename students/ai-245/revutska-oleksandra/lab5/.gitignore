@@ -1,0 +1,24 @@
+
+# Секретні налаштування
+.env
+.env.*
+
+# Віртуальне середовище
+venv/
+.venv/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Локальний FAISS-індекс
+index/*.faiss
+
+# Старі звіти
+report1.docx
+report1.pdf
+
+# Тимчасові результати
+results/*_backup.csv
+results/*_old.csv
