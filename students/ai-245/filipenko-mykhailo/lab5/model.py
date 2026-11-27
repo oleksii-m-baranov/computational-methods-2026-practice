@@ -1,4 +1,3 @@
-
 from langfuse.openai import OpenAI
 
 import config
@@ -9,7 +8,7 @@ from cache import ask_model
 client = OpenAI(
     base_url=config.BASE_URL,
     api_key=config.API_KEY,
-    timeout=120.0,
+    timeout=300.0,
     max_retries=0
 )
 
