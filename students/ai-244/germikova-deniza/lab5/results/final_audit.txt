@@ -1,0 +1,20 @@
+PASS: 90 unique CSV rows; 90 corresponding log runs; first 100 normalized characters of answers match CSV and logs.
+PASS: all Python source parses (AST).
+PASS: original SYSTEM, tasks.json, document bytes and old tools logic unchanged vs lab4 archive (only recipe directory path updated).
+PASS: index/chunks.json contains 99 chunks.
+PASS: manual review of 90 final answers exported separately.
+NOTE: Original Ollama experiments executed on macOS.
+NOTE: screenshots cropped to relevant panels.
+PASS: second audit: 31 Python files parse; 90 unique final-status runs, 9 logs, 12 existing trace screenshots.
+PASS: data/recipes relocated to data/corpus; all 12 old recipe files byte-identical; all 99 chunks equal including order and source.
+PASS: binary FAISS index, chunks.json and original experimental CSV/log bytes unchanged after relocation.
+PASS: Chroma result and code reviewed; all three metrics and same first chunk documented.
+NOTE: remaining original lab4.log unavailable in lab4 archive; baseline is a new run and includes a timeout.
+NOTE: Initial archive audit was static; subsequent runtime checks are listed below.
+PASS: macOS retest after corpus relocation: 17 documents, 10 questions, FAISS 99 x 1024, D1/N1 dispatcher and schema validation; rag_report preserved original figures.
+PASS: macOS full D1 agent retest after local .env restored: 2 steps, correct answer 17, no auth warnings.
+PASS: expanded B description screenshot now shows first generation of original B-r1-D1 trace (09:11:52.721).
+NOTE: local repository search did not find own historical lab4.log.
+
+PASS: 25.11.2026 repeat comparison (240 s timeout): both series processed 5 tasks; strict scores baseline 1/5 and RAG 2/5, consistent with previous series.
+NOTE: P1 baseline timed out again at 240 s; exact cause unknown. Interrupted intermediate 90 s series excluded from completed comparisons.

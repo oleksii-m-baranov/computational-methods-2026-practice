@@ -1,0 +1,133 @@
+[
+  {
+    "tool": "search_recipes",
+    "args": {
+      "query": "рис"
+    },
+    "result": "Плов з куркою, Омлет із сиром"
+  },
+  {
+    "tool": "product_info",
+    "args": {
+      "product": "рис"
+    },
+    "result": "Калорійність: 344 ккал на 100 г, ціна: 45 грн/кг"
+  },
+  {
+    "tool": "scale_amount",
+    "args": {
+      "target_servings": 6,
+      "amount": 300,
+      "base_servings": 4
+    },
+    "result": "450.0"
+  },
+  {
+    "tool": "search_recipes",
+    "args": {
+      "query": "курка"
+    },
+    "result": "За запитом 'курка' нічого не знайдено."
+  },
+  {
+    "tool": "product_info",
+    "args": {
+      "product": "курка"
+    },
+    "result": "Калорійність: 190 ккал на 100 г, ціна: 120 грн/кг"
+  },
+  {
+    "tool": "scale_amount",
+    "args": {
+      "amount": 400,
+      "base_servings": 4,
+      "target_servings": 6
+    },
+    "result": "600.0"
+  },
+  {
+    "tool": "search_recipes",
+    "args": {
+      "query": "морква"
+    },
+    "result": "Плов з куркою"
+  },
+  {
+    "tool": "product_info",
+    "args": {
+      "product": "морква"
+    },
+    "result": "Калорійність: 35 ккал на 100 г, ціна: 18 грн/кг"
+  },
+  {
+    "tool": "scale_amount",
+    "args": {
+      "target_servings": 6,
+      "amount": 100,
+      "base_servings": 4
+    },
+    "result": "150.0"
+  },
+  {
+    "tool": "search_recipes",
+    "args": {
+      "query": "цибуля"
+    },
+    "result": "Плов з куркою, Грибний крем-суп"
+  },
+  {
+    "tool": "product_info",
+    "args": {
+      "product": "цибуля"
+    },
+    "result": "Калорійність: 40 ккал на 100 г, ціна: 15 грн/кг"
+  },
+  {
+    "tool": "scale_amount",
+    "args": {
+      "amount": 80,
+      "base_servings": 4,
+      "target_servings": 6
+    },
+    "result": "120.0"
+  },
+  {
+    "tool": "search_recipes",
+    "args": {
+      "query": "картопля"
+    },
+    "result": "Грибний крем-суп, Запечена картопля з грибами"
+  },
+  {
+    "tool": "product_info",
+    "args": {
+      "product": "картопля"
+    },
+    "result": "Калорійність: 77 ккал на 100 г, ціна: 20 грн/кг"
+  },
+  {
+    "tool": "scale_amount",
+    "args": {
+      "amount": 500,
+      "base_servings": 4,
+      "target_servings": 6
+    },
+    "result": "750.0"
+  },
+  {
+    "tool": "search_recipes",
+    "args": {
+      "query": "молоко"
+    },
+    "result": "Омлет із сиром"
+  },
+  {
+    "tool": "scale_amount",
+    "args": {
+      "target_servings": 4,
+      "amount": 200,
+      "base_servings": 2
+    },
+    "result": "400.0"
+  }
+]
