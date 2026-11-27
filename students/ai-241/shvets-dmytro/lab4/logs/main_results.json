@@ -1,0 +1,101 @@
+[
+  {
+    "config": "none",
+    "right": 0,
+    "seconds": 949.4,
+    "steps": 7,
+    "prompt": 19842,
+    "completion": 92613,
+    "extra": 0,
+    "squeezes": 0,
+    "repeats": 0
+  },
+  {
+    "config": "trim",
+    "right": 0,
+    "seconds": 10.4,
+    "steps": 9,
+    "prompt": 17889,
+    "completion": 940,
+    "extra": 0,
+    "squeezes": 1,
+    "repeats": 0
+  },
+  {
+    "config": "trim+state",
+    "right": 0,
+    "seconds": 8.5,
+    "steps": 3,
+    "prompt": 7658,
+    "completion": 773,
+    "extra": 0,
+    "squeezes": 1,
+    "repeats": 1
+  },
+  {
+    "config": "none",
+    "right": 0,
+    "seconds": 930.9,
+    "steps": 7,
+    "prompt": 19842,
+    "completion": 92613,
+    "extra": 0,
+    "squeezes": 0,
+    "repeats": 0
+  },
+  {
+    "config": "trim",
+    "right": 0,
+    "seconds": 10.4,
+    "steps": 9,
+    "prompt": 17889,
+    "completion": 940,
+    "extra": 0,
+    "squeezes": 1,
+    "repeats": 0
+  },
+  {
+    "config": "trim+state",
+    "right": 0,
+    "seconds": 8.5,
+    "steps": 3,
+    "prompt": 7658,
+    "completion": 773,
+    "extra": 0,
+    "squeezes": 1,
+    "repeats": 1
+  },
+  {
+    "config": "none",
+    "right": 0,
+    "seconds": 934.1,
+    "steps": 7,
+    "prompt": 19842,
+    "completion": 92613,
+    "extra": 0,
+    "squeezes": 0,
+    "repeats": 0
+  },
+  {
+    "config": "trim",
+    "right": 0,
+    "seconds": 10.4,
+    "steps": 9,
+    "prompt": 17889,
+    "completion": 940,
+    "extra": 0,
+    "squeezes": 1,
+    "repeats": 0
+  },
+  {
+    "config": "trim+state",
+    "right": 0,
+    "seconds": 8.5,
+    "steps": 3,
+    "prompt": 7658,
+    "completion": 771,
+    "extra": 0,
+    "squeezes": 1,
+    "repeats": 0
+  }
+]
