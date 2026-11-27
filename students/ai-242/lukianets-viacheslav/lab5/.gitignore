@@ -1,0 +1,5 @@
+index/embeddings_cache.json
+chroma_db/
+cache/
+state/
+.env
