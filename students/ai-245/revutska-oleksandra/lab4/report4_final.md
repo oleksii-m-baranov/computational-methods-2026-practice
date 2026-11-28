@@ -32,11 +32,11 @@ PARAMETER num_ctx 3072
 
 **Рисунок 1 — Відомості про вихідну модель qwen2.5:3b.**
 
-<!-- ВСТАВИТИ СКРИНШОТ ollama show qwen2.5:3b -->
+<img width="1970" height="706" alt="image" src="https://github.com/user-attachments/assets/c298ea50-6eee-4ade-b35d-b07f17014864" />
 
 **Рисунок 2 — Похідна модель qwen25-3k та параметр num_ctx.**
 
-<!-- ВСТАВИТИ СКРИНШОТ ollama show qwen25-3k -->
+<img width="1950" height="790" alt="image" src="https://github.com/user-attachments/assets/320d0aeb-38c6-4c33-9288-32c214b77e61" />
 
 **Таблиця 1 — Конфігурації агента**
 
@@ -115,7 +115,7 @@ python analyze.py logs\probe_none_r1.log steps
 
 **Рисунок 3 — Аналіз пробного запуску без захисту.**
 
-<!-- ВСТАВИТИ СКРИНШОТ analyze.py logs\probe_none_r1.log steps -->
+<img width="2026" height="1064" alt="image" src="https://github.com/user-attachments/assets/567d612b-7c0b-41bd-aad0-d9ab97f9d43a" />
 
 ## 4. Обрізання історії (крок 5)
 
@@ -144,7 +144,7 @@ python analyze.py logs\probe_trim_r1.log
 
 **Рисунок 4 — Аналіз стиснення історії.**
 
-<!-- ВСТАВИТИ СКРИНШОТ analyze.py logs\probe_trim_r1.log -->
+<img width="2020" height="1286" alt="image" src="https://github.com/user-attachments/assets/07485580-1e83-4ea1-a928-8af0ecc4f91d" />
 
 ## 5. Збереження стану агента (крок 6)
 
@@ -163,11 +163,11 @@ python analyze.py logs\probe_trim+state_r1.log
 
 **Рисунок 5 — JSON-файл збереженого стану.**
 
-<!-- ВСТАВИТИ СКРИНШОТ state/probe_trim+state_r1.json -->
+<img width="1356" height="1202" alt="image" src="https://github.com/user-attachments/assets/b3c7cb1b-b7a1-41ef-ace0-0ea343faf0f8" />
 
 **Рисунок 6 — Перше повідомлення користувача після стиснення.**
 
-<!-- ВСТАВИТИ СКРИНШОТ відповідного блоку з probe_trim+state_r1.log -->
+<img width="1666" height="1230" alt="image" src="https://github.com/user-attachments/assets/d9be25ec-3f82-46ba-8d86-116ce32013a4" />
 
 ## 6. Кеш відповідей моделі (крок 7)
 
@@ -209,7 +209,7 @@ python measure.py none 1 cache_timed_cache2_warm
 
 **Рисунок 7 — Холодний та теплий прогони кешу.**
 
-<!-- ВСТАВИТИ СКРИНШОТ cache1/cache2 з часом та CACHE HIT/MISS -->
+<img width="2210" height="736" alt="image" src="https://github.com/user-attachments/assets/f6ff1eae-6dc1-4666-b129-49f8d37de8da" />
 
 ## 7. Основна серія 3 × 3 (крок 8)
 
@@ -249,7 +249,7 @@ python measure.py all 3 main
 
 **Рисунок 8 — Підсумкова таблиця measure.py для дев'яти прогонів.**
 
-<!-- ВСТАВИТИ СКРИНШОТ результату python measure.py all 3 main -->
+<img width="2234" height="232" alt="image" src="https://github.com/user-attachments/assets/6f402596-86db-43c8-97a1-98ea1130b93c" />
 
 ## 8. Трасування Langfuse
 
@@ -257,11 +257,11 @@ python measure.py all 3 main
 
 **Рисунок 9 — Траса long-main_none_r1.**
 
-<!-- ВСТАВИТИ СКРИНШОТ LANGFUSE: long-main_none_r1 -->
+<img width="1688" height="1210" alt="image" src="https://github.com/user-attachments/assets/6ba5d9d9-79bb-446b-bd69-ab31b5684527" />
 
 **Рисунок 10 — Траса long-main_trim+state_r1.**
 
-<!-- ВСТАВИТИ СКРИНШОТ LANGFUSE: long-main_trim+state_r1 -->
+<img width="1708" height="1226" alt="image" src="https://github.com/user-attachments/assets/80a27559-661d-4b43-a8d3-6577c84d3bc7" />
 
 На першому кроці обидва режими мають 2318 токенів. Перший виклик після стиснення у trim+state — крок 2: 2888 токенів, у none на тому самому кроці — 2637. Різниця 251 токен: повідомлення не видалялися (8 → 8), а стан додано; зменшення входу на цьому кроці не спостерігається. У дереві Langfuse можна одразу зіставити кількість генерацій, їхню вкладеність, тривалість і використання токенів, які в текстовому лозі потрібно зіставляти за кроками. Фактичний вигляд дерев ще потрібно перевірити за скриншотами.
 
