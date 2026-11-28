@@ -1,0 +1,17 @@
+{
+  "run_id": "final_trim_r1",
+  "mode": "trim",
+  "repeat": 1,
+  "tag": "final",
+  "model": "qwen25-4k",
+  "num_ctx": 3072,
+  "compress": "trim",
+  "use_state": false,
+  "use_cache": false,
+  "elapsed_seconds": 12.51,
+  "expected_total": 20716.67,
+  "answer": null,
+  "correct": false,
+  "min_calls": 18,
+  "log_path": "logs\\final_trim_r1.log"
+}

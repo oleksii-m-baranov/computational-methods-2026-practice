@@ -1,0 +1,335 @@
+{
+  "cache_directory": "C:\\Users\\miha2\\AppData\\Local\\Temp\\lab4_cache_test_3gb8i2rz",
+  "cold": {
+    "name": "COLD CACHE",
+    "hits": 0,
+    "misses": 3,
+    "results": [
+      {
+        "question": "Знайди інформацію про ноутбук StudyNova 14.",
+        "cache": "MISS",
+        "response": {
+          "id": "chatcmpl-347",
+          "choices": [
+            {
+              "finish_reason": "tool_calls",
+              "index": 0,
+              "logprobs": null,
+              "message": {
+                "content": "",
+                "refusal": null,
+                "role": "assistant",
+                "annotations": null,
+                "audio": null,
+                "function_call": null,
+                "tool_calls": [
+                  {
+                    "id": "call_5d1itjyy",
+                    "function": {
+                      "arguments": "{\"model\":\"StudyNova 14\"}",
+                      "name": "laptop_info"
+                    },
+                    "type": "function",
+                    "index": 0
+                  }
+                ]
+              }
+            }
+          ],
+          "created": 1795099741,
+          "model": "qwen25-lab4-4096",
+          "object": "chat.completion",
+          "metadata": null,
+          "moderation": null,
+          "service_tier": null,
+          "system_fingerprint": "fp_ollama",
+          "usage": {
+            "completion_tokens": 25,
+            "prompt_tokens": 421,
+            "total_tokens": 446,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cache_write_tokens": null,
+              "cached_tokens": 0,
+              "image_tokens": null,
+              "text_tokens": null
+            }
+          }
+        }
+      },
+      {
+        "question": "Знайди інформацію про ноутбук CodeNova 15.",
+        "cache": "MISS",
+        "response": {
+          "id": "chatcmpl-800",
+          "choices": [
+            {
+              "finish_reason": "tool_calls",
+              "index": 0,
+              "logprobs": null,
+              "message": {
+                "content": "",
+                "refusal": null,
+                "role": "assistant",
+                "annotations": null,
+                "audio": null,
+                "function_call": null,
+                "tool_calls": [
+                  {
+                    "id": "call_c23tk2nl",
+                    "function": {
+                      "arguments": "{\"model\":\"CodeNova 15\"}",
+                      "name": "laptop_info"
+                    },
+                    "type": "function",
+                    "index": 0
+                  }
+                ]
+              }
+            }
+          ],
+          "created": 1795099741,
+          "model": "qwen25-lab4-4096",
+          "object": "chat.completion",
+          "metadata": null,
+          "moderation": null,
+          "service_tier": null,
+          "system_fingerprint": "fp_ollama",
+          "usage": {
+            "completion_tokens": 25,
+            "prompt_tokens": 421,
+            "total_tokens": 446,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cache_write_tokens": null,
+              "cached_tokens": 410,
+              "image_tokens": null,
+              "text_tokens": null
+            }
+          }
+        }
+      },
+      {
+        "question": "Знайди інформацію про ноутбук GameNova X16.",
+        "cache": "MISS",
+        "response": {
+          "id": "chatcmpl-940",
+          "choices": [
+            {
+              "finish_reason": "tool_calls",
+              "index": 0,
+              "logprobs": null,
+              "message": {
+                "content": "",
+                "refusal": null,
+                "role": "assistant",
+                "annotations": null,
+                "audio": null,
+                "function_call": null,
+                "tool_calls": [
+                  {
+                    "id": "call_uirw942y",
+                    "function": {
+                      "arguments": "{\"model\":\"GameNova X16\"}",
+                      "name": "laptop_info"
+                    },
+                    "type": "function",
+                    "index": 0
+                  }
+                ]
+              }
+            }
+          ],
+          "created": 1795099742,
+          "model": "qwen25-lab4-4096",
+          "object": "chat.completion",
+          "metadata": null,
+          "moderation": null,
+          "service_tier": null,
+          "system_fingerprint": "fp_ollama",
+          "usage": {
+            "completion_tokens": 25,
+            "prompt_tokens": 421,
+            "total_tokens": 446,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cache_write_tokens": null,
+              "cached_tokens": 410,
+              "image_tokens": null,
+              "text_tokens": null
+            }
+          }
+        }
+      }
+    ]
+  },
+  "warm": {
+    "name": "WARM CACHE",
+    "hits": 3,
+    "misses": 0,
+    "results": [
+      {
+        "question": "Знайди інформацію про ноутбук StudyNova 14.",
+        "cache": "HIT",
+        "response": {
+          "id": "chatcmpl-347",
+          "choices": [
+            {
+              "finish_reason": "tool_calls",
+              "index": 0,
+              "logprobs": null,
+              "message": {
+                "content": "",
+                "refusal": null,
+                "role": "assistant",
+                "annotations": null,
+                "audio": null,
+                "function_call": null,
+                "tool_calls": [
+                  {
+                    "id": "call_5d1itjyy",
+                    "function": {
+                      "arguments": "{\"model\":\"StudyNova 14\"}",
+                      "name": "laptop_info"
+                    },
+                    "type": "function",
+                    "index": 0
+                  }
+                ]
+              }
+            }
+          ],
+          "created": 1795099741,
+          "model": "qwen25-lab4-4096",
+          "object": "chat.completion",
+          "metadata": null,
+          "moderation": null,
+          "service_tier": null,
+          "system_fingerprint": "fp_ollama",
+          "usage": {
+            "completion_tokens": 25,
+            "prompt_tokens": 421,
+            "total_tokens": 446,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cache_write_tokens": null,
+              "cached_tokens": 0,
+              "image_tokens": null,
+              "text_tokens": null
+            }
+          }
+        }
+      },
+      {
+        "question": "Знайди інформацію про ноутбук CodeNova 15.",
+        "cache": "HIT",
+        "response": {
+          "id": "chatcmpl-800",
+          "choices": [
+            {
+              "finish_reason": "tool_calls",
+              "index": 0,
+              "logprobs": null,
+              "message": {
+                "content": "",
+                "refusal": null,
+                "role": "assistant",
+                "annotations": null,
+                "audio": null,
+                "function_call": null,
+                "tool_calls": [
+                  {
+                    "id": "call_c23tk2nl",
+                    "function": {
+                      "arguments": "{\"model\":\"CodeNova 15\"}",
+                      "name": "laptop_info"
+                    },
+                    "type": "function",
+                    "index": 0
+                  }
+                ]
+              }
+            }
+          ],
+          "created": 1795099741,
+          "model": "qwen25-lab4-4096",
+          "object": "chat.completion",
+          "metadata": null,
+          "moderation": null,
+          "service_tier": null,
+          "system_fingerprint": "fp_ollama",
+          "usage": {
+            "completion_tokens": 25,
+            "prompt_tokens": 421,
+            "total_tokens": 446,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cache_write_tokens": null,
+              "cached_tokens": 410,
+              "image_tokens": null,
+              "text_tokens": null
+            }
+          }
+        }
+      },
+      {
+        "question": "Знайди інформацію про ноутбук GameNova X16.",
+        "cache": "HIT",
+        "response": {
+          "id": "chatcmpl-940",
+          "choices": [
+            {
+              "finish_reason": "tool_calls",
+              "index": 0,
+              "logprobs": null,
+              "message": {
+                "content": "",
+                "refusal": null,
+                "role": "assistant",
+                "annotations": null,
+                "audio": null,
+                "function_call": null,
+                "tool_calls": [
+                  {
+                    "id": "call_uirw942y",
+                    "function": {
+                      "arguments": "{\"model\":\"GameNova X16\"}",
+                      "name": "laptop_info"
+                    },
+                    "type": "function",
+                    "index": 0
+                  }
+                ]
+              }
+            }
+          ],
+          "created": 1795099742,
+          "model": "qwen25-lab4-4096",
+          "object": "chat.completion",
+          "metadata": null,
+          "moderation": null,
+          "service_tier": null,
+          "system_fingerprint": "fp_ollama",
+          "usage": {
+            "completion_tokens": 25,
+            "prompt_tokens": 421,
+            "total_tokens": 446,
+            "completion_tokens_details": null,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cache_write_tokens": null,
+              "cached_tokens": 410,
+              "image_tokens": null,
+              "text_tokens": null
+            }
+          }
+        }
+      }
+    ]
+  }
+}

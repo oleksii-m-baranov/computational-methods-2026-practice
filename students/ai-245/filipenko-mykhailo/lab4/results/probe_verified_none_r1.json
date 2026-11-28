@@ -1,0 +1,17 @@
+{
+  "run_id": "probe_verified_none_r1",
+  "mode": "none",
+  "repeat": 1,
+  "tag": "probe_verified",
+  "model": "qwen25-lab4-4096",
+  "num_ctx": 4096,
+  "compress": "none",
+  "use_state": false,
+  "use_cache": false,
+  "elapsed_seconds": 19.2,
+  "expected_total": 20716.67,
+  "answer": null,
+  "correct": false,
+  "min_calls": 18,
+  "log_path": "logs\\probe_verified_none_r1.log"
+}

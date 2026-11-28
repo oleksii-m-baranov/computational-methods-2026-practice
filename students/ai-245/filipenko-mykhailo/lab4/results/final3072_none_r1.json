@@ -1,0 +1,17 @@
+{
+  "run_id": "final3072_none_r1",
+  "mode": "none",
+  "repeat": 1,
+  "tag": "final3072",
+  "model": "qwen25-4k",
+  "num_ctx": 3072,
+  "compress": "none",
+  "use_state": false,
+  "use_cache": false,
+  "elapsed_seconds": 1170.58,
+  "expected_total": 20716.67,
+  "answer": null,
+  "correct": false,
+  "min_calls": 18,
+  "log_path": "logs\\final3072_none_r1.log"
+}
