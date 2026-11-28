@@ -1,0 +1,16 @@
+2026-11-28 01:53:07 - INFO - ===== LOCAL (llama3.2:3b) =====
+2026-11-28 01:53:07 - INFO - Різниця між HTTP та HTTPS полярна: HTTP (HyperText Transfer Protocol) — безсекurentний протокол передачи даних, який не забезпечує криптографічного шифрування даних. HTTPS (HyperText Transfer Protocol Secure) — сецурний протокол передачи даних, який забезпечує криптографічне шифрування даних для захисту передачи конфіденциальних даних.
+2026-11-28 01:53:07 - INFO - Час: 11.53 с
+2026-11-28 01:53:07 - INFO - Довжина, символів: 337
+2026-11-28 01:53:07 - INFO - USAGE: CompletionUsage(completion_tokens=94, prompt_tokens=41, total_tokens=135, completion_tokens_details=None, prompt_tokens_details=PromptTokensDetails(audio_tokens=None, cache_write_tokens=None, cached_tokens=0, image_tokens=None, text_tokens=None))
+2026-11-28 01:53:07 - INFO - 
+2026-11-28 01:53:08 - INFO - ===== CLOUD (openai/gpt-oss-120b) =====
+2026-11-28 01:53:08 - INFO - **HTTP** (Hypertext Transfer Protocol) – це протокол передачі даних у вигляді простого тексту. При його використанні інформація між браузером і сервером передається у відкритому вигляді, тому її можна перехопити та прочитати.
+
+**HTTPS** (HTTP Secure) – це HTTP, який працює поверх захищеного каналу TLS/SSL. Під час передачі дані шифруються, що забезпечує конфіденційність, цілісність і автентифікацію сервера (можна перевірити, що ви дійсно підключені до потрібного сайту).  
+
+Отже, різниця — HTTPS додає шифрування і безпеку до звичайного HTTP.
+2026-11-28 01:53:08 - INFO - Час: 0.90 с
+2026-11-28 01:53:08 - INFO - Довжина, символів: 546
+2026-11-28 01:53:08 - INFO - USAGE: CompletionUsage(completion_tokens=205, prompt_tokens=87, total_tokens=292, completion_tokens_details=CompletionTokensDetails(accepted_prediction_tokens=None, audio_tokens=None, reasoning_tokens=27, rejected_prediction_tokens=None, text_tokens=None), prompt_tokens_details=None, queue_time=0.283401398, prompt_time=0.003660321, completion_time=0.423586928, total_time=0.427247249)
+2026-11-28 01:53:08 - INFO - 

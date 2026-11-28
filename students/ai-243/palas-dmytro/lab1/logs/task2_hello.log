@@ -1,0 +1,34 @@
+2026-11-28 02:06:06 - INFO - ===== llama3.2:3b | concise =====
+2026-11-28 02:06:06 - INFO - SYSTEM: Ти лаконічний технічний асистент.
+2026-11-28 02:06:06 - INFO - CHARS: 969
+2026-11-28 02:06:06 - INFO - RESPONSE:
+HTTP (Hypertext Transfer Protocol) та HTTPS (Hypertext Transfer Protocol Secure) — два протоколи, які використовуються для передачі даних на інтернет. їх основна розниця полягає в забезпеченні безпеки даних.
+
+HTTP — аномальний протокол, який не забезпечує жодного рівня безпеки даних. він використовує протokol «пакетно», який передає дані в вигляді серії пакетів. Хоча пакети можуть бути шифровані за допомогою протоколу SSL/TLS, сами пакети не отримують жодного рівня шифрування.
+
+HTTPS — протокол, який використовує протokol SSL/TLS для шифрування даних перед передачею на інтернет. він забезпечує криптографічний шифрування пакетів, який забезпечує рівень безпеки даних, такий як зашифрована інформація.
+
+Тобто, якщо ви передаєте дані за допомогою HTTP, вони можуть бути перехоплені або модифіковані за допомогоюthird-party, тоді, коли ви передаєте дані за допомогою HTTPS, вони будуть зашифровані за допомогою протоколу SSL/TLS, що забезпечує рівень безпеки даних.
+2026-11-28 02:06:06 - INFO - USAGE: CompletionUsage(completion_tokens=262, prompt_tokens=48, total_tokens=310, completion_tokens_details=None, prompt_tokens_details=PromptTokensDetails(audio_tokens=None, cache_write_tokens=None, cached_tokens=15, image_tokens=None, text_tokens=None))
+2026-11-28 02:06:06 - INFO - 
+2026-11-28 02:06:13 - INFO - ===== llama3.2:3b | uk_two_sentences =====
+2026-11-28 02:06:13 - INFO - SYSTEM: Відповідай лише українською, максимум двома реченнями.
+2026-11-28 02:06:13 - INFO - CHARS: 203
+2026-11-28 02:06:13 - INFO - RESPONSE:
+HTTS (Hypertext Transfer Protocol Secure) — протокол передачи даних, який зазначається за допомогою символу «S» після «H» в назві. HTTP — протokol передачі даних, який не забезпечує зашифрованість даних.
+2026-11-28 02:06:13 - INFO - USAGE: CompletionUsage(completion_tokens=62, prompt_tokens=52, total_tokens=114, completion_tokens_details=None, prompt_tokens_details=PromptTokensDetails(audio_tokens=None, cache_write_tokens=None, cached_tokens=15, image_tokens=None, text_tokens=None))
+2026-11-28 02:06:13 - INFO - 
+2026-11-28 02:09:50 - INFO - ===== qwen3:4b | concise =====
+2026-11-28 02:09:50 - INFO - SYSTEM: Ти лаконічний технічний асистент.
+2026-11-28 02:09:50 - INFO - CHARS: 208
+2026-11-28 02:09:50 - INFO - RESPONSE:
+HTTP is an unencrypted protocol for web communication. HTTPS adds SSL/TLS encryption to secure data in transit, verifies server identity via digital certificates, and operates on port 443 (vs HTTP's port 80).
+2026-11-28 02:09:50 - INFO - USAGE: CompletionUsage(completion_tokens=1880, prompt_tokens=49, total_tokens=1929, completion_tokens_details=None, prompt_tokens_details=PromptTokensDetails(audio_tokens=None, cache_write_tokens=None, cached_tokens=0, image_tokens=None, text_tokens=None))
+2026-11-28 02:09:50 - INFO - 
+2026-11-28 02:10:43 - INFO - ===== qwen3:4b | uk_two_sentences =====
+2026-11-28 02:10:43 - INFO - SYSTEM: Відповідай лише українською, максимум двома реченнями.
+2026-11-28 02:10:43 - INFO - CHARS: 214
+2026-11-28 02:10:43 - INFO - RESPONSE:
+HTTP — це протокол без шифрування, який передає дані відкрито, в той час як HTTPS використовує TLS/SSL для шифрування і захисту даних від зламання. HTTPS забезпечує безпеку передачі інформації, а HTTP не має цього.
+2026-11-28 02:10:43 - INFO - USAGE: CompletionUsage(completion_tokens=492, prompt_tokens=58, total_tokens=550, completion_tokens_details=None, prompt_tokens_details=PromptTokensDetails(audio_tokens=None, cache_write_tokens=None, cached_tokens=3, image_tokens=None, text_tokens=None))
+2026-11-28 02:10:43 - INFO - 

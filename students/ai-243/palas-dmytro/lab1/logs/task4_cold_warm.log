@@ -1,0 +1,2 @@
+2026-11-28 04:16:37 - INFO - COLD START [llama3.2:3b | short]: {'ttft_s': 20.474, 'total_s': 22.012, 'chars': 30, 'chars_per_s': 1.4}
+2026-11-28 04:16:41 - INFO - WARM START [llama3.2:3b | short]: {'ttft_s': 2.281, 'total_s': 3.779, 'chars': 23, 'chars_per_s': 6.1}
