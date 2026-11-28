@@ -1,67 +1,69 @@
 
-"""Аналіз покрокових логів агента для лабораторної №4."""
+"""Читання лога прогону: розбір тексту лога на прогони та кроки."""
 
 import re
-from pathlib import Path
 
 
-STEP_PATTERN = re.compile(
-    r"---\s*крок\s+(\d+)\s*\|\s*"
-    r"prompt_tokens=(\d+)\s*\|\s*"
-    r"completion_tokens=(\d+)"
-)
+def find_status(block):
+    if "ПОМИЛКА СЕРВЕРА" in block:
+        return "server_error"
+    if re.search(r"^ВІДПОВІДЬ:", block, flags=re.M):
+        return "final"
+    if "СТОП: модель не змогла" in block:
+        return "retry_limit"
+    if "СТОП: вичерпано ліміт кроків" in block:
+        return "step_limit"
+    return "unknown"
 
-CALL_PATTERN = re.compile(r"виклик:\s*(\w+)\(")
 
+def parse_step(chunk):
+    first_line = chunk.split("\n", 1)[0]
 
-def parse_log(path):
-    """Зчитує кроки, токени та виклики інструментів."""
+    prompt = re.search(r"prompt_tokens=(\d+)", first_line)
+    completion = re.search(r"completion_tokens=(\d+)", first_line)
 
-    path = Path(path)
+    squeeze = re.search(
+        r"^  СТИСНЕННЯ: вхід був (\d+) токенів, повідомлень (\d+) -> (\d+)",
+        chunk,
+        flags=re.M,
+    )
 
-    if not path.is_file():
-        raise FileNotFoundError(f"Лог не знайдено: {path}")
-
-    content = path.read_text(encoding="utf-8")
-
-    steps = []
-
-    for match in STEP_PATTERN.finditer(content):
-        steps.append({
-            "step": int(match.group(1)),
-            "prompt_tokens": int(match.group(2)),
-            "completion_tokens": int(match.group(3)),
-        })
-
-    calls = CALL_PATTERN.findall(content)
+    extra = re.findall(
+        r"підсумовування коштувало (\d+) токенів",
+        chunk,
+    )
 
     return {
-        "steps": steps,
-        "tool_calls": len(calls),
-        "tool_names": calls,
-        "max_prompt_tokens": max(
-            (step["prompt_tokens"] for step in steps),
-            default=0,
-        ),
+        "n": int(re.match(r"\d+", chunk).group()),
+        "tokens": int(prompt.group(1)) if prompt else None,
+        "completion": int(completion.group(1)) if completion else 0,
+        "from_cache": "з кешу" in first_line,
+        "calls": re.findall(r"^  виклик   : (.*)$", chunk, flags=re.M),
+        "answer": bool(re.search(r"^ВІДПОВІДЬ:", chunk, flags=re.M)),
+        "server_error": "ПОМИЛКА СЕРВЕРА" in first_line,
+        "squeeze": tuple(int(x) for x in squeeze.groups()) if squeeze else None,
+        "extra": sum(int(x) for x in extra),
     }
 
 
-if __name__ == "__main__":
-    import sys
+def parse_run(block):
+    chunks = re.split(r"^--- крок ", block, flags=re.M)[1:]
 
-    if len(sys.argv) != 2:
-        print("Використання: python logparse.py <шлях_до_лога>")
-        sys.exit(1)
+    return {
+        "task": block.split("\n", 1)[0],
+        "status": find_status(block),
+        "steps": [parse_step(chunk) for chunk in chunks],
+    }
 
-    result = parse_log(sys.argv[1])
 
-    print("Кількість кроків:", len(result["steps"]))
-    print("Кількість викликів інструментів:", result["tool_calls"])
-    print("Максимум вхідних токенів:", result["max_prompt_tokens"])
+def parse_log(text):
+    text = re.sub(
+        r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} - [A-Z]+ - ",
+        "",
+        text,
+        flags=re.M,
+    )
 
-    for step in result["steps"]:
-        print(
-            f"Крок {step['step']}: "
-            f"prompt={step['prompt_tokens']}, "
-            f"completion={step['completion_tokens']}"
-        )
+    blocks = re.split(r"^ЗАДАЧА: ", text, flags=re.M)[1:]
+
+    return [parse_run(block) for block in blocks]

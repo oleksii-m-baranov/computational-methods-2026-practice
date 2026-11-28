@@ -10,12 +10,11 @@
 BASE_URL = "http://localhost:11434/v1"
 API_KEY = "ollama"
 
-MODEL = "qwen25-4k"
+MODEL = "qwen25-3k"
 TEMPERATURE = 0
 
 # Розмір контекстного вікна
-NUM_CTX = 4096
-
+NUM_CTX = 3072
 
 # --------------------------------------------------
 # 2. Обмеження роботи агента
@@ -59,7 +58,7 @@ LAB_LOGFILE_NAME = "lab4"
 COMPRESS = "trim"
 
 # Поріг активації стиснення
-COMPRESS_AT = 2800
+COMPRESS_AT = 2150
 
 # Кількість останніх повідомлень
 KEEP_LAST = 6

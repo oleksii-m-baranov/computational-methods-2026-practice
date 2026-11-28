@@ -1,3 +1,4 @@
+
 """Бібліотечний агент: контекст, стан, кеш і Langfuse."""
 
 import logging
@@ -6,14 +7,16 @@ from pathlib import Path
 from langfuse import observe
 
 import config
-from compress import compress_messages
+from compress import compress_history
 from dispatcher import MODEL_ERRORS, call_tool
 from model import call_model
-from state import AgentState
+from state import TaskState
 
 
-def create_logger():
-    """Створює лог у папці logs для measure.py."""
+def create_logger(logfile_name=None, overwrite=False):
+    """Створює окремий лог для кожного прогону."""
+
+    logfile_name = logfile_name or config.LAB_LOGFILE_NAME
 
     Path("logs").mkdir(exist_ok=True)
 
@@ -21,15 +24,21 @@ def create_logger():
     logger.setLevel(logging.INFO)
     logger.propagate = False
 
-    # Не додаємо однакові обробники повторно.
-    if not logger.handlers:
-        handler = logging.FileHandler(
-            Path("logs") / f"{config.LAB_LOGFILE_NAME}.log",
-            mode="a",
-            encoding="utf-8",
-        )
-        handler.setFormatter(logging.Formatter("%(message)s"))
-        logger.addHandler(handler)
+    for handler in list(logger.handlers):
+        logger.removeHandler(handler)
+        handler.close()
+
+    handler = logging.FileHandler(
+        Path("logs") / f"{logfile_name}.log",
+        mode="w" if overwrite else "a",
+        encoding="utf-8",
+    )
+
+    handler.setFormatter(
+        logging.Formatter("%(message)s")
+    )
+
+    logger.addHandler(handler)
 
     return logger
 
@@ -42,22 +51,23 @@ def run_agent(
     task_id="task",
     log_overwrite=False,
 ):
-    """Виконує завдання через Ollama та інструменти."""
+    """Виконує бібліотечне завдання."""
 
     if max_steps is None:
         max_steps = config.MAX_STEPS
 
-    logger = create_logger()
+    logger = create_logger(
+        logfile_name,
+        overwrite=log_overwrite,
+    )
 
     messages = [
         {"role": "system", "content": config.SYSTEM},
         {"role": "user", "content": task},
     ]
 
-    state = AgentState() if config.USE_STATE else None
-
+    state = TaskState(task_id)
     retries = 0
-    last_prompt_tokens = 0
 
     logger.info(f"\n{'=' * 60}")
     logger.info(f"ЗАДАЧА: {task}")
@@ -67,44 +77,20 @@ def run_agent(
     logger.info(f"КЕШ: {config.USE_CACHE}")
 
     for step in range(1, max_steps + 1):
-        old_count = len(messages)
 
-        messages = compress_messages(
-            messages,
-            last_prompt_tokens,
-        )
+        try:
+            response, from_cache = call_model(messages)
 
-        if len(messages) < old_count:
-            logger.info(
-                f"TRIM: повідомлень {old_count} -> {len(messages)}"
+        except Exception as error:
+            logger.error(
+                f"--- крок {step} | "
+                f"ПОМИЛКА СЕРВЕРА: {error}"
             )
-
-        request_messages = list(messages)
-
-        if state is not None and state.tool_results:
-            summary = state.get_summary()
-
-            request_messages.insert(
-                1,
-                {
-                    "role": "system",
-                    "content": (
-                        "Збережені результати інструментів:\n\n"
-                        + summary
-                    ),
-                },
-            )
-
-            logger.info(
-                f"STATE: збережено викликів "
-                f"{state.get_tool_count()}"
-            )
-
-        response, from_cache = call_model(request_messages)
+            return None
 
         if response is None:
             logger.error(
-                f"ПОМИЛКА СЕРВЕРА на кроці {step}"
+                f"--- крок {step} | ПОМИЛКА СЕРВЕРА"
             )
             return None
 
@@ -122,13 +108,12 @@ def run_agent(
             else 0
         )
 
-        last_prompt_tokens = prompt_tokens
-
         logger.info(
             f"--- крок {step} | "
+            f"помилок поспіль={retries} | "
             f"prompt_tokens={prompt_tokens} | "
             f"completion_tokens={completion_tokens}"
-            + (" | CACHE HIT" if from_cache else "")
+            + (" | з кешу" if from_cache else "")
         )
 
         if not msg.tool_calls:
@@ -142,11 +127,12 @@ def run_agent(
         model_failed = False
 
         for call in msg.tool_calls:
+
             name = call.function.name
             arguments = call.function.arguments
 
             logger.info(
-                f"  виклик: {name}({arguments})"
+                f"  виклик   : {name}({arguments})"
             )
 
             level, result = call_tool(
@@ -157,26 +143,25 @@ def run_agent(
             result_text = str(result)
 
             logger.info(
-                f"  рівень перевірки: {level}"
+                f"  рівень   : {level}"
             )
+
             logger.info(
                 f"  результат: {result_text}"
             )
 
-            if state is not None and level == "ok":
-                state.add_tool_result(
+            messages.append({
+                "role": "tool",
+                "tool_call_id": call.id,
+                "content": result_text,
+            })
+
+            if level == "ok":
+                state.record(
                     name,
                     arguments,
                     result_text,
                 )
-
-            messages.append(
-                {
-                    "role": "tool",
-                    "tool_call_id": call.id,
-                    "content": result_text,
-                }
-            )
 
             if level in MODEL_ERRORS:
                 model_failed = True
@@ -186,13 +171,24 @@ def run_agent(
 
             if retries > config.MAX_RETRIES:
                 logger.info(
-                    "СТОП: перевищено кількість помилок"
+                    "СТОП: модель не змогла "
+                    "виправити помилки"
                 )
                 return None
+
         else:
             retries = 0
 
+        messages = compress_history(
+            messages,
+            task,
+            prompt_tokens,
+            state,
+            logger,
+        )
+
     logger.info("СТОП: вичерпано ліміт кроків")
+
     return None
 
 
@@ -208,4 +204,5 @@ if __name__ == "__main__":
         )
 
     print("Відповідь агента:", answer)
+
     get_client().flush()

@@ -1,50 +1,138 @@
 
-"""Аналіз використання контексту агента в лабораторній №4."""
+"""Розбір логів прогонів агента."""
 
+import os
 import sys
 
+import config
 from logparse import parse_log
-from metrics import calculate_metrics
+from metrics import describe
 
 
-def main():
-    if len(sys.argv) != 3:
-        print("Використання: python analyze.py <log_file> <mode>")
-        sys.exit(1)
+def action_lines(step):
+    if step["server_error"]:
+        return ["ПОМИЛКА СЕРВЕРА"]
 
-    log_file = sys.argv[1]
-    mode = sys.argv[2]
+    if step["calls"]:
+        return [
+            c if len(c) < 60 else c[:57] + "..."
+            for c in step["calls"]
+        ]
 
-    if mode != "steps":
-        print(f"Невідомий режим аналізу: {mode}")
-        sys.exit(1)
+    if step["answer"]:
+        return ["відповідь без виклику"]
 
-    parsed = parse_log(log_file)
-    metrics = calculate_metrics(parsed)
+    return ["відхилено перевіркою (див. лог)"]
 
-    print("\n=== АНАЛІЗ КОНТЕКСТУ АГЕНТА ===")
-    print(f"Файл: {log_file}")
-    print(f"Кількість кроків: {metrics['steps']}")
-    print(f"Виклики інструментів: {metrics['tool_calls']}")
-    print(f"Перший prompt: {metrics['first_prompt_tokens']}")
-    print(f"Останній prompt: {metrics['last_prompt_tokens']}")
-    print(f"Максимум prompt: {metrics['max_prompt_tokens']}")
-    print(f"Приріст токенів: {metrics['prompt_growth']}")
-    print(f"Вихідні токени: {metrics['total_completion_tokens']}")
+
+def print_steps(run):
+    header = [
+        "Крок",
+        "prompt_tokens",
+        "Приріст",
+        "Що зробила модель",
+    ]
+
+    rows = []
+    previous = None
+
+    for s in run["steps"]:
+        growth = ""
+
+        if previous is not None and s["tokens"] is not None:
+            growth = s["tokens"] - previous
+
+        actions = action_lines(s)
+
+        rows.append([
+            str(s["n"]),
+            str(s["tokens"]),
+            str(growth),
+            actions[0],
+        ])
+
+        rows += [["", "", "", a] for a in actions[1:]]
+
+        if s["tokens"] is not None:
+            previous = s["tokens"]
+
+    widths = [
+        max(len(r[i]) for r in [header] + rows)
+        for i in range(len(header))
+    ]
+
+    right = [True, True, True, False]
+
+    def line(cells):
+        parts = [
+            c.rjust(w) if r else c.ljust(w)
+            for c, w, r in zip(cells, widths, right)
+        ]
+
+        return "| " + " | ".join(parts) + " |"
+
+    print()
+    print(line(header))
+
     print(
-        f"Використання контексту: "
-        f"{metrics['context_usage_percent']}%"
+        "|" + "|".join(
+            "-" * (w + 1) + ":" if r
+            else ":" + "-" * (w + 1)
+            for w, r in zip(widths, right)
+        ) + "|"
     )
 
-    print("\n=== ТОКЕНИ ЗА КРОКАМИ ===")
+    for r in rows:
+        print(line(r))
 
-    for step in parsed["steps"]:
+
+def print_summary(run):
+    d = describe(run)
+
+    print(f"  статус завершення: {d['status']}")
+    print(f"  кроків: {d['steps']}")
+    print(f"  повторних викликів: {d['repeats']}")
+    print(f"  вхід першого кроку: {d['first_tokens']} токенів")
+    print(f"  типовий приріст за крок: {d['typical_growth']:.0f} токенів")
+
+    print(
+        f"  найбільший вхід: {d['max_tokens']} токенів "
+        f"({d['max_tokens'] / config.NUM_CTX:.0%} "
+        f"вікна {config.NUM_CTX})"
+    )
+
+    print(f"  сума prompt_tokens за прогін: {d['prompt_tokens']}")
+    print(f"  сума completion_tokens: {d['completion_tokens']}")
+    print(f"  за формулою n*C + d*n*(n-1)/2: {d['formula']:.0f}")
+    print(f"  вхід перестав рости на кроці: {d['stall'] or 'не помічено'}")
+    print(f"  влучань у кеш: {d['cache_hits']}")
+    print(f"  кількість стиснень: {len(d['squeezes'])}")
+
+    for s in d["squeezes"]:
+        before, msgs_before, msgs_after = s["squeeze"]
+
         print(
-            f"Крок {step['step']}: "
-            f"prompt={step['prompt_tokens']}, "
-            f"completion={step['completion_tokens']}"
+            f"  стиснення на кроці {s['n']}: "
+            f"вхід був {before}, "
+            f"повідомлень {msgs_before} -> {msgs_after}"
         )
 
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) < 2:
+        sys.exit("Використання: python analyze.py <лог> [steps]")
+
+    path_to_log = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)),
+        sys.argv[1],
+    )
+
+    with open(path_to_log, encoding="utf-8") as f:
+        runs = parse_log(f.read())
+
+    for run in runs:
+        print(f"\nПрогін: {run['task'][:60]}")
+        print_summary(run)
+
+        if len(sys.argv) > 2 and sys.argv[2] == "steps":
+            print_steps(run)

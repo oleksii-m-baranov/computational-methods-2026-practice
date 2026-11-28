@@ -1,42 +1,70 @@
 
-"""Обчислення метрик використання контексту агента."""
+"""Показники прогону, які рахуються з розібраного лога."""
+
+import statistics
 
 import config
 
 
-def calculate_metrics(parsed_log):
-    """Обчислює показники за результатами аналізу лога."""
+def count_repeats(steps):
+    seen = set()
+    repeats = 0
 
-    steps = parsed_log["steps"]
+    for step in steps:
+        for call in step["calls"]:
+            if call in seen:
+                repeats += 1
+            seen.add(call)
 
-    prompt_tokens = [
-        step["prompt_tokens"]
-        for step in steps
+    return repeats
+
+
+def typical_growth(tokens):
+    growth = [
+        after - before
+        for (_, before), (_, after) in zip(tokens, tokens[1:])
+        if after > before
     ]
 
-    completion_tokens = [
-        step["completion_tokens"]
-        for step in steps
+    return statistics.median(growth) if growth else 0
+
+
+def find_stall(tokens, typical):
+    for (_, before), (number, after) in zip(tokens, tokens[1:]):
+        near_window = after >= 0.8 * config.NUM_CTX
+        stopped = after - before <= 0.2 * typical
+
+        if near_window and stopped:
+            return number
+
+    return None
+
+
+def describe(run):
+    steps = run["steps"]
+
+    tokens = [
+        (s["n"], s["tokens"])
+        for s in steps
+        if s["tokens"] is not None
     ]
 
-    first_prompt = prompt_tokens[0] if prompt_tokens else 0
-    last_prompt = prompt_tokens[-1] if prompt_tokens else 0
-
-    growth = last_prompt - first_prompt
-
-    context_usage = (
-        last_prompt / config.NUM_CTX * 100
-        if config.NUM_CTX > 0
-        else 0
-    )
+    typical = typical_growth(tokens)
+    n = len(tokens)
+    first = tokens[0][1] if tokens else 0
 
     return {
-        "steps": len(steps),
-        "tool_calls": parsed_log["tool_calls"],
-        "first_prompt_tokens": first_prompt,
-        "last_prompt_tokens": last_prompt,
-        "max_prompt_tokens": parsed_log["max_prompt_tokens"],
-        "prompt_growth": growth,
-        "total_completion_tokens": sum(completion_tokens),
-        "context_usage_percent": round(context_usage, 2),
+        "status": run["status"],
+        "steps": n,
+        "repeats": count_repeats(steps),
+        "first_tokens": first,
+        "typical_growth": typical,
+        "max_tokens": max((t for _, t in tokens), default=0),
+        "prompt_tokens": sum(t for _, t in tokens),
+        "completion_tokens": sum(s["completion"] for s in steps),
+        "extra_tokens": sum(s["extra"] for s in steps),
+        "formula": n * first + typical * n * (n - 1) / 2,
+        "stall": find_stall(tokens, typical),
+        "cache_hits": sum(1 for s in steps if s["from_cache"]),
+        "squeezes": [s for s in steps if s["squeeze"]],
     }

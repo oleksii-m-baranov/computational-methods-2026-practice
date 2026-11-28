@@ -1,32 +1,66 @@
 
-"""Стиснення контексту агента для лабораторної №4."""
+"""Стиснення контексту бібліотечного LLM-агента."""
 
 import config
 from context import trim_messages
 
 
-def compress_messages(messages, prompt_tokens):
-    """
-    Скорочує історію повідомлень залежно від режиму.
+def attach_state(messages, task, state):
+    """Додає збережені результати до запитання користувача."""
 
-    none — без стиснення;
-    trim — видалення старих груп повідомлень.
-    """
+    note = state.render()
 
-    mode = config.COMPRESS
+    if note:
+        messages[1] = {
+            "role": "user",
+            "content": task + "\n\n" + note,
+        }
 
-    if mode == "none":
-        return messages
+    return messages
 
-    if prompt_tokens < config.COMPRESS_AT:
-        return messages
 
-    if mode == "trim":
-        return trim_messages(
-            messages,
-            keep_last=config.KEEP_LAST,
+def compress_by_trim(messages, task, used, state, logger):
+    """Скорочує історію та за потреби додає стан."""
+
+    before = len(messages)
+
+    messages = trim_messages(
+        messages,
+        keep_last=config.KEEP_LAST,
+    )
+
+    if config.USE_STATE:
+        messages = attach_state(messages, task, state)
+
+    logger.info(
+        f"  СТИСНЕННЯ: вхід був {used} токенів, "
+        f"повідомлень {before} -> {len(messages)}"
+        + (", стан додано" if config.USE_STATE else "")
+    )
+
+    if config.USE_STATE:
+        logger.info(
+            "  ПЕРШЕ ПОВІДОМЛЕННЯ КОРИСТУВАЧА "
+            "ПІСЛЯ СТИСНЕННЯ:\n"
+            + messages[1]["content"]
         )
 
-    raise ValueError(
-        f"Невідомий режим стиснення: {mode}"
-    )
+    return messages
+
+
+def compress_history(messages, task, used, state, logger):
+    """Стискає історію після перевищення порога."""
+
+    if used <= config.COMPRESS_AT:
+        return messages
+
+    if config.COMPRESS == "trim":
+        return compress_by_trim(
+            messages,
+            task,
+            used,
+            state,
+            logger,
+        )
+
+    return messages

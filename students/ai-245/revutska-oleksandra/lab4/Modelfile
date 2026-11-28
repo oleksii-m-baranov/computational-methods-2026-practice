@@ -1,2 +1,2 @@
 FROM qwen2.5:3b
-PARAMETER num_ctx 4096
+PARAMETER num_ctx 3072
