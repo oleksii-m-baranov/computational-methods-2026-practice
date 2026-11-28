@@ -1,0 +1,13 @@
+mode=trim_state
+run=1
+task_id=long_books_01
+expected=268
+compress=trim
+use_state=True
+use_cache=False
+cache_hits=0
+cache_misses=0
+cache_size=0
+answer=Для книжки "Місто вічної ночі" штраф за прострочення становить 25 грн.
+
+
