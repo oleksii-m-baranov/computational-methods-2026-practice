@@ -1,0 +1,27 @@
+2026-11-28 01:53:26 - INFO - Warmup [local | llama3.2:3b]: {'ttft_s': 5.362, 'total_s': 16.964, 'chars': 676, 'chars_per_s': 39.9}
+2026-11-28 01:53:29 - INFO -   run 1/3 [local | short]: {'ttft_s': 2.255, 'total_s': 3.217, 'chars': 45, 'chars_per_s': 14.0}
+2026-11-28 01:53:32 - INFO -   run 2/3 [local | short]: {'ttft_s': 2.132, 'total_s': 2.749, 'chars': 23, 'chars_per_s': 8.4}
+2026-11-28 01:53:35 - INFO -   run 3/3 [local | short]: {'ttft_s': 2.12, 'total_s': 3.151, 'chars': 36, 'chars_per_s': 11.4}
+2026-11-28 01:53:35 - INFO - MEDIAN: {'provider': 'local', 'model': 'llama3.2:3b', 'prompt': 'short', 'ttft_s': 2.132, 'total_s': 3.151, 'chars_per_s': 11.4}
+2026-11-28 01:53:42 - INFO -   run 1/3 [local | medium]: {'ttft_s': 2.293, 'total_s': 6.866, 'chars': 289, 'chars_per_s': 42.1}
+2026-11-28 01:53:49 - INFO -   run 2/3 [local | medium]: {'ttft_s': 2.104, 'total_s': 7.239, 'chars': 294, 'chars_per_s': 40.6}
+2026-11-28 01:53:58 - INFO -   run 3/3 [local | medium]: {'ttft_s': 2.106, 'total_s': 9.293, 'chars': 490, 'chars_per_s': 52.7}
+2026-11-28 01:53:58 - INFO - MEDIAN: {'provider': 'local', 'model': 'llama3.2:3b', 'prompt': 'medium', 'ttft_s': 2.106, 'total_s': 7.239, 'chars_per_s': 42.1}
+2026-11-28 01:54:30 - INFO -   run 1/3 [local | long]: {'ttft_s': 2.381, 'total_s': 31.328, 'chars': 1671, 'chars_per_s': 53.3}
+2026-11-28 01:55:03 - INFO -   run 2/3 [local | long]: {'ttft_s': 2.101, 'total_s': 33.61, 'chars': 1701, 'chars_per_s': 50.6}
+2026-11-28 01:56:11 - INFO -   run 3/3 [local | long]: {'ttft_s': 2.141, 'total_s': 67.356, 'chars': 2329, 'chars_per_s': 34.6}
+2026-11-28 01:56:11 - INFO - MEDIAN: {'provider': 'local', 'model': 'llama3.2:3b', 'prompt': 'long', 'ttft_s': 2.141, 'total_s': 33.61, 'chars_per_s': 50.6}
+2026-11-28 01:56:11 - INFO - Warmup [cloud | openai/gpt-oss-120b]: {'ttft_s': 0.428, 'total_s': 0.718, 'chars': 380, 'chars_per_s': 529.0}
+2026-11-28 01:56:12 - INFO -   run 1/3 [cloud | short]: {'ttft_s': 0.484, 'total_s': 0.511, 'chars': 25, 'chars_per_s': 49.0}
+2026-11-28 01:56:13 - INFO -   run 2/3 [cloud | short]: {'ttft_s': 0.448, 'total_s': 0.626, 'chars': 270, 'chars_per_s': 431.0}
+2026-11-28 01:56:13 - INFO -   run 3/3 [cloud | short]: {'ttft_s': 0.431, 'total_s': 0.543, 'chars': 181, 'chars_per_s': 333.3}
+2026-11-28 01:56:13 - INFO - MEDIAN: {'provider': 'cloud', 'model': 'openai/gpt-oss-120b', 'prompt': 'short', 'ttft_s': 0.448, 'total_s': 0.543, 'chars_per_s': 333.3}
+2026-11-28 01:56:14 - INFO -   run 1/3 [cloud | medium]: {'ttft_s': 0.43, 'total_s': 0.653, 'chars': 362, 'chars_per_s': 554.0}
+2026-11-28 01:56:14 - INFO -   run 2/3 [cloud | medium]: {'ttft_s': 0.418, 'total_s': 0.669, 'chars': 379, 'chars_per_s': 566.8}
+2026-11-28 01:56:15 - INFO -   run 3/3 [cloud | medium]: {'ttft_s': 0.25, 'total_s': 0.57, 'chars': 479, 'chars_per_s': 840.1}
+2026-11-28 01:56:15 - INFO - MEDIAN: {'provider': 'cloud', 'model': 'openai/gpt-oss-120b', 'prompt': 'medium', 'ttft_s': 0.418, 'total_s': 0.653, 'chars_per_s': 566.8}
+2026-11-28 01:56:18 - INFO -   run 1/3 [cloud | long]: {'ttft_s': 0.448, 'total_s': 2.609, 'chars': 2999, 'chars_per_s': 1149.7}
+2026-11-28 01:56:20 - INFO -   run 2/3 [cloud | long]: {'ttft_s': 0.451, 'total_s': 2.141, 'chars': 2463, 'chars_per_s': 1150.1}
+2026-11-28 01:56:22 - INFO -   run 3/3 [cloud | long]: {'ttft_s': 0.526, 'total_s': 2.245, 'chars': 2280, 'chars_per_s': 1015.6}
+2026-11-28 01:56:22 - INFO - MEDIAN: {'provider': 'cloud', 'model': 'openai/gpt-oss-120b', 'prompt': 'long', 'ttft_s': 0.451, 'total_s': 2.245, 'chars_per_s': 1149.7}
+2026-11-28 01:56:22 - INFO - Saved results.csv

@@ -1,0 +1,30 @@
+2026-11-28 02:36:51 - INFO - llama3.2:3b / 1_fact — готово
+2026-11-28 02:36:52 - INFO -   [llama3.2:3b] 2_format attempt 1: json.loads OK
+2026-11-28 02:36:54 - INFO -   [llama3.2:3b] 2_format attempt 2: json.loads OK
+2026-11-28 02:36:54 - INFO - llama3.2:3b / 2_format — готово
+2026-11-28 02:37:08 - INFO - llama3.2:3b / 3_summary — готово
+2026-11-28 02:37:17 - INFO - llama3.2:3b / 4_code — готово
+2026-11-28 02:37:44 - INFO - llama3.2:3b / 5_logic — готово
+2026-11-28 02:37:53 - INFO - llama3.2:3b / 6_language — готово
+2026-11-28 02:39:05 - INFO - qwen3:4b / 1_fact — готово
+2026-11-28 02:40:49 - INFO -   [qwen3:4b] 2_format attempt 1: json.loads OK
+2026-11-28 02:45:28 - INFO -   [qwen3:4b] 2_format attempt 2: json.loads OK
+2026-11-28 02:45:28 - INFO - qwen3:4b / 2_format — готово
+2026-11-28 02:57:52 - INFO - qwen3:4b / 3_summary — готово
+2026-11-28 03:35:56 - INFO - qwen3:4b / 4_code — готово
+2026-11-28 03:43:45 - INFO - qwen3:4b / 5_logic — готово
+2026-11-28 04:15:57 - INFO - qwen3:4b / 6_language — готово
+2026-11-28 04:15:58 - INFO - openai/gpt-oss-120b / 1_fact — готово
+2026-11-28 04:15:59 - INFO -   [openai/gpt-oss-120b] 2_format attempt 1: json.loads OK
+2026-11-28 04:15:59 - INFO -   [openai/gpt-oss-120b] 2_format attempt 2: json.loads OK
+2026-11-28 04:15:59 - INFO - openai/gpt-oss-120b / 2_format — готово
+2026-11-28 04:16:02 - INFO - openai/gpt-oss-120b / 3_summary — готово
+2026-11-28 04:16:06 - INFO - openai/gpt-oss-120b / 4_code — готово
+2026-11-28 04:16:08 - INFO - openai/gpt-oss-120b / 5_logic — готово
+2026-11-28 04:16:10 - INFO - openai/gpt-oss-120b / 6_language — готово
+2026-11-28 04:16:10 - INFO - Saved quality.json
+2026-11-28 14:00:35 - INFO - --- Повторний прогін 3_summary (текст оновлено до 5 речень) ---
+2026-11-28 14:00:50 - INFO - llama3.2:3b / 3_summary (5 речень) — готово
+2026-11-28 14:12:33 - INFO - qwen3:4b / 3_summary (5 речень) — готово
+2026-11-28 14:12:35 - INFO - openai/gpt-oss-120b / 3_summary (5 речень) — готово
+2026-11-28 14:12:35 - INFO - Saved updated quality.json (3_summary)
