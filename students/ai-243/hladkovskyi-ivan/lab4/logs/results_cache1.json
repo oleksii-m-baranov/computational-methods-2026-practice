@@ -1,0 +1,20 @@
+[
+  {
+    "run_id": "cache1_none_r1",
+    "config": "none",
+    "seconds": 8.6,
+    "right_number_detected": false,
+    "answer": "Головний загальний бюджет для всіх шести поїздок становить 2500.0 грн.",
+    "metrics": {
+      "config": "none",
+      "right": 0,
+      "seconds": 8.6,
+      "steps": 19,
+      "prompt": 39252,
+      "completion": 845,
+      "extra": 0,
+      "squeezes": 0,
+      "repeats": 0
+    }
+  }
+]

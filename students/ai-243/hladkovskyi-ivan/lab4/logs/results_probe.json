@@ -1,0 +1,20 @@
+[
+  {
+    "run_id": "probe_trim+state_r1",
+    "config": "trim+state",
+    "seconds": 8.1,
+    "right_number_detected": false,
+    "answer": "Для поїздки з Кам'янець-Подільським (3 особи), Хотином (2 особи), Одесою (4 особи), Карпатами (3 особи), Шацькі озера (2 особи), Львівом (5 особ) загальний бюджет буде 1950.0 грн.",
+    "metrics": {
+      "config": "trim+state",
+      "right": 0,
+      "seconds": 8.1,
+      "steps": 13,
+      "prompt": 23619,
+      "completion": 740,
+      "extra": 0,
+      "squeezes": 1,
+      "repeats": 0
+    }
+  }
+]
